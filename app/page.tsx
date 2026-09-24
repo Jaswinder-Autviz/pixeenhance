@@ -355,36 +355,36 @@ export default function HomePage() {
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://pixenhance.com/#organization',
+        '@id': 'https://pixenhance.in/#organization',
         name: 'PixEnhance',
-        url: 'https://pixenhance.com',
-        logo: 'https://pixenhance.com/favicon.svg',
+        url: 'https://pixenhance.in',
+        logo: 'https://pixenhance.in/favicon.svg',
         description:
           'PixEnhance is an editorial-grade, privacy-first online image and PDF utility hub.',
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://pixenhance.com/#website',
-        url: 'https://pixenhance.com',
+        '@id': 'https://pixenhance.in/#website',
+        url: 'https://pixenhance.in',
         name: 'PixEnhance — Free Online Image & PDF Studio',
         publisher: {
-          '@id': 'https://pixenhance.com/#organization',
+          '@id': 'https://pixenhance.in/#organization',
         },
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://pixenhance.com/tools?q={search_term_string}',
+          target: 'https://pixenhance.in/tools?q={search_term_string}',
           'query-input': 'required name=search_term_string',
         },
       },
       {
         '@type': 'ItemList',
-        '@id': 'https://pixenhance.com/#tools-directory',
+        '@id': 'https://pixenhance.in/#tools-directory',
         name: 'Featured Image and PDF Tools',
         itemListElement: TOOLS_LIST.slice(0, 25).map((tool, idx) => ({
           '@type': 'ListItem',
           position: idx + 1,
           name: tool.name,
-          url: `https://pixenhance.com${tool.slug}`,
+          url: `https://pixenhance.in${tool.slug}`,
           description: tool.shortDescription,
         })),
       },

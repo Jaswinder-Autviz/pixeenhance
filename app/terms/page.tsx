@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Terms of service and usage conditions for PixEnhance free online image utility hub.',
   alternates: {
-    canonical: 'https://pixenhance.com/terms',
+    canonical: 'https://pixenhance.in/terms',
   },
 };
 

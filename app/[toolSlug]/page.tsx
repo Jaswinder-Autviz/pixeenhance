@@ -52,14 +52,14 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
     description: tool.metaDescription,
     keywords: [tool.name, ...tool.features, ...tool.supportedFormats, 'PixEnhance', 'online image studio'],
     alternates: {
-      canonical: `https://pixenhance.com${tool.slug}`,
+      canonical: `https://pixenhance.in${tool.slug}`,
     },
     openGraph: {
       title: tool.metaTitle,
       description: tool.metaDescription,
       type: 'website',
       siteName: 'PixEnhance',
-      url: `https://pixenhance.com${tool.slug}`,
+      url: `https://pixenhance.in${tool.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -203,9 +203,9 @@ export default async function ToolPage({ params }: ToolPageProps) {
     '@graph': [
       {
         '@type': 'WebApplication',
-        '@id': `https://pixenhance.com${tool.slug}#software`,
+        '@id': `https://pixenhance.in${tool.slug}#software`,
         name: tool.name,
-        url: `https://pixenhance.com${tool.slug}`,
+        url: `https://pixenhance.in${tool.slug}`,
         description: tool.metaDescription,
         applicationCategory: 'MultimediaApplication',
         operatingSystem: 'All modern web browsers (Chrome, Safari, Firefox, Edge)',
@@ -231,19 +231,19 @@ export default async function ToolPage({ params }: ToolPageProps) {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://pixenhance.com',
+            item: 'https://pixenhance.in',
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Tools',
-            item: 'https://pixenhance.com/tools',
+            item: 'https://pixenhance.in/tools',
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: tool.name,
-            item: `https://pixenhance.com${tool.slug}`,
+            item: `https://pixenhance.in${tool.slug}`,
           },
         ],
       },

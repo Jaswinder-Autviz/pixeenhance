@@ -2,8 +2,8 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 // Configuration
 const BASELINE_VISITORS = 0; // Starts clean from 0 for real visitors
-const HITS_URL = 'https://hits.sh/pixenhance.com.svg';
-const BACKUP_URL = 'https://api.visitorbadge.io/api/visitors?path=pixenhance.com';
+const HITS_URL = 'https://hits.sh/pixenhance.in.svg';
+const BACKUP_URL = 'https://api.visitorbadge.io/api/visitors?path=pixenhance.in';
 
 // In-memory persistent count cache during server runtime
 let cachedCount = BASELINE_VISITORS;

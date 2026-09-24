@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://pixenhance.com'),
+  metadataBase: new URL('https://pixenhance.in'),
   title: {
     default: 'PixEnhance — Free Online Image & PDF Studio',
     template: '%s | PixEnhance',
@@ -45,6 +45,9 @@ export const metadata: Metadata = {
   creator: 'PixEnhance',
   publisher: 'PixEnhance',
   category: 'Multimedia & Utilities',
+  alternates: {
+    canonical: 'https://pixenhance.in',
+  },
   robots: {
     index: true,
     follow: true,
@@ -54,13 +57,13 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
-      },
+    },
   },
   openGraph: {
     title: 'PixEnhance — Free Online Image & PDF Studio',
     description:
       'Compress, resize, convert, and edit images and PDFs instantly. Fast, private, and 100% free.',
-    url: 'https://pixenhance.com',
+    url: 'https://pixenhance.in',
     siteName: 'PixEnhance',
     locale: 'en_US',
     type: 'website',
@@ -83,14 +86,14 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'PixEnhance',
-  url: 'https://pixenhance.com',
+  url: 'https://pixenhance.in',
   description:
     'Free online studio for image compression, PDF conversion, photo resizing, vectorization, and editing. Fast, private, and 100% free.',
   potentialAction: {
     '@type': 'SearchAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: 'https://pixenhance.com/tools?q={search_term_string}',
+      urlTemplate: 'https://pixenhance.in/tools?q={search_term_string}',
     },
     'query-input': 'required name=search_term_string',
   },

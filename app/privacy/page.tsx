@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'PixEnhance privacy policy: Your photos and files are processed with strict privacy and never stored or collected.',
   alternates: {
-    canonical: 'https://pixenhance.com/privacy',
+    canonical: 'https://pixenhance.in/privacy',
   },
 };
 

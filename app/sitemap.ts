@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { TOOLS_LIST } from '@/src/data/toolsList';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://pixenhance.com';
+  const baseUrl = 'https://pixenhance.in';
 
   const toolRoutes = TOOLS_LIST.map((tool) => ({
     url: `${baseUrl}${tool.slug}`,

@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://pixenhance.com/sitemap.xml',
+    sitemap: 'https://pixenhance.in/sitemap.xml',
   };
 }
