@@ -74,6 +74,9 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.svg',
   },
+  verification: {
+    google: 'googleac95a75a7ab9db56',
+  },
 };
 
 const websiteSchema = {
