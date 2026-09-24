@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Users, Eye, Activity } from 'lucide-react';
+import { Users, Activity } from 'lucide-react';
 
 interface VisitorCounterProps {
   variant?: 'footer' | 'hero' | 'compact';
@@ -48,11 +48,15 @@ export function VisitorCounter({
               sessionStorage.setItem('pixenhance_session_counted', 'true');
             }
           }
+        } else {
+          if (isMounted) {
+            setCount((prev) => (prev !== null ? prev : 0));
+          }
         }
-      } catch (err) {
-        // Fail silently and keep baseline display
+      } catch {
+        // Fail gracefully with accurate baseline
         if (isMounted) {
-          setCount(1240);
+          setCount((prev) => (prev !== null ? prev : 0));
         }
       } finally {
         if (isMounted) {
@@ -68,7 +72,7 @@ export function VisitorCounter({
     };
   }, []);
 
-  const formattedCount = count !== null ? count.toLocaleString() : '1+';
+  const formattedCount = count !== null ? count.toLocaleString() : '0';
 
   if (variant === 'hero') {
     return (

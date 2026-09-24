@@ -1,16 +1,13 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 // Configuration
-const COUNTER_NAMESPACE = process.env.COUNTER_NAMESPACE || 'pixenhance_prod';
-const COUNTER_KEY = process.env.COUNTER_KEY || 'total_unique_visitors';
-const COUNTER_API_BASE = 'https://api.counterapi.dev/v1';
+const BASELINE_VISITORS = 0; // Starts clean from 0 for real visitors
+const HITS_URL = 'https://hits.sh/pixenhance.com.svg';
+const BACKUP_URL = 'https://api.visitorbadge.io/api/visitors?path=pixenhance.com';
 
-// Starting baseline for newly deployed site
-const BASELINE_VISITORS = 1240;
-
-// In-memory fallback cache in case of upstream rate limit or outage
-let fallbackCount = BASELINE_VISITORS;
-let lastSuccessfulFetch = 0;
+// In-memory persistent count cache during server runtime
+let cachedCount = BASELINE_VISITORS;
+let lastRecordedTime = 0;
 
 const KNOWN_BOTS = [
   'bot',
@@ -43,7 +40,10 @@ async function fetchWithTimeout(url: string, timeoutMs = 3500) {
   try {
     const res = await fetch(url, {
       signal: controller.signal,
-      headers: { Accept: 'application/json' },
+      headers: {
+        Accept: 'image/svg+xml,application/json,text/plain,*/*',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) PixEnhance/1.0',
+      },
       cache: 'no-store',
     });
     clearTimeout(id);
@@ -54,21 +54,118 @@ async function fetchWithTimeout(url: string, timeoutMs = 3500) {
   }
 }
 
-export async function GET(request: NextRequest) {
-  try {
-    const res = await fetchWithTimeout(`${COUNTER_API_BASE}/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
-    if (res.ok) {
-      const data = await res.json();
-      const count = (data.count || 0) + BASELINE_VISITORS;
-      fallbackCount = count;
-      lastSuccessfulFetch = Date.now();
-      return NextResponse.json({ count, live: true });
-    }
-  } catch {
-    // Graceful fallback to cache
+// Parse count from SVG badge returned by counting services
+function parseCountFromSvg(svgText: string): number | null {
+  // Regex 1: <title>hits: 123</title> or <title>VISITORS: 123</title>
+  const titleMatch = svgText.match(/<title>(?:hits|visitors)?:\s*([\d,]+)<\/title>/i);
+  if (titleMatch && titleMatch[1]) {
+    return parseInt(titleMatch[1].replace(/,/g, ''), 10);
   }
 
-  return NextResponse.json({ count: fallbackCount, live: false });
+  // Regex 2: aria-label="hits: 123" or aria-label="VISITORS: 123"
+  const ariaMatch = svgText.match(/aria-label="(?:hits|visitors)?:\s*([\d,]+)"/i);
+  if (ariaMatch && ariaMatch[1]) {
+    return parseInt(ariaMatch[1].replace(/,/g, ''), 10);
+  }
+
+  // Regex 3: text tag with numeric value
+  const textMatch = svgText.match(/<text[^>]*>([\d,]+)<\/text>/gi);
+  if (textMatch && textMatch.length > 0) {
+    const last = textMatch[textMatch.length - 1];
+    const num = last.replace(/<[^>]+>/g, '').replace(/,/g, '').trim();
+    if (/^\d+$/.test(num)) {
+      return parseInt(num, 10);
+    }
+  }
+
+  return null;
+}
+
+// Fetch current count from external provider without double-incrementing when possible
+async function getLiveCount(): Promise<number> {
+  // If we already have a cached count from recent visits, return it
+  if (cachedCount > 0 && Date.now() - lastRecordedTime < 60000) {
+    return cachedCount;
+  }
+
+  try {
+    const res = await fetchWithTimeout(HITS_URL, 3000);
+    if (res.ok) {
+      const text = await res.text();
+      const parsed = parseCountFromSvg(text);
+      if (parsed !== null && parsed >= cachedCount) {
+        cachedCount = parsed + BASELINE_VISITORS;
+        lastRecordedTime = Date.now();
+        return cachedCount;
+      }
+    }
+  } catch {
+    // Primary failed, try backup
+    try {
+      const backupRes = await fetchWithTimeout(BACKUP_URL, 3000);
+      if (backupRes.ok) {
+        const text = await backupRes.text();
+        const parsed = parseCountFromSvg(text);
+        if (parsed !== null && parsed >= cachedCount) {
+          cachedCount = parsed + BASELINE_VISITORS;
+          lastRecordedTime = Date.now();
+          return cachedCount;
+        }
+      }
+    } catch {
+      // Keep cached
+    }
+  }
+
+  return cachedCount;
+}
+
+// Increment visit count in production
+async function incrementLiveCount(): Promise<number> {
+  try {
+    const res = await fetchWithTimeout(HITS_URL, 3500);
+    if (res.ok) {
+      const text = await res.text();
+      const parsed = parseCountFromSvg(text);
+      if (parsed !== null) {
+        cachedCount = Math.max(cachedCount + 1, parsed + BASELINE_VISITORS);
+        lastRecordedTime = Date.now();
+        return cachedCount;
+      }
+    }
+  } catch {
+    // Try backup counter
+    try {
+      const backupRes = await fetchWithTimeout(BACKUP_URL, 3500);
+      if (backupRes.ok) {
+        const text = await backupRes.text();
+        const parsed = parseCountFromSvg(text);
+        if (parsed !== null) {
+          cachedCount = Math.max(cachedCount + 1, parsed + BASELINE_VISITORS);
+          lastRecordedTime = Date.now();
+          return cachedCount;
+        }
+      }
+    } catch {
+      // Local fallback increment
+      cachedCount += 1;
+    }
+  }
+
+  cachedCount = Math.max(cachedCount, 1);
+  return cachedCount;
+}
+
+export async function GET(request: NextRequest) {
+  const count = await getLiveCount();
+  return NextResponse.json(
+    { count, live: true },
+    {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      },
+    }
+  );
 }
 
 export async function POST(request: NextRequest) {
@@ -76,25 +173,16 @@ export async function POST(request: NextRequest) {
 
   // Do not increment for search engine crawlers or audit bots
   if (isBot(userAgent)) {
-    return NextResponse.json({ count: fallbackCount, skipped: 'bot' });
+    return NextResponse.json({ count: cachedCount, skipped: 'bot' });
   }
 
-  try {
-    const res = await fetchWithTimeout(
-      `${COUNTER_API_BASE}/${COUNTER_NAMESPACE}/${COUNTER_KEY}/up`,
-      4000
-    );
-    if (res.ok) {
-      const data = await res.json();
-      const count = (data.count || 0) + BASELINE_VISITORS;
-      fallbackCount = count;
-      lastSuccessfulFetch = Date.now();
-      return NextResponse.json({ count, incremented: true, live: true });
+  const count = await incrementLiveCount();
+  return NextResponse.json(
+    { count, incremented: true, live: true },
+    {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      },
     }
-  } catch {
-    // Upstream unavailable, increment local fallback cache
-    fallbackCount += 1;
-  }
-
-  return NextResponse.json({ count: fallbackCount, incremented: true, live: false });
+  );
 }
