@@ -1,19 +1,87 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, Sparkles } from 'lucide-react';
 
 export function SideAdRails() {
   const [closedLeft, setClosedLeft] = useState(false);
   const [closedRight, setClosedRight] = useState(false);
+  const leftRailRef = useRef<HTMLElement>(null);
+  const rightRailRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const updatePosition = () => {
+      const footer = document.querySelector('footer');
+      if (!footer) {
+        ticking = false;
+        return;
+      }
+
+      const footerRect = footer.getBoundingClientRect();
+      const activeRail = leftRailRef.current || rightRailRef.current;
+      const bannerHeight = activeRail ? activeRail.offsetHeight : 580;
+      const bannerTop = 80; // top-20 (80px)
+      const gap = 24; // Margin between banner bottom and footer top
+      const threshold = bannerTop + bannerHeight + gap;
+
+      let offset = 0;
+      if (footerRect.top < threshold) {
+        offset = threshold - footerRect.top;
+      }
+
+      const transformStyle = offset > 0 ? `translate3d(0, -${offset}px, 0)` : 'translate3d(0, 0, 0)';
+
+      if (leftRailRef.current) {
+        leftRailRef.current.style.transform = transformStyle;
+      }
+      if (rightRailRef.current) {
+        rightRailRef.current.style.transform = transformStyle;
+      }
+
+      ticking = false;
+    };
+
+    const handleScrollOrResize = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updatePosition);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+    window.addEventListener('resize', handleScrollOrResize, { passive: true });
+
+    // Initial positioning
+    updatePosition();
+
+    // Observe body and footer resizing
+    const resizeObserver = new ResizeObserver(() => {
+      handleScrollOrResize();
+    });
+
+    const footer = document.querySelector('footer');
+    if (footer) {
+      resizeObserver.observe(footer);
+    }
+    resizeObserver.observe(document.body);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollOrResize);
+      window.removeEventListener('resize', handleScrollOrResize);
+      resizeObserver.disconnect();
+    };
+  }, [closedLeft, closedRight]);
 
   return (
     <>
       {/* Left Desktop Skyscraper Ad Tower */}
-      {/* Positioned strictly outside the 1024px center container using calc(50% + 525px) */}
+      {/* Positioned strictly outside the center container using calc(50% + 525px) */}
       {!closedLeft && (
         <aside
-          className="fixed top-20 right-[calc(50%+525px)] z-20 hidden min-[1360px]:flex flex-col items-center justify-between w-[130px] xl:w-[145px] h-[580px] rounded-2xl border-2 border-dashed border-indigo-200 dark:border-indigo-800/80 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xl p-2.5 text-center transition-all duration-300 hover:border-indigo-400 pointer-events-auto"
+          ref={leftRailRef}
+          className="fixed top-20 right-[calc(50%+525px)] z-20 hidden min-[1360px]:flex flex-col items-center justify-between w-[130px] xl:w-[145px] h-[580px] rounded-2xl border-2 border-dashed border-indigo-200 dark:border-indigo-800/80 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xl p-2.5 text-center will-change-transform transition-[border-color,box-shadow,opacity] duration-300 hover:border-indigo-400 pointer-events-auto"
           aria-label="Left Rail Advertisement"
           data-ad-slot="side-rail-left"
           data-ad-format="vertical"
@@ -65,10 +133,11 @@ export function SideAdRails() {
       )}
 
       {/* Right Desktop Skyscraper Ad Tower */}
-      {/* Positioned strictly outside the 1024px center container using calc(50% + 525px) */}
+      {/* Positioned strictly outside the center container using calc(50% + 525px) */}
       {!closedRight && (
         <aside
-          className="fixed top-20 left-[calc(50%+525px)] z-20 hidden min-[1360px]:flex flex-col items-center justify-between w-[130px] xl:w-[145px] h-[580px] rounded-2xl border-2 border-dashed border-emerald-200 dark:border-emerald-800/80 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xl p-2.5 text-center transition-all duration-300 hover:border-emerald-400 pointer-events-auto"
+          ref={rightRailRef}
+          className="fixed top-20 left-[calc(50%+525px)] z-20 hidden min-[1360px]:flex flex-col items-center justify-between w-[130px] xl:w-[145px] h-[580px] rounded-2xl border-2 border-dashed border-emerald-200 dark:border-emerald-800/80 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xl p-2.5 text-center will-change-transform transition-[border-color,box-shadow,opacity] duration-300 hover:border-emerald-400 pointer-events-auto"
           aria-label="Right Rail Advertisement"
           data-ad-slot="side-rail-right"
           data-ad-format="vertical"
