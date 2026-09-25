@@ -47,10 +47,25 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
     return { title: 'Tool Not Found | PixEnhance' };
   }
 
+  const baseKeywords = [
+    tool.name,
+    tool.h1,
+    `${tool.name.toLowerCase()} online`,
+    `free ${tool.name.toLowerCase()}`,
+    `best ${tool.name.toLowerCase()} online`,
+    `${tool.name.toLowerCase()} without watermark`,
+    `${tool.id.replace(/-/g, ' ')}`,
+    ...tool.features,
+    ...tool.supportedFormats.map((fmt) => `${fmt} ${tool.name.toLowerCase()}`),
+    'PixEnhance',
+    'pixenhance.in',
+    'free online image tools',
+  ];
+
   return {
     title: tool.metaTitle,
     description: tool.metaDescription,
-    keywords: [tool.name, ...tool.features, ...tool.supportedFormats, 'PixEnhance', 'online image studio'],
+    keywords: Array.from(new Set(baseKeywords)),
     alternates: {
       canonical: `https://pixenhance.in${tool.slug}`,
     },
