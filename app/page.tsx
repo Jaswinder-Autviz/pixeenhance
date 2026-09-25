@@ -40,7 +40,6 @@ import {
   FlipHorizontal,
 } from 'lucide-react';
 import { AdPlaceholder } from '@/components/common/AdPlaceholder';
-import { VisitorCounter } from '@/components/common/VisitorCounter';
 import { TOOLS_LIST, ToolCategory, ToolItem } from '@/src/data/toolsList';
 
 const CATEGORIES: Array<ToolCategory | 'All'> = [
@@ -432,14 +431,9 @@ export default function HomePage() {
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-6 font-normal">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8 font-normal">
             Compress, resize, convert, edit, and organize your images instantly with zero latency and complete privacy.
           </p>
-
-          {/* Live Visitor Counter */}
-          <div className="flex items-center justify-center mb-8">
-            <VisitorCounter variant="hero" />
-          </div>
 
           {/* Live Search Bar with Ambient Ring */}
           <div className="max-w-xl mx-auto relative mb-4">

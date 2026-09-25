@@ -1,13 +1,22 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
 
-// Configuration
-const BASELINE_VISITORS = 0; // Starts clean from 0 for real visitors
-const HITS_URL = 'https://hits.sh/pixenhance.in.svg';
-const BACKUP_URL = 'https://api.visitorbadge.io/api/visitors?path=pixenhance.in';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-// In-memory persistent count cache during server runtime
-let cachedCount = BASELINE_VISITORS;
-let lastRecordedTime = 0;
+const STATS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'visitor_stats.json');
+
+interface VisitorStats {
+  totalUniqueVisitors: number;
+  ipHashes: string[];
+  lastUpdated: string;
+}
+
+// In-memory cache
+let statsCache: VisitorStats | null = null;
+const ipSetCache = new Set<string>();
 
 const KNOWN_BOTS = [
   'bot',
@@ -25,6 +34,7 @@ const KNOWN_BOTS = [
   'petalbot',
   'curl',
   'wget',
+  'python',
 ];
 
 function isBot(userAgent: string | null): boolean {
@@ -33,133 +43,70 @@ function isBot(userAgent: string | null): boolean {
   return KNOWN_BOTS.some((bot) => ua.includes(bot));
 }
 
-// Helper to fetch upstream with timeout
-async function fetchWithTimeout(url: string, timeoutMs = 3500) {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeoutMs);
+function getClientIp(request: NextRequest): string {
+  const forwarded = request.headers.get('x-forwarded-for');
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  const realIp = request.headers.get('x-real-ip');
+  if (realIp) return realIp.trim();
+  const cfIp = request.headers.get('cf-connecting-ip');
+  if (cfIp) return cfIp.trim();
+  return '127.0.0.1';
+}
+
+function hashIp(ip: string): string {
+  return crypto.createHash('sha256').update(ip).digest('hex').substring(0, 16);
+}
+
+function loadStats(): VisitorStats {
+  if (statsCache) {
+    return statsCache;
+  }
+
   try {
-    const res = await fetch(url, {
-      signal: controller.signal,
-      headers: {
-        Accept: 'image/svg+xml,application/json,text/plain,*/*',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) PixEnhance/1.0',
-      },
-      cache: 'no-store',
-    });
-    clearTimeout(id);
-    return res;
+    if (fs.existsSync(STATS_FILE_PATH)) {
+      const data = fs.readFileSync(STATS_FILE_PATH, 'utf-8');
+      const parsed = JSON.parse(data) as VisitorStats;
+      statsCache = parsed;
+      if (Array.isArray(parsed.ipHashes)) {
+        parsed.ipHashes.forEach((h) => ipSetCache.add(h));
+      }
+      return statsCache;
+    }
   } catch (err) {
-    clearTimeout(id);
-    throw err;
+    console.error('Error reading visitor stats file:', err);
   }
+
+  // Initial stats fallback
+  statsCache = {
+    totalUniqueVisitors: 0,
+    ipHashes: [],
+    lastUpdated: new Date().toISOString(),
+  };
+  return statsCache;
 }
 
-// Parse count from SVG badge returned by counting services
-function parseCountFromSvg(svgText: string): number | null {
-  // Regex 1: <title>hits: 123</title> or <title>VISITORS: 123</title>
-  const titleMatch = svgText.match(/<title>(?:hits|visitors)?:\s*([\d,]+)<\/title>/i);
-  if (titleMatch && titleMatch[1]) {
-    return parseInt(titleMatch[1].replace(/,/g, ''), 10);
-  }
-
-  // Regex 2: aria-label="hits: 123" or aria-label="VISITORS: 123"
-  const ariaMatch = svgText.match(/aria-label="(?:hits|visitors)?:\s*([\d,]+)"/i);
-  if (ariaMatch && ariaMatch[1]) {
-    return parseInt(ariaMatch[1].replace(/,/g, ''), 10);
-  }
-
-  // Regex 3: text tag with numeric value
-  const textMatch = svgText.match(/<text[^>]*>([\d,]+)<\/text>/gi);
-  if (textMatch && textMatch.length > 0) {
-    const last = textMatch[textMatch.length - 1];
-    const num = last.replace(/<[^>]+>/g, '').replace(/,/g, '').trim();
-    if (/^\d+$/.test(num)) {
-      return parseInt(num, 10);
-    }
-  }
-
-  return null;
-}
-
-// Fetch current count from external provider without double-incrementing when possible
-async function getLiveCount(): Promise<number> {
-  // If we already have a cached count from recent visits, return it
-  if (cachedCount > 0 && Date.now() - lastRecordedTime < 60000) {
-    return cachedCount;
-  }
-
+function saveStats(stats: VisitorStats) {
   try {
-    const res = await fetchWithTimeout(HITS_URL, 3000);
-    if (res.ok) {
-      const text = await res.text();
-      const parsed = parseCountFromSvg(text);
-      if (parsed !== null && parsed >= cachedCount) {
-        cachedCount = parsed + BASELINE_VISITORS;
-        lastRecordedTime = Date.now();
-        return cachedCount;
-      }
+    stats.lastUpdated = new Date().toISOString();
+    // Keep max 50,000 hashes to maintain compact file size
+    if (stats.ipHashes.length > 50000) {
+      stats.ipHashes = stats.ipHashes.slice(-50000);
     }
-  } catch {
-    // Primary failed, try backup
-    try {
-      const backupRes = await fetchWithTimeout(BACKUP_URL, 3000);
-      if (backupRes.ok) {
-        const text = await backupRes.text();
-        const parsed = parseCountFromSvg(text);
-        if (parsed !== null && parsed >= cachedCount) {
-          cachedCount = parsed + BASELINE_VISITORS;
-          lastRecordedTime = Date.now();
-          return cachedCount;
-        }
-      }
-    } catch {
-      // Keep cached
-    }
+    fs.writeFileSync(STATS_FILE_PATH, JSON.stringify(stats, null, 2), 'utf-8');
+  } catch (err) {
+    console.error('Error saving visitor stats file:', err);
   }
-
-  return cachedCount;
-}
-
-// Increment visit count in production
-async function incrementLiveCount(): Promise<number> {
-  try {
-    const res = await fetchWithTimeout(HITS_URL, 3500);
-    if (res.ok) {
-      const text = await res.text();
-      const parsed = parseCountFromSvg(text);
-      if (parsed !== null) {
-        cachedCount = Math.max(cachedCount + 1, parsed + BASELINE_VISITORS);
-        lastRecordedTime = Date.now();
-        return cachedCount;
-      }
-    }
-  } catch {
-    // Try backup counter
-    try {
-      const backupRes = await fetchWithTimeout(BACKUP_URL, 3500);
-      if (backupRes.ok) {
-        const text = await backupRes.text();
-        const parsed = parseCountFromSvg(text);
-        if (parsed !== null) {
-          cachedCount = Math.max(cachedCount + 1, parsed + BASELINE_VISITORS);
-          lastRecordedTime = Date.now();
-          return cachedCount;
-        }
-      }
-    } catch {
-      // Local fallback increment
-      cachedCount += 1;
-    }
-  }
-
-  cachedCount = Math.max(cachedCount, 1);
-  return cachedCount;
 }
 
 export async function GET(request: NextRequest) {
-  const count = await getLiveCount();
+  const stats = loadStats();
   return NextResponse.json(
-    { count, live: true },
+    {
+      count: stats.totalUniqueVisitors,
+      live: true,
+    },
     {
       headers: {
         'Cache-Control': 'no-store, no-cache, must-revalidate',
@@ -170,15 +117,35 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const userAgent = request.headers.get('user-agent');
+  const stats = loadStats();
 
-  // Do not increment for search engine crawlers or audit bots
   if (isBot(userAgent)) {
-    return NextResponse.json({ count: cachedCount, skipped: 'bot' });
+    return NextResponse.json({
+      count: stats.totalUniqueVisitors,
+      skipped: 'bot',
+    });
   }
 
-  const count = await incrementLiveCount();
+  const clientIp = getClientIp(request);
+  const ipHash = hashIp(clientIp);
+
+  let isNewIp = false;
+
+  if (!ipSetCache.has(ipHash)) {
+    // Brand new unique IP detected
+    ipSetCache.add(ipHash);
+    stats.ipHashes.push(ipHash);
+    stats.totalUniqueVisitors += 1;
+    isNewIp = true;
+    saveStats(stats);
+  }
+
   return NextResponse.json(
-    { count, incremented: true, live: true },
+    {
+      count: stats.totalUniqueVisitors,
+      isNewVisitor: isNewIp,
+      live: true,
+    },
     {
       headers: {
         'Cache-Control': 'no-store, no-cache, must-revalidate',
