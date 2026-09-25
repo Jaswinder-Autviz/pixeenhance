@@ -152,6 +152,24 @@ export default function RootLayout({
         <meta name="theme-color" content="#4f46e5" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        {/* Google Analytics 4 (GA4) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-V7KYB6XEHV"
+        />
+        <script
+          id="google-analytics-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-V7KYB6XEHV', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         {/* Google AdSense */}
         <script
           async
