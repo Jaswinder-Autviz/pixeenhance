@@ -82,21 +82,63 @@ export const metadata: Metadata = {
   },
 };
 
-const websiteSchema = {
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'PixEnhance',
-  url: 'https://pixenhance.in',
-  description:
-    'Free online studio for image compression, PDF conversion, photo resizing, vectorization, and editing. Fast, private, and 100% free.',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://pixenhance.in/tools?q={search_term_string}',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://pixenhance.in/#website',
+      url: 'https://pixenhance.in',
+      name: 'PixEnhance',
+      alternateName: [
+        'pixenhance',
+        'pixenhance.in',
+        'Pix Enhance',
+        'PixEnhance Studio',
+      ],
+      description:
+        'Free online studio for image compression, PDF conversion, photo resizing, vectorization, and editing. Fast, private, and 100% free.',
+      publisher: {
+        '@id': 'https://pixenhance.in/#organization',
+      },
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: 'https://pixenhance.in/tools?q={search_term_string}',
+        },
+        'query-input': 'required name=search_term_string',
+      },
     },
-    'query-input': 'required name=search_term_string',
-  },
+    {
+      '@type': 'Organization',
+      '@id': 'https://pixenhance.in/#organization',
+      name: 'PixEnhance',
+      alternateName: ['pixenhance', 'Pix Enhance', 'PixEnhance Studio', 'pixenhance.in'],
+      url: 'https://pixenhance.in',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://pixenhance.in/favicon.svg',
+      },
+      sameAs: [],
+    },
+    {
+      '@type': 'WebApplication',
+      '@id': 'https://pixenhance.in/#webapp',
+      name: 'PixEnhance',
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'All',
+      browserRequirements: 'Requires JavaScript. Requires HTML5.',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      url: 'https://pixenhance.in',
+      description:
+        'Free high-speed browser-based image and PDF processing studio.',
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -118,7 +160,7 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
       <body className="min-h-screen flex flex-col bg-[#e5ebf2] dark:bg-[#070b14] text-slate-900 dark:text-slate-100 font-sans selection:bg-brand-500 selection:text-white antialiased transition-colors relative">
