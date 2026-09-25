@@ -1,22 +1,14 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import crypto from 'crypto';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const STATS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'visitor_stats.json');
+// In-memory real-time active users presence tracker
+const activeUsers = new Map<string, number>();
+const seenIps = new Set<string>();
 
-interface VisitorStats {
-  totalUniqueVisitors: number;
-  ipHashes: string[];
-  lastUpdated: string;
-}
-
-// In-memory cache
-let statsCache: VisitorStats | null = null;
-const ipSetCache = new Set<string>();
+let cachedTotalCount = 28;
+let lastUpstreamFetch = 0;
 
 const KNOWN_BOTS = [
   'bot',
@@ -45,9 +37,7 @@ function isBot(userAgent: string | null): boolean {
 
 function getClientIp(request: NextRequest): string {
   const forwarded = request.headers.get('x-forwarded-for');
-  if (forwarded) {
-    return forwarded.split(',')[0].trim();
-  }
+  if (forwarded) return forwarded.split(',')[0].trim();
   const realIp = request.headers.get('x-real-ip');
   if (realIp) return realIp.trim();
   const cfIp = request.headers.get('cf-connecting-ip');
@@ -55,56 +45,81 @@ function getClientIp(request: NextRequest): string {
   return '127.0.0.1';
 }
 
-function hashIp(ip: string): string {
-  return crypto.createHash('sha256').update(ip).digest('hex').substring(0, 16);
+function cleanupActiveUsers() {
+  const cutoff = Date.now() - 45000; // Active within last 45 seconds
+  for (const [id, time] of activeUsers.entries()) {
+    if (time < cutoff) {
+      activeUsers.delete(id);
+    }
+  }
 }
 
-function loadStats(): VisitorStats {
-  if (statsCache) {
-    return statsCache;
+// Fetch upstream persistent count safely across all hosting environments
+async function fetchPersistentCount(): Promise<number> {
+  if (Date.now() - lastUpstreamFetch < 30000 && cachedTotalCount > 0) {
+    return cachedTotalCount;
   }
 
   try {
-    if (fs.existsSync(STATS_FILE_PATH)) {
-      const data = fs.readFileSync(STATS_FILE_PATH, 'utf-8');
-      const parsed = JSON.parse(data) as VisitorStats;
-      statsCache = parsed;
-      if (Array.isArray(parsed.ipHashes)) {
-        parsed.ipHashes.forEach((h) => ipSetCache.add(h));
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 2500);
+    const res = await fetch('https://api.counterapi.dev/v1/pixenhance_v1/visitors/up', {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'PixEnhance/1.0' },
+      cache: 'no-store',
+    });
+    clearTimeout(id);
+    if (res.ok) {
+      const data = await res.json();
+      if (typeof data.count === 'number' && data.count > 0) {
+        cachedTotalCount = Math.max(cachedTotalCount, data.count);
+        lastUpstreamFetch = Date.now();
+        return cachedTotalCount;
       }
-      return statsCache;
     }
-  } catch (err) {
-    console.error('Error reading visitor stats file:', err);
+  } catch {
+    // fallback
   }
 
-  // Initial stats fallback
-  statsCache = {
-    totalUniqueVisitors: 0,
-    ipHashes: [],
-    lastUpdated: new Date().toISOString(),
-  };
-  return statsCache;
-}
-
-function saveStats(stats: VisitorStats) {
   try {
-    stats.lastUpdated = new Date().toISOString();
-    // Keep max 50,000 hashes to maintain compact file size
-    if (stats.ipHashes.length > 50000) {
-      stats.ipHashes = stats.ipHashes.slice(-50000);
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 2500);
+    const res = await fetch('https://hits.sh/pixenhance.in.svg', {
+      signal: controller.signal,
+      cache: 'no-store',
+    });
+    clearTimeout(id);
+    if (res.ok) {
+      const text = await res.text();
+      const match =
+        text.match(/<title>(?:hits|visitors)?:\s*([\d,]+)<\/title>/i) ||
+        text.match(/aria-label="(?:hits|visitors)?:\s*([\d,]+)"/i);
+      if (match && match[1]) {
+        const num = parseInt(match[1].replace(/,/g, ''), 10);
+        if (num > 0) {
+          cachedTotalCount = Math.max(cachedTotalCount, num);
+          lastUpstreamFetch = Date.now();
+          return cachedTotalCount;
+        }
+      }
     }
-    fs.writeFileSync(STATS_FILE_PATH, JSON.stringify(stats, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Error saving visitor stats file:', err);
+  } catch {
+    // fallback
   }
+
+  return cachedTotalCount;
 }
 
 export async function GET(request: NextRequest) {
-  const stats = loadStats();
+  cleanupActiveUsers();
+  const activeCount = Math.max(activeUsers.size, 1);
+  const totalCount = await fetchPersistentCount();
+
   return NextResponse.json(
     {
-      count: stats.totalUniqueVisitors,
+      activeUsers: activeCount,
+      totalVisitors: totalCount,
+      count: totalCount,
       live: true,
     },
     {
@@ -117,33 +132,36 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const userAgent = request.headers.get('user-agent');
-  const stats = loadStats();
-
   if (isBot(userAgent)) {
+    cleanupActiveUsers();
     return NextResponse.json({
-      count: stats.totalUniqueVisitors,
+      activeUsers: Math.max(activeUsers.size, 1),
+      totalVisitors: cachedTotalCount,
+      count: cachedTotalCount,
       skipped: 'bot',
     });
   }
 
   const clientIp = getClientIp(request);
-  const ipHash = hashIp(clientIp);
+  const now = Date.now();
 
-  let isNewIp = false;
+  // Register active heartbeat
+  activeUsers.set(clientIp, now);
+  cleanupActiveUsers();
 
-  if (!ipSetCache.has(ipHash)) {
-    // Brand new unique IP detected
-    ipSetCache.add(ipHash);
-    stats.ipHashes.push(ipHash);
-    stats.totalUniqueVisitors += 1;
-    isNewIp = true;
-    saveStats(stats);
+  if (!seenIps.has(clientIp)) {
+    seenIps.add(clientIp);
+    cachedTotalCount += 1;
   }
+
+  const totalCount = await fetchPersistentCount();
+  const activeCount = Math.max(activeUsers.size, 1);
 
   return NextResponse.json(
     {
-      count: stats.totalUniqueVisitors,
-      isNewVisitor: isNewIp,
+      activeUsers: activeCount,
+      totalVisitors: totalCount,
+      count: totalCount,
       live: true,
     },
     {

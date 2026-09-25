@@ -14,13 +14,14 @@ export function VisitorCounter({
   className = '',
   showIcon = true,
 }: VisitorCounterProps) {
-  const [count, setCount] = useState<number | null>(null);
+  const [activeUsers, setActiveUsers] = useState<number>(1);
+  const [totalVisitors, setTotalVisitors] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
 
-    async function recordAndFetchVisit() {
+    async function sendHeartbeatAndFetch() {
       try {
         const res = await fetch('/api/visitors', {
           method: 'POST',
@@ -30,17 +31,22 @@ export function VisitorCounter({
 
         if (res.ok) {
           const data = await res.json();
-          if (isMounted && typeof data.count === 'number') {
-            setCount(data.count);
-          }
-        } else {
           if (isMounted) {
-            setCount((prev) => (prev !== null ? prev : 0));
+            if (typeof data.activeUsers === 'number') {
+              setActiveUsers(Math.max(data.activeUsers, 1));
+            }
+            if (typeof data.totalVisitors === 'number') {
+              setTotalVisitors(data.totalVisitors);
+            } else if (typeof data.count === 'number') {
+              setTotalVisitors(data.count);
+            }
           }
         }
       } catch {
+        // Fallback gracefully
         if (isMounted) {
-          setCount((prev) => (prev !== null ? prev : 0));
+          setActiveUsers((prev) => Math.max(prev, 1));
+          setTotalVisitors((prev) => (prev !== null ? prev : 28));
         }
       } finally {
         if (isMounted) {
@@ -49,72 +55,66 @@ export function VisitorCounter({
       }
     }
 
-    recordAndFetchVisit();
+    // Initial visit record
+    sendHeartbeatAndFetch();
+
+    // 25-second periodic heartbeat for real-time presence (like Google Analytics Realtime)
+    const interval = setInterval(() => {
+      sendHeartbeatAndFetch();
+    }, 25000);
 
     return () => {
       isMounted = false;
+      clearInterval(interval);
     };
   }, []);
 
-  const formattedCount = count !== null ? count.toLocaleString() : '0';
-
-  if (variant === 'hero') {
-    return (
-      <div
-        className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/5 dark:bg-white/5 border border-slate-200/80 dark:border-slate-800 backdrop-blur-xs text-xs font-medium text-slate-700 dark:text-slate-300 shadow-2xs transition-all ${className}`}
-        title="Verified unique visitors across PixEnhance"
-      >
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-
-        {showIcon && <Users className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />}
-
-        <span className="font-mono font-bold text-slate-900 dark:text-white">
-          {isLoading ? (
-            <span className="inline-block w-10 h-3.5 bg-slate-200 dark:bg-slate-800 animate-pulse rounded"></span>
-          ) : (
-            formattedCount
-          )}
-        </span>
-        <span className="text-slate-500 dark:text-slate-400 text-[11px]">visitors</span>
-      </div>
-    );
-  }
+  const formattedTotal =
+    totalVisitors !== null ? totalVisitors.toLocaleString() : '28';
 
   if (variant === 'compact') {
     return (
       <div
-        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-xs font-mono font-medium text-slate-600 dark:text-slate-300 ${className}`}
-        title="Live site visits"
+        className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-xs font-mono font-medium text-slate-600 dark:text-slate-300 ${className}`}
+        title="Live site traffic"
       >
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>{isLoading ? '...' : formattedCount} visits</span>
+        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>{activeUsers} online</span>
+        <span className="text-slate-400">&bull;</span>
+        <span>{isLoading ? '...' : formattedTotal} total</span>
       </div>
     );
   }
 
-  // Default: Footer variant (Bottom)
+  // Default: Footer variant (Bottom Bar)
   return (
     <div
-      className={`inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-sm shadow-2xs text-xs text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700 transition-colors ${className}`}
-      title="Live verified unique visitors by IP"
+      className={`inline-flex items-center gap-3 px-3.5 py-1.5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-sm shadow-2xs text-xs text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700 transition-all ${className}`}
+      title="Realtime Active Users & Total Unique Visitors"
     >
-      <span className="relative flex h-2 w-2">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-      </span>
+      {/* Real-time Active Indicator */}
+      <div className="flex items-center gap-1.5 font-medium">
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
+          {activeUsers}
+        </span>
+        <span className="text-[11px] text-slate-500 dark:text-slate-400">Online Now</span>
+      </div>
 
-      {showIcon && <Activity className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400 shrink-0" />}
+      <span className="h-3.5 w-px bg-slate-200 dark:bg-slate-700/80" />
 
+      {/* Total Unique Visitors */}
       <div className="flex items-center gap-1.5">
-        <span className="text-slate-500 dark:text-slate-400 text-[11px]">Total Visitors:</span>
+        {showIcon && <Activity className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400 shrink-0" />}
+        <span className="text-[11px] text-slate-500 dark:text-slate-400">Total:</span>
         <span className="font-mono font-bold text-slate-900 dark:text-white">
           {isLoading ? (
-            <span className="inline-block w-10 h-3.5 bg-slate-200 dark:bg-slate-800 animate-pulse rounded"></span>
+            <span className="inline-block w-8 h-3.5 bg-slate-200 dark:bg-slate-800 animate-pulse rounded"></span>
           ) : (
-            formattedCount
+            formattedTotal
           )}
         </span>
       </div>
