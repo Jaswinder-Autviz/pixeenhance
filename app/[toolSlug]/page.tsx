@@ -85,8 +85,8 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
 }
 
 export async function generateStaticParams() {
-  return TOOLS_LIST.map((tool) => ({
-    toolSlug: tool.id,
+  return Array.from(TOOL_MAP.keys()).map((toolSlug) => ({
+    toolSlug,
   }));
 }
 
@@ -229,13 +229,6 @@ export default async function ToolPage({ params }: ToolPageProps) {
           '@type': 'Offer',
           price: '0',
           priceCurrency: 'USD',
-        },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: '1840',
-          bestRating: '5',
-          worstRating: '1',
         },
         featureList: tool.features.join(', '),
       },

@@ -155,14 +155,14 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
       {relatedTools.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-              Related Image Tools
-            </h3>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+              Related Tools
+            </h2>
             <Link
               href="/tools"
-              className="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1"
+              className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 flex items-center gap-1"
             >
-              <span>View all 20 tools</span>
+              <span>Explore All Tools</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

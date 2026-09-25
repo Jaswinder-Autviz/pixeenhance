@@ -1,4 +1,4 @@
-﻿export type ToolCategory =
+export type ToolCategory =
   | 'Compress'
   | 'Resize'
   | 'Convert'
@@ -1878,10 +1878,24 @@ export const TOOLS_LIST: ToolItem[] = [
   }
 ];
 
+const ALIAS_MAP: Record<string, string> = {
+  'resize-image-to-a4': 'a4-image-resizer',
+  'compress-image-online': 'image-compressor',
+  'photo-resizer': 'image-resizer',
+};
+
 export const TOOL_MAP = new Map(
   TOOLS_LIST.flatMap((t) => [
     [t.id, t],
     [t.slug.replace(/^\//, ''), t],
   ])
 );
+
+// Register aliases
+Object.entries(ALIAS_MAP).forEach(([alias, targetId]) => {
+  const target = TOOL_MAP.get(targetId);
+  if (target) {
+    TOOL_MAP.set(alias, target);
+  }
+});
 
