@@ -1797,10 +1797,10 @@ export const TOOLS_LIST: ToolItem[] = [
     badge: 'Dev Suite',
     shortDescription: 'Convert code to beautiful images (Carbon style) and transform between JSON, TypeScript, YAML, HTML, JSX & CSS.',
     icon: 'Code2',
-    metaTitle: 'Free Online Code Converter & Code to Image Studio | PixEnhance',
+    metaTitle: 'Code Converter & Code to Image Studio — Free Online | PixEnhance',
     metaDescription: 'Convert code snippets to beautiful PNG/SVG images with macOS window frames, or transform code between JSON, TypeScript interfaces, YAML, HTML, JSX, and CSS.',
-    h1: 'Free Online Code Converter & Code to Image Studio',
-    subtitle: 'Generate stunning social code images (Carbon & Ray style) and convert code between TypeScript, JSON, YAML, JSX, and CSS with instant privacy.',
+    h1: 'Code Converter & Code to Image Studio',
+    subtitle: 'Generate beautiful code screenshots or transform code between JSON, TypeScript, YAML, HTML, and JSX instantly.',
     features: [
       'Code to Image Studio: Export high-res PNG and vector SVG code mockups',
       'Mac window chrome, line numbers, padding, and 8+ designer gradient backgrounds',
@@ -1848,7 +1848,7 @@ export const TOOLS_LIST: ToolItem[] = [
     metaTitle: 'Code to Image Converter Online — Create Beautiful Code Snippets | PixEnhance',
     metaDescription: 'Turn code into beautiful images online for free. Carbon & Ray.so style code screenshots with dark themes, custom gradients, and macOS frames.',
     h1: 'Code to Image Converter',
-    subtitle: 'Create elegant, high-resolution code screenshots for Twitter, documentation, blogs, and presentations directly in your browser.',
+    subtitle: 'Create elegant, high-resolution code screenshots with custom themes, macOS frames, and designer gradients.',
     features: [
       'Carbon & Ray.so style code snippet mockup generator',
       'Export to Retina 2× PNG and vector SVG',

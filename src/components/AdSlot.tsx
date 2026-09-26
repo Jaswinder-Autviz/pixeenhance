@@ -11,11 +11,16 @@ interface AdSlotProps {
 
 export const AdSlot: React.FC<AdSlotProps> = ({
   type = 'responsive',
-  slotId = '1234567890',
-  adClient = 'ca-pub-XXXXXXXXXXXXXXXX',
+  slotId,
+  adClient = 'ca-pub-7732882072230308',
   className = ''
 }) => {
   const adRef = useRef<HTMLDivElement>(null);
+
+  // If no valid ad unit slot ID is specified, return null to avoid dummy placeholders
+  if (!slotId || slotId === '1234567890') {
+    return null;
+  }
 
   // Attempt to push ad via window.adsbygoogle if AdSense script is injected
   useEffect(() => {
@@ -25,7 +30,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
         w.adsbygoogle.push({});
       }
     } catch {
-      // Gracefully handle ad blocker or non-production environment
+      // Gracefully handle ad blocker
     }
   }, []);
 
@@ -60,30 +65,14 @@ export const AdSlot: React.FC<AdSlotProps> = ({
           minHeight: dim.minHeight
         }}
       >
-        <span className="ad-label">Advertisement</span>
-        {/* Placeholder container styled cleanly to avoid layout shifts */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '1rem',
-            color: 'var(--text-muted)',
-            fontSize: '0.8rem',
-            textAlign: 'center'
-          }}
-        >
-          {/* Real Google AdSense tag insertion target */}
-          <ins
-            className="adsbygoogle"
-            style={{ display: 'block', width: '100%', textAlign: 'center' }}
-            data-ad-client={adClient}
-            data-ad-slot={slotId}
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-          <span style={{ opacity: 0.6, fontSize: '0.75rem' }}>Google AdSense Placement Area</span>
-        </div>
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', width: '100%', textAlign: 'center' }}
+          data-ad-client={adClient}
+          data-ad-slot={slotId}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
       </div>
     </aside>
   );

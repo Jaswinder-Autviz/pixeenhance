@@ -76,59 +76,61 @@ const TRANSFORM_OPTIONS: { id: TransformType; name: string; desc: string; inputE
 ];
 
 const SAMPLE_CODES: Record<string, string> = {
-  typescript: `// TypeScript Interface & Async Fetch
-interface UserProfile {
+  typescript: `// TypeScript Product Model & Fetch Handler
+export interface Product {
   id: string;
-  username: string;
-  roles: ('admin' | 'editor' | 'viewer')[];
-  stats: { views: number; followers: number };
+  name: string;
+  price: number;
+  category: string;
+  inStock: boolean;
+  tags: string[];
 }
 
-export async function fetchUser(userId: string): Promise<UserProfile> {
-  const res = await fetch(\`/api/users/\${userId}\`);
-  if (!res.ok) throw new Error("Failed to load user");
+export async function fetchProduct(id: string): Promise<Product> {
+  const res = await fetch(\`/api/products/\${id}\`);
+  if (!res.ok) throw new Error("Failed to load product");
   return res.json();
 }`,
-  react: `import React, { useState } from 'react';
+  react: `import React from 'react';
 
-export function CounterButton({ initialCount = 0 }: { initialCount?: number }) {
-  const [count, setCount] = useState(initialCount);
-
+export function ProductBadge({ title, price, isFree }: { title: string; price: number; isFree?: boolean }) {
   return (
-    <button
-      onClick={() => setCount((prev) => prev + 1)}
-      className="px-4 py-2 bg-indigo-600 text-white rounded-xl shadow-lg hover:scale-105 transition-transform"
-    >
-      Clicked {count} times ✨
-    </button>
+    <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900 text-white">
+      <div>
+        <h4 className="text-sm font-semibold">{title}</h4>
+        <span className="text-xs text-slate-400">{isFree ? 'Free Studio' : \`$\${price}\`}</span>
+      </div>
+      <button className="px-3 py-1 bg-indigo-600 rounded-lg text-xs font-bold hover:bg-indigo-500">
+        Get Started
+      </button>
+    </div>
   );
 }`,
-  python: `import math
+  python: `def calculate_discount(price: float, discount_percent: float) -> float:
+    """Calculate final product price after discount."""
+    if not (0 <= discount_percent <= 100):
+        raise ValueError("Invalid discount percentage")
+    return round(price * (1 - discount_percent / 100), 2)
 
-def calculate_fibonacci(n: int) -> list[int]:
-    """Generate first n Fibonacci sequence numbers."""
-    if n <= 0:
-        return []
-    fib = [0, 1]
-    while len(fib) < n:
-        fib.append(fib[-1] + fib[-2])
-    return fib[:n]
-
-print(f"Fibonacci(10): {calculate_fibonacci(10)}")`,
+# Sample calculation
+final_price = calculate_discount(49.99, 15.0)
+print(f"Discounted Price: \${final_price}")`,
   json: `{
-  "projectName": "PixEnhance Studio",
-  "version": "2.4.0",
-  "private": true,
-  "secureProcessing": true,
+  "id": "prod_pix_01",
+  "name": "PixEnhance Pro Studio",
+  "category": "Image & Utility Suite",
+  "price": 0.0,
+  "currency": "USD",
+  "status": "active",
   "features": [
-    "Image Compression",
-    "Vectorization",
-    "PDF to Word",
-    "Code Converter"
+    "High-speed image compression",
+    "Lossless vector conversion",
+    "Browser-based local privacy",
+    "Carbon code to image export"
   ],
-  "author": {
-    "name": "Dev Team",
-    "verified": true
+  "rating": {
+    "score": 4.9,
+    "count": 1280
   }
 }`,
 };
@@ -140,13 +142,13 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
   // TAB 1: CODE TO IMAGE STATE
   // ==========================================
   const [snippetCode, setSnippetCode] = useState<string>(SAMPLE_CODES.typescript);
-  const [windowTitle, setWindowTitle] = useState<string>('snippet.tsx');
+  const [windowTitle, setWindowTitle] = useState<string>('Product.ts');
   const [selectedGradient, setSelectedGradient] = useState<string>('sunset');
   const [selectedTheme, setSelectedTheme] = useState<string>('one-dark');
-  const [paddingSize, setPaddingSize] = useState<number>(32);
+  const [paddingSize, setPaddingSize] = useState<number>(24);
   const [showLineNumbers, setShowLineNumbers] = useState<boolean>(true);
   const [showWindowControls, setShowWindowControls] = useState<boolean>(true);
-  const [fontSize, setFontSize] = useState<number>(14);
+  const [fontSize, setFontSize] = useState<number>(13);
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const [copiedNotification, setCopiedNotification] = useState<boolean>(false);
 
@@ -389,7 +391,8 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
           <foreignObject width="100%" height="100%">
             <div xmlns="http://www.w3.org/1999/xhtml">
               <style>
-                * { box-sizing: border-box; font-family: monospace, sans-serif; }
+                * { box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+                code, pre, .font-mono { font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, 'Courier New', monospace; }
               </style>
               ${nodeHtml}
             </div>
@@ -445,7 +448,8 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
-        * { box-sizing: border-box; font-family: monospace; }
+        * { box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        code, pre, .font-mono { font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, 'Courier New', monospace; }
       </style>
       ${serialized}
     </div>
@@ -472,7 +476,13 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
 
       const svgData = `<svg xmlns="http://www.w3.org/2000/svg" width="${width * scale}" height="${height * scale}" viewBox="0 0 ${width} ${height}">
         <foreignObject width="100%" height="100%">
-          <div xmlns="http://www.w3.org/1999/xhtml">${serialized}</div>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+              * { box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+              code, pre, .font-mono { font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, 'Courier New', monospace; }
+            </style>
+            ${serialized}
+          </div>
         </foreignObject>
       </svg>`;
 
@@ -519,37 +529,40 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-6 space-y-8">
+    <div
+      className="w-full max-w-5xl mx-auto px-4 py-4 space-y-5"
+      style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
+    >
       {/* Mode Selector Header Pill */}
-      <div className="flex flex-wrap items-center justify-between gap-4 p-2 bg-slate-200/80 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-2xl shadow-sm">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-1.5 bg-slate-200/80 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-xl shadow-xs">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => setActiveTab('code-to-image')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'code-to-image'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                ? 'bg-indigo-600 text-white shadow-xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <ImageIcon className="w-4 h-4" />
+            <ImageIcon className="w-3.5 h-3.5" />
             <span>Code to Image Studio</span>
           </button>
 
           <button
             onClick={() => setActiveTab('code-transformer')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'code-transformer'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                ? 'bg-indigo-600 text-white shadow-xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <ArrowRightLeft className="w-4 h-4" />
+            <ArrowRightLeft className="w-3.5 h-3.5" />
             <span>Code &amp; Data Converter</span>
           </button>
         </div>
 
-        <div className="hidden sm:flex items-center gap-2 pr-3 text-xs text-slate-500 dark:text-slate-400 font-medium">
-          <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+        <div className="hidden sm:flex items-center gap-1.5 pr-2.5 text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+          <Sparkles className="w-3 h-3 text-indigo-500" />
           <span>Fast &bull; Free &bull; Private</span>
         </div>
       </div>
@@ -558,32 +571,32 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
       {/* MODE 1: CODE TO IMAGE STUDIO                             */}
       {/* ========================================================= */}
       {activeTab === 'code-to-image' && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Controls Bar */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 shadow-md">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
             {/* Window Title */}
             <div>
-              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono mb-1.5">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                 File / Title
               </label>
               <input
                 type="text"
                 value={windowTitle}
                 onChange={(e) => setWindowTitle(e.target.value)}
-                placeholder="snippet.ts"
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono text-slate-800 dark:text-slate-100 focus:outline-none focus:border-indigo-500"
+                placeholder="Product.ts"
+                className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono text-slate-800 dark:text-slate-100 focus:outline-none focus:border-indigo-500"
               />
             </div>
 
             {/* Theme Selector */}
             <div>
-              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono mb-1.5">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                 Editor Theme
               </label>
               <select
                 value={selectedTheme}
                 onChange={(e) => setSelectedTheme(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-indigo-500"
+                className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-medium text-slate-800 dark:text-slate-100 focus:outline-none focus:border-indigo-500"
               >
                 {THEMES.map((th) => (
                   <option key={th.id} value={th.id}>
@@ -593,19 +606,41 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
               </select>
             </div>
 
+            {/* Font Size Selector */}
+            <div>
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
+                Font Size ({fontSize}px)
+              </label>
+              <div className="flex items-center gap-1">
+                {[12, 13, 14, 16].map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => setFontSize(size)}
+                    className={`flex-1 py-1 rounded-md text-[11px] font-bold font-mono transition-all ${
+                      fontSize === size
+                        ? 'bg-indigo-600 text-white shadow-2xs'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Padding Controls */}
             <div>
-              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono mb-1.5">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                 Canvas Padding ({paddingSize}px)
               </label>
-              <div className="flex items-center gap-1.5 pt-0.5">
-                {[16, 32, 48, 64].map((size) => (
+              <div className="flex items-center gap-1">
+                {[16, 24, 32, 48].map((size) => (
                   <button
                     key={size}
                     onClick={() => setPaddingSize(size)}
-                    className={`flex-1 py-1.5 rounded-lg text-xs font-bold font-mono transition-all ${
+                    className={`flex-1 py-1 rounded-md text-[11px] font-bold font-mono transition-all ${
                       paddingSize === size
-                        ? 'bg-indigo-600 text-white shadow-xs'
+                        ? 'bg-indigo-600 text-white shadow-2xs'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
                     }`}
                   >
@@ -616,23 +651,23 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
             </div>
 
             {/* Toggles */}
-            <div className="flex items-center justify-between sm:justify-start gap-4 pt-4 sm:pt-6">
-              <label className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
+            <div className="flex items-center justify-between sm:justify-start gap-3 pt-3 sm:pt-4">
+              <label className="flex items-center gap-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={showLineNumbers}
                   onChange={(e) => setShowLineNumbers(e.target.checked)}
-                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4"
+                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5"
                 />
-                <span>Line Numbers</span>
+                <span>Lines</span>
               </label>
 
-              <label className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
+              <label className="flex items-center gap-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={showWindowControls}
                   onChange={(e) => setShowWindowControls(e.target.checked)}
-                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4"
+                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5"
                 />
                 <span>macOS Dots</span>
               </label>
@@ -640,37 +675,37 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
           </div>
 
           {/* Gradient Selector Pill Row */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono shrink-0 mr-1">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono shrink-0 mr-1">
               Background:
             </span>
             {GRADIENT_PRESETS.map((preset) => (
               <button
                 key={preset.id}
                 onClick={() => setSelectedGradient(preset.id)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all flex items-center gap-1.5 shrink-0 ${
                   selectedGradient === preset.id
-                    ? 'ring-2 ring-indigo-500 bg-white dark:bg-slate-800 shadow-sm'
+                    ? 'ring-2 ring-indigo-500 bg-white dark:bg-slate-800 shadow-2xs font-semibold'
                     : 'bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-white'
                 }`}
               >
-                <div className={`w-3.5 h-3.5 rounded-full bg-gradient-to-r ${preset.class}`} />
+                <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${preset.class}`} />
                 <span>{preset.name}</span>
               </button>
             ))}
           </div>
 
           {/* Quick Code Sample Preset Chips */}
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-slate-400 font-bold font-mono">Load Sample:</span>
+          <div className="flex items-center gap-1.5 text-xs">
+            <span className="text-slate-400 font-bold font-mono text-[10px] uppercase">Product Samples:</span>
             {Object.keys(SAMPLE_CODES).map((key) => (
               <button
                 key={key}
                 onClick={() => {
                   setSnippetCode(SAMPLE_CODES[key]);
-                  setWindowTitle(`sample.${key === 'typescript' ? 'ts' : key === 'react' ? 'tsx' : key === 'python' ? 'py' : 'json'}`);
+                  setWindowTitle(`Product.${key === 'typescript' ? 'ts' : key === 'react' ? 'tsx' : key === 'python' ? 'py' : 'json'}`);
                 }}
-                className="px-2.5 py-1 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-100 hover:text-indigo-700 dark:hover:bg-slate-700 font-semibold uppercase text-[10px] font-mono transition-colors"
+                className="px-2 py-0.5 rounded-md bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-100 hover:text-indigo-700 dark:hover:bg-slate-700 font-semibold uppercase text-[10px] font-mono transition-colors"
               >
                 {key}
               </button>
@@ -678,41 +713,54 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
           </div>
 
           {/* LIVE PREVIEW CANVAS */}
-          <div className="rounded-3xl border border-slate-300 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-950 p-4 sm:p-8 flex items-center justify-center overflow-x-auto shadow-inner">
+          <div className="rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-950 p-3 sm:p-6 flex items-center justify-center overflow-x-auto shadow-inner">
             <div
               ref={previewBoxRef}
               style={{ padding: `${paddingSize}px` }}
-              className={`rounded-3xl transition-all duration-300 shadow-2xl flex items-center justify-center max-w-full bg-gradient-to-br ${currentGradient.class}`}
+              className={`rounded-2xl transition-all duration-300 shadow-xl flex items-center justify-center max-w-full bg-gradient-to-br ${currentGradient.class}`}
             >
               {/* Mockup Window Box */}
               <div
-                style={{ backgroundColor: currentTheme.bg, color: currentTheme.text }}
-                className="rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden w-full min-w-[320px] max-w-2xl"
+                style={{
+                  backgroundColor: currentTheme.bg,
+                  color: currentTheme.text,
+                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                }}
+                className="rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.4)] border border-white/10 overflow-hidden w-full min-w-[280px] max-w-xl"
               >
                 {/* Window Header / Traffic lights */}
                 <div
                   style={{ backgroundColor: currentTheme.bar }}
-                  className="px-4 py-3 flex items-center justify-between border-b border-white/5"
+                  className="px-3.5 py-2 flex items-center justify-between border-b border-white/5"
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     {showWindowControls && (
                       <div className="flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded-full bg-[#FF5F56] shadow-xs" />
-                        <div className="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-xs" />
-                        <div className="w-3 h-3 rounded-full bg-[#27C93F] shadow-xs" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
                       </div>
                     )}
                   </div>
-                  <span className="text-[11px] font-mono opacity-60 font-semibold truncate px-2">
-                    {windowTitle || 'snippet'}
+                  <span
+                    className="text-[11px] font-medium opacity-65 truncate px-2"
+                    style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
+                  >
+                    {windowTitle || 'Product.ts'}
                   </span>
-                  <div className="w-8" />
+                  <div className="w-6" />
                 </div>
 
                 {/* Code Body */}
-                <div className="p-4 font-mono text-left flex gap-3 overflow-x-auto" style={{ fontSize: `${fontSize}px` }}>
+                <div
+                  className="p-3.5 sm:p-4 text-left flex gap-3 overflow-x-auto"
+                  style={{
+                    fontSize: `${fontSize}px`,
+                    fontFamily: "'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace",
+                  }}
+                >
                   {showLineNumbers && (
-                    <div className="select-none opacity-30 text-right font-mono pr-2 border-r border-white/10 space-y-1">
+                    <div className="select-none opacity-30 text-right pr-2 border-r border-white/10 space-y-0.5 text-[11px] font-mono">
                       {snippetCode.split('\n').map((_, i) => (
                         <div key={i}>{i + 1}</div>
                       ))}
@@ -728,59 +776,59 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
           </div>
 
           {/* Editable Code Input Area */}
-          <div className="rounded-2xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+          <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-xs">
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-sans">
                 Edit Code Snippet
               </label>
               <button
                 onClick={() => setSnippetCode('')}
-                className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-semibold"
+                className="text-[11px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-medium"
               >
                 Clear
               </button>
             </div>
             <textarea
-              rows={6}
+              rows={5}
               value={snippetCode}
               onChange={(e) => setSnippetCode(e.target.value)}
               placeholder="Paste or write any code here to render live above..."
-              className="w-full p-3 font-mono text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-indigo-500 leading-relaxed"
+              className="w-full p-2.5 font-mono text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-indigo-500 leading-relaxed resize-y"
             />
           </div>
 
           {/* Export Action Buttons */}
-          <div className="flex flex-wrap items-center justify-end gap-3 pt-2">
+          <div className="flex flex-wrap items-center justify-end gap-2 pt-1">
             {copiedNotification && (
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 animate-in fade-in">
-                <Check className="w-4 h-4" />
-                <span>Copied Image to Clipboard!</span>
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 animate-in fade-in">
+                <Check className="w-3.5 h-3.5" />
+                <span>Copied Image!</span>
               </span>
             )}
 
             <button
               onClick={handleCopyImage}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold shadow-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold shadow-2xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
             >
-              <Copy className="w-4 h-4" />
+              <Copy className="w-3.5 h-3.5" />
               <span>Copy Image</span>
             </button>
 
             <button
               onClick={handleDownloadSvg}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold shadow-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold shadow-2xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
             >
-              <FileCode className="w-4 h-4" />
+              <FileCode className="w-3.5 h-3.5" />
               <span>Save SVG</span>
             </button>
 
             <button
               onClick={handleDownloadPng}
               disabled={isExporting}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-indigo-500/20 transition-all hover:scale-105"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs transition-all hover:scale-102"
             >
-              <Download className="w-4 h-4" />
-              <span>{isExporting ? 'Generating...' : 'Download PNG (High-Res)'}</span>
+              <Download className="w-3.5 h-3.5" />
+              <span>{isExporting ? 'Generating...' : 'Download PNG'}</span>
             </button>
           </div>
         </div>
@@ -790,23 +838,23 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
       {/* MODE 2: CODE & DATA TRANSFORMER                           */}
       {/* ========================================================= */}
       {activeTab === 'code-to-image' ? null : (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Format Selector Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {TRANSFORM_OPTIONS.map((opt) => (
               <button
                 key={opt.id}
                 onClick={() => setTransformType(opt.id)}
-                className={`p-3 rounded-2xl border text-left transition-all ${
+                className={`p-2.5 rounded-xl border text-left transition-all ${
                   transformType === opt.id
-                    ? 'border-indigo-500 bg-indigo-50/80 dark:bg-indigo-950/40 shadow-sm ring-1 ring-indigo-500'
+                    ? 'border-indigo-500 bg-indigo-50/80 dark:bg-indigo-950/40 shadow-xs ring-1 ring-indigo-500'
                     : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300'
                 }`}
               >
                 <span className="block text-xs font-bold text-slate-900 dark:text-white">
                   {opt.name}
                 </span>
-                <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">
+                <span className="block text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">
                   {opt.desc}
                 </span>
               </button>
@@ -815,18 +863,18 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
 
           {/* Error Banner */}
           {transformError && (
-            <div className="p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 flex items-center gap-2.5 text-xs text-rose-700 dark:text-rose-300">
-              <AlertCircle className="w-4 h-4 shrink-0" />
+            <div className="p-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 flex items-center gap-2 text-xs text-rose-700 dark:text-rose-300">
+              <AlertCircle className="w-3.5 h-3.5 shrink-0" />
               <span>{transformError}</span>
             </div>
           )}
 
           {/* Dual Code Panels: Input & Output */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Input Panel */}
-            <div className="flex flex-col rounded-2xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-md overflow-hidden">
-              <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-mono">
+            <div className="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs overflow-hidden">
+              <div className="px-3.5 py-2 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-sans">
                   Input Code
                 </span>
                 <div className="flex items-center gap-2">
@@ -834,7 +882,7 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
                     onClick={() => setInputCode(SAMPLE_CODES.json)}
                     className="text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
                   >
-                    Sample JSON
+                    Product JSON
                   </button>
                   <span className="text-slate-300 dark:text-slate-700">|</span>
                   <button
@@ -846,54 +894,54 @@ export function CodeConverterView({ initialMode = 'code-to-image' }: CodeConvert
                 </div>
               </div>
               <textarea
-                rows={14}
+                rows={10}
                 value={inputCode}
                 onChange={(e) => setInputCode(e.target.value)}
-                placeholder="Paste code to convert here..."
-                className="w-full p-4 font-mono text-xs sm:text-sm bg-transparent text-slate-900 dark:text-slate-100 focus:outline-none resize-none leading-relaxed"
+                placeholder="Paste code or JSON to convert here..."
+                className="w-full p-3 font-mono text-xs bg-transparent text-slate-900 dark:text-slate-100 focus:outline-none resize-none leading-relaxed"
               />
             </div>
 
             {/* Output Panel */}
-            <div className="flex flex-col rounded-2xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-md overflow-hidden">
-              <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 flex items-center justify-between">
+            <div className="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs overflow-hidden">
+              <div className="px-3.5 py-2 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-mono">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 font-sans">
                     Converted Result
                   </span>
                   {outputCode && !transformError && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
                       Success
                     </span>
                   )}
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                   <button
                     onClick={handleCopyTransformed}
                     disabled={!outputCode}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-indigo-600 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-indigo-600 hover:text-white transition-colors"
                   >
-                    {copiedTransformer ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copiedTransformer ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                     <span>{copiedTransformer ? 'Copied' : 'Copy'}</span>
                   </button>
 
                   <button
                     onClick={handleDownloadTransformed}
                     disabled={!outputCode}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors"
                   >
-                    <Download className="w-3.5 h-3.5" />
+                    <Download className="w-3 h-3" />
                     <span>Download</span>
                   </button>
                 </div>
               </div>
               <textarea
-                rows={14}
+                rows={10}
                 readOnly
                 value={outputCode}
                 placeholder="Converted output will appear here in real-time..."
-                className="w-full p-4 font-mono text-xs sm:text-sm bg-slate-50/50 dark:bg-slate-950/50 text-slate-900 dark:text-slate-100 focus:outline-none resize-none leading-relaxed"
+                className="w-full p-3 font-mono text-xs bg-slate-50/50 dark:bg-slate-950/50 text-slate-900 dark:text-slate-100 focus:outline-none resize-none leading-relaxed"
               />
             </div>
           </div>

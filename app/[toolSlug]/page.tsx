@@ -308,10 +308,10 @@ export default async function ToolPage({ params }: ToolPageProps) {
       </div>
 
       {/* Editorial Tool Hero Header */}
-      <section className="py-8 sm:py-12 border-b border-slate-200/80 dark:border-slate-800 bg-gradient-to-b from-white/90 via-slate-50/60 to-transparent dark:from-slate-900/80 dark:via-slate-950/60 dark:to-transparent backdrop-blur-xs relative z-10">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-4 sm:py-6 border-b border-slate-200/80 dark:border-slate-800 bg-gradient-to-b from-white/90 via-slate-50/60 to-transparent dark:from-slate-900/80 dark:via-slate-950/60 dark:to-transparent backdrop-blur-xs relative z-10">
+        <div className="max-w-4xl mx-auto px-4 text-center">
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-2 text-xs text-slate-400 font-medium mb-4" aria-label="Breadcrumb">
+          <nav className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 font-medium mb-2" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
               Home
             </Link>
@@ -320,31 +320,31 @@ export default async function ToolPage({ params }: ToolPageProps) {
               Tools
             </Link>
             <span>/</span>
-            <span className="text-indigo-600 dark:text-indigo-400 font-bold">{tool.name}</span>
+            <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{tool.name}</span>
           </nav>
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/60 dark:via-purple-950/60 dark:to-pink-950/60 border border-indigo-200/80 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold mb-3 shadow-xs">
-            <Sparkles className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/60 dark:via-purple-950/60 dark:to-pink-950/60 border border-indigo-200/80 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 text-[11px] font-semibold mb-2 shadow-2xs">
+            <Sparkles className="h-3 w-3 text-indigo-600 dark:text-indigo-400" />
             <span>Instant &bull; 100% Free &bull; Private</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">
             {tool.h1}
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-6 font-normal">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed mb-3 font-normal">
             {tool.subtitle}
           </p>
 
           {/* Quick Feature Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-1.5">
             {tool.features.slice(0, 3).map((feat, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 text-slate-700 dark:text-slate-300 text-xs font-semibold shadow-2xs"
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/90 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 text-slate-700 dark:text-slate-300 text-[11px] font-medium shadow-2xs"
               >
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                <CheckCircle2 className="h-3 w-3 text-emerald-500" />
                 <span>{feat}</span>
               </span>
             ))}
@@ -353,7 +353,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
       </section>
 
       {/* Main Interactive Tool Engine View */}
-      <section className="py-8 relative z-10">
+      <section className="py-3 sm:py-5 relative z-10">
         {renderToolEngine()}
       </section>
 
