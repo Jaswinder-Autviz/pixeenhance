@@ -1,15 +1,21 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
-import { SideAdRails } from '@/components/common/SideAdRails';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  themeColor: '#4f46e5',
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pixenhance.in'),
@@ -59,6 +65,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'PixEnhance',
+  },
   openGraph: {
     title: 'PixEnhance — Free Online Image & PDF Studio',
     description:
@@ -67,12 +78,21 @@ export const metadata: Metadata = {
     siteName: 'PixEnhance',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: 'https://pixenhance.in/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'PixEnhance — Free Online Image & PDF Studio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PixEnhance — Free Online Image & PDF Studio',
     description:
       'Compress, resize, convert, and edit images and PDFs instantly. Fast, private, and 100% free.',
+    images: ['https://pixenhance.in/og-image.jpg'],
   },
   icons: {
     icon: '/favicon.svg',
@@ -148,42 +168,42 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
-      <head>
-        <meta name="theme-color" content="#4f46e5" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        {/* Google Analytics 4 (GA4) */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-V7KYB6XEHV"
-        />
-        <script
-          id="google-analytics-init"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-V7KYB6XEHV', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
-        {/* Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7732882072230308"
-          crossOrigin="anonymous"
-        />
+      <body
+        className="min-h-screen flex flex-col bg-[#e5ebf2] dark:bg-[#070b14] text-slate-900 dark:text-slate-100 font-sans selection:bg-brand-500 selection:text-white antialiased transition-colors relative"
+        suppressHydrationWarning
+      >
+        {/* Structured Data (Schema.org JSON-LD) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-      </head>
-      <body className="min-h-screen flex flex-col bg-[#e5ebf2] dark:bg-[#070b14] text-slate-900 dark:text-slate-100 font-sans selection:bg-brand-500 selection:text-white antialiased transition-colors relative">
-        {/* Global Desktop Left & Right Skyscraper Ad Towers */}
-        <SideAdRails />
+
+        {/* Google Analytics 4 (GA4) - Loaded safely via next/script after hydration */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-V7KYB6XEHV"
+        />
+        <Script
+          id="google-analytics-init"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-V7KYB6XEHV', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+
+        {/* Google AdSense - Loaded safely via next/script after hydration */}
+        <Script
+          id="google-adsense"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7732882072230308"
+          crossOrigin="anonymous"
+        />
 
         <Header />
         <main className="flex-grow" id="main-content">{children}</main>
