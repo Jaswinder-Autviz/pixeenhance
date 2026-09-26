@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
+import { GoogleAdSense } from '@/components/common/GoogleAdSense';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -197,13 +198,8 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* Google AdSense - Loaded safely via next/script after hydration */}
-        <Script
-          id="google-adsense"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7732882072230308"
-          crossOrigin="anonymous"
-        />
+        {/* Google AdSense - Injected cleanly without data-nscript attribute */}
+        <GoogleAdSense publisherId="ca-pub-7732882072230308" />
 
         <Header />
         <main className="flex-grow" id="main-content">{children}</main>
