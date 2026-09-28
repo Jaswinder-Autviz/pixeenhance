@@ -24,7 +24,6 @@ import { BulkResizerView } from '@/components/tool-views/BulkResizerView';
 import { CollageMakerView } from '@/components/tool-views/CollageMakerView';
 import { ImageEnlargerView } from '@/components/tool-views/ImageEnlargerView';
 import { ColorPickerView } from '@/components/tool-views/ColorPickerView';
-import { MemeGeneratorView } from '@/components/tool-views/MemeGeneratorView';
 import { UniversalConverterView } from '@/components/tool-views/UniversalConverterView';
 import { PdfToImageView } from '@/components/tool-views/PdfToImageView';
 import { PngToSvgView } from '@/components/tool-views/PngToSvgView';
@@ -33,6 +32,7 @@ import { PdfConverterHubView } from '@/components/tool-views/PdfConverterHubView
 import { PdfToWordView } from '@/components/tool-views/PdfToWordView';
 import { WordToPdfView } from '@/components/tool-views/WordToPdfView';
 import { CodeConverterView } from '@/components/tool-views/CodeConverterView';
+import { ImageSplitterView } from '@/components/tool-views/ImageSplitterView';
 
 interface ToolPageProps {
   params: Promise<{ toolSlug: string }>;
@@ -144,12 +144,16 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
         return <FlipperView />;
       case 'collage-maker':
         return <CollageMakerView />;
+      case 'image-splitter':
+      case 'split-image':
+      case 'grid-splitter':
+      case 'panorama-splitter':
+      case 'photo-splitter':
+        return <ImageSplitterView />;
       case 'image-enlarger':
         return <ImageEnlargerView />;
       case 'color-picker':
         return <ColorPickerView />;
-      case 'meme-generator':
-        return <MemeGeneratorView />;
       case 'image-converter':
         return <UniversalConverterView />;
       case 'heic-to-jpg':

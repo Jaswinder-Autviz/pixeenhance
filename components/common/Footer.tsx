@@ -44,6 +44,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/image-splitter" className="hover:text-brand-600 transition-colors">
+                  Image Splitter
+                </Link>
+              </li>
+              <li>
                 <Link href="/image-cropper" className="hover:text-brand-600 transition-colors">
                   Cropper
                 </Link>
