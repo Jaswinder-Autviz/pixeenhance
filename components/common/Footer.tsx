@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Sparkles, ShieldCheck, Heart } from 'lucide-react';
+import { Sparkles, ShieldCheck } from 'lucide-react';
 import { VisitorCounter } from './VisitorCounter';
 
 export function Footer() {
@@ -127,8 +127,13 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
+                <Link href="/about" className="hover:text-brand-600 transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
                 <Link href="/tools" className="hover:text-brand-600 transition-colors">
-                  All 20 Tools
+                  All 40+ Tools
                 </Link>
               </li>
               <li>
