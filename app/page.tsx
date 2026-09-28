@@ -39,7 +39,7 @@ import {
   Play,
   FlipHorizontal,
 } from 'lucide-react';
-import { AdPlaceholder } from '@/components/common/AdPlaceholder';
+import { AdBanner } from '@/components/common/AdBanner';
 import { TOOLS_LIST, ToolCategory } from '@/src/data/toolsList';
 
 const CATEGORIES: Array<ToolCategory | 'All'> = [
@@ -500,6 +500,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Top Homepage Banner */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <AdBanner slot="home-top-banner" />
+      </div>
+
       {/* 2. CATEGORIZED TOOLS SECTIONS WITH MAIN HEADINGS */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-16">
         {/* Search / Global Summary Header */}
@@ -659,6 +664,11 @@ export default function HomePage() {
             })
         )}
       </section>
+
+      {/* Mid Homepage Banner */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <AdBanner slot="home-mid-banner" />
+      </div>
 
       {/* 3. Why PixEnhance (Aesthetic Bento Feature Grid) */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -871,9 +881,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Bottom Ad Placeholder */}
-      <div className="max-w-5xl mx-auto px-4 pb-12">
-        <AdPlaceholder slot="bottom-banner" />
+      {/* Bottom Ad Banner */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <AdBanner slot="home-bottom-banner" />
       </div>
     </div>
   );

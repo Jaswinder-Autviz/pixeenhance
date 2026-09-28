@@ -6,7 +6,6 @@ import {
   Search,
   Sparkles,
   ArrowRight,
-  ShieldCheck,
   Minimize2,
   Maximize2,
   Crop,
@@ -33,8 +32,8 @@ import {
   Code,
   Play,
 } from 'lucide-react';
-import { TOOLS_LIST, ToolCategory, ToolItem } from '@/src/data/toolsList';
-import { AdPlaceholder } from '@/components/common/AdPlaceholder';
+import { TOOLS_LIST, ToolCategory } from '@/src/data/toolsList';
+import { AdBanner } from '@/components/common/AdBanner';
 
 const CATEGORIES: Array<ToolCategory | 'All'> = [
   'All',
@@ -339,7 +338,7 @@ export default function ToolsDirectoryPage() {
 
       {/* Top Banner Ad */}
       <div className="max-w-5xl mx-auto px-4 pt-6 relative z-10">
-        <AdPlaceholder slot="top-banner" />
+        <AdBanner slot="tools-top-banner" />
       </div>
 
       {/* Hero Header */}
@@ -437,7 +436,7 @@ export default function ToolsDirectoryPage() {
             </button>
           </div>
         ) : (
-          categoriesToDisplay.map((cat, catIdx) => {
+          categoriesToDisplay.map((cat) => {
             const meta = CATEGORY_META[cat];
             const CategoryIcon = meta.icon;
             const toolsInCat = filteredTools.filter((t) => t.category === cat);
@@ -524,24 +523,7 @@ export default function ToolsDirectoryPage() {
                       </div>
                     );
                   })}
-
-                  {/* In-Feed Native Card for First Category */}
-                  {cat === 'Convert' && (
-                    <AdPlaceholder slot="in-feed" label="Featured Media Partner" />
-                  )}
                 </div>
-
-                {/* Inter-Category Sponsored Banners */}
-                {catIdx === 1 && (
-                  <div className="pt-6">
-                    <AdPlaceholder slot="mid-content" label="Sponsored &bull; High Conversion Banner" />
-                  </div>
-                )}
-                {catIdx === 3 && (
-                  <div className="pt-6">
-                    <AdPlaceholder slot="in-content" label="Sponsored &bull; Tools Suite Partner" />
-                  </div>
-                )}
               </div>
             );
           })
@@ -549,7 +531,7 @@ export default function ToolsDirectoryPage() {
 
         {/* Bottom Banner Ad */}
         <div className="pt-6">
-          <AdPlaceholder slot="bottom-banner" />
+          <AdBanner slot="tools-bottom-banner" />
         </div>
       </section>
     </div>
