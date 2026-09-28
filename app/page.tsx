@@ -40,7 +40,7 @@ import {
   FlipHorizontal,
 } from 'lucide-react';
 import { AdPlaceholder } from '@/components/common/AdPlaceholder';
-import { TOOLS_LIST, ToolCategory, ToolItem } from '@/src/data/toolsList';
+import { TOOLS_LIST, ToolCategory } from '@/src/data/toolsList';
 
 const CATEGORIES: Array<ToolCategory | 'All'> = [
   'All',
@@ -500,11 +500,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Top Banner Ad Placeholder */}
-      <div className="max-w-5xl mx-auto px-4 pt-6">
-        <AdPlaceholder slot="top-banner" />
-      </div>
-
       {/* 2. CATEGORIZED TOOLS SECTIONS WITH MAIN HEADINGS */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-16">
         {/* Search / Global Summary Header */}
@@ -562,7 +557,7 @@ export default function HomePage() {
               if (selectedCategory !== 'All' && selectedCategory !== cat) return false;
               return filteredTools.some((t) => t.category === cat);
             })
-            .map((cat, catIdx) => {
+            .map((cat) => {
               const meta = CATEGORY_META[cat];
 
               const CategoryIcon = meta.icon;
@@ -658,34 +653,12 @@ export default function HomePage() {
                         </Link>
                       );
                     })}
-
-                    {/* Native In-Feed Ad Card for 1st Category */}
-                    {cat === 'Convert' && (
-                      <AdPlaceholder slot="in-feed" label="Featured Media Partner" />
-                    )}
                   </div>
-
-                  {/* Inter-Category Sponsored Banners */}
-                  {catIdx === 0 && (
-                    <div className="pt-6">
-                      <AdPlaceholder slot="mid-content" label="Sponsored &bull; High-Speed Media Partner" />
-                    </div>
-                  )}
-                  {catIdx === 2 && (
-                    <div className="pt-6">
-                      <AdPlaceholder slot="in-content" label="Sponsored &bull; PDF &amp; Document Solutions" />
-                    </div>
-                  )}
                 </div>
               );
             })
         )}
       </section>
-
-      {/* In-Content Ad Placeholder */}
-      <div className="max-w-4xl mx-auto px-4 my-6">
-        <AdPlaceholder slot="in-content" />
-      </div>
 
       {/* 3. Why PixEnhance (Aesthetic Bento Feature Grid) */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -768,11 +741,6 @@ export default function HomePage() {
           })}
         </div>
       </section>
-
-      {/* In-Between Bento & Workflow Sponsored Banner */}
-      <div className="max-w-5xl mx-auto px-4 py-4">
-        <AdPlaceholder slot="mid-content" label="Sponsored Media Suite &bull; High Conversion Placement" />
-      </div>
 
       {/* 4. How It Works Section */}
       <section className="py-20 relative overflow-hidden bg-slate-200/80 dark:bg-slate-900/80 border-y border-slate-300 dark:border-slate-800 backdrop-blur-md">
@@ -865,11 +833,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Pre-FAQ In-Content Sponsored Unit */}
-      <div className="max-w-4xl mx-auto px-4 py-4">
-        <AdPlaceholder slot="in-content" label="Sponsored Partner &bull; High Impression Placement" />
-      </div>
 
       {/* 6. Comprehensive FAQ Section */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

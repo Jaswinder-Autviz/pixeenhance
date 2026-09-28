@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Sparkles, ShieldCheck, CheckCircle2 } from 'lucide-react';
-import { TOOLS_LIST, TOOL_MAP } from '@/src/data/toolsList';
-import { AdPlaceholder } from '@/components/common/AdPlaceholder';
+import { Sparkles, CheckCircle2 } from 'lucide-react';
+import { TOOL_MAP } from '@/src/data/toolsList';
 import { SEOContentSection } from '@/components/common/SEOContentSection';
 
 // Tool Views
@@ -302,11 +301,6 @@ export default async function ToolPage({ params }: ToolPageProps) {
         <div className="absolute -bottom-24 right-1/4 w-[550px] h-[550px] bg-gradient-to-t from-sky-500/8 via-blue-500/6 to-transparent rounded-full blur-3xl" />
       </div>
 
-      {/* Top Banner Ad Placeholder */}
-      <div className="max-w-5xl mx-auto px-4 pt-4 relative z-10">
-        <AdPlaceholder slot="top-banner" />
-      </div>
-
       {/* Editorial Tool Hero Header */}
       <section className="py-4 sm:py-6 border-b border-slate-200/80 dark:border-slate-800 bg-gradient-to-b from-white/90 via-slate-50/60 to-transparent dark:from-slate-900/80 dark:via-slate-950/60 dark:to-transparent backdrop-blur-xs relative z-10">
         <div className="max-w-4xl mx-auto px-4 text-center">
@@ -355,11 +349,6 @@ export default async function ToolPage({ params }: ToolPageProps) {
       {/* Main Interactive Tool Engine View */}
       <section className="py-3 sm:py-5 relative z-10">
         {renderToolEngine()}
-      </section>
-
-      {/* High-Engagement In-Tool / Post-Action Ad Placement */}
-      <section className="max-w-5xl mx-auto px-4 relative z-10">
-        <AdPlaceholder slot="in-tool" label="Post-Processing Sponsored Unit &bull; High Conversion" />
       </section>
 
       {/* In-Depth Educational & Technical SEO Article Section */}

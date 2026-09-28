@@ -23,9 +23,6 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
 
   return (
     <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-      {/* In-tool / between tool and content ad */}
-      <AdPlaceholder slot="in-content" />
-
       {/* 1. What is this tool & Overview */}
       <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-6 sm:p-8 shadow-sm">
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-4">

@@ -33,7 +33,7 @@ export function loadImage(source: File | string): Promise<HTMLImageElement> {
       resolve(img);
     };
 
-    img.onerror = (err) => {
+    img.onerror = () => {
       if (objectUrl) {
         URL.revokeObjectURL(objectUrl);
       }
@@ -197,52 +197,124 @@ export async function compressImage(
 
 /**
  * Compress an image iteratively to match a target file size (e.g. 200 KB)
+ * Preserves aspect ratio, achieves the closest possible size with maximum quality,
+ * and never increases file size if the original image is already smaller than target.
  */
 export async function compressToTargetSize(
   file: File,
   targetBytes: number,
   outputFormat: string = 'image/jpeg'
 ): Promise<{ blob: Blob; originalSize: number; compressedSize: number; quality: number }> {
-  const img = await loadImage(file);
-  const canvas = document.createElement('canvas');
-  canvas.width = img.naturalWidth;
-  canvas.height = img.naturalHeight;
-
-  const ctx = canvas.getContext('2d');
-  if (!ctx) throw new Error('Canvas 2D context not supported');
-
-  if (outputFormat === 'image/jpeg') {
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Never increase file size if the original image is already smaller than the selected target
+  if (file.size <= targetBytes) {
+    try {
+      // Attempt gentle visually-lossless compression (quality 0.88)
+      const gentleResult = await compressImage(file, 0.88, outputFormat);
+      if (gentleResult.blob.size < file.size) {
+        return {
+          blob: gentleResult.blob,
+          originalSize: file.size,
+          compressedSize: gentleResult.blob.size,
+          quality: 88,
+        };
+      }
+    } catch {
+      // fallback to original
+    }
+    return {
+      blob: file,
+      originalSize: file.size,
+      compressedSize: file.size,
+      quality: 100,
+    };
   }
-  ctx.drawImage(img, 0, 0);
 
-  // Binary search for optimal quality between 0.05 and 0.98
-  let minQ = 0.05;
-  let maxQ = 0.98;
+  const img = await loadImage(file);
+  const origW = img.naturalWidth || 800;
+  const origH = img.naturalHeight || 600;
+  const aspectRatio = origW / origH;
+
+  let currentW = origW;
+  let currentH = origH;
   let bestBlob: Blob | null = null;
   let bestQuality = 0.8;
+  let closestDiff = Infinity;
 
-  for (let i = 0; i < 6; i++) {
-    const testQ = (minQ + maxQ) / 2;
-    const currentBlob = await canvasToBlob(canvas, outputFormat, testQ);
+  // Multi-pass resolution + quality search (max 4 dimension adjustments)
+  for (let dimStep = 0; dimStep < 4; dimStep++) {
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(32, Math.round(currentW));
+    canvas.height = Math.max(32, Math.round(currentH));
 
-    bestBlob = currentBlob;
-    bestQuality = testQ;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) break;
 
-    if (currentBlob.size > targetBytes) {
-      maxQ = testQ;
-    } else {
-      minQ = testQ;
-      // If we are within 5% of target, stop early
-      if (targetBytes - currentBlob.size < targetBytes * 0.05) {
-        break;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    if (outputFormat === 'image/jpeg') {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    let minQ = 0.05;
+    let maxQ = 0.96;
+    let stageBestBlob: Blob | null = null;
+    let stageBestQ = 0.8;
+
+    for (let i = 0; i < 7; i++) {
+      const testQ = (minQ + maxQ) / 2;
+      const currentBlob = await canvasToBlob(canvas, outputFormat, testQ);
+
+      const diff = Math.abs(currentBlob.size - targetBytes);
+      if (diff < closestDiff && currentBlob.size <= targetBytes * 1.05) {
+        closestDiff = diff;
+        bestBlob = currentBlob;
+        bestQuality = testQ;
       }
+
+      stageBestBlob = currentBlob;
+      stageBestQ = testQ;
+
+      if (currentBlob.size > targetBytes) {
+        maxQ = testQ;
+      } else {
+        minQ = testQ;
+        // Stop early if within 3% of targetBytes
+        if (targetBytes - currentBlob.size < targetBytes * 0.03) {
+          break;
+        }
+      }
+    }
+
+    // Check if we hit the target size (<= targetBytes or within 4%)
+    if (stageBestBlob && stageBestBlob.size <= targetBytes) {
+      bestBlob = stageBestBlob;
+      bestQuality = stageBestQ;
+      break;
+    }
+
+    // If even at low quality (minQ), stageBestBlob is still larger than targetBytes,
+    // downscale dimensions preserving aspect ratio for the next pass
+    if (stageBestBlob && stageBestBlob.size > targetBytes) {
+      const overshoot = stageBestBlob.size / targetBytes;
+      const scale = Math.max(0.2, Math.min(0.85, 1 / Math.sqrt(overshoot)));
+      currentW = Math.max(48, Math.round(currentW * scale));
+      currentH = Math.max(48, Math.round(currentW / aspectRatio));
+    } else {
+      break;
     }
   }
 
   if (!bestBlob) {
-    bestBlob = await canvasToBlob(canvas, outputFormat, 0.7);
+    const fallback = await compressImage(file, 0.75, outputFormat);
+    bestBlob = fallback.blob;
+  }
+
+  // Double check: Never increase file size if original was smaller than target
+  if (file.size <= targetBytes && bestBlob.size > file.size) {
+    bestBlob = file;
   }
 
   return {
@@ -252,6 +324,7 @@ export async function compressToTargetSize(
     quality: Math.round(bestQuality * 100),
   };
 }
+
 
 /**
  * Format converter: Converts image to PNG, JPEG, or WebP with optional background color fill
