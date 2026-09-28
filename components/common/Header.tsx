@@ -47,7 +47,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     label: 'Convert',
     heading: 'Compression & Converters',
     subheading: 'Lossless compression & cross-format conversion',
-    count: 10,
+    count: 14,
     gradient: 'from-emerald-500 to-teal-600',
     badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
     icon: Repeat,
@@ -70,7 +70,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     label: 'PDF Tools',
     heading: 'PDF Tools & Document Converters',
     subheading: 'PDF to Word, Word to PDF, image merge & extract',
-    count: 10,
+    count: 15,
     gradient: 'from-rose-500 to-red-600',
     badgeColor: 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300 border-rose-200 dark:border-rose-800',
     icon: FileText,
@@ -93,7 +93,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     label: 'Resize',
     heading: 'Resize & Scale Tools',
     subheading: 'Pixel dimensions, DPI scaling & ISO paper standards',
-    count: 7,
+    count: 12,
     gradient: 'from-sky-500 to-blue-600',
     badgeColor: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300 border-sky-200 dark:border-sky-800',
     icon: Maximize2,
@@ -113,7 +113,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     label: 'Crop & Edit',
     heading: 'Crop & Creative Studio',
     subheading: 'Precision crop box, photo collages & meme generation',
-    count: 6,
+    count: 8,
     gradient: 'from-purple-500 to-pink-600',
     badgeColor: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300 border-purple-200 dark:border-purple-800',
     icon: Crop,
@@ -132,7 +132,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     label: 'Utilities',
     heading: 'Developer & Pixel Utilities',
     subheading: 'Code converter, snippet to image, base64 & palette tools',
-    count: 7,
+    count: 8,
     gradient: 'from-amber-500 to-orange-600',
     badgeColor: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 border-amber-200 dark:border-amber-800',
     icon: Sliders,
@@ -381,7 +381,7 @@ export function Header() {
               >
                 <span>All Tools</span>
                 <span className="px-1.5 py-0.2 rounded-md bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 text-[10px] font-mono font-extrabold">
-                  40+
+                  60+
                 </span>
               </Link>
             </nav>
@@ -434,7 +434,7 @@ export function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1"
               >
-                <span>All 40+ Tools</span>
+                <span>All 60+ Tools</span>
                 <ArrowRight className="w-3 h-3" />
               </Link>
             </div>

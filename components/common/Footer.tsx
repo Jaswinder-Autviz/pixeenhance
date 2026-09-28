@@ -133,7 +133,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/tools" className="hover:text-brand-600 transition-colors">
-                  All 40+ Tools
+                  All 60+ Tools
                 </Link>
               </li>
               <li>

@@ -762,7 +762,7 @@ export default function HomePage() {
               {
                 step: '01',
                 title: 'Select your tool',
-                desc: 'Choose from 40+ tools like Image Compressor, A-Series Resizer, or Image to PDF.',
+                desc: 'Choose from 60+ tools like Image Compressor, A-Series Resizer, or Image to PDF.',
                 gradient: 'from-emerald-500 to-teal-600',
               },
               {

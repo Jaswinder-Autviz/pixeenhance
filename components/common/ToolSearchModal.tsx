@@ -139,7 +139,7 @@ export function ToolSearchModal({ isOpen, onClose }: ToolSearchModalProps) {
             onClick={onClose}
             className="text-brand-600 hover:text-brand-700 font-medium"
           >
-            Browse all 20 tools &rarr;
+            Browse all 60+ tools &rarr;
           </Link>
           <span>All processing runs locally in browser</span>
         </div>
