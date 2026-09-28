@@ -33,6 +33,7 @@ import { PdfConverterHubView } from '@/components/tool-views/PdfConverterHubView
 import { PdfToWordView } from '@/components/tool-views/PdfToWordView';
 import { WordToPdfView } from '@/components/tool-views/WordToPdfView';
 import { CodeConverterView } from '@/components/tool-views/CodeConverterView';
+import { ImageSplitterView } from '@/components/tool-views/ImageSplitterView';
 
 interface ToolPageProps {
   params: Promise<{ toolSlug: string }>;
@@ -144,6 +145,12 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
         return <FlipperView />;
       case 'collage-maker':
         return <CollageMakerView />;
+      case 'image-splitter':
+      case 'split-image':
+      case 'grid-splitter':
+      case 'panorama-splitter':
+      case 'photo-splitter':
+        return <ImageSplitterView />;
       case 'image-enlarger':
         return <ImageEnlargerView />;
       case 'color-picker':

@@ -2211,6 +2211,57 @@ export const TOOLS_LIST: ToolItem[] = [
       }
     ],
     relatedSlugs: ['image-to-pdf-under-100kb', 'jpg-to-pdf-under-200kb', 'image-to-pdf', 'pdf-converter']
+  },
+
+  // 57. Image Splitter (Landscape, Carousel & Grid)
+  {
+    id: 'image-splitter',
+    slug: '/image-splitter',
+    name: 'Image Splitter',
+    category: 'Crop & Edit',
+    popular: true,
+    badge: 'Landscape & Grid',
+    shortDescription: 'Split landscape photos into 2, 3, or more parts, Instagram panoramas, swipe carousels & grids. Download as ZIP.',
+    icon: 'LayoutGrid',
+    metaTitle: 'Free Image Splitter Online — Split Landscape Photos into 2, 3+ Parts & Grid | PixEnhance',
+    metaDescription: 'Split images online for free into 2, 3, or multiple horizontal or vertical parts. Perfect for Instagram swipe carousels, panorama photos, and 3x3 grids. Fast, private & instant ZIP download.',
+    h1: 'Online Image Splitter (Landscape & Grid)',
+    subtitle: 'Split any landscape or panorama photo into 2, 3, or multiple equal slices, Instagram swipe carousels, and grid tiles.',
+    features: [
+      'Split landscape photos into 2, 3, 4, 5, or custom number of parts',
+      'Horizontal panorama slice & Instagram swipe carousel modes',
+      'Grid split (3×3 Instagram profile feed, 2×2, custom rows & columns)',
+      'Real-time interactive cut lines preview with slice number badges',
+      'Export as high-quality JPG, PNG, or WebP',
+      'Download all slices at once as a single ZIP archive or individually',
+      '100% client-side processing — private & super fast'
+    ],
+    howToUse: [
+      'Upload or drag and drop your landscape or any image.',
+      'Choose a preset (e.g. 3 Parts Landscape, 2 Parts Swipe, 3×3 Grid) or customize columns and rows.',
+      'Check the real-time visual grid overlay to preview the cut boundaries and slice order.',
+      'Click "Download All as ZIP" or download individual numbered slices.'
+    ],
+    supportedFormats: ['JPG / JPEG', 'PNG', 'WebP', 'SVG'],
+    faqs: [
+      {
+        question: 'How do I split a landscape image into 3 parts for Instagram?',
+        answer: 'Simply upload your landscape photo, select the "3 Parts (1×3)" preset, and click "Download All as ZIP". You will get 3 seamlessly aligned slices (Slide 1, Slide 2, Slide 3) ready to upload to an Instagram carousel post.'
+      },
+      {
+        question: 'Are the split images seamless without any white lines?',
+        answer: 'Yes! The splitter calculates pixel-exact integer cut boundaries so when placed side-by-side or swiped in a carousel, they match 100% seamlessly.'
+      },
+      {
+        question: 'Can I split into a 3x3 grid for Instagram profile feed?',
+        answer: 'Yes, select the Grid mode or click the "Instagram 3×3 Grid" preset to split your photo into 9 square tiles formatted for your profile layout.'
+      },
+      {
+        question: 'Is my photo uploaded to any server?',
+        answer: 'No. All image splitting and ZIP packaging happens entirely inside your browser using HTML5 Canvas. Your photos never leave your device.'
+      }
+    ],
+    relatedSlugs: ['image-cropper', 'collage-maker', 'image-resizer', 'instagram-image-resizer']
   }
 ];
 
@@ -2228,6 +2279,10 @@ const ALIAS_MAP: Record<string, string> = {
   'image-to-pdf-50kb': 'jpg-to-pdf-under-50kb',
   'image-to-pdf-100kb': 'image-to-pdf-under-100kb',
   'image-to-pdf-200kb': 'image-to-pdf-under-200kb',
+  'split-image': 'image-splitter',
+  'grid-splitter': 'image-splitter',
+  'panorama-splitter': 'image-splitter',
+  'photo-splitter': 'image-splitter',
 };
 
 export const TOOL_MAP = new Map(
