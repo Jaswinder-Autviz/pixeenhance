@@ -383,8 +383,12 @@ export async function createTargetCompressedPdf(
       }
     }
 
+    if (!stageBlob) {
+      break;
+    }
+
     // If we succeeded in getting under or equal to targetBytes:
-    if (stageBlob && stageBlob.size <= targetBytes) {
+    if (stageBlob.size <= targetBytes) {
       bestBlob = stageBlob;
       bestQuality = stageQ;
       break;
