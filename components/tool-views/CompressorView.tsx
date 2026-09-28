@@ -151,15 +151,31 @@ function TargetSizeButtons({
   );
 }
 
-export function CompressorView() {
+interface CompressorViewProps {
+  initialTargetSize?: string;
+}
+
+export function CompressorView({ initialTargetSize }: CompressorViewProps = {}) {
   const [file, setFile] = useState<File | null>(null);
   const [originalPreview, setOriginalPreview] = useState<string | null>(null);
   const [compressedBlob, setCompressedBlob] = useState<Blob | null>(null);
   const [compressedPreview, setCompressedPreview] = useState<string | null>(null);
   const [compressedSize, setCompressedSize] = useState<number>(0);
 
-  // Target size state (default: 'auto')
-  const [selectedTarget, setSelectedTarget] = useState<string>('auto');
+  // Target size state (default: initialTargetSize || query param || 'auto')
+  const [selectedTarget, setSelectedTarget] = useState<string>(() => {
+    if (initialTargetSize) return initialTargetSize;
+    if (typeof window !== 'undefined') {
+      const sp = new URLSearchParams(window.location.search);
+      const querySize = sp.get('size') || sp.get('target');
+      if (querySize) {
+        const normalized = querySize.toLowerCase().trim();
+        const match = TARGET_SIZE_OPTIONS.find((o) => o.value === normalized);
+        if (match) return match.value;
+      }
+    }
+    return 'auto';
+  });
   const [customValue, setCustomValue] = useState<number>(350);
   const [customUnit, setCustomUnit] = useState<'KB' | 'MB'>('KB');
   const [appliedCustomBytes, setAppliedCustomBytes] = useState<number>(350 * 1024);

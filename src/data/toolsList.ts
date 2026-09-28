@@ -1875,6 +1875,342 @@ export const TOOLS_LIST: ToolItem[] = [
       }
     ],
     relatedSlugs: ['code-converter', 'image-to-base64', 'base64-to-image', 'collage-maker']
+  },
+
+  // 48. Compress Image to 20KB (SEO Landing Page)
+  {
+    id: 'compress-image-to-20kb',
+    slug: '/compress-image-to-20kb',
+    name: 'Compress Image to 20KB',
+    category: 'Convert',
+    popular: true,
+    badge: 'Under 20 KB',
+    shortDescription: 'Compress JPG, PNG, and WebP images to under 20KB for signatures, job applications, and government portals.',
+    icon: 'Minimize2',
+    metaTitle: 'Compress Image to 20KB Online Free — Reduce JPG & PNG Under 20KB | PixEnhance',
+    metaDescription: 'Compress image to 20KB online for free. Reduce JPG, PNG, and WebP photo file size below 20 KB with high clarity. Perfect for government forms and signatures.',
+    h1: 'Compress Image to 20KB Online',
+    subtitle: 'Reduce photo and signature file sizes to under 20 KB with automatic precision quality tuning.',
+    features: [
+      'Target 20 KB exact file size constraint',
+      'Preserves original aspect ratio and dimensions',
+      'Perfect for passport signatures and exam registration portals',
+      '100% private in-browser compression with zero data upload'
+    ],
+    howToUse: [
+      'Upload your JPG, PNG, or WebP photo or signature.',
+      'The 20 KB target size is automatically applied.',
+      'Review the real-time file size and visual preview.',
+      'Click Download Compressed Image.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'How do I compress an image to 20KB without blur?',
+        answer: 'PixEnhance uses iterative binary quantization to compress the color encoding while retaining clean edges and readable contrast.'
+      },
+      {
+        question: 'Is this 20KB tool suitable for SSC, UPSC, and government portals?',
+        answer: 'Yes! Most Indian and international portals require photos or signatures between 10KB and 20KB. This tool targets exact limits under 20KB.'
+      }
+    ],
+    relatedSlugs: ['compress-image-to-50kb', 'image-compressor', 'image-resizer', 'jpg-to-pdf-under-50kb']
+  },
+
+  // 49. Compress Image to 50KB (SEO Landing Page)
+  {
+    id: 'compress-image-to-50kb',
+    slug: '/compress-image-to-50kb',
+    name: 'Compress Image to 50KB',
+    category: 'Convert',
+    popular: true,
+    badge: 'Under 50 KB',
+    shortDescription: 'Compress JPG, PNG, and WebP photos to under 50KB for online application forms and exam portals.',
+    icon: 'Minimize2',
+    metaTitle: 'Compress Image to 50KB Online Free — Reduce JPG & PNG Under 50KB | PixEnhance',
+    metaDescription: 'Compress image to 50KB online for free. Reduce JPG, PNG, and WebP photo file size below 50 KB with maximum clarity. Fast, private, and 100% free.',
+    h1: 'Compress Image to 50KB Online',
+    subtitle: 'Shrink your photos and document scans to under 50 KB with smart quality preservation.',
+    features: [
+      'Automatic target compression to stay under 50 KB',
+      'Maintains sharp face details and readable text',
+      'Works with JPG, JPEG, PNG, and WebP formats',
+      'Zero server upload: complete client-side data privacy'
+    ],
+    howToUse: [
+      'Drop your photo or document into the upload zone.',
+      'The 50 KB target preset compresses your image automatically.',
+      'Inspect before and after savings in real time.',
+      'Click Download Compressed Image.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'Why do application forms require images under 50KB?',
+        answer: 'Web portals and exam boards enforce a 50KB limit to optimize server storage and ensure fast database uploads.'
+      },
+      {
+        question: 'Will compressing to 50KB reduce image dimensions?',
+        answer: 'No. The image resolution and dimensions are preserved while unnecessary metadata and color redundancies are optimized.'
+      }
+    ],
+    relatedSlugs: ['compress-image-to-20kb', 'compress-image-to-100kb', 'image-compressor', 'jpg-to-pdf-under-50kb']
+  },
+
+  // 50. Compress Image to 100KB (SEO Landing Page)
+  {
+    id: 'compress-image-to-100kb',
+    slug: '/compress-image-to-100kb',
+    name: 'Compress Image to 100KB',
+    category: 'Convert',
+    popular: true,
+    badge: 'Under 100 KB',
+    shortDescription: 'Compress high-resolution photos and documents to under 100KB without visible quality loss.',
+    icon: 'Minimize2',
+    metaTitle: 'Compress Image to 100KB Online Free — Reduce JPG & PNG Under 100KB | PixEnhance',
+    metaDescription: 'Compress image to 100KB online for free. Shrink JPG, PNG, and WebP photos below 100 KB with smart quality preservation and zero watermark.',
+    h1: 'Compress Image to 100KB Online',
+    subtitle: 'Optimize high-res pictures to under 100 KB for websites, emails, and online submissions.',
+    features: [
+      'Automatic target compression under 100 KB',
+      'Preserves crisp colors and fine image details',
+      'Side-by-side visual comparison preview',
+      'No registration, watermarks, or file limits'
+    ],
+    howToUse: [
+      'Select or drop your photo into the tool.',
+      'The 100 KB preset optimizes your file instantly.',
+      'Review file size reduction and quality.',
+      'Download your optimized image.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'Can I compress PNG photos to 100KB?',
+        answer: 'Yes, PNG photos are intelligently quantized and compressed to stay under 100KB while maintaining clarity.'
+      }
+    ],
+    relatedSlugs: ['compress-image-to-50kb', 'compress-image-to-200kb', 'image-compressor', 'jpg-to-pdf-under-100kb']
+  },
+
+  // 51. Compress Image to 200KB (SEO Landing Page)
+  {
+    id: 'compress-image-to-200kb',
+    slug: '/compress-image-to-200kb',
+    name: 'Compress Image to 200KB',
+    category: 'Convert',
+    popular: true,
+    badge: 'Under 200 KB',
+    shortDescription: 'Reduce large multi-megabyte photos to under 200KB for fast website loading and email sharing.',
+    icon: 'Minimize2',
+    metaTitle: 'Compress Image to 200KB Online Free — Reduce JPG & PNG Under 200KB | PixEnhance',
+    metaDescription: 'Compress image to 200KB online for free. Reduce JPG, PNG, and WebP file sizes under 200 KB with visually lossless quality.',
+    h1: 'Compress Image to 200KB Online',
+    subtitle: 'Convert multi-megabyte images into lightweight files under 200 KB with studio quality.',
+    features: [
+      'Target size limit strictly below 200 KB',
+      'Up to 90% file size reduction with high visual fidelity',
+      'Real-time before/after savings inspector',
+      'Fast client-side processing with complete privacy'
+    ],
+    howToUse: [
+      'Upload your large image file.',
+      'The 200 KB target size is applied automatically.',
+      'Inspect the optimized preview and final file size.',
+      'Click Download Compressed Image.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'What if my original photo is already under 200KB?',
+        answer: 'If your image is already smaller than 200KB, PixEnhance maintains original quality without artificially inflating the file size.'
+      }
+    ],
+    relatedSlugs: ['compress-image-to-100kb', 'image-compressor', 'jpg-to-pdf-under-200kb', 'image-to-pdf-under-200kb']
+  },
+
+  // 52. JPG to PDF Under 50KB (SEO Landing Page)
+  {
+    id: 'jpg-to-pdf-under-50kb',
+    slug: '/jpg-to-pdf-under-50kb',
+    name: 'JPG to PDF Under 50KB',
+    category: 'PDF Tools',
+    popular: true,
+    badge: 'Under 50 KB',
+    shortDescription: 'Convert JPG images into a compressed PDF document strictly under 50KB for online forms.',
+    icon: 'FileText',
+    metaTitle: 'JPG to PDF Under 50KB Online Free — Convert & Compress to PDF | PixEnhance',
+    metaDescription: 'Convert JPG to PDF under 50KB online for free. Combine multiple JPG photos into a single compressed PDF under 50 KB for online job and exam forms.',
+    h1: 'JPG to PDF Under 50KB Converter',
+    subtitle: 'Convert and compress your JPG images into a compact PDF file strictly below 50 KB.',
+    features: [
+      'Automated compression engine targeting under 50 KB',
+      'Combines single or multiple JPG images into one PDF',
+      'Preserves original orientation and aspect ratio without auto-cropping',
+      '100% private browser compilation with instant download'
+    ],
+    howToUse: [
+      'Select or drop your JPG images into the tool.',
+      'The Under 50 KB target preset is automatically activated.',
+      'Reorder pages or adjust margins if needed.',
+      'Click Convert & Download PDF to save your file.'
+    ],
+    supportedFormats: ['JPG', 'JPEG'],
+    faqs: [
+      {
+        question: 'Can I combine multiple JPG files and stay under 50KB?',
+        answer: 'Yes! PixEnhance iteratively balances encoding quality and resolution to keep the entire compiled PDF document below 50KB.'
+      },
+      {
+        question: 'Why do application portals require PDFs under 50KB?',
+        answer: 'Government portals, universities, and exam boards require compact PDFs to facilitate fast file uploads on slow connections.'
+      }
+    ],
+    relatedSlugs: ['jpg-to-pdf-under-100kb', 'jpg-to-pdf-under-200kb', 'compress-image-to-50kb', 'image-to-pdf']
+  },
+
+  // 53. JPG to PDF Under 100KB (SEO Landing Page)
+  {
+    id: 'jpg-to-pdf-under-100kb',
+    slug: '/jpg-to-pdf-under-100kb',
+    name: 'JPG to PDF Under 100KB',
+    category: 'PDF Tools',
+    popular: true,
+    badge: 'Under 100 KB',
+    shortDescription: 'Convert and compress JPG pictures into a high-quality PDF document under 100KB.',
+    icon: 'FileText',
+    metaTitle: 'JPG to PDF Under 100KB Online Free — Convert JPG to PDF | PixEnhance',
+    metaDescription: 'Convert JPG to PDF under 100KB online for free. Combine multiple JPG photos into a single PDF under 100 KB with crystal clear text and graphics.',
+    h1: 'JPG to PDF Under 100KB Converter',
+    subtitle: 'Convert JPG photos into a clean, readable PDF document compressed below 100 KB.',
+    features: [
+      'Target compression solver strictly below 100 KB',
+      'Batch image support: combine multiple photos into one document',
+      'Preserves aspect ratios and readable text details',
+      'No watermarks, no registrations, completely free'
+    ],
+    howToUse: [
+      'Drop your JPG pictures into the tool.',
+      'The Under 100 KB target size is pre-selected.',
+      'Click Convert & Download PDF to generate your document.',
+      'Save your optimized PDF instantly.'
+    ],
+    supportedFormats: ['JPG', 'JPEG'],
+    faqs: [
+      {
+        question: 'Will text inside document photos remain readable under 100KB?',
+        answer: 'Yes! PixEnhance preserves high text contrast and uses intelligent readability safeguards during compression.'
+      }
+    ],
+    relatedSlugs: ['jpg-to-pdf-under-50kb', 'jpg-to-pdf-under-200kb', 'image-to-pdf-under-100kb', 'compress-image-to-100kb']
+  },
+
+  // 54. JPG to PDF Under 200KB (SEO Landing Page)
+  {
+    id: 'jpg-to-pdf-under-200kb',
+    slug: '/jpg-to-pdf-under-200kb',
+    name: 'JPG to PDF Under 200KB',
+    category: 'PDF Tools',
+    popular: true,
+    badge: 'Under 200 KB',
+    shortDescription: 'Combine JPG images into a crisp, high-resolution PDF document compressed under 200KB.',
+    icon: 'FileText',
+    metaTitle: 'JPG to PDF Under 200KB Online Free — Convert JPG to PDF | PixEnhance',
+    metaDescription: 'Convert JPG to PDF under 200KB online for free. Combine multiple JPG and JPEG images into a single PDF document under 200 KB.',
+    h1: 'JPG to PDF Under 200KB Converter',
+    subtitle: 'Combine multiple JPG photos into a professional PDF compressed under 200 KB.',
+    features: [
+      'Target size solver under 200 KB',
+      'Multiple photos combined into separate PDF pages',
+      'A4, Letter, and Fit page layout options with margin control',
+      'Fast client-side processing with full privacy'
+    ],
+    howToUse: [
+      'Upload single or multiple JPG images.',
+      'The Under 200 KB preset is active by default.',
+      'Reorder pages or adjust page layout if desired.',
+      'Click Convert & Download PDF.'
+    ],
+    supportedFormats: ['JPG', 'JPEG'],
+    faqs: [
+      {
+        question: 'How many photos can I convert into a 200KB PDF?',
+        answer: 'You can convert multiple photos. PixEnhance automatically balances page resolution to fit all pages within the 200KB target.'
+      }
+    ],
+    relatedSlugs: ['jpg-to-pdf-under-100kb', 'image-to-pdf-under-200kb', 'compress-image-to-200kb', 'pdf-converter']
+  },
+
+  // 55. Image to PDF Under 100KB (SEO Landing Page)
+  {
+    id: 'image-to-pdf-under-100kb',
+    slug: '/image-to-pdf-under-100kb',
+    name: 'Image to PDF Under 100KB',
+    category: 'PDF Tools',
+    popular: true,
+    badge: 'Under 100 KB',
+    shortDescription: 'Convert JPG, PNG, and WebP photos into a clean PDF document compressed under 100KB.',
+    icon: 'Layers',
+    metaTitle: 'Image to PDF Under 100KB Online Free — Convert Images to PDF | PixEnhance',
+    metaDescription: 'Convert images to PDF under 100KB online for free. Merge JPG, PNG, and WebP photos into a lightweight multi-page PDF document under 100 KB.',
+    h1: 'Image to PDF Under 100KB Converter',
+    subtitle: 'Convert multi-format photos into a single PDF document compressed below 100 KB.',
+    features: [
+      'Target size compression under 100 KB',
+      'Supports JPG, PNG, WebP, and BMP files simultaneously',
+      'Page reordering and customizable margins',
+      'Instant in-browser ISO PDF generation'
+    ],
+    howToUse: [
+      'Drop your images into the upload area.',
+      'Under 100 KB preset is pre-selected for maximum savings.',
+      'Review pages and click Convert & Download PDF.',
+      'Download your PDF instantly.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'Can I mix PNG and JPG images in the same PDF under 100KB?',
+        answer: 'Yes! You can upload different image formats together and PixEnhance compiles them into a unified PDF under 100KB.'
+      }
+    ],
+    relatedSlugs: ['image-to-pdf-under-200kb', 'jpg-to-pdf-under-100kb', 'image-to-pdf', 'compress-pdf']
+  },
+
+  // 56. Image to PDF Under 200KB (SEO Landing Page)
+  {
+    id: 'image-to-pdf-under-200kb',
+    slug: '/image-to-pdf-under-200kb',
+    name: 'Image to PDF Under 200KB',
+    category: 'PDF Tools',
+    popular: true,
+    badge: 'Under 200 KB',
+    shortDescription: 'Convert multiple images into a high-quality PDF document compressed below 200KB.',
+    icon: 'Layers',
+    metaTitle: 'Image to PDF Under 200KB Online Free — Convert Images to PDF | PixEnhance',
+    metaDescription: 'Convert images to PDF under 200KB online for free. Combine JPG, PNG, and WebP photos into a single PDF file under 200 KB with crystal clear quality.',
+    h1: 'Image to PDF Under 200KB Converter',
+    subtitle: 'Merge your photos into a crisp, multi-page PDF document optimized under 200 KB.',
+    features: [
+      'Strict target compression under 200 KB',
+      'Combines multiple images with drag/arrow sequence ordering',
+      'Keeps original aspect ratio without unwanted cropping',
+      '100% private, free, and watermark-free'
+    ],
+    howToUse: [
+      'Select your images from your computer or phone.',
+      'The Under 200 KB preset is pre-selected.',
+      'Click Convert & Download PDF.',
+      'Save your completed PDF document.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'Is my data secure when converting images to PDF?',
+        answer: 'Yes, PixEnhance compiles your PDF locally in your web browser. Your images are never sent to external servers.'
+      }
+    ],
+    relatedSlugs: ['image-to-pdf-under-100kb', 'jpg-to-pdf-under-200kb', 'image-to-pdf', 'pdf-converter']
   }
 ];
 
@@ -1882,6 +2218,16 @@ const ALIAS_MAP: Record<string, string> = {
   'resize-image-to-a4': 'a4-image-resizer',
   'compress-image-online': 'image-compressor',
   'photo-resizer': 'image-resizer',
+  'compress-image-20kb': 'compress-image-to-20kb',
+  'compress-image-50kb': 'compress-image-to-50kb',
+  'compress-image-100kb': 'compress-image-to-100kb',
+  'compress-image-200kb': 'compress-image-to-200kb',
+  'jpg-to-pdf-50kb': 'jpg-to-pdf-under-50kb',
+  'jpg-to-pdf-100kb': 'jpg-to-pdf-under-100kb',
+  'jpg-to-pdf-200kb': 'jpg-to-pdf-under-200kb',
+  'image-to-pdf-50kb': 'jpg-to-pdf-under-50kb',
+  'image-to-pdf-100kb': 'image-to-pdf-under-100kb',
+  'image-to-pdf-200kb': 'image-to-pdf-under-200kb',
 };
 
 export const TOOL_MAP = new Map(

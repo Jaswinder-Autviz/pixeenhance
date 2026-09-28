@@ -132,11 +132,13 @@ function TargetPdfSizeButtons({
 interface ImageToPdfViewProps {
   sourceFormat?: 'all' | 'jpg' | 'png';
   hideBanners?: boolean;
+  initialTargetSize?: string;
 }
 
 export function ImageToPdfView({
   sourceFormat = 'all',
   hideBanners = false,
+  initialTargetSize,
 }: ImageToPdfViewProps) {
   const [images, setImages] = useState<PdfImageItem[]>([]);
   const [options, setOptions] = useState<PdfOptions>({
@@ -146,8 +148,20 @@ export function ImageToPdfView({
     quality: 0.9,
   });
 
-  // Target PDF Size State (Default: Under 200 KB)
-  const [selectedTarget, setSelectedTarget] = useState<string>('200kb');
+  // Target PDF Size State (Defaults to initialTargetSize, query param, or '200kb')
+  const [selectedTarget, setSelectedTarget] = useState<string>(() => {
+    if (initialTargetSize) return initialTargetSize;
+    if (typeof window !== 'undefined') {
+      const sp = new URLSearchParams(window.location.search);
+      const querySize = sp.get('size') || sp.get('target');
+      if (querySize) {
+        const normalized = querySize.toLowerCase().trim();
+        const match = TARGET_PDF_SIZE_OPTIONS.find((o) => o.value === normalized);
+        if (match) return match.value;
+      }
+    }
+    return '200kb';
+  });
   const [customValue, setCustomValue] = useState<number>(350);
   const [customUnit, setCustomUnit] = useState<'KB' | 'MB'>('KB');
   const [appliedCustomBytes, setAppliedCustomBytes] = useState<number>(350 * 1024);

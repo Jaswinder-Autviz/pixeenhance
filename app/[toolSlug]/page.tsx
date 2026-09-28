@@ -36,6 +36,7 @@ import { CodeConverterView } from '@/components/tool-views/CodeConverterView';
 
 interface ToolPageProps {
   params: Promise<{ toolSlug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateMetadata({ params }: ToolPageProps): Promise<Metadata> {
@@ -89,8 +90,16 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ToolPage({ params }: ToolPageProps) {
+export default async function ToolPage({ params, searchParams }: ToolPageProps) {
   const { toolSlug } = await params;
+  const sp = searchParams ? await searchParams : {};
+  const querySize =
+    typeof sp.size === 'string'
+      ? sp.size
+      : typeof sp.target === 'string'
+      ? sp.target
+      : undefined;
+
   const tool = TOOL_MAP.get(toolSlug);
 
   if (!tool) {
@@ -101,7 +110,15 @@ export default async function ToolPage({ params }: ToolPageProps) {
   const renderToolEngine = () => {
     switch (tool.id) {
       case 'image-compressor':
-        return <CompressorView />;
+        return <CompressorView initialTargetSize={querySize} />;
+      case 'compress-image-to-20kb':
+        return <CompressorView initialTargetSize="20kb" />;
+      case 'compress-image-to-50kb':
+        return <CompressorView initialTargetSize="50kb" />;
+      case 'compress-image-to-100kb':
+        return <CompressorView initialTargetSize="100kb" />;
+      case 'compress-image-to-200kb':
+        return <CompressorView initialTargetSize="200kb" />;
       case 'image-resizer':
         return <ResizerView />;
       case 'bulk-image-resizer':
@@ -193,11 +210,21 @@ export default async function ToolPage({ params }: ToolPageProps) {
       case 'base64-to-image':
         return <Base64View mode="base64-to-image" />;
       case 'image-to-pdf':
-        return <ImageToPdfView sourceFormat="all" />;
+        return <ImageToPdfView sourceFormat="all" initialTargetSize={querySize} />;
       case 'jpg-to-pdf':
-        return <ImageToPdfView sourceFormat="jpg" />;
+        return <ImageToPdfView sourceFormat="jpg" initialTargetSize={querySize} />;
       case 'png-to-pdf':
-        return <ImageToPdfView sourceFormat="png" />;
+        return <ImageToPdfView sourceFormat="png" initialTargetSize={querySize} />;
+      case 'jpg-to-pdf-under-50kb':
+        return <ImageToPdfView sourceFormat="jpg" initialTargetSize="50kb" />;
+      case 'jpg-to-pdf-under-100kb':
+        return <ImageToPdfView sourceFormat="jpg" initialTargetSize="100kb" />;
+      case 'jpg-to-pdf-under-200kb':
+        return <ImageToPdfView sourceFormat="jpg" initialTargetSize="200kb" />;
+      case 'image-to-pdf-under-100kb':
+        return <ImageToPdfView sourceFormat="all" initialTargetSize="100kb" />;
+      case 'image-to-pdf-under-200kb':
+        return <ImageToPdfView sourceFormat="all" initialTargetSize="200kb" />;
       case 'pdf-to-word':
         return <PdfToWordView />;
       case 'word-to-pdf':
