@@ -1,7 +1,7 @@
 /**
- * PixEnhance Image to PDF Generator
- * Generates standard ISO PDF 1.4 documents
- * with embedded DCTDecode (JPEG) images and custom page layouts.
+ * PixEnhance Image to PDF Generator & Compression Engine
+ * Generates standard ISO PDF 1.4 documents with embedded DCTDecode (JPEG) images,
+ * custom page layouts, and iterative target-size compression.
  */
 
 export interface PdfImageItem {
@@ -17,7 +17,38 @@ export interface PdfOptions {
   orientation: 'portrait' | 'landscape' | 'auto';
   margin: 'none' | 'small' | 'large';
   quality: number; // 0.1 to 1.0
+  maxDimension?: number;
 }
+
+export interface PdfCompressionResult {
+  blob: Blob;
+  originalBytes: number;
+  finalBytes: number;
+  targetBytes?: number | null;
+  quality: number;
+  noticeMessage?: string;
+}
+
+export interface TargetPdfSizeOption {
+  label: string;
+  value: string;
+  bytes: number | null;
+}
+
+export const TARGET_PDF_SIZE_OPTIONS: TargetPdfSizeOption[] = [
+  { label: 'Auto / Best Quality', value: 'auto', bytes: null },
+  { label: 'Under 50 KB', value: '50kb', bytes: 50 * 1024 },
+  { label: 'Under 100 KB', value: '100kb', bytes: 100 * 1024 },
+  { label: 'Under 150 KB', value: '150kb', bytes: 150 * 1024 },
+  { label: 'Under 200 KB', value: '200kb', bytes: 200 * 1024 },
+  { label: 'Under 250 KB', value: '250kb', bytes: 250 * 1024 },
+  { label: 'Under 300 KB', value: '300kb', bytes: 300 * 1024 },
+  { label: 'Under 400 KB', value: '400kb', bytes: 400 * 1024 },
+  { label: 'Under 500 KB', value: '500kb', bytes: 500 * 1024 },
+  { label: 'Under 1 MB', value: '1mb', bytes: 1024 * 1024 },
+  { label: 'Under 2 MB', value: '2mb', bytes: 2 * 1024 * 1024 },
+  { label: 'Custom Size', value: 'custom', bytes: null },
+];
 
 /**
  * Standard page sizes in points (72 points = 1 inch)
@@ -41,7 +72,8 @@ const MARGIN_PRESETS: Record<'none' | 'small' | 'large', number> = {
  */
 async function imageToJpegBytes(
   file: File,
-  quality: number = 0.92
+  quality: number = 0.92,
+  maxDimension?: number
 ): Promise<{ bytes: Uint8Array; width: number; height: number }> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -49,9 +81,22 @@ async function imageToJpegBytes(
 
     img.onload = () => {
       URL.revokeObjectURL(url);
+      let targetW = img.naturalWidth || 800;
+      let targetH = img.naturalHeight || 600;
+
+      if (maxDimension && (targetW > maxDimension || targetH > maxDimension)) {
+        if (targetW > targetH) {
+          targetH = Math.max(1, Math.round((targetH * maxDimension) / targetW));
+          targetW = maxDimension;
+        } else {
+          targetW = Math.max(1, Math.round((targetW * maxDimension) / targetH));
+          targetH = maxDimension;
+        }
+      }
+
       const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+      canvas.width = targetW;
+      canvas.height = targetH;
 
       const ctx = canvas.getContext('2d');
       if (!ctx) {
@@ -59,10 +104,13 @@ async function imageToJpegBytes(
         return;
       }
 
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+
       // Fill with white background (in case of PNG transparency)
       ctx.fillStyle = '#FFFFFF';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(img, 0, 0, targetW, targetH);
 
       canvas.toBlob(
         async (blob) => {
@@ -73,8 +121,8 @@ async function imageToJpegBytes(
           const buffer = await blob.arrayBuffer();
           resolve({
             bytes: new Uint8Array(buffer),
-            width: img.naturalWidth,
-            height: img.naturalHeight,
+            width: targetW,
+            height: targetH,
           });
         },
         'image/jpeg',
@@ -112,7 +160,7 @@ export async function createPdfFromImages(
 
   // Pre-process all images into JPEG bytes
   const processedImages = await Promise.all(
-    images.map((item) => imageToJpegBytes(item.file, options.quality))
+    images.map((item) => imageToJpegBytes(item.file, options.quality, options.maxDimension))
   );
 
   const numPages = processedImages.length;
@@ -132,13 +180,7 @@ export async function createPdfFromImages(
   // PDF Header
   writeStr('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
 
-  // We have:
-  // Obj 1: Catalog
-  // Obj 2: Pages
-  // For each page i (0 to numPages - 1):
-  //   Obj (3 + i*3): Page
-  //   Obj (4 + i*3): Image XObject
-  //   Obj (5 + i*3): Contents stream
+  // Total Objects: Obj 1 (Catalog) + Obj 2 (Pages) + 3 objects per page
   const totalObjects = 2 + numPages * 3;
 
   // Obj 1: Catalog
@@ -185,7 +227,7 @@ export async function createPdfFromImages(
     const availW = Math.max(10, pageW - margin * 2);
     const availH = Math.max(10, pageH - margin * 2);
 
-    // Compute proportional scale
+    // Compute proportional scale without cropping
     const imgRatio = imgData.width / imgData.height;
     const availRatio = availW / availH;
 
@@ -265,4 +307,122 @@ export async function createPdfFromImages(
   );
 
   return new Blob(chunks as any, { type: 'application/pdf' });
+}
+
+/**
+ * Iteratively compresses and builds a PDF to stay under a specified target file size
+ * while maintaining readable quality and original aspect ratio.
+ */
+export async function createTargetCompressedPdf(
+  images: PdfImageItem[],
+  options: PdfOptions,
+  targetBytes?: number | null
+): Promise<PdfCompressionResult> {
+  const totalOriginalBytes = images.reduce((acc, curr) => acc + curr.file.size, 0);
+
+  // If no targetBytes specified or Auto / Best Quality mode:
+  if (!targetBytes) {
+    const blob = await createPdfFromImages(images, { ...options, quality: 0.90 });
+    return {
+      blob,
+      originalBytes: totalOriginalBytes,
+      finalBytes: blob.size,
+      targetBytes: null,
+      quality: 90,
+    };
+  }
+
+  // If source images are already smaller than target:
+  // "If the source images are already smaller than the target, preserve good quality instead of artificially increasing the PDF size."
+  if (totalOriginalBytes <= targetBytes) {
+    const highQualityBlob = await createPdfFromImages(images, { ...options, quality: 0.88 });
+    return {
+      blob: highQualityBlob,
+      originalBytes: totalOriginalBytes,
+      finalBytes: highQualityBlob.size,
+      targetBytes,
+      quality: 88,
+    };
+  }
+
+  // Iterative target compression:
+  let minQ = 0.12;
+  let maxQ = 0.92;
+  let bestBlob: Blob | null = null;
+  let bestQuality = 0.8;
+  let currentMaxDim: number | undefined = undefined;
+
+  // Multi-pass: pass 0 is full resolution, passes 1-3 scale down dimensions if quality alone cannot reach target
+  for (let pass = 0; pass < 4; pass++) {
+    minQ = 0.10;
+    maxQ = 0.92;
+    let stageBlob: Blob | null = null;
+    let stageQ = 0.8;
+
+    for (let iter = 0; iter < 5; iter++) {
+      const testQ = (minQ + maxQ) / 2;
+      const testPdf = await createPdfFromImages(images, {
+        ...options,
+        quality: testQ,
+        maxDimension: currentMaxDim,
+      });
+
+      stageBlob = testPdf;
+      stageQ = testQ;
+
+      if (testPdf.size > targetBytes) {
+        maxQ = testQ;
+      } else {
+        minQ = testQ;
+        bestBlob = testPdf;
+        bestQuality = testQ;
+        // If within 5% of target, stop early
+        if (targetBytes - testPdf.size <= targetBytes * 0.05) {
+          break;
+        }
+      }
+    }
+
+    // If we succeeded in getting under or equal to targetBytes:
+    if (stageBlob && stageBlob.size <= targetBytes) {
+      bestBlob = stageBlob;
+      bestQuality = stageQ;
+      break;
+    }
+
+    // If still over targetBytes, check if we can downscale dimensions while maintaining readable quality
+    const minAllowedDim = 650;
+    const currentDim = currentMaxDim || 2200;
+
+    if (currentDim > minAllowedDim) {
+      const overshoot = stageBlob.size / targetBytes;
+      const scale = Math.max(0.5, Math.min(0.85, 1 / Math.sqrt(overshoot)));
+      currentMaxDim = Math.max(minAllowedDim, Math.round(currentDim * scale));
+    } else {
+      // Reached minimum readable quality threshold!
+      bestBlob = stageBlob;
+      bestQuality = stageQ;
+      break;
+    }
+  }
+
+  if (!bestBlob) {
+    bestBlob = await createPdfFromImages(images, { ...options, quality: 0.70 });
+  }
+
+  // If the requested target is technically impossible while maintaining readable quality, show a clear message
+  let noticeMessage: string | undefined = undefined;
+  if (bestBlob.size > targetBytes) {
+    const achievableKb = Math.round(bestBlob.size / 1024);
+    noticeMessage = `The closest achievable size is ${achievableKb} KB while maintaining readable quality.`;
+  }
+
+  return {
+    blob: bestBlob,
+    originalBytes: totalOriginalBytes,
+    finalBytes: bestBlob.size,
+    targetBytes,
+    quality: Math.round(bestQuality * 100),
+    noticeMessage,
+  };
 }

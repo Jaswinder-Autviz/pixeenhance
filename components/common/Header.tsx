@@ -17,7 +17,6 @@ import {
   Sliders,
   ArrowRight,
   ShieldCheck,
-  Zap,
 } from 'lucide-react';
 import { ToolSearchModal } from './ToolSearchModal';
 
@@ -278,7 +277,7 @@ export function Header() {
                     <button
                       type="button"
                       onClick={() => toggleDropdown(cat.id)}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 ${isOpen
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[14px] font-semibold transition-all duration-200 ${isOpen
                           ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs'
                           : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
                         }`}
@@ -378,7 +377,7 @@ export function Header() {
               <Link
                 href="/tools"
                 onClick={closeDropdowns}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[14px] font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors"
               >
                 <span>All Tools</span>
                 <span className="px-1.5 py-0.2 rounded-md bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 text-[10px] font-mono font-extrabold">
@@ -452,7 +451,7 @@ export function Header() {
                     onClick={() =>
                       setMobileExpandedCat(isExpanded ? '' : cat.id)
                     }
-                    className="w-full flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-800/60 text-xs font-bold"
+                    className="w-full flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-800/60 text-[14px] font-semibold"
                   >
                     <div className="flex items-center gap-2">
                       <div
