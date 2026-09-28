@@ -108,7 +108,7 @@ const CATEGORY_META: Record<ToolCategory, CategoryMeta> = {
   },
   'Crop & Edit': {
     title: 'Crop & Photo Editing Tools',
-    subtitle: 'Crop images, make photo collages, rotate, mirror flip, and generate viral memes',
+    subtitle: 'Split images, crop photos, make photo collages, rotate, and mirror flip',
     icon: Crop,
     gradient: 'from-purple-500 via-violet-600 to-pink-500',
     badge: 'Creative Studio',

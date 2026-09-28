@@ -24,7 +24,6 @@ import { BulkResizerView } from '@/components/tool-views/BulkResizerView';
 import { CollageMakerView } from '@/components/tool-views/CollageMakerView';
 import { ImageEnlargerView } from '@/components/tool-views/ImageEnlargerView';
 import { ColorPickerView } from '@/components/tool-views/ColorPickerView';
-import { MemeGeneratorView } from '@/components/tool-views/MemeGeneratorView';
 import { UniversalConverterView } from '@/components/tool-views/UniversalConverterView';
 import { PdfToImageView } from '@/components/tool-views/PdfToImageView';
 import { PngToSvgView } from '@/components/tool-views/PngToSvgView';
@@ -155,8 +154,6 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
         return <ImageEnlargerView />;
       case 'color-picker':
         return <ColorPickerView />;
-      case 'meme-generator':
-        return <MemeGeneratorView />;
       case 'image-converter':
         return <UniversalConverterView />;
       case 'heic-to-jpg':
