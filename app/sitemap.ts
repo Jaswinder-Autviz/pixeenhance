@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { TOOLS_LIST } from '@/src/data/toolsList';
+import { SEO_LANDING_PAGES } from '@/src/data/seoLandingPages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://pixenhance.in';
@@ -44,5 +45,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return [...staticRoutes, ...toolRoutes];
+  const seoLandingRoutes = SEO_LANDING_PAGES.map((page) => ({
+    url: `${baseUrl}/${page.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...toolRoutes, ...seoLandingRoutes];
 }
