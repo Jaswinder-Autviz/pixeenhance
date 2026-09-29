@@ -6,33 +6,33 @@ import { VisitorCounter } from './VisitorCounter';
 export function Footer() {
   return (
     <footer id="app-footer" className="w-full border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 text-slate-600 dark:text-slate-400 text-sm relative z-30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-5">
           {/* Brand Info */}
-          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
+          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1 space-y-3">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white shadow-sm">
-                <Sparkles className="h-4 w-4" />
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-600 text-white shadow-xs">
+                <Sparkles className="h-3.5 w-3.5" />
               </div>
-              <span className="text-lg font-bold text-slate-900 dark:text-white">
+              <span className="text-base font-bold text-slate-900 dark:text-white">
                 Pix<span className="text-brand-600">Enhance</span>
               </span>
             </Link>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               The modern, privacy-first online image utility hub. Resize, compress, convert, crop, and optimize images with zero latency and complete privacy.
             </p>
-            <div className="flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-500">
-              <ShieldCheck className="h-4 w-4 shrink-0" />
+            <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-500">
+              <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
               <span>Complete Privacy Guarantee</span>
             </div>
           </div>
 
           {/* Column 1: Core Image Tools */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
               Core Tools
             </h3>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/image-compressor" className="hover:text-brand-600 transition-colors">
                   Compressor
@@ -77,11 +77,11 @@ export function Footer() {
           </div>
 
           {/* Column 2: Compress by Size */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
               Compress Tools
             </h3>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/compress-jpg" className="hover:text-brand-600 transition-colors">
                   Compress JPG
@@ -121,11 +121,11 @@ export function Footer() {
           </div>
 
           {/* Column 3: Resize & Presets */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
               Resize &amp; Presets
             </h3>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/resize-image" className="hover:text-brand-600 transition-colors">
                   Resize Image Online
@@ -170,11 +170,11 @@ export function Footer() {
           </div>
 
           {/* Column 4: Social & Convert */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
               Social &amp; Convert
             </h3>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/resize-image-for-instagram" className="hover:text-brand-600 transition-colors">
                   Instagram Resizer
@@ -234,11 +234,11 @@ export function Footer() {
           </div>
 
           {/* Column 5: Company & Legal */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
               Company
             </h3>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/about" className="hover:text-brand-600 transition-colors">
                   About Us
@@ -268,11 +268,11 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+        {/* Compact Bottom Bar */}
+        <div className="mt-8 pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
           <p>© 2026 PixEnhance. Free online image and PDF utilities.</p>
           
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <VisitorCounter variant="footer" />
             <p className="hidden md:flex items-center gap-1 text-slate-400 dark:text-slate-500">
               Crafted for speed, simplicity &amp; complete privacy
