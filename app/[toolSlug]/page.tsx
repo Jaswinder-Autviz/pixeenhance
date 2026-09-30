@@ -4,6 +4,20 @@ import Link from 'next/link';
 import { Sparkles, CheckCircle2 } from 'lucide-react';
 import { TOOL_MAP } from '@/src/data/toolsList';
 import { SEOContentSection } from '@/components/common/SEOContentSection';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
+
+function getCategoryInfo(cat: string) {
+  switch (cat) {
+    case 'Compress': return { slug: 'compress', title: 'Image Compression' };
+    case 'Convert': return { slug: 'convert', title: 'Image Converter' };
+    case 'PDF Tools': return { slug: 'pdf-tools', title: 'PDF Tools' };
+    case 'Resize': return { slug: 'resize', title: 'Image Resizer' };
+    case 'Crop & Edit': return { slug: 'crop-edit', title: 'Crop & Edit' };
+    case 'Social Media': return { slug: 'social-media', title: 'Social Media' };
+    case 'Utilities': return { slug: 'utilities', title: 'Utilities' };
+    default: return { slug: 'tools', title: 'Tools' };
+  }
+}
 
 // Tool Views
 import { CompressorView } from '@/components/tool-views/CompressorView';
@@ -242,6 +256,8 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
     }
   };
 
+  const catInfo = getCategoryInfo(tool.category);
+
   // Rich JSON-LD Schemas for WebApplication, BreadcrumbList, HowTo, and FAQPage
   const toolJsonLd = {
     '@context': 'https://schema.org',
@@ -274,8 +290,8 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Tools',
-            item: 'https://pixenhance.in/tools',
+            name: catInfo.title,
+            item: `https://pixenhance.in/tools/${catInfo.slug}`,
           },
           {
             '@type': 'ListItem',
@@ -336,17 +352,14 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
       <section className="py-4 sm:py-6 border-b border-slate-200/80 dark:border-slate-800 bg-gradient-to-b from-white/90 via-slate-50/60 to-transparent dark:from-slate-900/80 dark:via-slate-950/60 dark:to-transparent backdrop-blur-xs relative z-10">
         <div className="max-w-4xl mx-auto px-4 text-center">
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 font-medium mb-2" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <Link href="/tools" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
-              Tools
-            </Link>
-            <span>/</span>
-            <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{tool.name}</span>
-          </nav>
+          <div className="flex justify-center mb-3">
+            <Breadcrumbs
+              categorySlug={catInfo.slug}
+              categoryTitle={catInfo.title}
+              toolTitle={tool.name}
+              toolSlug={tool.slug}
+            />
+          </div>
 
           {/* Badge */}
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/60 dark:via-purple-950/60 dark:to-pink-950/60 border border-indigo-200/80 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 text-[11px] font-semibold mb-2 shadow-2xs">

@@ -399,7 +399,7 @@ export async function createTargetCompressedPdf(
     const currentDim = currentMaxDim || 2200;
 
     if (currentDim > minAllowedDim) {
-      const overshoot = stageBlob.size / targetBytes;
+      const overshoot = stageBlob ? stageBlob.size / targetBytes : 1.5;
       const scale = Math.max(0.5, Math.min(0.85, 1 / Math.sqrt(overshoot)));
       currentMaxDim = Math.max(minAllowedDim, Math.round(currentDim * scale));
     } else {

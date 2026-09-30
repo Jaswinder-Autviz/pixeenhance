@@ -343,30 +343,17 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
             </div>
 
             <div className="divide-y divide-slate-100 dark:divide-slate-800">
-              {data.faqs.map((faq, idx) => {
-                const isOpen = openFaqIndex === idx;
-                return (
-                  <div key={idx} className="py-4">
-                    <button
-                      onClick={() => toggleFaq(idx)}
-                      className="w-full flex items-center justify-between text-left gap-4 font-semibold text-sm sm:text-base text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                      aria-expanded={isOpen}
-                    >
-                      <span>{faq.question}</span>
-                      <ChevronDown
-                        className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
-                          isOpen ? 'rotate-180 text-indigo-600 dark:text-indigo-400' : ''
-                        }`}
-                      />
-                    </button>
-                    {isOpen && (
-                      <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                        {faq.answer}
-                      </p>
-                    )}
-                  </div>
-                );
-              })}
+              {data.faqs.map((faq, idx) => (
+                <details key={idx} className="group py-4" open={idx === 0}>
+                  <summary className="w-full flex cursor-pointer list-none items-center justify-between text-left gap-4 font-semibold text-sm sm:text-base text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
+                    <span>{faq.question}</span>
+                    <ChevronDown className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-indigo-600 dark:group-open:text-indigo-400" />
+                  </summary>
+                  <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                    {faq.answer}
+                  </p>
+                </details>
+              ))}
             </div>
           </div>
         )}

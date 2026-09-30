@@ -1,56 +1,78 @@
 import { MetadataRoute } from 'next';
-import { TOOLS_LIST } from '@/src/data/toolsList';
-import { SEO_LANDING_PAGES } from '@/src/data/seoLandingPages';
+import { getAllTools, CATEGORIES } from '@/lib/tools';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://pixenhance.in';
+  const currentDate = new Date();
 
-  const toolRoutes = TOOLS_LIST.map((tool) => ({
-    url: `${baseUrl}${tool.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
-  const staticRoutes = [
+  // Core static landing pages
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'daily' as const,
       priority: 1.0,
     },
     {
       url: `${baseUrl}/tools`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'daily' as const,
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/about`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
       url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.4,
     },
     {
       url: `${baseUrl}/terms`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.4,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
   ];
 
-  const seoLandingRoutes = SEO_LANDING_PAGES.map((page) => ({
-    url: `${baseUrl}/${page.slug}`,
-    lastModified: new Date(),
+  // New clean category hub pages
+  const categoryRoutes: MetadataRoute.Sitemap = CATEGORIES.map((cat) => ({
+    url: `${baseUrl}/tools/${cat.slug}`,
+    lastModified: currentDate,
     changeFrequency: 'weekly' as const,
-    priority: 0.7,
+    priority: 0.85,
   }));
 
-  return [...staticRoutes, ...toolRoutes, ...seoLandingRoutes];
+  // All active tools from the unified registry (ensuring no live URL is omitted)
+  const seenUrls = new Set<string>(staticRoutes.map((r) => r.url));
+  categoryRoutes.forEach((r) => seenUrls.add(r.url));
+
+  const toolRoutes: MetadataRoute.Sitemap = [];
+
+  for (const tool of getAllTools()) {
+    const slug = tool.slug.startsWith('/') ? tool.slug : `/${tool.slug}`;
+    const fullUrl = `${baseUrl}${slug}`;
+
+    if (!seenUrls.has(fullUrl)) {
+      seenUrls.add(fullUrl);
+      toolRoutes.push({
+        url: fullUrl,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+      });
+    }
+  }
+
+  return [...staticRoutes, ...categoryRoutes, ...toolRoutes];
 }
