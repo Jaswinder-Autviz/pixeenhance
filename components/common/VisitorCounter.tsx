@@ -14,9 +14,9 @@ export function VisitorCounter({
   className = '',
   showIcon = true,
 }: VisitorCounterProps) {
-  const [activeUsers, setActiveUsers] = useState<number>(1);
-  const [totalVisitors, setTotalVisitors] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [activeUsers, setActiveUsers] = useState<number>(2);
+  const [totalVisitors, setTotalVisitors] = useState<number>(1280);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let isMounted = true;

@@ -54,7 +54,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/jpg-to-png" className="hover:text-brand-600 transition-colors">
+                <Link href="/image-converter" className="hover:text-brand-600 transition-colors">
                   Converter (All)
                 </Link>
               </li>

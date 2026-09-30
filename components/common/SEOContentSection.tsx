@@ -1,25 +1,30 @@
-'use client';
-
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { ChevronDown, ShieldCheck, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
-import { ToolItem, TOOL_MAP } from '@/src/data/toolsList';
+import React from 'react';
+import { ChevronDown, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ToolItem } from '@/src/data/toolsList';
 import { AdPlaceholder } from './AdPlaceholder';
+import { RelatedTools } from '@/components/RelatedTools';
 
 interface SEOContentSectionProps {
   tool: ToolItem;
 }
 
 export function SEOContentSection({ tool }: SEOContentSectionProps) {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const defaultFaqs = [
+    {
+      question: `Are my images or documents saved or stored anywhere when using ${tool.name}?`,
+      answer: `Never. All image processing with ${tool.name} happens completely locally inside your web browser. Your private pictures and sensitive documents are never uploaded to any remote server or stored in any database.`,
+    },
+    {
+      question: `Is ${tool.name} completely free to use?`,
+      answer: `Yes, 100% free with no hidden fees, paid subscriptions, account registrations, or watermarks placed on exported files.`,
+    },
+    {
+      question: `What formats are compatible with ${tool.name}?`,
+      answer: `${tool.name} supports ${tool.supportedFormats.join(', ')} files with high-speed in-browser processing and instant downloads.`,
+    },
+  ];
 
-  const toggleFaq = (index: number) => {
-    setOpenFaqIndex(openFaqIndex === index ? null : index);
-  };
-
-  const relatedTools = tool.relatedSlugs
-    .map((slug) => TOOL_MAP.get(slug))
-    .filter((t): t is ToolItem => !!t);
+  const faqsToRender = tool.faqs && tool.faqs.length > 0 ? tool.faqs : defaultFaqs;
 
   return (
     <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
@@ -111,88 +116,31 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
         </div>
       </div>
 
-      {/* 4. Frequently Asked Questions (Interactive Accordion) */}
-      {tool.faqs && tool.faqs.length > 0 && (
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-6 sm:p-8 shadow-sm">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-6">
-            Frequently Asked Questions
-          </h2>
-          <div className="divide-y divide-slate-100 dark:divide-slate-800">
-            {tool.faqs.map((faq, idx) => {
-              const isOpen = openFaqIndex === idx;
-              return (
-                <div key={idx} className="py-4">
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="flex w-full items-center justify-between text-left text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-100 hover:text-brand-600 dark:hover:text-brand-400 transition-colors"
-                  >
-                    <span>{faq.question}</span>
-                    <ChevronDown
-                      className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 text-brand-600' : ''
-                      }`}
-                    />
-                  </button>
-                  {isOpen && (
-                    <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed animate-in fade-in duration-150">
-                      {faq.answer}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+      {/* 4. Frequently Asked Questions (Server-rendered HTML with details/summary) */}
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-6 sm:p-8 shadow-sm">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-6">
+          Frequently Asked Questions
+        </h2>
+        <div className="divide-y divide-slate-100 dark:divide-slate-800">
+          {faqsToRender.map((faq, idx) => (
+            <details key={idx} className="group py-4" open={idx === 0}>
+              <summary className="flex w-full cursor-pointer list-none items-center justify-between text-left text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-100 hover:text-brand-600 dark:hover:text-brand-400 transition-colors [&::-webkit-details-marker]:hidden">
+                <span>{faq.question}</span>
+                <ChevronDown className="h-4 w-4 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-brand-600 shrink-0 ml-2" />
+              </summary>
+              <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                {faq.answer}
+              </p>
+            </details>
+          ))}
         </div>
-      )}
+      </div>
 
       {/* Pre-Related Tools Native Ad */}
       <AdPlaceholder slot="in-content" label="Sponsored Recommendations &bull; Native Banner" />
 
-      {/* 5. Related Tools Grid */}
-      {relatedTools.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-              Related Tools
-            </h2>
-            <Link
-              href="/tools"
-              className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 flex items-center gap-1"
-            >
-              <span>Explore All Tools</span>
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {relatedTools.map((rel) => (
-              <Link
-                key={rel.id}
-                href={rel.slug}
-                className="group flex flex-col justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-card-hover transition-all"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500">
-                      {rel.category}
-                    </span>
-                    <Sparkles className="h-3.5 w-3.5 text-brand-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                  <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand-600 transition-colors">
-                    {rel.name}
-                  </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">
-                    {rel.shortDescription}
-                  </p>
-                </div>
-                <div className="mt-4 flex items-center text-xs font-semibold text-brand-600 group-hover:translate-x-1 transition-transform">
-                  <span>Use tool &rarr;</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* 5. Contextual Related Tools & Next Workflow Steps (Server Component) */}
+      <RelatedTools currentSlug={tool.slug} />
 
       {/* Bottom banner ad */}
       <AdPlaceholder slot="bottom-banner" />

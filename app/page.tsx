@@ -595,7 +595,23 @@ export default function HomePage() {
                     </div>
 
                     <Link
-                      href={`/tools?category=${cat}`}
+                      href={
+                        cat === 'Compress'
+                          ? '/tools/compress'
+                          : cat === 'Convert'
+                          ? '/tools/convert'
+                          : cat === 'PDF Tools'
+                          ? '/tools/pdf-tools'
+                          : cat === 'Resize'
+                          ? '/tools/resize'
+                          : cat === 'Crop & Edit'
+                          ? '/tools/crop-edit'
+                          : cat === 'Social Media'
+                          ? '/tools/social-media'
+                          : cat === 'Utilities'
+                          ? '/tools/utilities'
+                          : `/tools?category=${cat}`
+                      }
                       className={`inline-flex items-center gap-1.5 text-xs font-bold ${theme.text} hover:opacity-80 transition-opacity`}
                     >
                       <span>Explore all {toolsInCat.length} tools</span>
@@ -608,9 +624,8 @@ export default function HomePage() {
                     {toolsInCat.map((tool) => {
                       const cardTheme = getCategoryTheme(tool.category);
                       return (
-                        <Link
+                        <div
                           key={tool.id}
-                          href={tool.slug}
                           className={`group relative flex flex-col justify-between p-5 rounded-2xl border ${cardTheme.border} ${cardTheme.cardBg} ${cardTheme.cardBorderHover} shadow-[0_4px_20px_-2px_rgba(15,23,42,0.08)] dark:shadow-[0_4px_25px_-2px_rgba(0,0,0,0.5)] hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden`}
                         >
                           {/* Top Accent Line that illuminates on hover */}
@@ -636,9 +651,11 @@ export default function HomePage() {
                               {tool.category === 'Convert' ? 'Compression & Converter' : tool.category}
                             </span>
 
-                            {/* Tool Title */}
+                            {/* Tool Title as primary anchor with stretched-link */}
                             <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-slate-950 dark:group-hover:text-white transition-colors mt-0.5 mb-1.5">
-                              {tool.name}
+                              <Link href={tool.slug} className="after:absolute after:inset-0">
+                                {tool.name}
+                              </Link>
                             </h3>
 
                             {/* Description */}
@@ -655,7 +672,7 @@ export default function HomePage() {
                               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </span>
                           </div>
-                        </Link>
+                        </div>
                       );
                     })}
                   </div>
@@ -856,28 +873,17 @@ export default function HomePage() {
         </div>
 
         <div className="rounded-2xl border-2 border-slate-300/90 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/90 p-6 sm:p-8 shadow-md divide-y divide-slate-200 dark:divide-slate-800">
-          {homeFaqs.map((faq, idx) => {
-            const isOpen = openFaqIndex === idx;
-            return (
-              <div key={idx} className="py-4">
-                <button
-                  onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                  className="flex w-full items-center justify-between text-left text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-100 hover:text-brand-600 dark:hover:text-brand-400 transition-colors"
-                >
-                  <span>{faq.question}</span>
-                  <ChevronDown
-                    className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${isOpen ? 'rotate-180 text-brand-600' : ''
-                      }`}
-                  />
-                </button>
-                {isOpen && (
-                  <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed animate-in fade-in duration-150">
-                    {faq.answer}
-                  </p>
-                )}
-              </div>
-            );
-          })}
+          {homeFaqs.map((faq, idx) => (
+            <details key={idx} className="group py-4" open={idx === 0}>
+              <summary className="flex w-full cursor-pointer list-none items-center justify-between text-left text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-100 hover:text-brand-600 dark:hover:text-brand-400 transition-colors [&::-webkit-details-marker]:hidden">
+                <span>{faq.question}</span>
+                <ChevronDown className="h-4 w-4 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-brand-600 shrink-0 ml-2" />
+              </summary>
+              <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                {faq.answer}
+              </p>
+            </details>
+          ))}
         </div>
       </section>
 
