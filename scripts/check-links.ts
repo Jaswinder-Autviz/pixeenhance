@@ -22,6 +22,9 @@ async function runAudit() {
     if (!tool.title || tool.title.trim().length === 0) {
       console.error(`❌ [Missing Title] Tool: ${tool.slug}`);
       errorsFound++;
+    } else if (tool.title.length > 60) {
+      console.warn(`⚠️ [Title Too Long: ${tool.title.length} chars] ${tool.slug}: "${tool.title}"`);
+      warningsFound++;
     }
     if (!tool.description || tool.description.trim().length < 20) {
       console.error(`❌ [Thin/Missing Description] Tool: ${tool.slug} (length: ${tool.description?.length || 0})`);

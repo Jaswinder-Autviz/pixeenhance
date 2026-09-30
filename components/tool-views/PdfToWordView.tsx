@@ -246,9 +246,9 @@ export function PdfToWordView() {
           <Sparkles className="h-3.5 w-3.5" />
           <span>Genuine .DOCX OpenXML Format &bull; 100% Free</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           PDF to Word Converter
-        </h1>
+        </h2>
         <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
           Convert PDF documents into fully editable Microsoft Word (.docx) documents with clean formatting and total privacy.
         </p>

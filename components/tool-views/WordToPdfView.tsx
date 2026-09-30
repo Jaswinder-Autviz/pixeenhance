@@ -294,9 +294,9 @@ export function WordToPdfView() {
           <Sparkles className="h-3.5 w-3.5" />
           <span>High-Resolution ISO PDF Output &bull; 100% Free</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Word to PDF Converter
-        </h1>
+        </h2>
         <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
           Convert Microsoft Word (.docx) documents into high-DPI, print-ready PDF files instantly. 100% private and secure.
         </p>

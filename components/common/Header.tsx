@@ -53,7 +53,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     icon: Repeat,
     exploreLink: '/tools?category=Convert',
     tools: [
-      { name: 'Image Compressor', slug: '/image-compressor', desc: 'Shrink file sizes up to 85%', badge: 'Popular', badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' },
+      { name: 'Image Compressor', slug: '/image-compressor', desc: 'Compress file sizes up to 85%', badge: 'Popular', badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' },
       { name: 'Universal Converter', slug: '/image-converter', desc: 'Convert between all image formats', badge: 'Multi', badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' },
       { name: 'JPG to PNG', slug: '/jpg-to-png', desc: 'Convert JPG to transparent lossless PNG' },
       { name: 'PNG to JPG', slug: '/png-to-jpg', desc: 'Convert PNG with white background fallback' },
@@ -278,8 +278,8 @@ export function Header() {
                       type="button"
                       onClick={() => toggleDropdown(cat.id)}
                       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[14px] font-semibold transition-all duration-200 ${isOpen
-                          ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs'
-                          : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
+                        ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs'
+                        : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
                         }`}
                       aria-expanded={isOpen}
                       aria-haspopup="true"
