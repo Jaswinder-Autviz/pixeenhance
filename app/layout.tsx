@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://pixenhance.in'),
   title: {
     default: 'PixEnhance — Free Online Image & PDF Studio',
-    template: '%s | PixEnhance',
+    template: '%s',
   },
   description:
     'Free online studio for image compression, PDF conversion, photo resizing, vectorization, and editing. Fast, private, and 100% free.',
@@ -96,8 +96,13 @@ export const metadata: Metadata = {
     images: ['https://pixenhance.in/og-image.jpg'],
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
   },
+  manifest: '/manifest.json',
   verification: {
     google: 'googleac95a75a7ab9db56',
   },
