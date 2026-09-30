@@ -348,33 +348,10 @@ export default function HomePage() {
     },
   ];
 
-  // Google Rich Snippets SEO Schema (WebSite, Organization, FAQPage, ItemList)
+  // Google Rich Snippets SEO Schema (ItemList directory & FAQPage)
   const homeJsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': 'https://pixenhance.in/#organization',
-        name: 'PixEnhance',
-        url: 'https://pixenhance.in',
-        logo: 'https://pixenhance.in/favicon.svg',
-        description:
-          'PixEnhance is an editorial-grade, privacy-first online image and PDF utility hub.',
-      },
-      {
-        '@type': 'WebSite',
-        '@id': 'https://pixenhance.in/#website',
-        url: 'https://pixenhance.in',
-        name: 'PixEnhance — Free Online Image & PDF Studio',
-        publisher: {
-          '@id': 'https://pixenhance.in/#organization',
-        },
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: 'https://pixenhance.in/tools?q={search_term_string}',
-          'query-input': 'required name=search_term_string',
-        },
-      },
       {
         '@type': 'ItemList',
         '@id': 'https://pixenhance.in/#tools-directory',
