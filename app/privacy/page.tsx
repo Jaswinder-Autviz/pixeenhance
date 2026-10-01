@@ -61,21 +61,66 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section className="space-y-2">
+          <section className="space-y-3">
             <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-              3. Third-Party Analytics &amp; Advertising
+              3. Google AdSense &amp; Third-Party Cookies Policy
             </h2>
             <p>
-              We may display clean, non-intrusive advertisements to support the ongoing maintenance and free hosting of this site. Advertisements are served in isolated containers that cannot view, interact with, or access the image canvas or local file memory.
+              PixEnhance uses Google AdSense to serve advertisements when you visit our website. To comply with Google AdSense policies, please review the following information regarding advertising cookies:
+            </p>
+            <ul className="list-disc list-inside space-y-1.5 pl-2 text-xs sm:text-sm">
+              <li>
+                <strong>Third-party vendors</strong>, including Google, use cookies to serve ads based on a user&apos;s prior visits to this website or other websites on the internet.
+              </li>
+              <li>
+                <strong>Google&apos;s use of advertising cookies</strong> (such as the DoubleClick cookie) enables it and its partners to serve ads to users based on their visits to PixEnhance and/or other sites on the Internet.
+              </li>
+              <li>
+                <strong>Opt-Out Options:</strong> Users may opt out of personalized advertising by visiting{' '}
+                <a
+                  href="https://adssettings.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-600 underline font-medium"
+                >
+                  Google Ads Settings
+                </a>
+                . Alternatively, you can opt out of a third-party vendor&apos;s use of cookies for personalized advertising by visiting{' '}
+                <a
+                  href="https://www.aboutads.info/choices/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-600 underline font-medium"
+                >
+                  www.aboutads.info
+                </a>
+                .
+              </li>
+            </ul>
+            <p className="text-xs text-slate-500 pt-1">
+              Advertisements are served in isolated sandboxed containers and have zero access to the files you edit, convert, or compress in your browser.
             </p>
           </section>
 
           <section className="space-y-2">
             <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-              4. Contact Us
+              4. Analytics &amp; Performance Monitoring
             </h2>
             <p>
-              If you have any questions regarding this Privacy Policy or your data privacy, please reach out via our{' '}
+              We use aggregated analytics tools (Google Analytics 4 and Microsoft Clarity) solely to monitor website traffic, aggregate user engagement, and fix browser compatibility issues. These tools collect non-personally identifiable diagnostic data (such as browser type, operating system, and page load latency) and do not record or view user image content.
+            </p>
+          </section>
+
+          <section className="space-y-2">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+              5. Contact &amp; Data Protection Inquiries
+            </h2>
+            <p>
+              If you have any questions regarding this Privacy Policy, cookie preferences, or data practices, please contact us directly at{' '}
+              <a href="mailto:pa.jaswindersingh@gmail.com" className="text-brand-600 font-semibold underline">
+                pa.jaswindersingh@gmail.com
+              </a>{' '}
+              or submit a message via our{' '}
               <Link href="/contact" className="text-brand-600 hover:underline">
                 Contact Page
               </Link>.

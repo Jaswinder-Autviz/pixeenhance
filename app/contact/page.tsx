@@ -109,8 +109,27 @@ export default function ContactPage() {
           )}
         </div>
 
+        {/* Direct Email Card for AdSense & Reviewers */}
+        <div className="mt-6 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between gap-4 text-xs sm:text-sm">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400">
+              <Mail className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="font-bold text-slate-900 dark:text-white">Direct Email Support</p>
+              <p className="text-slate-500 dark:text-slate-400">General queries, publisher &amp; legal inquiries</p>
+            </div>
+          </div>
+          <a
+            href="mailto:pa.jaswindersingh@gmail.com"
+            className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-50 dark:hover:bg-brand-950/60 hover:text-brand-600 transition-colors font-semibold font-mono text-xs"
+          >
+            pa.jaswindersingh@gmail.com
+          </a>
+        </div>
+
         {/* Ad Placement */}
-        <div className="pt-10">
+        <div className="pt-8">
           <AdPlaceholder slot="in-content" />
         </div>
       </div>
