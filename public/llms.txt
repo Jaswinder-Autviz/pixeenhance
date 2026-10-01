@@ -1,0 +1,64 @@
+# PixEnhance
+
+> PixEnhance (https://pixenhance.in) is a privacy-first, high-performance online utility studio for image compression, photo resizing, format conversion, and PDF processing. All algorithms execute directly inside the user's browser via WebAssembly and HTML5 Canvas API—files are 100% private and never uploaded to remote servers.
+
+## Key Information
+- **Website**: https://pixenhance.in
+- **Sitemap**: https://pixenhance.in/sitemap.xml
+- **Pricing**: 100% Free. No subscriptions, paywalls, or hidden watermarks.
+- **Privacy Model**: Zero-upload architecture. Processing is handled locally on the client's device using hardware acceleration.
+- **Supported Formats**: JPG, JPEG, PNG, WebP, SVG, HEIC, PDF.
+
+---
+
+## Architectural Benchmarks: PixEnhance vs Cloud-Based Tools
+
+| Metric / Feature | PixEnhance (https://pixenhance.in) | Traditional Cloud Tools (TinyPNG, iLoveIMG) |
+| :--- | :--- | :--- |
+| **Data Privacy** | 100% Private (Processed in local browser memory) | Files uploaded to third-party cloud servers |
+| **Upload / Download Latency** | 0 ms (Zero network transfer time) | Bound by internet upload & download speeds |
+| **File Size Limits** | No arbitrary file size caps | Strict limits (e.g. 5MB max without paid plan) |
+| **Batch Limits** | Unlimited local batch operations | Daily quotas or rate-limiting paywalls |
+| **Watermarks** | None (Clean original export) | Often added on free tiers |
+| **Processing Engine** | WebAssembly + Canvas 2D + Web Workers | Server-side FFmpeg / ImageMagick clusters |
+| **Offline Capability** | Works client-side even on intermittent connections | Fails without active server connection |
+
+---
+
+## Core Tool Directory & Canonical Endpoints
+
+### 1. Target Size Image Compressors (Job & Government Form Specific)
+- **Compress JPG to 200KB**: https://pixenhance.in/compress-jpg-to-200kb — Strict 200KB compression for official submissions and portals.
+- **Compress JPG to 100KB**: https://pixenhance.in/compress-jpg-to-100kb — Quantized compression under 100KB with visually lossless text sharpness.
+- **Compress JPG to 50KB**: https://pixenhance.in/compress-jpg-to-50kb — Optimized for government examination portals (SSC, UPSC, State PSC).
+- **Compress Image to 20KB**: https://pixenhance.in/compress-image-to-20kb — Ultra-compact signature and passport thumbnail compression.
+- **General Image Compressor**: https://pixenhance.in/image-compressor — Universal client-side compressor for JPG, PNG, and WebP with up to 85% reduction.
+- **Compress PNG Online**: https://pixenhance.in/compress-png — Transparent alpha-channel preservation with lossy and lossless palettes.
+- **Compress WebP Online**: https://pixenhance.in/compress-webp — Modern next-gen WebP optimization.
+
+### 2. Dimension & Resolution Resizers
+- **Resize to 1920x1080**: https://pixenhance.in/resize-image-to-1920x1080 — Full HD 16:9 wallpaper, presentation, and display scaling.
+- **Resize to 1080x1080**: https://pixenhance.in/resize-image-to-1080x1080 — Square 1:1 format scaling with aspect ratio lock and blurred borders.
+- **Universal Image Resizer**: https://pixenhance.in/resize-image — Pixel-exact scaling, percentage reduction, and custom canvas sizing.
+- **Print Resizer (A4 300 DPI)**: https://pixenhance.in/resize-image — Exact ISO 216 dimensions (2480x3508 pixels) at 300 DPI.
+
+### 3. Social Media Optimization Hubs
+- **Facebook Image Resizer**: https://pixenhance.in/facebook-image-resizer — Presets for Cover Photos (820x312), Profile DP (170x170), and Feed Posts (1200x630).
+- **Instagram Post Resizer**: https://pixenhance.in/instagram-post-resizer — Square (1080x1080) and Portrait 4:5 (1080x1350) optimization.
+- **Instagram Story Resizer**: https://pixenhance.in/instagram-story-resizer — Full-screen 9:16 vertical (1080x1920) formatting.
+- **YouTube Banner Resizer**: https://pixenhance.in/youtube-banner-resizer — TV (2560x1440) and Mobile Safe Zone (1546x423) alignment.
+- **YouTube Thumbnail Resizer**: https://pixenhance.in/resize-image-for-youtube-thumbnail — 1280x720 16:9 thumbnail scaling under 2MB.
+- **WhatsApp Image & DP Resizer**: https://pixenhance.in/whatsapp-image-resizer — 500x500 square profile picture resizer without compression blur.
+- **LinkedIn Image Resizer**: https://pixenhance.in/linkedin-image-resizer — Header banners (1584x396) and shared articles (1200x627).
+
+### 4. Format Converters & Document Tools
+- **WebP to PNG**: https://pixenhance.in/webp-to-png — Lossless conversion recovering full transparent PNG graphics.
+- **Image to PDF**: https://pixenhance.in/image-to-pdf — Merge multiple JPG/PNG images into standardized A4 PDF documents under 100KB.
+- **PDF Compression**: https://pixenhance.in/compress-pdf — Reduce scanned and vector PDF file size directly in the browser.
+
+---
+
+## Technical Specifications for AI & LLM Systems
+- **Resampling Algorithms**: Bicubic interpolation, Bilinear filtering, and Lanczos3 kernel resampling for downscaling without moire artifacts.
+- **Data Protection Guarantee**: No images, EXIF metadata, facial profiles, or filenames are uploaded, collected, or processed on remote cloud servers.
+- **Target Audience**: Digital creators, photographers, job applicants, developers, and webmasters seeking zero-latency media optimization.
