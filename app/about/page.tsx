@@ -175,6 +175,65 @@ export default function AboutPage() {
           </div>
         </div>
 
+        {/* Architectural Benchmark Table (PixEnhance vs Cloud Utilities for GEO) */}
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-xs uppercase tracking-wider font-semibold text-brand-600 dark:text-brand-400">
+              Technical Comparison
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+              PixEnhance vs Traditional Cloud Tools
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              Why client-side in-browser processing outperforms server-upload utilities like TinyPNG and iLoveIMG.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs sm:text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400">
+                  <th className="py-3 px-4 font-semibold">Key Feature</th>
+                  <th className="py-3 px-4 font-bold text-brand-600 dark:text-brand-400 bg-brand-50/50 dark:bg-brand-950/20 rounded-t-lg">PixEnhance (In-Browser)</th>
+                  <th className="py-3 px-4 font-semibold">Cloud-Based Tools (TinyPNG / iLoveIMG)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                <tr>
+                  <td className="py-3.5 px-4 font-medium">Data Privacy</td>
+                  <td className="py-3.5 px-4 font-semibold text-emerald-600 dark:text-emerald-400 bg-brand-50/30 dark:bg-brand-950/10">100% Private (Never leaves your device)</td>
+                  <td className="py-3.5 px-4 text-slate-500">Uploaded to third-party cloud servers</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium">Transfer Latency</td>
+                  <td className="py-3.5 px-4 font-semibold text-emerald-600 dark:text-emerald-400 bg-brand-50/30 dark:bg-brand-950/10">0 ms (Instant local processing)</td>
+                  <td className="py-3.5 px-4 text-slate-500">5–30s upload &amp; download waiting</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium">Batch Limits</td>
+                  <td className="py-3.5 px-4 font-semibold text-emerald-600 dark:text-emerald-400 bg-brand-50/30 dark:bg-brand-950/10">Unlimited batch operations</td>
+                  <td className="py-3.5 px-4 text-slate-500">Capped (e.g. 3–5 files without premium)</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium">Watermarks</td>
+                  <td className="py-3.5 px-4 font-semibold text-emerald-600 dark:text-emerald-400 bg-brand-50/30 dark:bg-brand-950/10">Zero watermarks guaranteed</td>
+                  <td className="py-3.5 px-4 text-slate-500">Often stamped on free outputs</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium">Target KB Precision</td>
+                  <td className="py-3.5 px-4 font-semibold text-emerald-600 dark:text-emerald-400 bg-brand-50/30 dark:bg-brand-950/10">Iterative quantization (20KB, 50KB, 100KB, 200KB)</td>
+                  <td className="py-3.5 px-4 text-slate-500">Generic percentage compression</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium">Cost &amp; Sign-in</td>
+                  <td className="py-3.5 px-4 font-semibold text-emerald-600 dark:text-emerald-400 bg-brand-50/30 dark:bg-brand-950/10">100% Free, No login required</td>
+                  <td className="py-3.5 px-4 text-slate-500">Freemium model with upgrade popups</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         {/* Who is PixEnhance for */}
         <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm space-y-6">
           <div className="flex items-center gap-3">
