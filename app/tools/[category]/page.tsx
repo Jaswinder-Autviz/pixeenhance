@@ -39,11 +39,20 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       url,
       type: 'website',
       siteName: 'PixEnhance',
+      images: [
+        {
+          url: 'https://pixenhance.in/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: `${category.title} — PixEnhance`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${category.title} — Free Online Tools | PixEnhance`,
       description: category.description,
+      images: ['https://pixenhance.in/og-image.jpg'],
     },
   };
 }

@@ -12,12 +12,27 @@ export const metadata: Metadata = {
     canonical: 'https://pixenhance.in/blog',
   },
   openGraph: {
-    title: 'PixEnhance Creative & Technical Guides',
+    title: 'PixEnhance Blog — Guides, Exact Dimensions & Optimization',
     description:
       'Master image compression, DPI calculations, photo resizing, and format conversions with step-by-step practical walk-throughs.',
     url: 'https://pixenhance.in/blog',
     siteName: 'PixEnhance',
     type: 'website',
+    images: [
+      {
+        url: 'https://pixenhance.in/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'PixEnhance Blog',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PixEnhance Blog — Guides, Exact Dimensions & Optimization',
+    description:
+      'Master image compression, DPI calculations, photo resizing, and format conversions with step-by-step practical walk-throughs.',
+    images: ['https://pixenhance.in/og-image.jpg'],
   },
 };
 

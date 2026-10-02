@@ -27,6 +27,21 @@ export const metadata: Metadata = {
     siteName: 'PixEnhance',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: 'https://pixenhance.in/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'About PixEnhance',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us — The Story Behind PixEnhance',
+    description:
+      'Fast, clean, and uncompromisingly private. Discover the mission and philosophy driving PixEnhance.',
+    images: ['https://pixenhance.in/og-image.jpg'],
   },
 };
 
