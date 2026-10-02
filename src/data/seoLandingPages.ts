@@ -4445,6 +4445,23 @@ export const SLUG_ALIASES: Record<string, string> = {
   'ds160-photo-resizer': 'us-visa-photo-resizer',
   'amazon-image-resizer': 'amazon-product-image-resizer',
   'zillow-photo-resizer': 'zillow-listing-photo-resizer',
+
+  // Core Image & Compressor Aliases
+  'compress-jpg-to-20kb': 'compress-image-to-20kb',
+  'compress-jpeg-to-20kb': 'compress-image-to-20kb',
+  'compress-photo-to-20kb': 'compress-image-to-20kb',
+  'compress-image-to-50kb': 'compress-jpg-to-50kb',
+  'compress-photo-to-50kb': 'compress-jpg-to-50kb',
+  'compress-image-to-100kb': 'compress-jpg-to-100kb',
+  'compress-photo-to-100kb': 'compress-jpg-to-100kb',
+  'compress-image-to-200kb': 'compress-jpg-to-200kb',
+  'compress-photo-to-200kb': 'compress-jpg-to-200kb',
+  'webp-to-jpg-converter': 'webp-to-jpg',
+  'webp-to-png-converter': 'webp-to-png',
+  'jpg-to-png-converter': 'jpg-to-png',
+  'png-to-jpg-converter': 'png-to-jpg',
+  'heic-to-jpg-converter': 'heic-to-jpg',
+  'heic-to-jpeg': 'heic-to-jpg',
 };
 
 export function getSEOLandingPageBySlug(slug: string): SEOLandingPage | undefined {

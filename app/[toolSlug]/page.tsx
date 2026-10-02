@@ -58,7 +58,10 @@ interface ToolPageProps {
 
 export async function generateMetadata({ params }: ToolPageProps): Promise<Metadata> {
   const { toolSlug } = await params;
-  const tool = TOOL_MAP.get(toolSlug);
+  let tool = TOOL_MAP.get(toolSlug);
+  if (!tool && SLUG_ALIASES[toolSlug] && TOOL_MAP.has(SLUG_ALIASES[toolSlug])) {
+    tool = TOOL_MAP.get(SLUG_ALIASES[toolSlug]);
+  }
 
   if (!tool) {
     const seoPage = getSEOLandingPageBySlug(toolSlug);
@@ -134,7 +137,10 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
       ? sp.target
       : undefined;
 
-  const tool = TOOL_MAP.get(toolSlug);
+  let tool = TOOL_MAP.get(toolSlug);
+  if (!tool && SLUG_ALIASES[toolSlug] && TOOL_MAP.has(SLUG_ALIASES[toolSlug])) {
+    tool = TOOL_MAP.get(SLUG_ALIASES[toolSlug]);
+  }
 
   if (!tool) {
     const seoPage = getSEOLandingPageBySlug(toolSlug);
