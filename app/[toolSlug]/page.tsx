@@ -5,7 +5,7 @@ import { Sparkles, CheckCircle2 } from 'lucide-react';
 import { TOOL_MAP } from '@/src/data/toolsList';
 import { SEOContentSection } from '@/components/common/SEOContentSection';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
-import { SEO_LANDING_PAGES, getSEOLandingPageBySlug } from '@/src/data/seoLandingPages';
+import { SEO_LANDING_PAGES, SLUG_ALIASES, getSEOLandingPageBySlug } from '@/src/data/seoLandingPages';
 import { generateSEOMetadata } from '@/components/seo/SEOMetadata';
 import { SEOLandingTemplate } from '@/components/seo/SEOLandingTemplate';
 
@@ -117,7 +117,8 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
 export async function generateStaticParams() {
   const toolSlugs = Array.from(TOOL_MAP.keys());
   const seoSlugs = SEO_LANDING_PAGES.map((page) => page.slug);
-  const combined = Array.from(new Set([...toolSlugs, ...seoSlugs]));
+  const aliasSlugs = Object.keys(SLUG_ALIASES);
+  const combined = Array.from(new Set([...toolSlugs, ...seoSlugs, ...aliasSlugs]));
   return combined.map((toolSlug) => ({
     toolSlug,
   }));

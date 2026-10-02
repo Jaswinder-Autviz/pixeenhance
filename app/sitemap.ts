@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getAllTools, CATEGORIES } from '@/lib/tools';
 import { getAllPosts } from '@/lib/blog';
-import { SEO_LANDING_PAGES } from '@/src/data/seoLandingPages';
+import { SEO_LANDING_PAGES, SLUG_ALIASES } from '@/src/data/seoLandingPages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://pixenhance.in';
@@ -85,6 +85,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // All programmatic SEO landing pages (Govt exams, specific intents)
   for (const page of SEO_LANDING_PAGES) {
     const fullUrl = `${baseUrl}/${page.slug}`;
+    if (!seenUrls.has(fullUrl)) {
+      seenUrls.add(fullUrl);
+      toolRoutes.push({
+        url: fullUrl,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+      });
+    }
+  }
+
+  // All targeted aliases (SSC CGL, CHSL, MTS, GD, RRB NTPC, etc.)
+  for (const alias of Object.keys(SLUG_ALIASES)) {
+    const fullUrl = `${baseUrl}/${alias}`;
     if (!seenUrls.has(fullUrl)) {
       seenUrls.add(fullUrl);
       toolRoutes.push({

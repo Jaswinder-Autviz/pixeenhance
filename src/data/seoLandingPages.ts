@@ -1,4 +1,4 @@
-﻿export interface SEOLandingPage {
+export interface SEOLandingPage {
   slug: string;
   tool: 'image-compressor' | 'image-resizer' | 'converter' | 'social-resizer' | 'passport-resizer';
   toolConfig?: {
@@ -4392,13 +4392,110 @@ export const SEO_LANDING_PAGES: SEOLandingPage[] = [
       buttonText: 'Compress to 200KB',
       buttonHref: '/compress-jpg-to-200kb'
     }
-  }];
+  }
+];
 
 export const SEO_LANDING_PAGE_MAP = new Map<string, SEOLandingPage>(
   SEO_LANDING_PAGES.map((page) => [page.slug, page])
 );
 
+export const SLUG_ALIASES: Record<string, string> = {
+  // SSC Specific Exams
+  'ssc-cgl-photo-resizer': 'ssc-photo-resizer',
+  'ssc-chsl-photo-resizer': 'ssc-photo-resizer',
+  'ssc-mts-photo-resizer': 'ssc-photo-resizer',
+  'ssc-gd-photo-resizer': 'ssc-photo-resizer',
+  'ssc-cpo-photo-resizer': 'ssc-photo-resizer',
+
+  // Railways & Entrance Exams
+  'rrb-ntpc-photo-resizer': 'rrb-photo-resizer',
+  'rrb-alp-photo-resizer': 'rrb-photo-resizer',
+  'rrb-group-d-photo-resizer': 'rrb-photo-resizer',
+  'rrb-technician-photo-resizer': 'rrb-photo-resizer',
+  'neet-photo-resizer': 'neet-postcard-photo-resizer',
+  'jee-photo-resizer': 'jee-main-photo-resizer',
+  'cuet-ug-photo-resizer': 'cuet-photo-resizer',
+  'cuet-pg-photo-resizer': 'cuet-photo-resizer',
+  'gate-signature-resizer': 'gate-photo-resizer',
+  'bpsc-signature-resizer': 'bpsc-photo-resizer',
+  'bpsc-tre-photo-resizer': 'bpsc-photo-resizer',
+  'bpsc-cce-photo-resizer': 'bpsc-photo-resizer',
+  'up-police-signature-resizer': 'up-police-photo-resizer',
+  'up-constable-photo-resizer': 'up-police-photo-resizer',
+  'ibps-signature-resizer': 'ibps-photo-resizer',
+  'sbi-photo-resizer': 'ibps-photo-resizer',
+
+  // Driving & Identity
+  'sarathi-photo-resizer': 'driving-licence-photo-resizer',
+  'sarathi-signature-resizer': 'driving-licence-photo-resizer',
+  'parivahan-photo-resizer': 'driving-licence-photo-resizer',
+  'driving-license-photo-resizer': 'driving-licence-photo-resizer',
+  'pan-card-signature-resizer': 'pan-card-photo-resizer',
+  'epfo-photo-resizer': 'epfo-uan-photo-resizer',
+  'uan-photo-resizer': 'epfo-uan-photo-resizer',
+
+  // USA & Global Aliases
+  'dv-lottery-photo-resizer': 'dv-lottery-photo-checker-resizer',
+  'dv-lottery-photo-tool': 'dv-lottery-photo-checker-resizer',
+  'green-card-lottery-photo-resizer': 'dv-lottery-photo-checker-resizer',
+  'dv-lottery-photo-size': 'dv-lottery-photo-checker-resizer',
+  'us-passport-photo-tool': 'us-passport-photo-resizer',
+  'passport-photo-resizer-2x2': 'us-passport-photo-resizer',
+  'us-visa-photo-tool': 'us-visa-photo-resizer',
+  'ds160-photo-resizer': 'us-visa-photo-resizer',
+  'amazon-image-resizer': 'amazon-product-image-resizer',
+  'zillow-photo-resizer': 'zillow-listing-photo-resizer',
+};
+
 export function getSEOLandingPageBySlug(slug: string): SEOLandingPage | undefined {
   const clean = slug.replace(/^\//, '');
-  return SEO_LANDING_PAGE_MAP.get(clean);
+  if (SEO_LANDING_PAGE_MAP.has(clean)) {
+    return SEO_LANDING_PAGE_MAP.get(clean);
+  }
+
+  const alias = SLUG_ALIASES[clean];
+  if (alias && SEO_LANDING_PAGE_MAP.has(alias)) {
+    const parent = SEO_LANDING_PAGE_MAP.get(alias)!;
+
+    // Custom titles for prominent exam sub-categories
+    if (clean === 'ssc-cgl-photo-resizer') {
+      return {
+        ...parent,
+        slug: clean,
+        title: 'SSC CGL Photo & Signature Resizer Online Free (20KB - 50KB) | PixEnhance',
+        h1: 'SSC CGL Photo & Signature Resizer Online Free',
+      };
+    }
+    if (clean === 'ssc-chsl-photo-resizer') {
+      return {
+        ...parent,
+        slug: clean,
+        title: 'SSC CHSL Photo & Signature Resizer Online Free (20KB - 50KB) | PixEnhance',
+        h1: 'SSC CHSL Photo & Signature Resizer Online Free',
+      };
+    }
+    if (clean === 'ssc-mts-photo-resizer') {
+      return {
+        ...parent,
+        slug: clean,
+        title: 'SSC MTS Photo & Signature Resizer Online Free (20KB - 50KB) | PixEnhance',
+        h1: 'SSC MTS Photo & Signature Resizer Online Free',
+      };
+    }
+    if (clean === 'ssc-gd-photo-resizer') {
+      return {
+        ...parent,
+        slug: clean,
+        title: 'SSC GD Constable Photo & Signature Resizer | PixEnhance',
+        h1: 'SSC GD Constable Photo & Signature Resizer',
+      };
+    }
+
+    return {
+      ...parent,
+      slug: clean,
+    };
+  }
+
+  return undefined;
 }
