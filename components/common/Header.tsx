@@ -384,6 +384,18 @@ export function Header() {
                   60+
                 </span>
               </Link>
+
+              {/* Direct "Guides & Blog" Link */}
+              <Link
+                href="/blog"
+                onClick={closeDropdowns}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[14px] font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors"
+              >
+                <span>Guides</span>
+                <span className="px-1.5 py-0.2 rounded-md bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-extrabold">
+                  Blog
+                </span>
+              </Link>
             </nav>
           </div>
 
@@ -427,16 +439,25 @@ export function Header() {
           <div className="lg:hidden max-h-[80vh] overflow-y-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-8 space-y-3 z-50">
             <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
               <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
-                Categorized Tools
+                Menu
               </span>
-              <Link
-                href="/tools"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1"
-              >
-                <span>All 60+ Tools</span>
-                <ArrowRight className="w-3 h-3" />
-              </Link>
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/blog"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
+                >
+                  <span>Guides &amp; Blog</span>
+                </Link>
+                <Link
+                  href="/tools"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1"
+                >
+                  <span>All 60+ Tools</span>
+                  <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
             </div>
 
             {NAV_CATEGORIES.map((cat) => {

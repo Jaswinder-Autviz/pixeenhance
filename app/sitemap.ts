@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllTools, CATEGORIES } from '@/lib/tools';
+import { getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://pixenhance.in';
@@ -15,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/tools`,
+      lastModified: currentDate,
+      changeFrequency: 'daily' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/blog`,
       lastModified: currentDate,
       changeFrequency: 'daily' as const,
       priority: 0.9,
@@ -74,5 +81,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticRoutes, ...categoryRoutes, ...toolRoutes];
+  // All high-intent SEO blog articles
+  const blogRoutes: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.updatedAt || currentDate),
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
+  }));
+
+  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...blogRoutes];
 }
+
