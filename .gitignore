@@ -25,3 +25,7 @@ out
 *.njsproj
 *.sln
 *.sw?
+
+# Secrets & API credentials
+*service_account.json
+service_account.json
