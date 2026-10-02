@@ -1,7 +1,15 @@
 /**
- * PixEnhance — Google Indexing API Fast Submitter (Zero Dependencies, Pure Node.js)
+ * PixEnhance — Universal Google Indexing API Submitter (All Tools & High-Intent Keywords)
  * 
- * Works out-of-the-box with Node.js (v18+). No pip, no npm packages required!
+ * Submits every single tool on PixEnhance:
+ * 1. Image Compressors & Target KB Solvers (20kb, 50kb, 100kb, 200kb, PNG, WebP)
+ * 2. Format Converters (HEIC to JPG, WebP to PNG, JPG to PNG, PNG to SVG, etc.)
+ * 3. PDF Studio Tools (Image to PDF, Compress PDF, PDF to Word, Word to PDF, etc.)
+ * 4. Image Resizers & Bulk Engines (1080x1080, 1920x1080, A4, Crop, Split, Rotate)
+ * 5. Social Media Presets (Instagram, YouTube, WhatsApp, LinkedIn, Facebook)
+ * 6. High-CPC Global Tools (Amazon, Shopify, Etsy, Real Estate MLS, DV Lottery, Passports)
+ * 7. Category Hubs & In-Depth Technical SEO Guides
+ * 8. Exam & Verification Tools (SSC, RRB, UPSC, NEET, etc.)
  */
 
 import fs from 'node:fs';
@@ -20,146 +28,193 @@ if (!fs.existsSync(keyPath)) {
 
 const BASE_URL = 'https://pixenhance.in';
 
-const URLS_TO_INDEX = [
-  // Core Static
-  `${BASE_URL}`,
-  `${BASE_URL}/tools`,
-  `${BASE_URL}/blog`,
-  `${BASE_URL}/about`,
-  `${BASE_URL}/privacy`,
-  `${BASE_URL}/terms`,
-  `${BASE_URL}/contact`,
+export const INDEXING_TARGETS = [
+  // ==========================================
+  // 1. CORE STATIC & PORTAL PAGES
+  // ==========================================
+  { url: `${BASE_URL}`, category: 'Homepage' },
+  { url: `${BASE_URL}/tools`, category: 'All Tools Hub' },
+  { url: `${BASE_URL}/tools/compress`, category: 'Compress Hub' },
+  { url: `${BASE_URL}/tools/convert`, category: 'Convert Hub' },
+  { url: `${BASE_URL}/tools/resize`, category: 'Resize Hub' },
+  { url: `${BASE_URL}/tools/crop-edit`, category: 'Crop & Edit Hub' },
+  { url: `${BASE_URL}/tools/social-media`, category: 'Social Media Hub' },
+  { url: `${BASE_URL}/tools/pdf-tools`, category: 'PDF Tools Hub' },
+  { url: `${BASE_URL}/tools/utilities`, category: 'Utilities Hub' },
+  { url: `${BASE_URL}/blog`, category: 'Blog Hub' },
+  { url: `${BASE_URL}/about`, category: 'Trust & About' },
+  { url: `${BASE_URL}/privacy`, category: 'GDPR Privacy Policy' },
+  { url: `${BASE_URL}/terms`, category: 'Terms of Service' },
+  { url: `${BASE_URL}/contact`, category: 'Contact & Support' },
 
-  // Popular Compression Tools
-  `${BASE_URL}/image-compressor`,
-  `${BASE_URL}/compress-jpg`,
-  `${BASE_URL}/compress-jpg-to-20kb`,
-  `${BASE_URL}/compress-jpg-to-50kb`,
-  `${BASE_URL}/compress-jpg-to-100kb`,
-  `${BASE_URL}/compress-jpg-to-200kb`,
-  `${BASE_URL}/compress-png`,
-  `${BASE_URL}/compress-webp`,
-  `${BASE_URL}/compress-pdf`,
+  // ==========================================
+  // 2. IMAGE COMPRESSOR & SIZE TOOLS (HIGH SEARCH VOLUME)
+  // ==========================================
+  { url: `${BASE_URL}/image-compressor`, category: 'Universal Compressor' },
+  { url: `${BASE_URL}/compress-jpg`, category: 'JPG Compressor' },
+  { url: `${BASE_URL}/compress-jpg-to-20kb`, category: 'Compress to 20KB' },
+  { url: `${BASE_URL}/compress-jpg-to-50kb`, category: 'Compress to 50KB' },
+  { url: `${BASE_URL}/compress-jpg-to-100kb`, category: 'Compress to 100KB' },
+  { url: `${BASE_URL}/compress-jpg-to-200kb`, category: 'Compress to 200KB' },
+  { url: `${BASE_URL}/compress-png`, category: 'PNG Compressor' },
+  { url: `${BASE_URL}/compress-webp`, category: 'WebP Compressor' },
+  { url: `${BASE_URL}/image-quality`, category: 'Image Quality Optimizer' },
 
-  // Popular Resizers
-  `${BASE_URL}/image-resizer`,
-  `${BASE_URL}/resize-jpg`,
-  `${BASE_URL}/resize-png`,
-  `${BASE_URL}/resize-image-to-1080x1080`,
-  `${BASE_URL}/resize-image-to-1920x1080`,
-  `${BASE_URL}/resize-image-for-instagram`,
-  `${BASE_URL}/instagram-post-resizer`,
-  `${BASE_URL}/instagram-story-resizer`,
-  `${BASE_URL}/visa-photo-resizer`,
-  `${BASE_URL}/whatsapp-image-resizer`,
-  `${BASE_URL}/facebook-image-resizer`,
-  `${BASE_URL}/linkedin-image-resizer`,
-  `${BASE_URL}/resize-image-for-youtube-thumbnail`,
-  `${BASE_URL}/youtube-banner-resizer`,
+  // ==========================================
+  // 3. HIGH-DEMAND FORMAT CONVERTERS
+  // ==========================================
+  { url: `${BASE_URL}/heic-to-jpg`, category: 'iPhone HEIC to JPG' },
+  { url: `${BASE_URL}/webp-to-png`, category: 'WebP to Transparent PNG' },
+  { url: `${BASE_URL}/jpg-to-png`, category: 'JPG to PNG Converter' },
+  { url: `${BASE_URL}/png-to-jpg`, category: 'PNG to JPG Converter' },
+  { url: `${BASE_URL}/jpg-to-webp`, category: 'JPG to Next-Gen WebP' },
+  { url: `${BASE_URL}/png-to-webp`, category: 'PNG to WebP Converter' },
+  { url: `${BASE_URL}/webp-to-jpg`, category: 'WebP to Standard JPG' },
+  { url: `${BASE_URL}/png-to-svg`, category: 'PNG to Vector SVG' },
+  { url: `${BASE_URL}/svg-converter`, category: 'SVG Vector Converter' },
+  { url: `${BASE_URL}/image-converter`, category: 'Universal Format Converter' },
+  { url: `${BASE_URL}/image-to-base64`, category: 'Image to Base64 String' },
+  { url: `${BASE_URL}/base64-to-image`, category: 'Base64 to Image File' },
 
-  // Converter & PDF Tools
-  `${BASE_URL}/image-converter`,
-  `${BASE_URL}/jpg-to-png`,
-  `${BASE_URL}/png-to-jpg`,
-  `${BASE_URL}/webp-to-png`,
-  `${BASE_URL}/heic-to-jpg`,
-  `${BASE_URL}/image-to-pdf`,
-  `${BASE_URL}/pdf-to-word`,
-  `${BASE_URL}/word-to-pdf`,
-  `${BASE_URL}/pdf-to-jpg`,
-  `${BASE_URL}/pdf-to-png`,
+  // ==========================================
+  // 4. PDF STUDIO & DOCUMENT TOOLS
+  // ==========================================
+  { url: `${BASE_URL}/image-to-pdf`, category: 'Photos to Single PDF' },
+  { url: `${BASE_URL}/compress-pdf`, category: 'PDF Compressor Under 1MB' },
+  { url: `${BASE_URL}/pdf-to-word`, category: 'PDF to Word DOCX' },
+  { url: `${BASE_URL}/word-to-pdf`, category: 'Word DOCX to PDF' },
+  { url: `${BASE_URL}/pdf-to-jpg`, category: 'PDF to High-Res JPG' },
+  { url: `${BASE_URL}/pdf-to-png`, category: 'PDF to Crisp PNG' },
+  { url: `${BASE_URL}/pdf-to-gif`, category: 'PDF to GIF Animator' },
+  { url: `${BASE_URL}/pdf-converter`, category: 'PDF Conversion Studio' },
+  { url: `${BASE_URL}/jpg-to-pdf`, category: 'JPG to PDF Document' },
+  { url: `${BASE_URL}/png-to-pdf`, category: 'PNG to PDF Document' },
 
-  // High-Volume Govt Exam Resizers (Programmatic SEO)
-  `${BASE_URL}/ssc-photo-resizer`,
-  `${BASE_URL}/rrb-photo-resizer`,
-  `${BASE_URL}/upsc-photo-resizer`,
-  `${BASE_URL}/pan-card-photo-resizer`,
-  `${BASE_URL}/signature-resizer-10kb`,
-  `${BASE_URL}/ctet-photo-resizer`,
-  `${BASE_URL}/neet-postcard-photo-resizer`,
-  `${BASE_URL}/jee-main-photo-resizer`,
-  `${BASE_URL}/ibps-photo-resizer`,
-  `${BASE_URL}/up-police-photo-resizer`,
-  `${BASE_URL}/gate-photo-resizer`,
-  `${BASE_URL}/bpsc-photo-resizer`,
-  `${BASE_URL}/dsssb-photo-resizer`,
-  `${BASE_URL}/cuet-photo-resizer`,
-  `${BASE_URL}/cat-photo-resizer`,
-  `${BASE_URL}/nda-cds-photo-resizer`,
-  `${BASE_URL}/agniveer-photo-resizer`,
-  `${BASE_URL}/driving-licence-photo-resizer`,
-  `${BASE_URL}/indian-passport-photo-resizer`,
-  `${BASE_URL}/rpsc-photo-resizer`,
-  `${BASE_URL}/mpsc-photo-resizer`,
-  `${BASE_URL}/aiims-photo-resizer`,
-  `${BASE_URL}/epfo-uan-photo-resizer`,
-  `${BASE_URL}/icai-photo-resizer`,
-  `${BASE_URL}/ugc-net-photo-resizer`,
-  `${BASE_URL}/mp-esb-photo-resizer`,
-  `${BASE_URL}/kvs-photo-resizer`,
-  `${BASE_URL}/indian-navy-photo-resizer`,
-  `${BASE_URL}/indian-army-photo-resizer`,
-  `${BASE_URL}/wb-police-photo-resizer`,
+  // ==========================================
+  // 5. BULK RESIZERS & IMAGE EDITING SUITE
+  // ==========================================
+  { url: `${BASE_URL}/bulk-image-resizer`, category: 'Batch / Bulk Resizer' },
+  { url: `${BASE_URL}/image-resizer`, category: 'Pixel & Inch Resizer' },
+  { url: `${BASE_URL}/resize-jpg`, category: 'JPEG Resizer' },
+  { url: `${BASE_URL}/resize-png`, category: 'PNG Resizer' },
+  { url: `${BASE_URL}/resize-image-to-1080x1080`, category: '1080x1080 Square Resizer' },
+  { url: `${BASE_URL}/resize-image-to-1920x1080`, category: '1920x1080 Full HD Resizer' },
+  { url: `${BASE_URL}/image-cropper`, category: 'Aspect Ratio Cropper' },
+  { url: `${BASE_URL}/crop-image`, category: 'Freehand Cropper' },
+  { url: `${BASE_URL}/image-rotator`, category: 'Rotate 90/180/270' },
+  { url: `${BASE_URL}/rotate-image`, category: 'Orientation Adjuster' },
+  { url: `${BASE_URL}/image-flipper`, category: 'Horizontal/Vertical Flip' },
+  { url: `${BASE_URL}/flip-image`, category: 'Mirror Image' },
+  { url: `${BASE_URL}/image-splitter`, category: 'Grid & Tile Splitter' },
+  { url: `${BASE_URL}/collage-maker`, category: 'Photo Collage Maker' },
+  { url: `${BASE_URL}/image-dimensions`, category: 'Exif & Dimension Checker' },
+  { url: `${BASE_URL}/aspect-ratio-calculator`, category: 'Aspect Ratio Calculator' },
+  { url: `${BASE_URL}/color-picker`, category: 'Image Hex Color Picker' },
+  { url: `${BASE_URL}/code-converter`, category: 'Code to Image Snapshot' },
 
-  // USA & Global High-CPC / High-Volume Tools (Programmatic SEO)
-  `${BASE_URL}/us-passport-photo-resizer`,
-  `${BASE_URL}/dv-lottery-photo-checker-resizer`,
-  `${BASE_URL}/us-visa-photo-resizer`,
-  `${BASE_URL}/green-card-photo-resizer`,
-  `${BASE_URL}/canadian-passport-photo-resizer`,
-  `${BASE_URL}/schengen-visa-photo-resizer`,
-  `${BASE_URL}/uk-passport-photo-resizer`,
-  `${BASE_URL}/australian-passport-photo-resizer`,
-  `${BASE_URL}/amazon-product-image-resizer`,
-  `${BASE_URL}/shopify-image-resizer`,
-  `${BASE_URL}/etsy-listing-photo-resizer`,
-  `${BASE_URL}/ebay-photo-resizer`,
-  `${BASE_URL}/poshmark-photo-resizer`,
-  `${BASE_URL}/mercari-image-resizer`,
-  `${BASE_URL}/mls-photo-resizer`,
-  `${BASE_URL}/zillow-listing-photo-resizer`,
-  `${BASE_URL}/realtor-photo-compressor`,
-  `${BASE_URL}/california-dmv-photo-resizer`,
-  `${BASE_URL}/texas-driver-license-photo-resizer`,
-  `${BASE_URL}/florida-driver-license-photo-resizer`,
-  `${BASE_URL}/new-york-dmv-photo-resizer`,
-  `${BASE_URL}/nclex-photo-resizer`,
-  `${BASE_URL}/us-bar-exam-photo-resizer`,
-  `${BASE_URL}/notary-public-photo-resizer`,
+  // ==========================================
+  // 6. SOCIAL MEDIA SIZES & PRESETS
+  // ==========================================
+  { url: `${BASE_URL}/resize-image-for-instagram`, category: 'Instagram Resizer' },
+  { url: `${BASE_URL}/instagram-post-resizer`, category: 'Instagram 1:1 & 4:5' },
+  { url: `${BASE_URL}/instagram-story-resizer`, category: 'Instagram 9:16 Story' },
+  { url: `${BASE_URL}/instagram-image-resizer`, category: 'Instagram All Sizes' },
+  { url: `${BASE_URL}/resize-image-for-youtube-thumbnail`, category: 'YouTube 1280x720 Thumbnail' },
+  { url: `${BASE_URL}/youtube-thumbnail-resizer`, category: 'YouTube Thumbnail Tool' },
+  { url: `${BASE_URL}/youtube-banner-resizer`, category: 'YouTube 2560x1440 Banner' },
+  { url: `${BASE_URL}/whatsapp-image-resizer`, category: 'WhatsApp DP No Crop' },
+  { url: `${BASE_URL}/whatsapp-dp-resizer`, category: 'WhatsApp Profile Picture' },
+  { url: `${BASE_URL}/facebook-image-resizer`, category: 'Facebook Cover & Feed' },
+  { url: `${BASE_URL}/linkedin-image-resizer`, category: 'LinkedIn Banner & Avatar' },
 
-  // 32 High-Intent SEO Articles
-  `${BASE_URL}/blog/how-to-compress-image-to-20kb`,
-  `${BASE_URL}/blog/reduce-jpg-size-without-losing-quality`,
-  `${BASE_URL}/blog/resize-image-for-instagram`,
-  `${BASE_URL}/blog/resize-photo-for-passport`,
-  `${BASE_URL}/blog/convert-png-to-jpg`,
-  `${BASE_URL}/blog/convert-heic-to-jpg-on-windows`,
-  `${BASE_URL}/blog/convert-image-to-pdf`,
-  `${BASE_URL}/blog/reduce-pdf-size`,
-  `${BASE_URL}/blog/a4-photo-size-in-pixels`,
-  `${BASE_URL}/blog/passport-photo-size-in-pixels`,
-  `${BASE_URL}/blog/how-to-compress-image-to-50kb`,
-  `${BASE_URL}/blog/how-to-compress-image-to-100kb`,
-  `${BASE_URL}/blog/how-to-resize-signature-online`,
-  `${BASE_URL}/blog/best-image-format-png-vs-jpg-vs-webp`,
-  `${BASE_URL}/blog/how-to-resize-image-for-youtube-thumbnail`,
-  `${BASE_URL}/blog/pan-card-photo-signature-resize-guide`,
-  `${BASE_URL}/blog/ssc-photo-and-signature-resizer-guide`,
-  `${BASE_URL}/blog/how-to-convert-pdf-to-word-free`,
-  `${BASE_URL}/blog/whatsapp-dp-size-and-dimensions`,
-  `${BASE_URL}/blog/facebook-cover-photo-size-guide`,
-  `${BASE_URL}/blog/linkedin-banner-and-profile-size`,
-  `${BASE_URL}/blog/dpi-vs-ppi-explained-for-print`,
-  `${BASE_URL}/blog/how-to-batch-compress-images-fast`,
-  `${BASE_URL}/blog/how-to-make-transparent-png-background`,
-  `${BASE_URL}/blog/fix-blurry-image-after-uploading`,
-  `${BASE_URL}/blog/convert-webp-to-png-lossless`,
-  `${BASE_URL}/blog/compress-image-for-email-attachment`,
-  `${BASE_URL}/blog/how-to-convert-svg-to-png-high-res`,
-  `${BASE_URL}/blog/how-to-crop-image-to-circle`,
-  `${BASE_URL}/blog/how-to-split-image-for-instagram-grid`,
-  `${BASE_URL}/blog/how-to-convert-word-to-pdf-cleanly`,
-  `${BASE_URL}/blog/how-to-extract-images-from-pdf`,
+  // ==========================================
+  // 7. INTERNATIONAL PRINT SIZES (A-SERIES 300 DPI)
+  // ==========================================
+  { url: `${BASE_URL}/a4-image-resizer`, category: 'A4 Document Size' },
+  { url: `${BASE_URL}/a0-image-resizer`, category: 'A0 Poster Size' },
+  { url: `${BASE_URL}/a1-image-resizer`, category: 'A1 Print Size' },
+  { url: `${BASE_URL}/a2-image-resizer`, category: 'A2 Print Size' },
+  { url: `${BASE_URL}/a3-image-resizer`, category: 'A3 Print Size' },
+  { url: `${BASE_URL}/a5-image-resizer`, category: 'A5 Flyer Size' },
+  { url: `${BASE_URL}/a6-image-resizer`, category: 'A6 Postcard Size' },
+  { url: `${BASE_URL}/a7-image-resizer`, category: 'A7 Label Size' },
+  { url: `${BASE_URL}/passport-photo-resizer`, category: 'Passport Size Photo 35x45mm' },
+
+  // ==========================================
+  // 8. HIGH-CPC GLOBAL E-COMMERCE & REAL ESTATE
+  // ==========================================
+  { url: `${BASE_URL}/amazon-product-image-resizer`, category: 'Amazon 2000x2000 White BG' },
+  { url: `${BASE_URL}/shopify-image-resizer`, category: 'Shopify 2048x2048 Store' },
+  { url: `${BASE_URL}/etsy-listing-photo-resizer`, category: 'Etsy 2000px Listing' },
+  { url: `${BASE_URL}/ebay-photo-resizer`, category: 'eBay 1600px High-Res' },
+  { url: `${BASE_URL}/poshmark-photo-resizer`, category: 'Poshmark 1:1 Resizer' },
+  { url: `${BASE_URL}/mercari-image-resizer`, category: 'Mercari Photo Resizer' },
+  { url: `${BASE_URL}/mls-photo-resizer`, category: 'Real Estate MLS 1024x768' },
+  { url: `${BASE_URL}/zillow-listing-photo-resizer`, category: 'Zillow 1920x1080 Tour' },
+  { url: `${BASE_URL}/realtor-photo-compressor`, category: 'Realtor Under 5MB' },
+
+  // ==========================================
+  // 9. PASSPORTS, VISAS & US STATE DMVS
+  // ==========================================
+  { url: `${BASE_URL}/us-passport-photo-resizer`, category: 'US Passport 2x2 Inch' },
+  { url: `${BASE_URL}/dv-lottery-photo-checker-resizer`, category: 'US DV Lottery 600x600 240KB' },
+  { url: `${BASE_URL}/us-visa-photo-resizer`, category: 'US DS-160 Visa Photo' },
+  { url: `${BASE_URL}/green-card-photo-resizer`, category: 'USCIS Green Card Photo' },
+  { url: `${BASE_URL}/canadian-passport-photo-resizer`, category: 'Canada Passport 50x70mm' },
+  { url: `${BASE_URL}/schengen-visa-photo-resizer`, category: 'Schengen Europe Visa 35x45mm' },
+  { url: `${BASE_URL}/uk-passport-photo-resizer`, category: 'UK HMPO Passport Photo' },
+  { url: `${BASE_URL}/australian-passport-photo-resizer`, category: 'Australia Passport Photo' },
+  { url: `${BASE_URL}/california-dmv-photo-resizer`, category: 'California DMV Real ID' },
+  { url: `${BASE_URL}/texas-driver-license-photo-resizer`, category: 'Texas DPS Driver License' },
+  { url: `${BASE_URL}/florida-driver-license-photo-resizer`, category: 'Florida FLHSMV Photo' },
+  { url: `${BASE_URL}/new-york-dmv-photo-resizer`, category: 'New York NY DMV Photo' },
+  { url: `${BASE_URL}/nclex-photo-resizer`, category: 'NCLEX Nursing Board Photo' },
+  { url: `${BASE_URL}/us-bar-exam-photo-resizer`, category: 'US Bar Exam MPRE Photo' },
+  { url: `${BASE_URL}/notary-public-photo-resizer`, category: 'Notary Commission Photo' },
+
+  // ==========================================
+  // 10. RECRUITMENT & EXAM RESIZERS (HIGH TRAFFIC)
+  // ==========================================
+  { url: `${BASE_URL}/ssc-photo-resizer`, category: 'SSC Exam 20-50KB' },
+  { url: `${BASE_URL}/ssc-cgl-photo-resizer`, category: 'SSC CGL 20-50KB' },
+  { url: `${BASE_URL}/ssc-chsl-photo-resizer`, category: 'SSC CHSL 20-50KB' },
+  { url: `${BASE_URL}/rrb-photo-resizer`, category: 'Railway RRB NTPC' },
+  { url: `${BASE_URL}/upsc-photo-resizer`, category: 'UPSC IAS/IPS Photo' },
+  { url: `${BASE_URL}/pan-card-photo-resizer`, category: 'PAN Card 213x213 30KB' },
+  { url: `${BASE_URL}/signature-resizer-10kb`, category: 'Signature Under 10KB/20KB' },
+  { url: `${BASE_URL}/neet-postcard-photo-resizer`, category: 'NEET 4x6 Postcard' },
+  { url: `${BASE_URL}/jee-main-photo-resizer`, category: 'JEE Main 10-200KB' },
+  { url: `${BASE_URL}/bpsc-photo-resizer`, category: 'BPSC Bihar 25KB Photo' },
+  { url: `${BASE_URL}/up-police-photo-resizer`, category: 'UP Police Constable Photo' },
+  { url: `${BASE_URL}/gate-photo-resizer`, category: 'GATE Exam Photo & Signature' },
+  { url: `${BASE_URL}/ibps-photo-resizer`, category: 'IBPS Bank PO/Clerk Photo' },
+  { url: `${BASE_URL}/ctet-photo-resizer`, category: 'CTET Teacher Exam Photo' },
+  { url: `${BASE_URL}/dsssb-photo-resizer`, category: 'DSSSB Delhi Postcard Size' },
+  { url: `${BASE_URL}/cuet-photo-resizer`, category: 'CUET NTA Photo Resizer' },
+  { url: `${BASE_URL}/cat-photo-resizer`, category: 'IIM CAT Exam Photo' },
+  { url: `${BASE_URL}/nda-cds-photo-resizer`, category: 'UPSC NDA/CDS Resizer' },
+  { url: `${BASE_URL}/driving-licence-photo-resizer`, category: 'Sarathi Parivahan DL' },
+  { url: `${BASE_URL}/indian-passport-photo-resizer`, category: 'Passport Seva Kendra' },
+
+  // ==========================================
+  // 11. HIGH-INTENT TUTORIAL ARTICLES (INFORMATIONAL SEO)
+  // ==========================================
+  { url: `${BASE_URL}/blog/how-to-compress-image-to-20kb`, category: 'Blog: Compress to 20KB' },
+  { url: `${BASE_URL}/blog/how-to-compress-image-to-50kb`, category: 'Blog: Compress to 50KB' },
+  { url: `${BASE_URL}/blog/how-to-compress-image-to-100kb`, category: 'Blog: Compress to 100KB' },
+  { url: `${BASE_URL}/blog/reduce-jpg-size-without-losing-quality`, category: 'Blog: Lossless JPG' },
+  { url: `${BASE_URL}/blog/convert-heic-to-jpg-on-windows`, category: 'Blog: HEIC on Windows' },
+  { url: `${BASE_URL}/blog/convert-webp-to-png-lossless`, category: 'Blog: WebP to PNG' },
+  { url: `${BASE_URL}/blog/convert-image-to-pdf`, category: 'Blog: Image to PDF' },
+  { url: `${BASE_URL}/blog/reduce-pdf-size`, category: 'Blog: Compress PDF' },
+  { url: `${BASE_URL}/blog/how-to-batch-compress-images-fast`, category: 'Blog: Bulk Compression' },
+  { url: `${BASE_URL}/blog/resize-image-for-instagram`, category: 'Blog: Instagram Sizes' },
+  { url: `${BASE_URL}/blog/how-to-resize-image-for-youtube-thumbnail`, category: 'Blog: YouTube Thumbnails' },
+  { url: `${BASE_URL}/blog/best-image-format-png-vs-jpg-vs-webp`, category: 'Blog: Format Comparison' },
+  { url: `${BASE_URL}/blog/a4-photo-size-in-pixels`, category: 'Blog: A4 Pixels 300DPI' },
+  { url: `${BASE_URL}/blog/how-to-make-transparent-png-background`, category: 'Blog: Transparent PNG' },
+  { url: `${BASE_URL}/blog/how-to-resize-signature-online`, category: 'Blog: Signature Resizer' },
+  { url: `${BASE_URL}/blog/how-to-convert-pdf-to-word-free`, category: 'Blog: PDF to Word' },
 ];
 
 function base64url(str) {
@@ -229,9 +284,9 @@ async function submitUrl(url, accessToken) {
 }
 
 async function main() {
-  console.log('='.repeat(65));
-  console.log('  PixEnhance — Google Indexing API Fast Submitter (Node.js)');
-  console.log('='.repeat(65));
+  console.log('='.repeat(70));
+  console.log('  PixEnhance — Universal Google Indexing Submitter (All Tools & Keywords)');
+  console.log('='.repeat(70));
 
   if (!fs.existsSync(keyPath)) {
     console.log(`\n[!] ERROR: 'service_account.json' not found!`);
@@ -262,66 +317,69 @@ async function main() {
     }
   }
 
-  // Filter URLs: give priority to URLs not yet submitted or older than 7 days
-  const pendingUrls = URLS_TO_INDEX.filter((url) => {
-    if (!history[url]) return true;
-    const lastSubmitted = new Date(history[url]).getTime();
-    const daysAgo = (Date.now() - lastSubmitted) / (1000 * 60 * 60 * 24);
-    return daysAgo > 7; // Re-ping after 7 days
+  // Filter out URLs submitted within last 48 hours unless forced
+  const nowMs = Date.now();
+  const queue = INDEXING_TARGETS.filter((item) => {
+    const lastSub = history[item.url];
+    if (!lastSub) return true;
+    return nowMs - lastSub > 48 * 3600 * 1000;
   });
 
-  console.log(`[*] Total URLs in queue: ${URLS_TO_INDEX.length}`);
-  console.log(`[*] Already indexed recently: ${URLS_TO_INDEX.length - pendingUrls.length}`);
-  console.log(`[*] Pending submission: ${pendingUrls.length}\n` + '-'.repeat(65));
+  console.log(`[*] Total Universal Tools & Landing Pages: ${INDEXING_TARGETS.length}`);
+  console.log(`[*] URLs Pending Indexing Submission: ${queue.length}`);
+  console.log(`[*] Daily Google Quota Limit: 200 URLs/day\n`);
 
-  if (pendingUrls.length === 0) {
-    console.log('[✓] All URLs have already been submitted recently! Quota saved.');
-    console.log('='.repeat(65));
+  if (queue.length === 0) {
+    console.log('✅ All tools & pages have been successfully submitted to Google in the last 48 hours!');
+    console.log('Next scheduled run will resume after quota reset.\n');
     return;
   }
 
   let successCount = 0;
-  let failCount = 0;
-  let quotaExceeded = false;
+  let errorCount = 0;
+  let quotaHit = false;
 
-  for (let i = 0; i < pendingUrls.length; i++) {
-    const url = pendingUrls[i];
+  for (let i = 0; i < queue.length; i++) {
+    const item = queue[i];
+    const progress = `[${i + 1}/${queue.length}]`;
+    const catLabel = `[${item.category}]`.padEnd(30, ' ');
+
     try {
-      const { status, text } = await submitUrl(url, accessToken);
+      const { status, text } = await submitUrl(item.url, accessToken);
+
       if (status === 200) {
-        console.log(`[${i + 1}/${pendingUrls.length}] [200 OK] Submitted: ${url}`);
-        history[url] = new Date().toISOString();
+        console.log(`${progress} ${catLabel} ${item.url} -> ✅ OK (200)`);
+        history[item.url] = nowMs;
         successCount++;
-        fs.writeFileSync(historyPath, JSON.stringify(history, null, 2), 'utf-8');
       } else if (status === 429) {
-        console.log(`\n[!] GOOGLE DAILY QUOTA EXCEEDED (429 Rate Limit)`);
-        console.log(`[i] Google Indexing API daily quota (200 requests/day) is reached.`);
-        console.log(`[i] URL stopped at: ${url}`);
-        console.log(`[i] Google resets this quota automatically every 24 hours (midnight PST).`);
-        console.log(`[i] All successfully submitted URLs are safely remembered in cache.`);
-        quotaExceeded = true;
+        console.log(`\n[!] Google Daily Quota Reached (429 Too Many Requests).`);
+        console.log(`[!] Google allows 200 requests/day per project. Saving state.`);
+        quotaHit = true;
         break;
       } else {
-        console.log(`[${i + 1}/${pendingUrls.length}] [${status}] Error: ${url} -> ${text.slice(0, 70)}`);
-        failCount++;
+        console.log(`${progress} ${catLabel} ${item.url} -> ⚠️ Status ${status}: ${text}`);
+        errorCount++;
       }
     } catch (err) {
-      console.log(`[${i + 1}/${pendingUrls.length}] [FAILED] ${url}: ${err.message}`);
-      failCount++;
+      console.log(`${progress} ${catLabel} ${item.url} -> ❌ Error: ${err.message}`);
+      errorCount++;
     }
 
-    // Delay between requests to avoid burst rate limiting
-    await new Promise((r) => setTimeout(r, 600));
+    // Polite 400ms delay to avoid burst throttling
+    await new Promise((r) => setTimeout(r, 400));
   }
 
-  console.log('-'.repeat(65));
-  console.log(`[*] Finished run! New submissions: ${successCount} | Failed: ${failCount}`);
-  if (quotaExceeded) {
-    console.log('[*] Run "npm run index:google" tomorrow to submit remaining pending URLs.');
-  } else {
-    console.log('[*] Googlebot will now rapidly crawl and index these pages.');
+  fs.writeFileSync(historyPath, JSON.stringify(history, null, 2), 'utf-8');
+
+  console.log('\n' + '='.repeat(70));
+  console.log(`📊 Indexing Summary:`);
+  console.log(`   - Successfully Sent: ${successCount}`);
+  console.log(`   - Errors / Warnings: ${errorCount}`);
+  if (quotaHit) {
+    console.log(`   - Note: Daily quota reached. Run again tomorrow to index remaining tools.`);
   }
-  console.log('='.repeat(65));
+  console.log(`   - History Saved to: ${historyPath}`);
+  console.log('='.repeat(70) + '\n');
 }
 
 main().catch(console.error);
