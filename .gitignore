@@ -31,3 +31,5 @@ out
 service_account.json
 *indexing_history.json
 .indexing_history.json
+*reddit_config.json
+.reddit_config.json
