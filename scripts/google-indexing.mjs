@@ -226,34 +226,76 @@ async function main() {
     return;
   }
 
-  console.log(`[*] Submitting ${URLS_TO_INDEX.length} URLs to Googlebot...\n` + '-'.repeat(65));
+  const historyPath = path.join(__dirname, '.indexing_history.json');
+  let history = {};
+  if (fs.existsSync(historyPath)) {
+    try {
+      history = JSON.parse(fs.readFileSync(historyPath, 'utf-8'));
+    } catch {
+      history = {};
+    }
+  }
+
+  // Filter URLs: give priority to URLs not yet submitted or older than 7 days
+  const pendingUrls = URLS_TO_INDEX.filter((url) => {
+    if (!history[url]) return true;
+    const lastSubmitted = new Date(history[url]).getTime();
+    const daysAgo = (Date.now() - lastSubmitted) / (1000 * 60 * 60 * 24);
+    return daysAgo > 7; // Re-ping after 7 days
+  });
+
+  console.log(`[*] Total URLs in queue: ${URLS_TO_INDEX.length}`);
+  console.log(`[*] Already indexed recently: ${URLS_TO_INDEX.length - pendingUrls.length}`);
+  console.log(`[*] Pending submission: ${pendingUrls.length}\n` + '-'.repeat(65));
+
+  if (pendingUrls.length === 0) {
+    console.log('[✓] All URLs have already been submitted recently! Quota saved.');
+    console.log('='.repeat(65));
+    return;
+  }
 
   let successCount = 0;
   let failCount = 0;
+  let quotaExceeded = false;
 
-  for (let i = 0; i < URLS_TO_INDEX.length; i++) {
-    const url = URLS_TO_INDEX[i];
+  for (let i = 0; i < pendingUrls.length; i++) {
+    const url = pendingUrls[i];
     try {
       const { status, text } = await submitUrl(url, accessToken);
       if (status === 200) {
-        console.log(`[${i + 1}/${URLS_TO_INDEX.length}] [200 OK] Submitted: ${url}`);
+        console.log(`[${i + 1}/${pendingUrls.length}] [200 OK] Submitted: ${url}`);
+        history[url] = new Date().toISOString();
         successCount++;
+        fs.writeFileSync(historyPath, JSON.stringify(history, null, 2), 'utf-8');
+      } else if (status === 429) {
+        console.log(`\n[!] GOOGLE DAILY QUOTA EXCEEDED (429 Rate Limit)`);
+        console.log(`[i] Google Indexing API daily quota (200 requests/day) is reached.`);
+        console.log(`[i] URL stopped at: ${url}`);
+        console.log(`[i] Google resets this quota automatically every 24 hours (midnight PST).`);
+        console.log(`[i] All successfully submitted URLs are safely remembered in cache.`);
+        quotaExceeded = true;
+        break;
       } else {
-        console.log(`[${i + 1}/${URLS_TO_INDEX.length}] [${status}] Error: ${url} -> ${text.slice(0, 70)}`);
+        console.log(`[${i + 1}/${pendingUrls.length}] [${status}] Error: ${url} -> ${text.slice(0, 70)}`);
         failCount++;
       }
     } catch (err) {
-      console.log(`[${i + 1}/${URLS_TO_INDEX.length}] [FAILED] ${url}: ${err.message}`);
+      console.log(`[${i + 1}/${pendingUrls.length}] [FAILED] ${url}: ${err.message}`);
       failCount++;
     }
 
-    // Small delay between requests
-    await new Promise((r) => setTimeout(r, 400));
+    // Delay between requests to avoid burst rate limiting
+    await new Promise((r) => setTimeout(r, 600));
   }
 
   console.log('-'.repeat(65));
-  console.log(`[*] Finished! Success: ${successCount} | Failed: ${failCount}`);
-  console.log('[*] Googlebot will now rapidly crawl and index these pages.\n' + '='.repeat(65));
+  console.log(`[*] Finished run! New submissions: ${successCount} | Failed: ${failCount}`);
+  if (quotaExceeded) {
+    console.log('[*] Run "npm run index:google" tomorrow to submit remaining pending URLs.');
+  } else {
+    console.log('[*] Googlebot will now rapidly crawl and index these pages.');
+  }
+  console.log('='.repeat(65));
 }
 
 main().catch(console.error);

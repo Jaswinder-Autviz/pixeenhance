@@ -29,3 +29,5 @@ out
 # Secrets & API credentials
 *service_account.json
 service_account.json
+*indexing_history.json
+.indexing_history.json

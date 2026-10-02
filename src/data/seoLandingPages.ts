@@ -1,4 +1,4 @@
-﻿export interface SEOLandingPage {
+export interface SEOLandingPage {
   slug: string;
   tool: 'image-compressor' | 'image-resizer' | 'converter' | 'social-resizer' | 'passport-resizer';
   toolConfig?: {
@@ -2335,7 +2335,7 @@ export const SEO_LANDING_PAGES: SEOLandingPage[] = [
     usefulInfo: {
       heading: 'UPSC NDA & CDS Photo & Signature Rules',
       paragraphs: [
-        'UPSC requires that the candidate\\'s name and the date of photograph are clearly printed at the bottom of the photo.',
+        "UPSC requires that the candidate's name and the date of photograph are clearly printed at the bottom of the photo.",
         'The photograph must not be older than 10 days from the start of the online application process.'
       ],
       table: {
@@ -2347,7 +2347,7 @@ export const SEO_LANDING_PAGES: SEOLandingPage[] = [
       }
     },
     faqs: [
-      { question: 'Is candidate name and date required on UPSC NDA photo?', answer: 'Yes, UPSC mandates that the applicant\\'s name and date of photo be printed clearly at the bottom.' }
+      { question: 'Is candidate name and date required on UPSC NDA photo?', answer: "Yes, UPSC mandates that the applicant's name and date of photo be printed clearly at the bottom." }
     ],
     relatedLinks: [
       { title: 'UPSC Photo Resizer', slug: 'upsc-photo-resizer', description: 'UPSC civil services' },
@@ -2401,7 +2401,7 @@ export const SEO_LANDING_PAGES: SEOLandingPage[] = [
       }
     },
     faqs: [
-      { question: 'What is written on the Agniveer Air Force slate?', answer: 'The candidate\\'s name and date of photograph must be written in capital letters with white chalk on a black slate held in front of the chest.' }
+      { question: 'What is written on the Agniveer Air Force slate?', answer: "The candidate's name and date of photograph must be written in capital letters with white chalk on a black slate held in front of the chest." }
     ],
     relatedLinks: [
       { title: 'NDA CDS Resizer', slug: 'nda-cds-photo-resizer', description: 'Defence exam resizer' },
@@ -2814,7 +2814,7 @@ export const SEO_LANDING_PAGES: SEOLandingPage[] = [
     usefulInfo: {
       heading: 'NTA UGC NET Official Photo Guidelines',
       paragraphs: [
-        'The candidate\\'s photograph should show 80% face coverage (without mask) including ears against a white background.',
+        "The candidate's photograph should show 80% face coverage (without mask) including ears against a white background.",
         'Spectacles are allowed only if used regularly.'
       ],
       table: {
@@ -2868,7 +2868,7 @@ export const SEO_LANDING_PAGES: SEOLandingPage[] = [
       heading: 'MP ESB Vyapam Profile Template Guidelines',
       paragraphs: [
         'MP ESB requires candidates to paste their photo and signature on a standardized template containing a handwritten declaration.',
-        'The photograph must have the candidate\\'s name and date of photograph printed clearly on the lower portion.'
+        "The photograph must have the candidate's name and date of photograph printed clearly on the lower portion."
       ],
       table: {
         headers: ['Document', 'Dimensions', 'File Size Limit', 'Format / Notes'],
