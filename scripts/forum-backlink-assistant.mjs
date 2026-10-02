@@ -14,45 +14,101 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SEARCH_TOPICS = [
+  // 1. Core Image Compression (TinyPNG / Lossless alternative)
   {
-    query: 'photo size 20kb OR 50kb',
-    category: 'Exam Form Resizer',
-    defaultTool: 'https://pixenhance.in/compress-jpg-to-50kb',
+    query: 'compress image without losing quality OR tinypng alternative',
+    category: 'Universal Image Compressor',
+    defaultTool: 'https://pixenhance.in/image-compressor',
   },
   {
-    query: 'ssc photo signature resize OR rejected',
-    category: 'SSC Forms',
+    query: 'compress png transparent OR compress webp size',
+    category: 'PNG / WebP Compression',
+    defaultTool: 'https://pixenhance.in/compress-png',
+  },
+  {
+    query: 'reduce jpg size to 50kb OR 100kb free',
+    category: 'Target KB Compressor',
+    defaultTool: 'https://pixenhance.in/compress-jpg-to-100kb',
+  },
+
+  // 2. High-Demand Format Converters
+  {
+    query: 'convert heic to jpg windows free OR iphone heic photos',
+    category: 'HEIC to JPG Converter',
+    defaultTool: 'https://pixenhance.in/heic-to-jpg',
+  },
+  {
+    query: 'convert webp to png lossless OR save webp as jpg',
+    category: 'WebP to PNG/JPG Converter',
+    defaultTool: 'https://pixenhance.in/webp-to-png',
+  },
+  {
+    query: 'convert jpg to png transparent background',
+    category: 'JPG to PNG Converter',
+    defaultTool: 'https://pixenhance.in/jpg-to-png',
+  },
+
+  // 3. PDF & Document Tools
+  {
+    query: 'convert photos to single pdf free OR image to pdf',
+    category: 'Image to PDF Converter',
+    defaultTool: 'https://pixenhance.in/image-to-pdf',
+  },
+  {
+    query: 'compress pdf under 1mb OR 2mb free online',
+    category: 'PDF Compressor',
+    defaultTool: 'https://pixenhance.in/compress-pdf',
+  },
+  {
+    query: 'convert pdf to jpg high resolution images',
+    category: 'PDF to JPG Converter',
+    defaultTool: 'https://pixenhance.in/pdf-to-jpg',
+  },
+
+  // 4. Batch & Bulk Operations
+  {
+    query: 'bulk resize images free OR batch compress photos',
+    category: 'Bulk Image Resizer',
+    defaultTool: 'https://pixenhance.in/bulk-image-resizer',
+  },
+
+  // 5. Social Media Resizers (Instagram, YouTube, WhatsApp)
+  {
+    query: 'resize image for instagram without cropping 1080x1080',
+    category: 'Instagram Post Resizer',
+    defaultTool: 'https://pixenhance.in/resize-image-for-instagram',
+  },
+  {
+    query: 'youtube thumbnail size 1280x720 resizer',
+    category: 'YouTube Thumbnail Resizer',
+    defaultTool: 'https://pixenhance.in/resize-image-for-youtube-thumbnail',
+  },
+  {
+    query: 'whatsapp dp full photo without crop',
+    category: 'WhatsApp DP Resizer',
+    defaultTool: 'https://pixenhance.in/whatsapp-image-resizer',
+  },
+
+  // 6. Exam & Verification Resizers
+  {
+    query: 'ssc photo signature resize 20kb 50kb',
+    category: 'SSC Exam Resizer',
     defaultTool: 'https://pixenhance.in/ssc-cgl-photo-resizer',
   },
   {
-    query: 'signature 10kb OR 20kb resize',
-    category: 'Signature Tools',
-    defaultTool: 'https://pixenhance.in/signature-resizer-10kb',
-  },
-  {
-    query: 'bpsc signature 15kb OR photo',
-    category: 'BPSC Bihar',
+    query: 'bpsc signature 15kb OR photo 25kb',
+    category: 'BPSC Bihar Resizer',
     defaultTool: 'https://pixenhance.in/bpsc-photo-resizer',
   },
   {
-    query: 'neet photo size OR postcard size 5x7',
-    category: 'NTA NEET',
+    query: 'neet photo 10kb to 200kb postcard size 5x7',
+    category: 'NEET Exam Resizer',
     defaultTool: 'https://pixenhance.in/neet-photo-resizer',
   },
   {
-    query: 'dv lottery photo 240kb OR 600x600',
-    category: 'US DV Lottery',
+    query: 'dv lottery photo 240kb 600x600 checker',
+    category: 'US DV Lottery Checker',
     defaultTool: 'https://pixenhance.in/dv-lottery-photo-checker-resizer',
-  },
-  {
-    query: 'amazon product image pure white background 2000x2000',
-    category: 'Amazon Sellers',
-    defaultTool: 'https://pixenhance.in/amazon-product-image-resizer',
-  },
-  {
-    query: 'driving licence photo 20kb sarathi',
-    category: 'Sarathi DL',
-    defaultTool: 'https://pixenhance.in/driving-licence-photo-resizer',
   },
 ];
 
@@ -162,6 +218,50 @@ async function searchRedditPosts(query, limit = 4) {
 function generateHelpfulReply(title, selftext, defaultTool) {
   const text = `${title} ${selftext}`.toLowerCase();
 
+  // 1. General & Lossless Image Compression (TinyPNG alternative)
+  if (text.includes('tinypng') || text.includes('compress image') || text.includes('compress photo') || text.includes('reduce image size') || text.includes('reduce photo size')) {
+    return `If you want to compress images without losing quality, check out PixEnhance. It runs 100% locally in your browser (no file uploads to external servers), has no file size limits, and lets you target specific KB sizes or visual quality presets:\nhttps://pixenhance.in/image-compressor\n\nIt handles JPG, PNG, and WebP with instant side-by-side comparison.`;
+  }
+
+  // 2. HEIC to JPG (iPhone on Windows)
+  if (text.includes('heic') || text.includes('iphone photo on windows') || text.includes('heif')) {
+    return `You can convert iPhone HEIC photos to standard high-resolution JPG directly in your browser without uploading your private photos to remote servers:\nhttps://pixenhance.in/heic-to-jpg\n\nPreserves full EXIF details and photo clarity with instant download.`;
+  }
+
+  // 3. WebP to PNG / JPG
+  if (text.includes('webp to png') || text.includes('save webp') || text.includes('convert webp')) {
+    return `Here is a fast in-browser converter to turn WebP files into clean, transparent PNG or JPG with lossless quality:\nhttps://pixenhance.in/webp-to-png\n\nNo sign-up or watermarks required.`;
+  }
+
+  // 4. PDF Tools (Image to PDF / Compress PDF)
+  if (text.includes('image to pdf') || text.includes('photo to pdf') || text.includes('convert to pdf')) {
+    return `You can merge and convert multiple JPG or PNG images into a single lightweight PDF document directly in your browser:\nhttps://pixenhance.in/image-to-pdf\n\nWorks completely client-side for confidential certificates and invoices.`;
+  }
+  if (text.includes('compress pdf') || text.includes('reduce pdf size')) {
+    return `If your PDF is too large for email or web portal uploads, this in-browser tool optimizes and compresses PDF files under 1MB or 2MB without blurring text:\nhttps://pixenhance.in/compress-pdf`;
+  }
+
+  // 5. Bulk & Batch Image Resizing
+  if (text.includes('batch') || text.includes('bulk resize') || text.includes('multiple photos')) {
+    return `If you need to resize or compress multiple photos at once, PixEnhance has a free bulk image resizer that processes batches right on your computer using local browser canvas:\nhttps://pixenhance.in/bulk-image-resizer`;
+  }
+
+  // 6. Social Media & Instagram 1080x1080
+  if (text.includes('instagram') || text.includes('1080x1080') || text.includes('post resizer')) {
+    return `To fit vertical or landscape photos into Instagram feed without unwanted cropping, you can use this free resizer that adds matching blurred borders or exact 1080x1080 / 1080x1350 dimensions:\nhttps://pixenhance.in/resize-image-for-instagram`;
+  }
+
+  // 7. YouTube Thumbnail
+  if (text.includes('youtube thumbnail') || text.includes('1280x720')) {
+    return `Here is a dedicated tool to scale and compress YouTube thumbnails to exact 1280x720 pixels under the 2MB YouTube upload limit:\nhttps://pixenhance.in/resize-image-for-youtube-thumbnail`;
+  }
+
+  // 8. WhatsApp DP
+  if (text.includes('whatsapp dp') || text.includes('profile picture no crop')) {
+    return `You can set full photos as WhatsApp DP without cropping friends or backgrounds using this free tool:\nhttps://pixenhance.in/whatsapp-image-resizer`;
+  }
+
+  // 9. Exam & Government Forms
   if (text.includes('ssc') || text.includes('cgl') || text.includes('chsl')) {
     return `Bhai, tension mat lo, phone browser se hi 1 second mein ho jata hai. Maine PixEnhance ka dedicated SSC tool use kiya tha, photo 20KB-50KB aur signature 10KB-20KB exact SSC rules ke according resize ho gaya:\nhttps://pixenhance.in/ssc-cgl-photo-resizer\n\nPhoto kisi server par upload nahi hoti to document privacy safe rehti hai.`;
   }
@@ -174,14 +274,8 @@ function generateHelpfulReply(title, selftext, defaultTool) {
   if (text.includes('dv') || text.includes('lottery') || text.includes('green card')) {
     return `For the US DV Lottery, the photo must be strictly 600x600 pixels and under 240 KB in sRGB color. You can format and check your photo directly here:\nhttps://pixenhance.in/dv-lottery-photo-checker-resizer\n\nIt checks biometric head height to prevent lottery disqualification.`;
   }
-  if (text.includes('amazon') || text.includes('shopify') || text.includes('etsy')) {
-    return `To meet marketplace requirements (like Amazon 2000x2000 pure white background or Shopify 2048x2048), this in-browser tool optimizes listing photos with lossless quality:\nhttps://pixenhance.in/amazon-product-image-resizer`;
-  }
-  if (text.includes('sarathi') || text.includes('driving') || text.includes('licence') || text.includes('parivahan')) {
-    return `Sarathi Parivahan portal requires photo and signature strictly between 10KB and 20KB. Here is a free in-browser tool calibrated to exact DL specifications:\nhttps://pixenhance.in/driving-licence-photo-resizer`;
-  }
 
-  return `You can resize or compress your image to exact KB or pixel dimensions directly in your web browser with this free private tool:\n${defaultTool}`;
+  return `You can resize, convert, or compress your image to exact KB or pixel dimensions directly in your web browser with this free private tool:\n${defaultTool}`;
 }
 
 function openBrowser(url) {
