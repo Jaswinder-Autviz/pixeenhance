@@ -5,6 +5,9 @@ import { Sparkles, CheckCircle2 } from 'lucide-react';
 import { TOOL_MAP } from '@/src/data/toolsList';
 import { SEOContentSection } from '@/components/common/SEOContentSection';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { SEO_LANDING_PAGES, getSEOLandingPageBySlug } from '@/src/data/seoLandingPages';
+import { generateSEOMetadata } from '@/components/seo/SEOMetadata';
+import { SEOLandingTemplate } from '@/components/seo/SEOLandingTemplate';
 
 function getCategoryInfo(cat: string) {
   switch (cat) {
@@ -58,6 +61,10 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
   const tool = TOOL_MAP.get(toolSlug);
 
   if (!tool) {
+    const seoPage = getSEOLandingPageBySlug(toolSlug);
+    if (seoPage) {
+      return generateSEOMetadata(toolSlug);
+    }
     return { title: 'Tool Not Found | PixEnhance' };
   }
 
@@ -108,7 +115,10 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
 }
 
 export async function generateStaticParams() {
-  return Array.from(TOOL_MAP.keys()).map((toolSlug) => ({
+  const toolSlugs = Array.from(TOOL_MAP.keys());
+  const seoSlugs = SEO_LANDING_PAGES.map((page) => page.slug);
+  const combined = Array.from(new Set([...toolSlugs, ...seoSlugs]));
+  return combined.map((toolSlug) => ({
     toolSlug,
   }));
 }
@@ -126,6 +136,10 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
   const tool = TOOL_MAP.get(toolSlug);
 
   if (!tool) {
+    const seoPage = getSEOLandingPageBySlug(toolSlug);
+    if (seoPage) {
+      return <SEOLandingTemplate data={seoPage} />;
+    }
     notFound();
   }
 

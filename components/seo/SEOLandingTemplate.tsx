@@ -20,6 +20,7 @@ import { ResizerView } from '@/components/tool-views/ResizerView';
 import { ConverterView } from '@/components/tool-views/ConverterView';
 import { SocialResizerView } from '@/components/tool-views/SocialResizerView';
 import { PassportResizerView } from '@/components/tool-views/PassportResizerView';
+import { AdPlaceholder } from '@/components/common/AdPlaceholder';
 
 interface SEOLandingTemplateProps {
   data: SEOLandingPage;
@@ -330,6 +331,9 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
           </p>
         </div>
 
+        {/* Mid-content Ad Slot */}
+        <AdPlaceholder slot="mid-content" />
+
         {/* 6. FAQ Section (Accordion) */}
         {data.faqs && data.faqs.length > 0 && (
           <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-6 sm:p-8 shadow-sm">
@@ -392,6 +396,9 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
             </div>
           </div>
         )}
+
+        {/* Bottom Banner Ad Slot */}
+        <AdPlaceholder slot="bottom-banner" />
 
         {/* 8. Call To Action (CTA) */}
         <div className="rounded-2xl border border-indigo-200/80 dark:border-indigo-900/60 bg-gradient-to-r from-indigo-50/80 via-purple-50/60 to-pink-50/80 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-pink-950/40 p-6 sm:p-8 text-center shadow-xs">
