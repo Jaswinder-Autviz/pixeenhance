@@ -385,16 +385,13 @@ export function Header() {
                 </span>
               </Link>
 
-              {/* Direct "Guides & Blog" Link */}
+              {/* Direct "Blog" Link */}
               <Link
                 href="/blog"
                 onClick={closeDropdowns}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[14px] font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors"
               >
-                <span>Guides</span>
-                <span className="px-1.5 py-0.2 rounded-md bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-extrabold">
-                  Blog
-                </span>
+                <span>Blog</span>
               </Link>
             </nav>
           </div>
@@ -447,7 +444,7 @@ export function Header() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
                 >
-                  <span>Guides &amp; Blog</span>
+                  <span>Blog</span>
                 </Link>
                 <Link
                   href="/tools"

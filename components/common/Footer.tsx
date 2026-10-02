@@ -241,7 +241,7 @@ export function Footer() {
             <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/blog" className="hover:text-brand-600 transition-colors font-medium text-emerald-600 dark:text-emerald-400">
-                  Guides &amp; Blog
+                  Blog
                 </Link>
               </li>
               <li>

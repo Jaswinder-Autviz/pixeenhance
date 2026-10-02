@@ -174,7 +174,7 @@ export default async function BlogPostPage({ params }: Props) {
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
             <Link href="/blog" className="hover:text-indigo-600 transition-colors">
-              Blog &amp; Guides
+              Blog
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
             <span className="text-slate-900 dark:text-white font-medium truncate max-w-[200px] sm:max-w-none">
@@ -399,13 +399,13 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                   <BookOpen className="w-4 h-4 text-indigo-500" />
-                  <span>More Practical Guides</span>
+                  <span>More From Our Blog</span>
                 </h3>
                 <Link
                   href="/blog"
                   className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
                 >
-                  View All Guides &rarr;
+                  View All Blog Posts &rarr;
                 </Link>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

@@ -53,11 +53,11 @@ export default function BlogIndexPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-semibold mb-4">
             <BookOpen className="w-3.5 h-3.5" />
-            <span>Practical Guides &amp; Industry Standards</span>
+            <span>Official PixEnhance Blog</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight max-w-3xl mx-auto leading-tight">
-            How-To Guides, Exact Dimensions &amp; Optimization Secrets
+            PixEnhance Blog: Sizing, Compression &amp; Format Guides
           </h1>
 
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -89,7 +89,7 @@ export default function BlogIndexPage() {
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
-                Featured Guide
+                Featured Article
               </span>
             </div>
 
@@ -121,7 +121,7 @@ export default function BlogIndexPage() {
                       href={`/blog/${featuredPost.slug}`}
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs hover:bg-indigo-600 dark:hover:bg-indigo-500 dark:hover:text-white transition-all shadow-xs"
                     >
-                      <span>Read Full Guide</span>
+                      <span>Read Full Article</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
 
@@ -187,7 +187,7 @@ export default function BlogIndexPage() {
                   href={`/blog/${post.slug}`}
                   className="text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 inline-flex items-center gap-1"
                 >
-                  <span>Read Guide</span>
+                  <span>Read Article</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
 
