@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Sparkles, CheckCircle2 } from 'lucide-react';
 import { TOOL_MAP } from '@/src/data/toolsList';
@@ -129,6 +129,21 @@ export async function generateStaticParams() {
 
 export default async function ToolPage({ params, searchParams }: ToolPageProps) {
   const { toolSlug } = await params;
+
+  // Handle 301 redirects for duplicate aliases without custom exam metadata
+  const customAliasSlugs = new Set([
+    'ssc-cgl-photo-resizer',
+    'ssc-chsl-photo-resizer',
+    'ssc-mts-photo-resizer',
+    'ssc-gd-photo-resizer',
+  ]);
+
+  if (SLUG_ALIASES[toolSlug] && !customAliasSlugs.has(toolSlug)) {
+    const targetSlug = SLUG_ALIASES[toolSlug];
+    const destination = targetSlug.startsWith('/') ? targetSlug : `/${targetSlug}`;
+    redirect(destination);
+  }
+
   const sp = searchParams ? await searchParams : {};
   const querySize =
     typeof sp.size === 'string'

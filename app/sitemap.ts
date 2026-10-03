@@ -96,17 +96,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // All targeted aliases (SSC CGL, CHSL, MTS, GD, RRB NTPC, etc.)
+  // Only targeted aliases with custom content (SSC CGL, CHSL, MTS, GD) - omit 301 redirected aliases
+  const customAliasSlugs = new Set([
+    'ssc-cgl-photo-resizer',
+    'ssc-chsl-photo-resizer',
+    'ssc-mts-photo-resizer',
+    'ssc-gd-photo-resizer',
+  ]);
+
   for (const alias of Object.keys(SLUG_ALIASES)) {
-    const fullUrl = `${baseUrl}/${alias}`;
-    if (!seenUrls.has(fullUrl)) {
-      seenUrls.add(fullUrl);
-      toolRoutes.push({
-        url: fullUrl,
-        lastModified: currentDate,
-        changeFrequency: 'weekly' as const,
-        priority: 0.85,
-      });
+    if (customAliasSlugs.has(alias)) {
+      const fullUrl = `${baseUrl}/${alias}`;
+      if (!seenUrls.has(fullUrl)) {
+        seenUrls.add(fullUrl);
+        toolRoutes.push({
+          url: fullUrl,
+          lastModified: currentDate,
+          changeFrequency: 'weekly' as const,
+          priority: 0.85,
+        });
+      }
     }
   }
 
