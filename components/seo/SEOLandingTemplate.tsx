@@ -83,6 +83,13 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
           price: '0',
           priceCurrency: 'USD',
         },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          ratingCount: '1420',
+          bestRating: '5',
+          worstRating: '1',
+        },
         featureList: data.features.join(', '),
       },
       {

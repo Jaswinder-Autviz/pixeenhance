@@ -9,6 +9,7 @@
     "start": "next start -p 3000",
     "lint": "oxlint",
     "index:google": "node scripts/google-indexing.mjs",
+    "sitemap:generate": "node scripts/generate-sitemap-schema.mjs",
     "backlinks": "node scripts/forum-backlink-assistant.mjs",
     "backlinks:py": "python scripts/forum_backlink_assistant.py"
   },
