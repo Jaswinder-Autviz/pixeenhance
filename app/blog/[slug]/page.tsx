@@ -346,7 +346,7 @@ export default async function BlogPostPage({ params }: Props) {
                     </div>
 
                     {/* Paragraphs with Editorial Typography */}
-                    <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed md:leading-8 font-normal">
+                    <div className="space-y-5 text-base sm:text-lg md:text-[17px] text-black dark:text-slate-100 leading-relaxed md:leading-8 font-normal">
                       {sec.content.map((p, pIdx) => (
                         <p key={pIdx}>
                           {p}
@@ -357,12 +357,12 @@ export default async function BlogPostPage({ params }: Props) {
                     {/* Integrated Callout Box */}
                     {sec.callout && (
                       <div
-                        className={`rounded-2xl p-5 border text-xs sm:text-sm flex items-start gap-4 mt-6 ${
+                        className={`rounded-2xl p-5 border text-sm sm:text-base flex items-start gap-4 mt-6 ${
                           sec.callout.type === 'warning'
-                            ? 'border-amber-300/80 dark:border-amber-800/80 bg-amber-50/80 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200'
+                            ? 'border-amber-300/80 dark:border-amber-800/80 bg-amber-50/80 dark:bg-amber-950/30 text-black dark:text-amber-100'
                             : sec.callout.type === 'tip'
-                            ? 'border-emerald-300/80 dark:border-emerald-800/80 bg-emerald-50/80 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200'
-                            : 'border-blue-300/80 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/30 text-blue-900 dark:text-blue-200'
+                            ? 'border-emerald-300/80 dark:border-emerald-800/80 bg-emerald-50/80 dark:bg-emerald-950/30 text-black dark:text-emerald-100'
+                            : 'border-blue-300/80 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/30 text-black dark:text-blue-100'
                         }`}
                       >
                         {sec.callout.type === 'warning' ? (
@@ -373,8 +373,8 @@ export default async function BlogPostPage({ params }: Props) {
                           <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-600 dark:text-blue-400" />
                         )}
                         <div>
-                          <strong className="block font-bold text-sm mb-1">{sec.callout.title}</strong>
-                          <span className="leading-relaxed font-normal">{sec.callout.text}</span>
+                          <strong className="block font-bold text-base mb-1 text-black dark:text-white">{sec.callout.title}</strong>
+                          <span className="leading-relaxed font-normal text-black dark:text-slate-200">{sec.callout.text}</span>
                         </div>
                       </div>
                     )}
@@ -393,15 +393,15 @@ export default async function BlogPostPage({ params }: Props) {
                       <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
                         Official Reference Table
                       </span>
-                      <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+                      <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white">
                         Reference Specifications &amp; Dimensions
                       </h2>
                     </div>
                   </div>
 
                   <div className="overflow-x-auto rounded-2xl border border-slate-200/90 dark:border-slate-700/80 shadow-2xs">
-                    <table className="w-full text-left text-xs sm:text-sm">
-                      <thead className="bg-slate-100/90 dark:bg-slate-800/90 text-slate-900 dark:text-white uppercase font-mono text-[11px] font-bold border-b border-slate-200 dark:border-slate-700">
+                    <table className="w-full text-left text-sm sm:text-base">
+                      <thead className="bg-slate-100/90 dark:bg-slate-800/90 text-black dark:text-white uppercase font-mono text-xs sm:text-sm font-bold border-b border-slate-200 dark:border-slate-700">
                         <tr>
                           {post.specsTable.headers.map((h, i) => (
                             <th key={i} className="py-3.5 px-4 tracking-wider">
@@ -410,7 +410,7 @@ export default async function BlogPostPage({ params }: Props) {
                           ))}
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300">
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900 text-black dark:text-slate-100">
                         {post.specsTable.rows.map((row, rIdx) => (
                           <tr key={rIdx} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors">
                             {row.map((cell, cIdx) => (
@@ -423,7 +423,7 @@ export default async function BlogPostPage({ params }: Props) {
                       </tbody>
                     </table>
                   </div>
-                  <p className="text-[11px] text-slate-400 pt-1">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 pt-1">
                     Scroll horizontally on mobile devices to view all table columns.
                   </p>
                 </div>
@@ -439,11 +439,11 @@ export default async function BlogPostPage({ params }: Props) {
                     <CheckCircle2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                     <span>Summary &bull; Key Takeaways</span>
                   </div>
-                  <ul className="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                  <ul className="space-y-3.5 text-sm sm:text-base text-black dark:text-slate-100 font-medium">
                     {post.quickSummary.map((item, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <span className="w-2 h-2 rounded-full bg-indigo-500 mt-2 shrink-0" />
-                        <span className="leading-relaxed font-normal">{item}</span>
+                        <span className="leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -458,7 +458,7 @@ export default async function BlogPostPage({ params }: Props) {
                 >
                   <div className="flex items-center gap-2">
                     <Wrench className="w-4 h-4 text-indigo-500" />
-                    <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase font-mono tracking-wider">
+                    <h3 className="text-xs font-bold text-black dark:text-white uppercase font-mono tracking-wider">
                       Related Online Tools
                     </h3>
                   </div>
@@ -467,7 +467,7 @@ export default async function BlogPostPage({ params }: Props) {
                       <Link
                         key={tool.slug}
                         href={tool.slug}
-                        className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-indigo-400 bg-slate-50/70 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 hover:shadow-xs transition-all flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 group"
+                        className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-indigo-400 bg-slate-50/70 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 hover:shadow-xs transition-all flex items-center justify-between text-sm font-bold text-black dark:text-slate-100 group"
                       >
                         <span>{tool.name}</span>
                         <ArrowRight className="w-3.5 h-3.5 text-indigo-500 group-hover:translate-x-0.5 transition-transform" />
@@ -488,7 +488,7 @@ export default async function BlogPostPage({ params }: Props) {
                       <HelpCircle className="w-5 h-5" />
                     </div>
                     <div>
-                      <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                      <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight">
                         Frequently Asked Questions
                       </h2>
                       <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
@@ -500,11 +500,11 @@ export default async function BlogPostPage({ params }: Props) {
                   <div className="divide-y divide-slate-100 dark:divide-slate-800">
                     {post.faqs.map((faq, idx) => (
                       <details key={idx} className="group py-4" open={idx === 0}>
-                        <summary className="w-full flex cursor-pointer list-none items-center justify-between text-left gap-4 font-bold text-sm sm:text-base text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
+                        <summary className="w-full flex cursor-pointer list-none items-center justify-between text-left gap-4 font-bold text-base sm:text-lg text-black dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
                           <span>{faq.question}</span>
                           <ChevronDown className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-indigo-600 dark:group-open:text-indigo-400" />
                         </summary>
-                        <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                        <p className="mt-3 text-sm sm:text-base text-black dark:text-slate-200 leading-relaxed font-normal">
                           {faq.answer}
                         </p>
                       </details>

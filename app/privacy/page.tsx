@@ -89,7 +89,7 @@ export default function PrivacyPage() {
 
         {/* Quick Navigation / Table of Contents Pill Bar */}
         <div className="mb-10 p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 shadow-sm backdrop-blur-md">
-          <div className="flex items-center gap-2 mb-2.5 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+          <div className="flex items-center gap-2 mb-2.5 text-xs font-bold uppercase tracking-wider text-black dark:text-slate-300 font-mono">
             <Sparkles className="h-3.5 w-3.5 text-indigo-500" />
             <span>Table of Contents / Quick Jump</span>
           </div>
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
               <a
                 key={item.href}
                 href={item.href}
-                className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 hover:text-indigo-600 dark:hover:bg-indigo-950/60 dark:hover:text-indigo-300 border border-slate-200 dark:border-slate-700/60 transition-all"
+                className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs sm:text-sm font-semibold text-black dark:text-slate-100 hover:bg-indigo-50 hover:text-indigo-600 dark:hover:bg-indigo-950/60 dark:hover:text-indigo-300 border border-slate-200 dark:border-slate-700/60 transition-all"
               >
                 {item.label}
               </a>
@@ -121,10 +121,10 @@ export default function PrivacyPage() {
                 <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
                   Guaranteed Confidentiality
                 </span>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5 mb-2.5">
+                <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white mt-0.5 mb-2.5">
                   The Zero-Upload Guarantee
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-normal">
+                <p className="text-sm sm:text-base text-black dark:text-slate-100 leading-relaxed font-normal">
                   PixEnhance is built with complete privacy at its core. Every single image conversion, resize, crop, or compression operation takes place privately on your device. Your files are never transmitted, stored, or accessed by anyone.
                 </p>
               </div>

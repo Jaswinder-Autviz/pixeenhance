@@ -91,18 +91,18 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-mono block leading-none mb-0.5">
               Quick Navigation
             </span>
-            <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider font-mono">
+            <h3 className="text-sm font-black text-black dark:text-white uppercase tracking-wider font-mono">
               Table of Contents
             </h3>
           </div>
         </div>
-        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/60">
+        <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-black dark:text-slate-200 border border-slate-200/60 dark:border-slate-700/60">
           {items.length} items
         </span>
       </div>
 
       {/* Navigation Links with Rail Indicator */}
-      <nav className="relative pl-3 space-y-1 before:absolute before:left-1 before:top-2 before:bottom-2 before:w-[2px] before:bg-gradient-to-b before:from-indigo-500 before:via-purple-500/40 before:to-slate-200 dark:before:to-slate-800 before:rounded-full text-xs">
+      <nav className="relative pl-3 space-y-1.5 before:absolute before:left-1 before:top-2 before:bottom-2 before:w-[2px] before:bg-gradient-to-b before:from-indigo-500 before:via-purple-500/40 before:to-slate-200 dark:before:to-slate-800 before:rounded-full text-[13px] sm:text-sm">
         {items.map((item) => {
           const isActive = activeId === item.id;
 
@@ -111,26 +111,26 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
               key={item.id}
               href={`#${item.id}`}
               onClick={(e) => handleScroll(e, item.id)}
-              className={`group flex items-center justify-between py-1.5 px-2.5 rounded-xl font-medium cursor-pointer transition-all ${
+              className={`group flex items-center justify-between py-2 px-2.5 rounded-xl font-medium cursor-pointer transition-all ${
                 isActive
                   ? 'bg-indigo-50/90 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-bold shadow-2xs'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50/80 dark:hover:bg-slate-800/60'
+                  : 'text-black dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50/80 dark:hover:bg-slate-800/60'
               }`}
             >
-              <div className="flex items-center gap-2 min-w-0">
+              <div className="flex items-center gap-2.5 min-w-0">
                 {item.number ? (
                   <span
-                    className={`font-mono text-[10px] font-bold px-1.5 py-0.5 rounded transition-colors shrink-0 ${
+                    className={`font-mono text-[11px] font-bold px-1.5 py-0.5 rounded transition-colors shrink-0 ${
                       isActive
                         ? 'bg-indigo-600 text-white dark:bg-indigo-500'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 group-hover:bg-indigo-100/70 dark:group-hover:bg-indigo-900/60'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 group-hover:bg-indigo-100/70 dark:group-hover:bg-indigo-900/60'
                     }`}
                   >
                     {item.number}
                   </span>
                 ) : (
                   <span
-                    className={`w-1.5 h-1.5 rounded-full shrink-0 transition-all ${
+                    className={`w-2 h-2 rounded-full shrink-0 transition-all ${
                       item.type === 'specs'
                         ? 'bg-purple-500'
                         : item.type === 'summary'
