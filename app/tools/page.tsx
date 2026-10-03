@@ -391,21 +391,19 @@ export default function ToolsDirectoryPage() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-300 ${
-                  isSelected
-                    ? cat === 'All'
-                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md scale-105'
-                      : `${theme?.tabActive} scale-105`
-                    : 'bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs'
-                }`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-300 ${isSelected
+                  ? cat === 'All'
+                    ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md scale-105'
+                    : `${theme?.tabActive} scale-105`
+                  : 'bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs'
+                  }`}
               >
                 <span>{cat === 'Convert' ? 'Compression & Converters' : cat}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
-                    isSelected
-                      ? 'bg-white/25 text-white'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
-                  }`}
+                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${isSelected
+                    ? 'bg-white/25 text-white'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                    }`}
                 >
                   {count}
                 </span>

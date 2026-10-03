@@ -147,11 +147,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 <Link
                   key={cat.slug}
                   href={`/tools/${cat.slug}`}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                    isCurrent
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${isCurrent
                       ? 'bg-brand-600 text-white shadow-sm'
                       : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-brand-500'
-                  }`}
+                    }`}
                 >
                   {cat.title}
                 </Link>
