@@ -175,7 +175,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
-        className="min-h-screen flex flex-col bg-[#e5ebf2] dark:bg-[#070b14] text-slate-900 dark:text-slate-100 font-sans selection:bg-brand-500 selection:text-white antialiased transition-colors relative"
+        className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 font-sans selection:bg-brand-500 selection:text-white antialiased transition-colors relative"
         suppressHydrationWarning
       >
         {/* Structured Data (Schema.org JSON-LD) */}

@@ -68,7 +68,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const tools = getToolsByCategory(category.slug);
 
   return (
-    <div className="w-full min-h-screen bg-[#e5ebf2] dark:bg-[#070b14] text-slate-900 dark:text-white transition-colors py-8 sm:py-12">
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-white transition-colors py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Breadcrumb Header */}
         <div className="space-y-4">

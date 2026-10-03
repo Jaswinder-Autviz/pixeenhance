@@ -365,7 +365,7 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#e5ebf2] dark:bg-[#070b14] text-slate-900 dark:text-white transition-colors relative overflow-hidden bg-grid-pattern">
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-white transition-colors relative overflow-hidden bg-grid-pattern">
       {/* Google Rich Snippets JSON-LD Structured Data */}
       <script
         type="application/ld+json"
