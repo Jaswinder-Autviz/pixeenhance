@@ -386,7 +386,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-white transition-colors relative overflow-hidden bg-grid-pattern">
+    <div className="w-full min-h-screen bg-[#E5EBF2] dark:bg-[#070b14] text-slate-900 dark:text-white transition-colors relative overflow-hidden bg-grid-pattern">
       {/* Google Rich Snippets Structured Data */}
       <script
         type="application/ld+json"
@@ -402,7 +402,7 @@ export default function HomePage() {
       </div>
 
       {/* 1. Dynamic Hero Section */}
-      <section className="relative z-10 overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-18 border-b border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-b from-white via-indigo-50/30 to-slate-50/80 dark:from-[#0b0f1d] dark:via-indigo-950/30 dark:to-[#070b14] backdrop-blur-md">
+      <section className="relative z-10 overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-18 border-b border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-b from-white/90 via-[#E5EBF2]/50 to-[#E5EBF2] dark:from-[#0b0f1d] dark:via-indigo-950/30 dark:to-[#070b14] backdrop-blur-md">
         {/* Soft Ambient Radial Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-aesthetic-radial dark:bg-aesthetic-dark-radial pointer-events-none" />
 
