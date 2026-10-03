@@ -1,35 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import { Sparkles, ShieldCheck } from 'lucide-react';
 import { VisitorCounter } from './VisitorCounter';
 
 export function Footer() {
   return (
     <footer id="app-footer" className="w-full border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 text-slate-600 dark:text-slate-400 text-sm relative z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-5">
-          {/* Brand Info */}
-          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1 space-y-3">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-600 text-white shadow-xs">
-                <Sparkles className="h-3.5 w-3.5" />
-              </div>
-              <span className="text-base font-bold text-slate-900 dark:text-white">
-                Pix<span className="text-brand-600">Enhance</span>
-              </span>
-            </Link>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              The modern, privacy-first online image utility hub. Resize, compress, convert, crop, and optimize images with zero latency and complete privacy.
-            </p>
-            <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-500">
-              <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
-              <span>Complete Privacy Guarantee</span>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
           {/* Column 1: Core Image Tools */}
-          <div className="space-y-2.5">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               Core Tools
             </h3>
             <ul className="space-y-1.5 text-xs">
@@ -77,8 +57,8 @@ export function Footer() {
           </div>
 
           {/* Column 2: Compress by Size */}
-          <div className="space-y-2.5">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               Compress Tools
             </h3>
             <ul className="space-y-1.5 text-xs">
@@ -121,8 +101,8 @@ export function Footer() {
           </div>
 
           {/* Column 3: Resize & Presets */}
-          <div className="space-y-2.5">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               Resize &amp; Presets
             </h3>
             <ul className="space-y-1.5 text-xs">
@@ -170,8 +150,8 @@ export function Footer() {
           </div>
 
           {/* Column 4: Social & Convert */}
-          <div className="space-y-2.5">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               Social &amp; Convert
             </h3>
             <ul className="space-y-1.5 text-xs">
@@ -234,8 +214,8 @@ export function Footer() {
           </div>
 
           {/* Column 5: Company & Legal */}
-          <div className="space-y-2.5">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono">
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               Company
             </h3>
             <ul className="space-y-1.5 text-xs">
