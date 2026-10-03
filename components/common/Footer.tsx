@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
           {/* Column 1: Core Image Tools */}
           <div className="space-y-3">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
               Core Tools
             </h3>
             <ul className="space-y-1.5 text-xs">
@@ -58,7 +58,7 @@ export function Footer() {
 
           {/* Column 2: Compress by Size */}
           <div className="space-y-3">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
               Compress Tools
             </h3>
             <ul className="space-y-1.5 text-xs">
@@ -102,7 +102,7 @@ export function Footer() {
 
           {/* Column 3: Resize & Presets */}
           <div className="space-y-3">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
               Resize &amp; Presets
             </h3>
             <ul className="space-y-1.5 text-xs">
@@ -151,7 +151,7 @@ export function Footer() {
 
           {/* Column 4: Social & Convert */}
           <div className="space-y-3">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
               Social &amp; Convert
             </h3>
             <ul className="space-y-1.5 text-xs">
@@ -215,7 +215,7 @@ export function Footer() {
 
           {/* Column 5: Company & Legal */}
           <div className="space-y-3">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
               Company
             </h3>
             <ul className="space-y-1.5 text-xs">
