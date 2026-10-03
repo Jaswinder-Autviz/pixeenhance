@@ -1,15 +1,16 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
-import { Inter } from 'next/font/google';
+import { Nunito } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { GoogleAdSense } from '@/components/common/GoogleAdSense';
 
-const inter = Inter({
+const nunito = Nunito({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
 });
 
 export const viewport: Viewport = {
@@ -173,7 +174,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className={nunito.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
         className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#070b14] text-black dark:text-slate-100 font-sans selection:bg-brand-500 selection:text-white antialiased transition-colors relative"
         suppressHydrationWarning
