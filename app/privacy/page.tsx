@@ -35,7 +35,7 @@ export default function PrivacyPage() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-slate-50/70 dark:bg-[#070b14] text-slate-900 dark:text-white py-12 sm:py-16 relative overflow-hidden bg-grid-pattern">
+    <div className="w-full min-h-screen bg-slate-50/70 dark:bg-[#070b14] text-slate-900 dark:text-white py-12 sm:py-16 relative overflow-x-clip bg-grid-pattern">
       {/* Ambient background glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent rounded-full blur-3xl" />
