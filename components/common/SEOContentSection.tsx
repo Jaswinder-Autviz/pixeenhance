@@ -90,13 +90,13 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
             <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
               In-Depth Overview
             </span>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight mt-0.5">
+            <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight mt-0.5">
               What is {tool.name}?
             </h2>
           </div>
         </div>
 
-        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-6 font-normal">
+        <p className="text-sm sm:text-base md:text-lg text-black dark:text-slate-200 leading-relaxed mb-6 font-normal">
           {tool.subtitle} PixEnhance provides an editorial-grade, privacy-first interface designed to give creators, developers, photographers, and everyday users instant control over their digital media without registration, subscriptions, or watermarks.
         </p>
 
@@ -105,7 +105,7 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
           {tool.features.map((feat, idx) => (
             <div
               key={idx}
-              className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 text-xs sm:text-sm text-slate-700 dark:text-slate-300"
+              className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 text-sm text-black dark:text-slate-200"
             >
               <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
               <span className="font-medium">{feat}</span>
@@ -124,10 +124,10 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
             <Zap className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight">
               How to Use {tool.name}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-sm text-black dark:text-slate-300">
               Simple browser workflow with real-time feedback.
             </p>
           </div>
@@ -144,11 +144,11 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
                   <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-600 text-white text-xs font-black font-mono shadow-xs group-hover:scale-105 transition-transform">
                     0{idx + 1}
                   </span>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
                     Step {idx + 1}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
+                <p className="text-sm text-black dark:text-slate-200 leading-relaxed font-medium">
                   {step}
                 </p>
               </div>
@@ -168,11 +168,11 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
               <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
                 <FileCode className="h-4 w-4" />
               </div>
-              <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+              <h3 className="text-base sm:text-lg font-extrabold text-black dark:text-white">
                 Supported File Formats
               </h3>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+            <p className="text-xs sm:text-sm text-black dark:text-slate-300 mb-4">
               Directly processed via native browser canvas decoders:
             </p>
             <div className="flex flex-wrap gap-2">
@@ -186,7 +186,7 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
               ))}
             </div>
           </div>
-          <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-6 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-6 pt-3 border-t border-slate-100 dark:border-slate-800">
             Supports standard image files up to 50MB and 16,000 × 16,000 px resolution.
           </p>
         </div>
@@ -198,11 +198,11 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
               <ShieldCheck className="h-5 w-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>Complete Privacy Guarantee</span>
             </div>
-            <p className="text-xs sm:text-sm text-emerald-900/80 dark:text-emerald-200/80 leading-relaxed font-normal">
+            <p className="text-sm text-emerald-950 dark:text-emerald-200 leading-relaxed font-normal">
               Your photos and documents are processed with complete confidentiality. Your files stay strictly on your device, and are never stored, tracked, or shared.
             </p>
           </div>
-          <div className="mt-4 pt-3 border-t border-emerald-200/60 dark:border-emerald-900/40 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono font-bold">
+          <div className="mt-4 pt-3 border-t border-emerald-200/60 dark:border-emerald-900/40 text-xs text-emerald-700 dark:text-emerald-400 font-mono font-bold">
             100% Private &bull; Fast &bull; Free Forever
           </div>
         </div>
@@ -218,10 +218,10 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
             <HelpCircle className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight">
               Frequently Asked Questions
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-sm text-black dark:text-slate-300">
               Clear answers regarding capabilities and security.
             </p>
           </div>
@@ -230,11 +230,11 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
         <div className="divide-y divide-slate-100 dark:divide-slate-800">
           {faqsToRender.map((faq, idx) => (
             <details key={idx} className="group py-4" open={idx === 0}>
-              <summary className="flex w-full cursor-pointer list-none items-center justify-between text-left text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
+              <summary className="flex w-full cursor-pointer list-none items-center justify-between text-left text-base sm:text-lg font-bold text-black dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
                 <span>{faq.question}</span>
                 <ChevronDown className="h-4 w-4 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-indigo-600 shrink-0 ml-2" />
               </summary>
-              <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              <p className="mt-3 text-sm sm:text-base text-black dark:text-slate-200 leading-relaxed font-normal">
                 {faq.answer}
               </p>
             </details>

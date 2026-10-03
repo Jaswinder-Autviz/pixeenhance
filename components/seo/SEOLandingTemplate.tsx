@@ -190,12 +190,12 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
           </div>
 
           {/* H1 */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-black dark:text-white tracking-tight mb-3">
             {data.h1}
           </h1>
 
           {/* Short Useful Introduction */}
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-4 font-normal">
+          <p className="text-sm sm:text-base md:text-lg text-black dark:text-slate-200 max-w-2xl mx-auto leading-relaxed mb-4 font-normal">
             {data.intro}
           </p>
 
@@ -204,7 +204,7 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
             {data.features.slice(0, 3).map((feat, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700/80 text-slate-700 dark:text-slate-300 text-[11px] font-medium shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700/80 text-black dark:text-slate-200 text-xs sm:text-sm font-medium shadow-2xs"
               >
                 <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                 <span>{feat}</span>
@@ -314,10 +314,10 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
                       Step {item.step}
                     </span>
                   </div>
-                  <h3 className="text-sm font-extrabold text-slate-900 dark:text-white mb-2 leading-snug">
+                  <h3 className="text-base sm:text-lg font-extrabold text-black dark:text-white mb-2 leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                  <p className="text-sm text-black dark:text-slate-200 leading-relaxed font-normal">
                     {item.description}
                   </p>
                 </div>
@@ -336,10 +336,10 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
               <Sparkles className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight">
                 Key Features &amp; Benefits
               </h2>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-sm text-black dark:text-slate-300">
                 Engineered for quality, accuracy, and maximum compatibility.
               </p>
             </div>
@@ -354,7 +354,7 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
                 <div className="p-1 rounded-lg bg-emerald-100/80 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
-                <span className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-medium leading-relaxed">
+                <span className="text-sm sm:text-base text-black dark:text-slate-200 font-medium leading-relaxed">
                   {feat}
                 </span>
               </div>
@@ -375,18 +375,18 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
               <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400 font-mono">
                 Technical Guide &bull; Best Practices
               </span>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight mt-0.5">
+              <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight mt-0.5">
                 {data.usefulInfo.heading}
               </h2>
             </div>
           </div>
 
           {/* Formatted Reading Paragraphs */}
-          <div className="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+          <div className="space-y-4 text-sm sm:text-base text-black dark:text-slate-200 leading-relaxed font-normal">
             {data.usefulInfo.paragraphs.map((p, idx) => (
               <p
                 key={idx}
-                className={idx === 0 ? 'text-sm sm:text-base font-medium text-slate-800 dark:text-slate-200 leading-relaxed' : ''}
+                className={idx === 0 ? 'text-base sm:text-lg font-medium text-black dark:text-slate-200 leading-relaxed' : ''}
               >
                 {p}
               </p>
@@ -396,22 +396,22 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
           {/* Optional Reference Table */}
           {data.usefulInfo.table && (
             <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
-              <div className="flex items-center gap-2 mb-3 text-xs font-bold text-slate-700 dark:text-slate-200">
+              <div className="flex items-center gap-2 mb-3 text-sm font-bold text-black dark:text-slate-200">
                 <TableIcon className="h-4 w-4 text-indigo-500" />
                 <span>Reference Specification Table</span>
               </div>
               <div className="overflow-x-auto rounded-2xl border border-slate-200/90 dark:border-slate-700/80 shadow-2xs">
-                <table className="w-full text-left text-xs sm:text-sm">
-                  <thead className="bg-slate-100/90 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-slate-100/90 dark:bg-slate-800/90 text-black dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
                     <tr>
                       {data.usefulInfo.table.headers.map((h, i) => (
-                        <th key={i} className="px-4 py-3 font-mono text-[11px] uppercase tracking-wider">
+                        <th key={i} className="px-4 py-3 font-mono text-xs uppercase tracking-wider">
                           {h}
                         </th>
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-black dark:text-slate-300">
                     {data.usefulInfo.table.rows.map((row, rIdx) => (
                       <tr key={rIdx} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors">
                         {row.map((cell, cIdx) => (
@@ -424,7 +424,7 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
                   </tbody>
                 </table>
               </div>
-              <p className="text-[11px] text-slate-400 mt-2">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
                 Scroll horizontally on mobile devices to view all table columns.
               </p>
             </div>
@@ -441,10 +441,10 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
               <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
                 Total Confidentiality
               </span>
-              <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white mt-0.5 mb-1.5">
+              <h3 className="text-lg sm:text-xl font-extrabold text-black dark:text-white mt-0.5 mb-1.5">
                 100% Client-Side Privacy Guarantee
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-black dark:text-slate-200 leading-relaxed font-normal">
                 Your images and personal documents are processed strictly in your local web browser using client-side canvas technology. Your files are never uploaded to any remote server, stored in any database, or viewed by third parties.
               </p>
             </div>
@@ -465,10 +465,10 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
                 <HelpCircle className="h-5 w-5" />
               </div>
               <div>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight">
                   Frequently Asked Questions
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                <p className="text-sm text-black dark:text-slate-300">
                   Helpful answers about formatting, compression, and browser compatibility.
                 </p>
               </div>
@@ -477,11 +477,11 @@ export function SEOLandingTemplate({ data }: SEOLandingTemplateProps) {
             <div className="divide-y divide-slate-100 dark:divide-slate-800">
               {data.faqs.map((faq, idx) => (
                 <details key={idx} className="group py-4" open={idx === 0}>
-                  <summary className="w-full flex cursor-pointer list-none items-center justify-between text-left gap-4 font-bold text-sm sm:text-base text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
+                  <summary className="w-full flex cursor-pointer list-none items-center justify-between text-left gap-4 font-bold text-base sm:text-lg text-black dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
                     <span>{faq.question}</span>
                     <ChevronDown className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-indigo-600 dark:group-open:text-indigo-400" />
                   </summary>
-                  <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                  <p className="mt-3 text-sm sm:text-base text-black dark:text-slate-200 leading-relaxed font-normal">
                     {faq.answer}
                   </p>
                 </details>

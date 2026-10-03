@@ -20,9 +20,9 @@ export default function TermsPage() {
         </h1>
         <p className="text-xs text-slate-400 mb-8">Effective Date: January 1, 2026</p>
 
-        <div className="space-y-6 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        <div className="space-y-6 text-base sm:text-lg text-black dark:text-slate-200 leading-relaxed">
           <section className="space-y-2">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h2 className="text-xl font-bold text-black dark:text-white">
               1. Acceptance of Terms
             </h2>
             <p>
@@ -31,7 +31,7 @@ export default function TermsPage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h2 className="text-xl font-bold text-black dark:text-white">
               2. Description of Service
             </h2>
             <p>
@@ -40,7 +40,7 @@ export default function TermsPage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h2 className="text-xl font-bold text-black dark:text-white">
               3. User Intellectual Property
             </h2>
             <p>
@@ -49,7 +49,7 @@ export default function TermsPage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h2 className="text-xl font-bold text-black dark:text-white">
               4. Disclaimer of Liability
             </h2>
             <p>

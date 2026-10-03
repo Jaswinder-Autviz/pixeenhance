@@ -56,12 +56,12 @@ export default function AboutPage() {
             <span>Our Mission &amp; Story</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-black dark:text-white leading-[1.15]">
             We built the image toolkit <br className="hidden sm:inline" />
             we wished existed.
           </h1>
 
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+          <p className="max-w-2xl mx-auto text-base sm:text-lg text-black dark:text-slate-200 leading-relaxed font-normal">
             No signup paywalls. No countdown timers. No watermark surprises. And most
             importantly — zero server uploads. Just fast, honest, and truly private
             digital media tools right in your browser.
@@ -78,14 +78,14 @@ export default function AboutPage() {
               <Heart className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-white">
                 Why we started PixEnhance
               </h2>
-              <p className="text-xs text-slate-400">Written from the heart by creators who were fed up.</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Written from the heart by creators who were fed up.</p>
             </div>
           </div>
 
-          <div className="space-y-4 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-4 text-base sm:text-lg text-black dark:text-slate-200 leading-relaxed">
             <p>
               Like almost everyone on the internet, we have all been there. You are applying for a job,
               registering for a competitive exam, or uploading personal documents to a government portal,

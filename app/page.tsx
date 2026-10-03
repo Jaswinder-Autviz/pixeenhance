@@ -413,14 +413,14 @@ export default function HomePage() {
             <span>Fast • 100% Private • No Sign-Up Needed</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-black dark:text-white tracking-tight leading-tight mb-4">
             Free Online{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-300 dark:to-pink-400">
               Image &amp; PDF Studio
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8 font-normal">
+          <p className="text-base sm:text-lg md:text-xl text-black dark:text-slate-200 max-w-2xl mx-auto leading-relaxed mb-8 font-normal">
             Compress, resize, convert, edit, and organize your images instantly with zero latency and complete privacy.
           </p>
 
@@ -580,14 +580,14 @@ export default function HomePage() {
                       </div>
                       <div>
                         <div className="flex items-center gap-2.5">
-                          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                          <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight">
                             {meta.title}
                           </h2>
                           <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${theme.badge} font-mono`}>
                             {toolsInCat.length} {toolsInCat.length === 1 ? 'Tool' : 'Tools'}
                           </span>
                         </div>
-                        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                        <p className="text-sm sm:text-base text-black dark:text-slate-300 mt-1 leading-relaxed">
                           {meta.subtitle}
                         </p>
                       </div>
@@ -651,21 +651,21 @@ export default function HomePage() {
                             </span>
 
                             {/* Tool Title */}
-                            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-1.5 leading-snug">
+                            <h3 className="text-base sm:text-lg font-extrabold text-black dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-1.5 leading-snug">
                               <Link href={tool.slug} className="after:absolute after:inset-0">
                                 {tool.name}
                               </Link>
                             </h3>
 
                             {/* Description */}
-                            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2 font-normal">
+                            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed line-clamp-2 font-normal">
                               {tool.shortDescription}
                             </p>
                           </div>
 
                           {/* Bottom Action Footer */}
                           <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold">
-                            <span className="text-[11px] text-slate-400 font-mono">Instant • Free</span>
+                            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Instant • Free</span>
                             <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 ${cardTheme.launchBadge} text-xs font-bold transition-all duration-300 shadow-2xs`}>
                               <span>Launch</span>
                               <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
@@ -692,10 +692,10 @@ export default function HomePage() {
           <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
             Uncompromising Privacy &amp; Performance
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
+          <h2 className="text-2xl sm:text-3xl font-black text-black dark:text-white mt-1">
             Why Choose PixEnhance?
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+          <p className="text-base text-black dark:text-slate-300 mt-2">
             Engineered for pure speed, total confidentiality, and effortless editing.
           </p>
         </div>
@@ -750,10 +750,10 @@ export default function HomePage() {
                 >
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-1.5">
+                <h3 className="text-base sm:text-lg font-extrabold text-black dark:text-white mb-1.5">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
+                <p className="text-sm text-black dark:text-slate-300 leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>
@@ -769,10 +769,10 @@ export default function HomePage() {
             <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
               Simple 4-Step Flow
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mt-1.5 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-black dark:text-white mt-1.5 tracking-tight">
               How It Works
             </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+            <p className="text-base text-black dark:text-slate-300 mt-2">
               Optimize and convert your files in seconds without software installations.
             </p>
           </div>
@@ -813,10 +813,10 @@ export default function HomePage() {
                 >
                   {step.step}
                 </div>
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-2">
+                <h3 className="text-base sm:text-lg font-extrabold text-black dark:text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
+                <p className="text-sm text-black dark:text-slate-300 leading-relaxed font-normal">
                   {step.desc}
                 </p>
               </div>
@@ -833,10 +833,10 @@ export default function HomePage() {
               <ShieldCheck className="h-5 w-5" />
               <span>Complete Privacy Guarantee</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl font-black text-black dark:text-white tracking-tight mb-4">
               Your Files Never Leave Your Computer
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-6 font-normal">
+            <p className="text-base sm:text-lg text-black dark:text-slate-200 leading-relaxed mb-6 font-normal">
               PixEnhance processes all your photos, documents, and code directly on your device. Everything remains entirely confidential with zero tracking and zero data leaks.
             </p>
             <div className="flex flex-wrap items-center gap-3">
@@ -857,10 +857,10 @@ export default function HomePage() {
       {/* 6. Comprehensive FAQ Section */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-black text-black dark:text-white tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+          <p className="text-base text-black dark:text-slate-300 mt-2">
             Answers to common questions about PixEnhance features and privacy.
           </p>
         </div>
@@ -868,11 +868,11 @@ export default function HomePage() {
         <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs divide-y divide-slate-100 dark:divide-slate-800">
           {homeFaqs.map((faq, idx) => (
             <details key={idx} className="group py-4" open={idx === 0}>
-              <summary className="flex w-full cursor-pointer list-none items-center justify-between text-left text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
+              <summary className="flex w-full cursor-pointer list-none items-center justify-between text-left text-base sm:text-lg font-bold text-black dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
                 <span>{faq.question}</span>
                 <ChevronDown className="h-4 w-4 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-indigo-600 shrink-0 ml-2" />
               </summary>
-              <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              <p className="mt-3 text-sm sm:text-base text-black dark:text-slate-200 leading-relaxed font-normal">
                 {faq.answer}
               </p>
             </details>
