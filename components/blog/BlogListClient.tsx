@@ -174,7 +174,7 @@ export function BlogListClient({ posts, categories }: BlogListClientProps) {
                     </h3>
                   </Link>
 
-                  <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed line-clamp-3 font-normal">
+                  <p className="text-xs text-black/85 dark:text-slate-300 leading-relaxed line-clamp-3 font-normal">
                     {post.excerpt}
                   </p>
                 </div>

@@ -420,7 +420,7 @@ export default function HomePage() {
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-black dark:text-slate-200 max-w-2xl mx-auto leading-relaxed mb-8 font-normal">
+          <p className="text-sm sm:text-base md:text-lg text-black dark:text-slate-200 max-w-2xl mx-auto leading-relaxed mb-8 font-normal">
             Compress, resize, convert, edit, and organize your images instantly with zero latency and complete privacy.
           </p>
 
@@ -587,7 +587,7 @@ export default function HomePage() {
                             {toolsInCat.length} {toolsInCat.length === 1 ? 'Tool' : 'Tools'}
                           </span>
                         </div>
-                        <p className="text-sm sm:text-base text-black dark:text-slate-300 mt-1 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-black dark:text-slate-400 mt-1 leading-relaxed">
                           {meta.subtitle}
                         </p>
                       </div>
@@ -658,7 +658,7 @@ export default function HomePage() {
                             </h3>
 
                             {/* Description */}
-                            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed line-clamp-2 font-normal">
+                            <p className="text-xs text-black/85 dark:text-slate-300 leading-relaxed line-clamp-2 font-normal">
                               {tool.shortDescription}
                             </p>
                           </div>
