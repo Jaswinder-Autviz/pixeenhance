@@ -23,9 +23,9 @@ export class UpscalerEngine {
 
     this.modelLoadPromise = (async () => {
       try {
-        // Configure wasm paths
+        // Configure wasm paths from official high-speed Cloudflare-backed CDN
         if (typeof window !== 'undefined') {
-          ort.env.wasm.wasmPaths = window.location.origin + '/';
+          ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/dist/';
           ort.env.wasm.numThreads = Math.min(4, navigator.hardwareConcurrency || 2);
         }
 

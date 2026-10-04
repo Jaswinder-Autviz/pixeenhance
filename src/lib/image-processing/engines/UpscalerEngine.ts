@@ -23,8 +23,8 @@ export class UpscalerEngine {
 
     this.modelLoadPromise = (async () => {
       try {
-        // Configure wasm paths
-        ort.env.wasm.wasmPaths = window.location.origin + '/';
+        // Configure wasm paths from official high-speed Cloudflare-backed CDN
+        ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/dist/';
         ort.env.wasm.numThreads = Math.min(4, navigator.hardwareConcurrency || 2);
 
         // Try WebGPU first, then WebAssembly
