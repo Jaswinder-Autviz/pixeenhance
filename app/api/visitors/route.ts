@@ -54,11 +54,39 @@ function cleanupActiveUsers() {
   }
 }
 
-// Fetch upstream persistent count safely across all hosting environments
-async function fetchPersistentCount(): Promise<number> {
+// Fetch current count safely without incrementing
+async function getPersistentCount(): Promise<number> {
   if (Date.now() - lastUpstreamFetch < 30000 && cachedTotalCount > 0) {
     return cachedTotalCount;
   }
+
+  try {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 2500);
+    const res = await fetch('https://api.counterapi.dev/v1/pixenhance_v1/visitors', {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'PixEnhance/1.0' },
+      cache: 'no-store',
+    });
+    clearTimeout(id);
+    if (res.ok) {
+      const data = await res.json();
+      if (typeof data.count === 'number' && data.count > 0) {
+        cachedTotalCount = Math.max(cachedTotalCount, data.count);
+        lastUpstreamFetch = Date.now();
+        return cachedTotalCount;
+      }
+    }
+  } catch {
+    // fallback
+  }
+
+  return cachedTotalCount;
+}
+
+// Increment persistent count upstream ONLY for new IP visits
+async function incrementPersistentCount(): Promise<number> {
+  cachedTotalCount += 1;
 
   try {
     const controller = new AbortController();
@@ -81,39 +109,13 @@ async function fetchPersistentCount(): Promise<number> {
     // fallback
   }
 
-  try {
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), 2500);
-    const res = await fetch('https://hits.sh/pixenhance.in.svg', {
-      signal: controller.signal,
-      cache: 'no-store',
-    });
-    clearTimeout(id);
-    if (res.ok) {
-      const text = await res.text();
-      const match =
-        text.match(/<title>(?:hits|visitors)?:\s*([\d,]+)<\/title>/i) ||
-        text.match(/aria-label="(?:hits|visitors)?:\s*([\d,]+)"/i);
-      if (match && match[1]) {
-        const num = parseInt(match[1].replace(/,/g, ''), 10);
-        if (num > 0) {
-          cachedTotalCount = Math.max(cachedTotalCount, num);
-          lastUpstreamFetch = Date.now();
-          return cachedTotalCount;
-        }
-      }
-    }
-  } catch {
-    // fallback
-  }
-
   return cachedTotalCount;
 }
 
 export async function GET(request: NextRequest) {
   cleanupActiveUsers();
   const activeCount = Math.max(activeUsers.size, 1);
-  const totalCount = await fetchPersistentCount();
+  const totalCount = await getPersistentCount();
 
   return NextResponse.json(
     {
@@ -149,12 +151,16 @@ export async function POST(request: NextRequest) {
   activeUsers.set(clientIp, now);
   cleanupActiveUsers();
 
+  let totalCount = cachedTotalCount;
+
+  // Only increment count if it's a new IP address
   if (!seenIps.has(clientIp)) {
     seenIps.add(clientIp);
-    cachedTotalCount += 1;
+    totalCount = await incrementPersistentCount();
+  } else {
+    totalCount = await getPersistentCount();
   }
 
-  const totalCount = await fetchPersistentCount();
   const activeCount = Math.max(activeUsers.size, 1);
 
   return NextResponse.json(
