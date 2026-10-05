@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Users, Activity } from 'lucide-react';
+import { Activity } from 'lucide-react';
 
 interface VisitorCounterProps {
   variant?: 'footer' | 'hero' | 'compact';
@@ -14,9 +14,9 @@ export function VisitorCounter({
   className = '',
   showIcon = true,
 }: VisitorCounterProps) {
-  const [activeUsers, setActiveUsers] = useState<number>(2);
-  const [totalVisitors, setTotalVisitors] = useState<number>(1280);
-  const [isLoading, setIsLoading] = useState(false);
+  const [activeUsers, setActiveUsers] = useState<number>(1);
+  const [totalVisitors, setTotalVisitors] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     let isMounted = true;
@@ -43,10 +43,8 @@ export function VisitorCounter({
           }
         }
       } catch {
-        // Fallback gracefully
         if (isMounted) {
           setActiveUsers((prev) => Math.max(prev, 1));
-          setTotalVisitors((prev) => (prev !== null ? prev : 28));
         }
       } finally {
         if (isMounted) {
@@ -58,7 +56,7 @@ export function VisitorCounter({
     // Initial visit record
     sendHeartbeatAndFetch();
 
-    // 25-second periodic heartbeat for real-time presence (like Google Analytics Realtime)
+    // 25-second periodic heartbeat for real-time presence
     const interval = setInterval(() => {
       sendHeartbeatAndFetch();
     }, 25000);
@@ -69,8 +67,7 @@ export function VisitorCounter({
     };
   }, []);
 
-  const formattedTotal =
-    totalVisitors !== null ? totalVisitors.toLocaleString() : '28';
+  const formattedTotal = totalVisitors !== null ? totalVisitors.toLocaleString() : null;
 
   if (variant === 'compact') {
     return (
@@ -81,7 +78,13 @@ export function VisitorCounter({
         <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
         <span>{activeUsers} online</span>
         <span className="text-slate-400">&bull;</span>
-        <span>{isLoading ? '...' : formattedTotal} total</span>
+        <span>
+          {isLoading || formattedTotal === null ? (
+            <span className="inline-block w-6 h-3 bg-slate-200 dark:bg-slate-700 animate-pulse rounded"></span>
+          ) : (
+            `${formattedTotal} total`
+          )}
+        </span>
       </div>
     );
   }
@@ -111,7 +114,7 @@ export function VisitorCounter({
         {showIcon && <Activity className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400 shrink-0" />}
         <span className="text-[11px] text-slate-500 dark:text-slate-400">Total:</span>
         <span className="font-mono font-bold text-slate-900 dark:text-white">
-          {isLoading ? (
+          {isLoading || formattedTotal === null ? (
             <span className="inline-block w-8 h-3.5 bg-slate-200 dark:bg-slate-800 animate-pulse rounded"></span>
           ) : (
             formattedTotal

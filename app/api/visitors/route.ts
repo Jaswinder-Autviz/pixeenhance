@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 const activeUsers = new Map<string, number>();
 const seenIps = new Set<string>();
 
-let cachedTotalCount = 28;
+let cachedTotalCount = 0;
 let lastUpstreamFetch = 0;
 
 const KNOWN_BOTS = [
