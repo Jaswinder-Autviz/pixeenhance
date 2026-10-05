@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { VisitorCounter } from './VisitorCounter';
 
 export function Footer() {
   return (
@@ -258,7 +257,6 @@ export function Footer() {
           <p>© 2026 PixEnhance. Free online image and PDF utilities.</p>
           
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <VisitorCounter variant="footer" />
             <p className="hidden md:flex items-center gap-1 text-slate-400 dark:text-slate-500">
               Crafted for speed, simplicity &amp; complete privacy
             </p>
