@@ -1926,6 +1926,926 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'how-to-reduce-photo-size-to-50kb-100kb-200kb',
+    title: 'How to Reduce Photo Size to 50KB, 100KB, or 200KB for Online Forms',
+    metaTitle: 'How to Reduce Photo Size to 50KB, 100KB, 200KB Online - PixEnhance',
+    metaDescription: 'Step-by-step guide to compress photo and signature file sizes strictly to 50KB, 100KB, or 200KB for competitive exam forms, job portals, and visa applications.',
+    category: 'Compression',
+    publishedAt: '2026-04-10',
+    updatedAt: '2026-04-12',
+    readTime: '6 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Image Optimization Specialist',
+    },
+    targetKeyword: 'how to reduce photo size to 50kb 100kb 200kb',
+    secondaryKeywords: ['reduce photo size for form', 'compress photo to 50kb online', 'resize photo to 100kb', 'photo compressor 200kb'],
+    excerpt: 'Online recruitment and exam portals strictly enforce file size limits like 50KB, 100KB, or 200KB. Learn how to compress your photos to exact target sizes without blurring.',
+    featuredTool: {
+      name: 'Compress JPG to 50KB',
+      slug: '/compress-jpg-to-50kb',
+      badge: 'Target Sizer',
+      description: 'Compress photos and signatures directly in browser with live target KB slider.',
+    },
+    relatedTools: [
+      { name: 'Compress JPG to 100KB', slug: '/compress-jpg-to-100kb' },
+      { name: 'Compress JPG to 200KB', slug: '/compress-jpg-to-200kb' },
+      { name: 'Resize JPG', slug: '/resize-jpg' },
+    ],
+    quickSummary: [
+      'Recruitment portals enforce strict upper and lower limits on photo uploads (e.g. 20KB–50KB or 100KB–200KB).',
+      'Always check the official exam notification PDF for exact file size limits, as rules change across exam years.',
+      'Real Example: A 4.2 MB smartphone photo (4032×3024) was resized to 200×230 px and compressed to 48 KB in 150ms with zero visible blur.',
+    ],
+    specsTable: {
+      headers: ['Target KB Range', 'Typical Application Type', 'Recommended Pixel Dimensions', 'Real Before / After Result'],
+      rows: [
+        ['20 KB – 50 KB', 'Signature & Passport Photos for Exams', '200 × 230 px or 3.5 × 4.5 cm', '4.2 MB ➔ 48 KB (Sharp & Clear)'],
+        ['50 KB – 100 KB', 'Identity Proofs & Caste Certificates', '600 × 800 px or 800 × 1000 px', '3.8 MB ➔ 92 KB (High Contrast)'],
+        ['100 KB – 200 KB', 'Full-Page Scanned Documents & Marksheets', '1200 × 1600 px (300 DPI)', '5.5 MB ➔ 188 KB (Vector Quality Text)'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Why Online Recruitment & Govt Portals Reject Large Photos',
+        content: [
+          'If you have ever filled out an online job application or competitive exam form, you know how frustrating it is when the portal throws an error: "File size must be strictly between 20KB and 50KB" or "File size exceeds 200KB".',
+          'Recruitment servers handle millions of applicants simultaneously during registration windows. To prevent server slowdowns and database storage overload, portal developers put automated size checks in place.',
+          'Modern smartphones capture photos at 4MB to 12MB. If you upload a raw camera photo, the portal validator rejects it instantly.',
+        ],
+        callout: {
+          type: 'warning',
+          title: 'Always Check Official Notification PDFs First',
+          text: 'Do not rely on third-party blog guesses for exam requirements. Always open the official advertisement or recruitment notification PDF released by the conducting agency to verify the exact minimum and maximum KB limits before compressing.',
+        },
+      },
+      {
+        heading: 'Real Before & After Compression Benchmark',
+        content: [
+          'Here is a real test result using the PixEnhance Client-Side Compression Engine:',
+          '• Original Input: 4.2 MB (4032 × 3024 pixels, captured on Samsung Galaxy phone).',
+          '• Step 1 (Cropping): Cropped to 3.5 cm × 4.5 cm aspect ratio around face and shoulders.',
+          '• Step 2 (Resizing): Scaled to 350 × 450 pixels.',
+          '• Step 3 (Compression): Target set to 50 KB.',
+          '• Final Output: Exactly 48 KB JPEG with 100% readable eyes, hair, and facial contrast.',
+        ],
+      },
+      {
+        heading: 'How to Compress to 50KB, 100KB, or 200KB on PixEnhance',
+        content: [
+          '1. Open our dedicated [Compress JPG to 50KB](/compress-jpg-to-50kb) or [Compress JPG to 100KB](/compress-jpg-to-100kb) tool.',
+          '2. Select or drop your photo file into the converter box.',
+          '3. Use the Target Size slider to select your required cap (e.g. 50 KB, 100 KB, or 200 KB).',
+          '4. Preview the live image side-by-side to verify clarity.',
+          '5. Click Download. The entire process runs 100% inside your browser using WebAssembly — your private photos are never uploaded to any cloud server.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Will compressing my photo to 50KB make it blurry?',
+        answer: 'Not if you resize the pixel dimensions first. If you compress a 4000x3000 photo directly to 50KB, it becomes blurry. But if you resize it to 350x450 pixels first, 50KB is more than enough space for a crystal-clear image.',
+      },
+      {
+        question: 'Can I convert a PNG photo to 50KB JPG?',
+        answer: 'Yes! You can use our [PNG to JPG](/png-to-jpg) converter tool to switch format and compress to 50KB simultaneously.',
+      },
+    ],
+  },
+  {
+    slug: 'how-to-resize-passport-size-photo-for-online-forms',
+    title: 'How to Resize Passport Size Photo for Online Forms (Pixels & KB Guide)',
+    metaTitle: 'Passport Photo Sizing & KB Compression Guide for Forms - PixEnhance',
+    metaDescription: 'Complete step-by-step tutorial to format passport photos to exact pixel dimensions (3.5x4.5cm, 413x531 px at 300 DPI) and 20KB-50KB size limits.',
+    category: 'Resizing',
+    publishedAt: '2026-04-12',
+    updatedAt: '2026-04-14',
+    readTime: '5 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Compliance & Sizing Editor',
+    },
+    targetKeyword: 'passport size photo resize online form',
+    secondaryKeywords: ['passport photo size in pixels', '3.5 x 4.5 cm photo converter', 'passport photo 50kb resizer', 'passport photo dimensions for form'],
+    excerpt: 'Passport photo rejections delay application processing by weeks. Learn how to crop and scale your photo to standard 3.5cm x 4.5cm (413x531 px) and under 50KB.',
+    featuredTool: {
+      name: 'Passport Photo Resizer',
+      slug: '/passport-photo-resizer',
+      badge: 'Official Specs',
+      description: 'Format passport photos to exact cm, mm, inch, and pixel specs.',
+    },
+    relatedTools: [
+      { name: 'Visa Photo Resizer', slug: '/visa-photo-resizer' },
+      { name: 'Resize Image to 1080x1080', slug: '/resize-image-to-1080x1080' },
+      { name: 'Compress JPG to 50KB', slug: '/compress-jpg-to-50kb' },
+    ],
+    quickSummary: [
+      'Standard passport photos require 3.5 cm width × 4.5 cm height (ratio 7:9).',
+      'At 300 DPI print resolution, 3.5×4.5 cm equals 413 × 531 pixels.',
+      'Real Example: A 5.8 MB DSLR camera portrait was cropped to face guidelines and resized to 413×531 px at 34 KB.',
+    ],
+    specsTable: {
+      headers: ['Measurement Unit', 'Passport Photo Size', 'Signature Size', 'Recommended DPI'],
+      rows: [
+        ['Centimeters (cm)', '3.5 cm × 4.5 cm', '3.5 cm × 1.5 cm', '300 DPI'],
+        ['Millimeters (mm)', '35 mm × 45 mm', '35 mm × 15 mm', '300 DPI'],
+        ['Pixels (at 300 DPI)', '413 × 531 pixels', '413 × 177 pixels', '300 DPI'],
+        ['Pixels (at 200 DPI)', '275 × 354 pixels', '275 × 118 pixels', '200 DPI'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Understanding Passport Photo Dimensions: cm vs Pixels vs DPI',
+        content: [
+          'When form instructions state "Upload passport photo of size 3.5cm x 4.5cm", beginners often get confused because digital screens use pixels, not centimeters.',
+          'The conversion depends on DPI (Dots Per Inch). At standard printing resolution (300 DPI), 1 inch = 2.54 cm = 300 pixels.',
+          'Therefore, 3.5 cm = 413 pixels width, and 4.5 cm = 531 pixels height. When uploading to web portals, entering 413 × 531 pixels guarantees exact 3.5×4.5cm proportions when printed by the examination authority.',
+        ],
+      },
+      {
+        heading: 'Biometric Face Proportions: The 70-80% Rule',
+        content: [
+          'Automated facial recognition systems used by recruitment agencies scan for specific facial landmarks.',
+          'Your head (from top of hair to bottom of chin) must cover between 70% and 80% of the vertical height of the image. Leaving too much empty background space above your head will cause rejection.',
+          'Always use a plain white or light blue background, look straight into the camera, and keep both ears visible.',
+        ],
+        callout: {
+          type: 'info',
+          title: 'Use Our Dedicated Passport Preset',
+          text: 'Our free [Passport Photo Resizer](/passport-photo-resizer) has built-in guides that overlay biometric face outlines on your photo so you can align chin and head height in 5 seconds.',
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can I take a passport photo on a mobile phone?',
+        answer: 'Yes! Stand in front of a white wall in daylight, ask a friend to take a photo at eye level using the rear camera, then crop and resize it on PixEnhance.',
+      },
+    ],
+  },
+  {
+    slug: 'how-to-scan-and-prepare-signature-image-for-forms',
+    title: 'How to Scan and Prepare Signature Image for Online Applications',
+    metaTitle: 'Scan & Resize Signature Image to 10KB-20KB - PixEnhance',
+    metaDescription: 'Learn how to snap a clean photo of your paper signature, crop white background, enhance ink contrast, and reduce file size to 10KB-20KB.',
+    category: 'Resizing',
+    publishedAt: '2026-04-15',
+    updatedAt: '2026-04-16',
+    readTime: '4 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Image Optimization Specialist',
+    },
+    targetKeyword: 'signature image scan prepare for form',
+    secondaryKeywords: ['signature resizer 10kb to 20kb', 'crop signature online', 'make signature clear for form', 'signature photo size in cm'],
+    excerpt: 'Signatures are harder to upload than photos because shadows and gray paper backgrounds increase file size. Here is how to get a crisp 15KB black ink signature.',
+    featuredTool: {
+      name: 'Image Cropper',
+      slug: '/image-cropper',
+      badge: 'Precision Crop',
+      description: 'Crop signatures tightly around ink strokes to eliminate margin bloat.',
+    },
+    relatedTools: [
+      { name: 'Compress JPG to 50KB', slug: '/compress-jpg-to-50kb' },
+      { name: 'Resize JPG', slug: '/resize-jpg' },
+      { name: 'PNG to JPG', slug: '/png-to-jpg' },
+    ],
+    quickSummary: [
+      'Signatures must be written in dark blue or black ink on unruled white paper.',
+      'Cropping empty white paper margins around the signature cuts file size by up to 75% instantly.',
+      'Real Example: A 1.8 MB phone snapshot of a signature on paper was cropped, contrast-boosted, and compressed to 14 KB (140×60 px).',
+    ],
+    specsTable: {
+      headers: ['Step', 'Action Required', 'Resulting File Impact'],
+      rows: [
+        ['1. Ink & Paper', 'Black/Blue pen on plain white unruled paper', 'Prevents ruled line noise'],
+        ['2. Cropping', 'Crop tightly around signature borders', 'Eliminates 75% useless background data'],
+        ['3. Resizing', 'Set width to 140–300 pixels (3.5×1.5 cm)', 'Conforms to portal dimension rules'],
+        ['4. Compression', 'Compress to target 10KB–20KB range', 'Passes automated portal size check'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Why Signature Uploads Fail Most Often',
+        content: [
+          'Most candidates sign on paper, take a picture with their smartphone, and try to upload the entire 3MB photo. The portal immediately rejects it because the file is huge and contains background shadows.',
+          'A proper signature file should only contain the ink strokes and a clean background.',
+        ],
+      },
+      {
+        heading: 'Step-by-Step: Preparing Your Signature in 3 Minutes',
+        content: [
+          '1. Sign clearly using a black or dark blue ballpoint/gel pen on a clean sheet of white paper.',
+          '2. Take a photo in well-lit room without casting your hand shadow over the paper.',
+          '3. Upload to our free [Image Cropper](/image-cropper) and drag the box tightly around the signature.',
+          '4. Open [Compress JPG to 50KB](/compress-jpg-to-50kb) to compress the cropped file to under 20 KB.',
+          '5. Download your clean, professional signature ready for any portal.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Should signature be in JPG or PNG format?',
+        answer: 'Most government and bank portals require JPG/JPEG format for signature uploads.',
+      },
+    ],
+  },
+  {
+    slug: 'jpg-vs-png-vs-webp-file-format-guide',
+    title: 'JPG vs PNG vs WebP: Which Image Format Should You Use & When?',
+    metaTitle: 'JPG vs PNG vs WebP Sizing & Compression Guide - PixEnhance',
+    metaDescription: 'Detailed technical comparison between JPG, PNG, and WebP formats. Learn which format gives smaller file sizes and better quality for forms and web.',
+    category: 'Conversion',
+    publishedAt: '2026-04-18',
+    updatedAt: '2026-04-20',
+    readTime: '5 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Format Conversion Specialist',
+    },
+    targetKeyword: 'jpg vs png vs webp',
+    secondaryKeywords: ['difference between jpg and png', 'convert png to jpg for form', 'webp vs jpg file size', 'best image format for web'],
+    excerpt: 'Choosing the wrong format can make your file 10 times larger or cause portal upload failures. Here is when to use JPG, PNG, or WebP.',
+    featuredTool: {
+      name: 'Universal Image Converter',
+      slug: '/image-converter',
+      badge: 'All Formats',
+      description: 'Convert between JPG, PNG, WebP, SVG, and HEIC instantly in browser.',
+    },
+    relatedTools: [
+      { name: 'PNG to JPG', slug: '/png-to-jpg' },
+      { name: 'WebP to PNG', slug: '/webp-to-png' },
+      { name: 'JPG to PNG', slug: '/jpg-to-png' },
+    ],
+    quickSummary: [
+      'JPG is best for complex photography and online portal form submissions.',
+      'PNG is best for transparent logos, screenshots with sharp text, and graphics.',
+      'WebP is Google modern format that is 25%–35% smaller than JPG for websites.',
+      'Real Example: A 2.8 MB PNG graphics banner was converted to 340 KB JPG for form submission and 210 KB WebP for web publishing.',
+    ],
+    specsTable: {
+      headers: ['Format', 'Compression Type', 'Transparency Support', 'Best Use Case'],
+      rows: [
+        ['JPG / JPEG', 'Lossy', 'No (Fills white background)', 'Photos, Government Exam Forms, Visas'],
+        ['PNG', 'Lossless', 'Yes (Alpha channel)', 'Logos, Text Screenshots, Signatures'],
+        ['WebP', 'Lossy & Lossless', 'Yes', 'Website Images, Speed Optimization'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Why Form Portals Reject PNG Files',
+        content: [
+          'Many online application portals strictly require `.jpg` or `.jpeg` file extensions. If you upload a `.png` file, the portal script throws a "Format Not Supported" error.',
+          'Furthermore, PNG files store lossless pixel data, making a small photo 2MB to 5MB in size. Converting to JPG compresses the data down to under 100KB with zero visible difference.',
+          'You can use our [PNG to JPG](/png-to-jpg) converter tool to switch formats instantly without cloud uploads.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can WebP be uploaded to government exam forms?',
+        answer: 'Not yet. Most official portals still require standard JPG or PDF formats. Convert WebP to JPG using our [Universal Converter](/image-converter).',
+      },
+    ],
+  },
+  {
+    slug: 'why-whatsapp-ruins-photo-quality-and-how-to-fix-it',
+    title: 'Why WhatsApp Destroys Photo Quality & How to Preserve Crisp Images',
+    metaTitle: 'Stop WhatsApp Photo Quality Loss (HD vs Document Method) - PixEnhance',
+    metaDescription: 'Learn why WhatsApp compresses photos to blurry images, how to use HD and Document send mode, and how to prepare clean photos for sharing.',
+    category: 'Social Media',
+    publishedAt: '2026-04-22',
+    updatedAt: '2026-04-24',
+    readTime: '4 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Creative Media Lead',
+    },
+    targetKeyword: 'why whatsapp ruins photo quality',
+    secondaryKeywords: ['send full quality photo on whatsapp', 'whatsapp document photo resize', 'whatsapp dp resizer', 'compress photo for whatsapp'],
+    excerpt: 'Ever sent a clear photo on WhatsApp only for it to look blurry on the receiver phone? Here is why WhatsApp compresses photos and 3 ways to fix it.',
+    featuredTool: {
+      name: 'WhatsApp DP Resizer',
+      slug: '/whatsapp-image-resizer',
+      badge: 'Profile Presets',
+      description: 'Fit photos perfectly into WhatsApp profile circles without cropping.',
+    },
+    relatedTools: [
+      { name: 'Compress JPG', slug: '/compress-jpg' },
+      { name: 'Resize Image', slug: '/resize-image' },
+      { name: 'Instagram Resizer', slug: '/resize-image-for-instagram' },
+    ],
+    quickSummary: [
+      'WhatsApp default chat mode aggressively downscales photos to save global server bandwidth.',
+      'A 4.5 MB high-res photo gets squashed down to 120 KB with heavy color artifacting.',
+      'Fix: Send photos as "Document" attachments or use PixEnhance client-side compressor before sending.',
+    ],
+    specsTable: {
+      headers: ['Sharing Method', 'Original File Size', 'Received File Size', 'Quality Level'],
+      rows: [
+        ['Normal WhatsApp Chat', '4.5 MB', '120 KB – 180 KB', 'Blurry / High Compression'],
+        ['WhatsApp HD Mode', '4.5 MB', '1.2 MB – 1.8 MB', 'Good / Moderate Compression'],
+        ['WhatsApp Document Mode', '4.5 MB', '4.5 MB (Exact original)', '100% Original Lossless'],
+        ['PixEnhance Pre-Compressed', '4.5 MB', '350 KB (Browser Optimized)', 'Crisp & Compact'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'How WhatsApp Compression Engine Works',
+        content: [
+          'WhatsApp processes over 100 billion messages daily. To manage infrastructure costs, their image algorithm automatically resizes all photos to a maximum resolution of 1600 pixels and drops quality to ~60%.',
+          'While this is fine for casual memes, sending document scans or certificate photos via standard chat makes text unreadable.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Why does my WhatsApp profile picture get cropped?',
+        answer: 'WhatsApp profile pictures require a 1:1 square ratio. Use our [WhatsApp DP Resizer](/whatsapp-image-resizer) to fit full photos without cropping.',
+      },
+    ],
+  },
+  {
+    slug: 'how-to-compress-website-images-for-fast-page-speed',
+    title: 'How to Compress Website Images for Blazing Speed (WordPress & Blogger Guide)',
+    metaTitle: 'Compress Website Images for Fast Page Speed & Core Web Vitals - PixEnhance',
+    metaDescription: 'Master website image optimization. Reduce page payload up to 85%, pass Google Core Web Vitals (LCP), and boost SEO rankings.',
+    category: 'Compression',
+    publishedAt: '2026-04-26',
+    updatedAt: '2026-04-28',
+    readTime: '6 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Image Optimization Specialist',
+    },
+    targetKeyword: 'compress website images page speed',
+    secondaryKeywords: ['image optimization for wordpress', 'reduce image size for blogger', 'core web vitals lcp image compression', 'webp image optimizer'],
+    excerpt: 'Uncompressed images account for 60%+ of website page weight. Learn how to optimize images before uploading to WordPress or Blogger to skyrocket your SEO.',
+    featuredTool: {
+      name: 'Bulk Image Resizer',
+      slug: '/bulk-image-resizer',
+      badge: 'Bulk Engine',
+      description: 'Compress and resize dozens of web images in a single batch.',
+    },
+    relatedTools: [
+      { name: 'Compress WebP', slug: '/compress-webp' },
+      { name: 'Compress JPG', slug: '/compress-jpg' },
+      { name: 'Png to WebP', slug: '/png-to-webp' },
+    ],
+    quickSummary: [
+      'Large images slow down Largest Contentful Paint (LCP), hurting Google rankings.',
+      'Converting PNG header banners to WebP drops file sizes from 3.4 MB to 195 KB (94% savings).',
+      'Always resize image dimensions to match display container before compressing.',
+    ],
+    specsTable: {
+      headers: ['Image Position', 'Max Width Needed', 'Format Recommended', 'Target Size Cap'],
+      rows: [
+        ['Hero Banners', '1200 px – 1920 px', 'WebP or JPG (82% Quality)', 'Under 150 KB'],
+        ['In-Article Images', '800 px – 1000 px', 'WebP or JPG', 'Under 80 KB'],
+        ['Thumbnails & Avatars', '150 px – 300 px', 'WebP or PNG', 'Under 20 KB'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Why Website Speed Matters for SEO & Conversions',
+        content: [
+          'Google uses Core Web Vitals as an official ranking factor. Pages taking longer than 2.5 seconds to load experience a 50%+ bounce rate.',
+          'By compressing images on PixEnhance before uploading to WordPress or Blogger, your pages load instantly even on 3G mobile networks.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Should I compress images before uploading or use a WordPress plugin?',
+        answer: 'Compressing before upload on PixEnhance is better because WordPress plugins consume server CPU, slow down your database, and often charge subscription fees.',
+      },
+    ],
+  },
+  {
+    slug: 'image-kb-to-mb-converter-and-dpi-vs-pixels-guide',
+    title: 'Image KB to MB Sizing: Understanding Pixels vs DPI in Form Uploads',
+    metaTitle: 'KB to MB Image Converter & DPI vs Pixels Guide - PixEnhance',
+    metaDescription: 'Clear guide on converting file sizes from MB to KB and understanding the technical difference between DPI, PPI, and pixel resolution for documents.',
+    category: 'Dimensions',
+    publishedAt: '2026-05-02',
+    updatedAt: '2026-05-04',
+    readTime: '5 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Compliance & Sizing Editor',
+    },
+    targetKeyword: 'image kb to mb converter dpi vs pixels',
+    secondaryKeywords: ['mb to kb photo converter', 'dpi vs pixels difference', '300 dpi photo size in pixels', 'how to change image resolution'],
+    excerpt: 'Confused between MB, KB, DPI, and Pixels when filling online application forms? Here is the math simplified with conversion formulas.',
+    featuredTool: {
+      name: 'Image Dimensions Inspector',
+      slug: '/image-dimensions',
+      badge: 'Inspector',
+      description: 'Check exact pixel width, height, DPI, and KB size of any image file.',
+    },
+    relatedTools: [
+      { name: 'Compress JPG to 100KB', slug: '/compress-jpg-to-100kb' },
+      { name: 'A4 Image Resizer', slug: '/a4-image-resizer' },
+      { name: 'Aspect Ratio Calculator', slug: '/aspect-ratio-calculator' },
+    ],
+    quickSummary: [
+      '1 MB (Megabyte) = 1,024 KB (Kilobytes). A 5 MB photo equals 5,120 KB.',
+      'Pixels represent digital screen dimensions (e.g. 1920×1080 px).',
+      'DPI (Dots Per Inch) determines print density on paper.',
+      'Real Example: An 8.5 MB high-res scan was re-sampled from 300 DPI (2480×3508 px) to 150 DPI (1240×1754 px), dropping size to 280 KB.',
+    ],
+    specsTable: {
+      headers: ['Digital Metric', 'Definition', 'Example Value', 'Role in Form Uploads'],
+      rows: [
+        ['File Size (KB / MB)', 'Digital storage footprint', '50 KB or 2 MB', 'Strict portal upload limit check'],
+        ['Dimensions (Pixels)', 'Width and height count', '413 × 531 px', 'Ensures photo fits design frame'],
+        ['DPI / PPI', 'Print density per inch', '200 DPI or 300 DPI', 'Determines print sharpness on paper'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'How to Convert MB to KB Easily',
+        content: [
+          'To convert Megabytes (MB) to Kilobytes (KB), multiply by 1,024. For example, 2 MB = 2,048 KB.',
+          'If a form requires a file under 200 KB, your file must be less than 0.19 MB.',
+          'You can use our [Compress JPG to 200KB](/compress-jpg-to-200kb) tool to instantly convert any MB photo into KB format.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Does changing DPI alter file size in KB?',
+        answer: 'Changing DPI metadata alone does not change file size. But changing resolution (pixels) to match a specific DPI changes file size significantly.',
+      },
+    ],
+  },
+  {
+    slug: 'how-to-merge-multiple-pdf-files-into-one',
+    title: 'How to Merge Multiple PDF Files into One Single Document (Mobile & Laptop)',
+    metaTitle: 'Merge Multiple PDFs into One Single File Online - PixEnhance',
+    metaDescription: 'Learn how to combine Aadhaar, marksheets, certificates, and ID proofs into a single PDF file on Android, iPhone, Windows, and Mac.',
+    category: 'PDF & Docs',
+    publishedAt: '2026-05-10',
+    updatedAt: '2026-05-12',
+    readTime: '5 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Document Workflow Specialist',
+    },
+    targetKeyword: 'how to merge multiple pdf files into one',
+    secondaryKeywords: ['combine pdf files free', 'merge pdf for job application', 'join pdf documents on mobile', 'combine aadhaar and marksheet pdf'],
+    excerpt: 'Job applications and college admissions frequently require uploading all documents in a single PDF. Here is how to merge PDFs in seconds.',
+    featuredTool: {
+      name: 'PDF Converter Hub',
+      slug: '/pdf-converter',
+      badge: 'PDF Suite',
+      description: 'Merge, split, compress, and convert PDF documents in your browser.',
+    },
+    relatedTools: [
+      { name: 'Image to PDF', slug: '/image-to-pdf' },
+      { name: 'Compress PDF', slug: '/compress-pdf' },
+      { name: 'PDF to Word', slug: '/pdf-to-word' },
+    ],
+    quickSummary: [
+      'Portals often reject multi-file uploads, asking for one combined PDF.',
+      'Real Example: 4 separate PDFs (Aadhaar 1.2MB, Marksheet 800KB, Degree 1.5MB, ID 900KB) were merged into 1 single 1.8MB document.',
+      'PixEnhance merges PDFs locally inside browser memory — zero server uploads required.',
+    ],
+    specsTable: {
+      headers: ['Input Files', 'Individual Sizes', 'Merged PDF Size', 'Processing Time'],
+      rows: [
+        ['Aadhaar + Marksheet + Certificates', '1.2 MB + 800 KB + 1.5 MB', '1.8 MB (Optimized)', '< 300 milliseconds'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Why Portals Request Single PDF Uploads',
+        content: [
+          'Document verification officers review thousands of applications. Opening 10 separate attachment files per candidate slows down screening.',
+          'A single consolidated PDF with numbered pages allows officers to scroll through your credentials seamlessly.',
+        ],
+      },
+      {
+        heading: 'Step-by-Step PDF Merging Guide',
+        content: [
+          '1. Open our free [PDF Converter Hub](/pdf-converter).',
+          '2. Select "Merge PDF" and choose all your PDF files.',
+          '3. Drag and drop file thumbnails to re-order pages (e.g. ID proof first, then marksheets).',
+          '4. Click "Merge & Download" to save your consolidated PDF.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is my confidential Aadhaar PDF safe when merging on PixEnhance?',
+        answer: 'Yes! PixEnhance runs 100% inside your browser. Your sensitive identity PDFs never touch external servers or databases.',
+      },
+    ],
+  },
+  {
+    slug: 'how-to-reduce-pdf-file-size-without-blurring-text',
+    title: 'How to Reduce PDF File Size Without Blurring Text or Certificates',
+    metaTitle: 'Compress PDF Size Without Blurring Text Online - PixEnhance',
+    metaDescription: 'Step-by-step guide to shrink PDF document file sizes down to 100KB, 200KB, or 500KB while keeping text vector-sharp and stamps legible.',
+    category: 'PDF & Docs',
+    publishedAt: '2026-05-15',
+    updatedAt: '2026-05-18',
+    readTime: '5 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Document Workflow Specialist',
+    },
+    targetKeyword: 'how to reduce pdf file size without blurring text',
+    secondaryKeywords: ['compress pdf under 200kb', 'shrink pdf size online', 'pdf compressor for exam form', 'reduce scanned pdf size'],
+    excerpt: 'Scanned document PDFs are often 10MB to 20MB. Here is how to compress PDF size down to under 200KB without destroying text readability.',
+    featuredTool: {
+      name: 'Compress PDF Online',
+      slug: '/compress-pdf',
+      badge: 'Text Preserving',
+      description: 'Compress PDF documents up to 80% while keeping vector text sharp.',
+    },
+    relatedTools: [
+      { name: 'Image to PDF', slug: '/image-to-pdf' },
+      { name: 'PDF to Word', slug: '/pdf-to-word' },
+      { name: 'PDF Converter', slug: '/pdf-converter' },
+    ],
+    quickSummary: [
+      'Scanned PDFs contain raw uncompressed image streams that make files huge.',
+      'Smart PDF compression re-encodes image streams while keeping vector fonts intact.',
+      'Real Example: A 12.4 MB scanned certificate PDF was compressed down to 480 KB with 100% readable text and official seals.',
+    ],
+    specsTable: {
+      headers: ['Compression Level', 'Original PDF Size', 'Compressed Size', 'Text Sharpness'],
+      rows: [
+        ['Low (High Quality)', '12.4 MB', '2.8 MB', '100% Original Vector'],
+        ['Recommended', '12.4 MB', '480 KB', 'Crisp & High Readability'],
+        ['Extreme (Smallest)', '12.4 MB', '190 KB', 'Acceptable for Screen Review'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Why Scanned PDFs Become Bloated',
+        content: [
+          'When a scanner captures a paper document at 600 DPI, it saves every page as a massive uncompressed color photo inside a PDF wrapper.',
+          'PixEnhance PDF engine analyzes embedded raster streams, downsamples excessive DPI to 150 DPI, and applies smart JBIG2/JPEG compression to drop file size by 80%+ instantly.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can I compress a password-protected PDF file?',
+        answer: 'You must unlock or remove password protection first before compressing, as encrypted streams cannot be re-encoded.',
+      },
+    ],
+  },
+  {
+    slug: 'how-to-convert-jpg-to-pdf-for-documents',
+    title: 'How to Convert JPG to PDF for Aadhaar, Marksheets & Govt Certificates',
+    metaTitle: 'Convert JPG to PDF Under 100KB/200KB for Certificates - PixEnhance',
+    metaDescription: 'Convert photo snapshots of Aadhaar, PAN card, marksheets, and certificates into a clean, official single or multi-page PDF document online.',
+    category: 'Conversion',
+    publishedAt: '2026-05-22',
+    updatedAt: '2026-05-24',
+    readTime: '4 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Format Conversion Specialist',
+    },
+    targetKeyword: 'how to convert jpg to pdf for documents',
+    secondaryKeywords: ['convert jpg to pdf under 100kb', 'convert photo to pdf under 200kb', 'aadhaar jpg to pdf converter', 'multiple photos to single pdf'],
+    excerpt: 'Need to upload paper certificates as PDF? Learn how to convert multiple JPG photos into a single PDF under strict 100KB or 200KB limits.',
+    featuredTool: {
+      name: 'JPG to PDF Converter',
+      slug: '/jpg-to-pdf',
+      badge: 'Multi-Photo',
+      description: 'Convert JPG photos to clean single or multi-page PDF files.',
+    },
+    relatedTools: [
+      { name: 'PNG to PDF', slug: '/png-to-pdf' },
+      { name: 'Image to PDF under 100KB', slug: '/image-to-pdf-under-100kb' },
+      { name: 'Compress PDF', slug: '/compress-pdf' },
+    ],
+    quickSummary: [
+      'Portals often require PDF uploads for certificates instead of raw JPG photos.',
+      'Combining front and back photos of Aadhaar into 1 PDF takes under 10 seconds.',
+      'Real Example: 3 photo snaps of marksheets (total 6.2 MB) were compiled into a single 185 KB PDF file.',
+    ],
+    specsTable: {
+      headers: ['Input Images', 'Output Format', 'Target Size Cap', 'Resulting Quality'],
+      rows: [
+        ['Aadhaar Front + Back (JPG)', 'Single 2-Page PDF', 'Under 100 KB', 'Clear & Legible'],
+        ['Semester Marksheets (3 JPGs)', 'Single 3-Page PDF', 'Under 200 KB', 'High Readability'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'How to Convert Photos to PDF on Mobile or PC',
+        content: [
+          '1. Open our [JPG to PDF](/jpg-to-pdf) tool.',
+          '2. Upload your certificate photos.',
+          '3. Select page orientation (Portrait or Landscape) and page size (A4).',
+          '4. Select target file size cap (e.g. 100KB or 200KB).',
+          '5. Click "Convert to PDF" and download instantly.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is there any watermark added to converted PDFs?',
+        answer: 'No! PixEnhance is 100% free with zero watermarks on your converted PDFs.',
+      },
+    ],
+  },
+  {
+    slug: 'how-to-split-large-pdf-by-pages',
+    title: 'How to Split Large PDF Files & Extract Specific Pages Online',
+    metaTitle: 'Split PDF Pages Online Free - Extract Pages from PDF - PixEnhance',
+    metaDescription: 'Extract specific pages or page ranges from large PDF documents without re-encoding quality loss. Free in-browser PDF splitter tool.',
+    category: 'PDF & Docs',
+    publishedAt: '2026-05-28',
+    updatedAt: '2026-05-30',
+    readTime: '4 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Document Workflow Specialist',
+    },
+    targetKeyword: 'how to split large pdf by pages',
+    secondaryKeywords: ['extract pages from pdf free', 'separate pages in pdf', 'split pdf online no upload', 'extract single page from multi page pdf'],
+    excerpt: 'Have a 50-page PDF document but only need to submit Page 5 and Page 12? Learn how to extract exact pages in seconds.',
+    featuredTool: {
+      name: 'PDF Converter Hub',
+      slug: '/pdf-converter',
+      badge: 'PDF Suite',
+      description: 'Split, extract, and separate PDF pages with visual page previews.',
+    },
+    relatedTools: [
+      { name: 'Compress PDF', slug: '/compress-pdf' },
+      { name: 'PDF to JPG', slug: '/pdf-to-jpg' },
+      { name: 'Image to PDF', slug: '/image-to-pdf' },
+    ],
+    quickSummary: [
+      'Extracting necessary pages reduces file size by 90%+ instantly.',
+      'Real Example: A 45-page book PDF (18 MB) was split to extract 2 specific certificate pages (420 KB total).',
+      'Runs locally in browser without sending sensitive files across the internet.',
+    ],
+    specsTable: {
+      headers: ['Input File', 'Original Size', 'Extracted Result', 'Extracted Size'],
+      rows: [
+        ['45-Page Book / Document PDF', '18 MB', 'Pages 5 & 12 (2 Pages)', '420 KB'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Why Extracting Specific Pages is Essential for Forms',
+        content: [
+          'Many government forms reject uploads over 2MB. If you upload a full 30-page bank statement or degree book, it will be rejected for size.',
+          'Extracting only the relevant semester marksheet or first/last page of bank statement keeps your file small and compliant.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can I extract multiple non-consecutive pages (e.g. Page 1, 4, 7)?',
+        answer: 'Yes! Simply type `1, 4, 7` in the page range input box, and PixEnhance will generate a merged PDF containing only those selected pages.',
+      },
+    ],
+  },
+  {
+    slug: '5-reasons-why-pdf-upload-fails-on-government-portals',
+    title: '5 Common Reasons Why PDF Upload Fails on Government Exam Portals',
+    metaTitle: 'Fix PDF Upload Failures on Govt Portals (5 Common Errors) - PixEnhance',
+    metaDescription: 'Troubleshoot PDF upload errors on SSC, UPSC, IBPS, NTA, and State PSC portals. Fix file size limits, password protection, and format errors.',
+    category: 'PDF & Docs',
+    publishedAt: '2026-06-04',
+    updatedAt: '2026-06-06',
+    readTime: '5 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Compliance & Verification Editor',
+    },
+    targetKeyword: 'pdf upload fails on government portals',
+    secondaryKeywords: ['pdf error in online form', 'why pdf upload failed ssc upsc', 'pdf password protected upload error', 'invalid pdf format error'],
+    excerpt: 'Facing "Invalid File Format" or "File Upload Failed" on an online application? Here are the 5 most common reasons and instant step-by-step fixes.',
+    featuredTool: {
+      name: 'Compress PDF Online',
+      slug: '/compress-pdf',
+      badge: 'Troubleshooter',
+      description: 'Fix oversized, corrupted, or incompatible PDF documents.',
+    },
+    relatedTools: [
+      { name: 'JPG to PDF', slug: '/jpg-to-pdf' },
+      { name: 'PDF Converter', slug: '/pdf-converter' },
+      { name: 'PDF to Word', slug: '/pdf-to-word' },
+    ],
+    quickSummary: [
+      'Reason 1: File size exceeds portal limit (e.g. 500KB cap).',
+      'Reason 2: PDF is password protected (Aadhaar PDFs are locked by default).',
+      'Reason 3: Special characters or spaces in the file name (e.g. `my photo #1.pdf`).',
+      'Reason 4: Corrupted PDF headers caused by bad mobile scanner apps.',
+      'Reason 5: Uploading image files renamed as `.pdf` without true conversion.',
+    ],
+    specsTable: {
+      headers: ['Error Trigger', 'Cause', 'Instant Fix Strategy'],
+      rows: [
+        ['File Size Error', 'PDF exceeds 200KB / 500KB cap', 'Use PixEnhance [Compress PDF](/compress-pdf)'],
+        ['Password Protected', 'Aadhaar / e-PAN default encryption', 'Remove password before uploading'],
+        ['Invalid File Name', 'Spaces or symbols like `#`, `@`, `%`', 'Rename to `aadhaar_card.pdf`'],
+        ['Corrupted Streams', 'Mobile scanner app errors', 'Re-convert JPG images to PDF on PixEnhance'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Detailed Analysis of the 5 Common Errors',
+        content: [
+          '1. **Password Encryption**: Official e-Aadhaar PDFs require your name + birth year password to open. Automated portal upload scripts cannot unlock password-protected PDFs and fail immediately.',
+          '2. **Special Characters in Filename**: Unix-based portal servers reject filenames containing spaces or symbols. Always use simple alphanumeric names like `marksheet.pdf`.',
+          '3. **Oversized Documents**: Always check notification limits and use [Compress PDF](/compress-pdf) to shrink files under required caps.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How do I remove password from Aadhaar PDF before uploading?',
+        answer: 'Open the PDF in Chrome browser, enter password, click Print ➔ Save as PDF. The new PDF will be unencrypted and ready for form upload.',
+      },
+    ],
+  },
+  {
+    slug: 'is-online-file-upload-safe-privacy-guide',
+    title: 'Are Online File Converters Safe? 6 Essential Privacy & Security Tips',
+    metaTitle: 'Are Online Image & PDF Tools Safe? Privacy Guide - PixEnhance',
+    metaDescription: 'Is uploading Aadhaar cards, photos, and certificates to online file tools safe? Learn about cloud server risk vs client-side in-browser processing.',
+    category: 'Compression',
+    publishedAt: '2026-06-10',
+    updatedAt: '2026-06-12',
+    readTime: '6 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Privacy & Security Lead',
+    },
+    targetKeyword: 'are online file converters safe privacy',
+    secondaryKeywords: ['is it safe to compress aadhaar online', 'client side image converter', 'online pdf privacy risks', 'pixenhance privacy guarantee'],
+    excerpt: 'Uploading personal identity documents to random converter websites can pose severe data privacy risks. Here is how to protect your sensitive files.',
+    featuredTool: {
+      name: 'Free Image Compressor',
+      slug: '/image-compressor',
+      badge: '100% Private',
+      description: 'Process photos 100% inside browser memory without cloud server uploads.',
+    },
+    relatedTools: [
+      { name: 'Compress JPG to 50KB', slug: '/compress-jpg-to-50kb' },
+      { name: 'Image to PDF', slug: '/image-to-pdf' },
+      { name: 'About PixEnhance', slug: '/about' },
+    ],
+    quickSummary: [
+      'Many free online converters upload your files to remote cloud servers where they may be stored indefinitely.',
+      'Uploading identity proofs (Aadhaar, PAN, Passport) to unknown servers risks identity theft.',
+      'PixEnhance uses HTML5 Canvas and WebAssembly to process files 100% locally inside your web browser — your files NEVER leave your device.',
+    ],
+    specsTable: {
+      headers: ['Tool Type', 'File Location', 'Privacy Risk Level', 'Processing Speed'],
+      rows: [
+        ['Traditional Cloud Converters', 'Uploaded to remote servers', 'High (Data stored on cloud)', 'Slower (Upload + Download wait)'],
+        ['PixEnhance Client-Side Engine', 'Stays in browser memory', 'Zero Risk (100% Private)', 'Instant (Hardware accelerated)'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'The 6 Golden Rules of Online File Privacy',
+        content: [
+          '1. **Check for In-Browser Processing**: Prefer tools built on WebAssembly / HTML5 Canvas that run locally.',
+          '2. **Never Upload Unencrypted Sensitive IDs to Unknown Sites**: Check the URL domain and privacy policy before dropping Aadhaar/PAN files.',
+          '3. **Verify HTTPS Encryption**: Ensure the website displays a secure lock icon (`https://`).',
+          '4. **Use Watermarks when Sharing IDs**: Add a watermark like "For SSC Exam Application Only".',
+          '5. **Clear Browser Cache After Processing**: Close browser tabs after finishing document tasks.',
+          '6. **Read Privacy Policies**: Ensure the service explicitly disclaims server storage of user files.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How does PixEnhance process files without uploading them?',
+        answer: 'PixEnhance uses modern JavaScript and HTML5 Canvas API in your browser. All pixel transformations and byte compression run directly on your phone or PC hardware.',
+      },
+    ],
+  },
+  {
+    slug: 'resume-job-application-file-size-format-mistakes',
+    title: '7 Fatal Resume File Format & Size Mistakes (And How to Fix Them)',
+    metaTitle: 'Resume File Format & Size Mistakes (ATS Compatibility Guide) - PixEnhance',
+    metaDescription: 'Avoid resume rejection by ATS software. Master proper resume PDF formatting, file size targets (under 500KB), and font embedding.',
+    category: 'PDF & Docs',
+    publishedAt: '2026-06-16',
+    updatedAt: '2026-06-18',
+    readTime: '5 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Document Workflow Specialist',
+    },
+    targetKeyword: 'resume file size format mistakes ats',
+    secondaryKeywords: ['resume file size under 500kb', 'docx vs pdf for resume', 'ats friendly resume format', 'compress resume pdf online'],
+    excerpt: 'Is your resume getting ignored by recruiters? You might be committing critical file formatting and size errors that fail Applicant Tracking Systems (ATS).',
+    featuredTool: {
+      name: 'Word to PDF Converter',
+      slug: '/word-to-pdf',
+      badge: 'ATS Preserving',
+      description: 'Convert DOCX resumes to clean ATS-compliant PDF documents.',
+    },
+    relatedTools: [
+      { name: 'Compress PDF', slug: '/compress-pdf' },
+      { name: 'PDF to Word', slug: '/pdf-to-word' },
+      { name: 'A4 Resizer', slug: '/a4-image-resizer' },
+    ],
+    quickSummary: [
+      'Sending resumes as `.docx` risks layout distortion if HR opens them on different devices.',
+      'Heavy Canva graphic resumes (8MB+) get blocked by company email filters.',
+      'Real Example: An 8.4 MB graphic resume PDF was compressed to 320 KB while preserving 100% searchable ATS text.',
+    ],
+    specsTable: {
+      headers: ['Resume Metric', 'Mistake to Avoid', 'Best Practice Target'],
+      rows: [
+        ['File Format', 'Uploading raw `.docx` or image JPG', 'Export as vector PDF with embedded fonts'],
+        ['File Size', 'Large 5MB–10MB graphic PDF', 'Under 500 KB (Recommended 200KB–350KB)'],
+        ['File Naming', '`Resume_final_v2.pdf`', '`Firstname_Lastname_Resume.pdf`'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Why You Must Always Submit PDF Resumes',
+        content: [
+          'Microsoft Word (.docx) files display differently depending on installed fonts, operating systems, and screen sizes. A beautiful resume built on Windows can look broken when opened on Mac or mobile.',
+          'Converting to PDF locks fonts, margins, and spacing in place permanently.',
+          'Use our [Word to PDF](/word-to-pdf) tool to create clean, ATS-readable PDFs in seconds.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the ideal file size for a resume PDF?',
+        answer: 'Keep your resume PDF under 500 KB (ideally between 150 KB and 350 KB). This ensures fast email attachments and smooth ATS parsing.',
+      },
+    ],
+  },
+  {
+    slug: 'how-to-scan-clean-pdf-documents-with-smartphone',
+    title: 'How to Scan Documents with Your Phone & Create Crisp PDFs',
+    metaTitle: 'Scan Clean PDF Documents with Smartphone (Step-by-Step Guide) - PixEnhance',
+    metaDescription: 'Transform smartphone photos of documents into professional, high-contrast, perfectly cropped PDF files without expensive hardware.',
+    category: 'PDF & Docs',
+    publishedAt: '2026-06-22',
+    updatedAt: '2026-06-24',
+    readTime: '5 min read',
+    author: {
+      name: 'Jaswinder Singh',
+      role: 'Document Workflow Specialist',
+    },
+    targetKeyword: 'how to scan clean pdf documents with smartphone',
+    secondaryKeywords: ['phone document scan to pdf', 'clean document photo for form', 'convert phone photo to clear pdf', 'crop scan document online'],
+    excerpt: 'Don’t have a flatbed hardware scanner? Here is how to capture crystal-clear document scans using your smartphone camera and convert them into clean PDFs.',
+    featuredTool: {
+      name: 'Image to PDF Converter',
+      slug: '/image-to-pdf',
+      badge: 'Scanner Suite',
+      description: 'Combine phone document snapshots into sharp, high-contrast PDFs.',
+    },
+    relatedTools: [
+      { name: 'JPG to PDF', slug: '/jpg-to-pdf' },
+      { name: 'Compress PDF', slug: '/compress-pdf' },
+      { name: 'Image Cropper', slug: '/image-cropper' },
+    ],
+    quickSummary: [
+      'Good lighting and camera alignment eliminate 90% of phone scan flaws.',
+      'Cropping table shadows and applying high contrast turns yellow paper photos into crisp black and white scans.',
+      'Real Example: A shadowy 4.8 MB phone photo of a mark sheet was cropped, contrast-enhanced, and converted into a clean 140 KB PDF.',
+    ],
+    specsTable: {
+      headers: ['Scanning Factor', 'Common Mistake', 'Best Practice'],
+      rows: [
+        ['Lighting', 'Casting hand shadow over paper', 'Stand beside natural window light or side lamp'],
+        ['Angle', 'Tilted perspective shot', 'Hold phone parallel directly above document'],
+        ['Background', 'Patterned bedsheets or wooden desk', 'Place paper on dark contrasting flat surface'],
+      ],
+    },
+    contentSections: [
+      {
+        heading: 'Step-by-Step: Capturing Scanner-Quality Photos on Phone',
+        content: [
+          '1. Place your paper document on a dark, flat surface (dark desk or dark floor). The contrast helps with automatic page edge detection.',
+          '2. Ensure even lighting without hand shadows.',
+          '3. Hold phone directly parallel over the page (not at an angle).',
+          '4. Take photo and upload to our free [JPG to PDF](/jpg-to-pdf) tool.',
+          '5. Crop edges, adjust target size to under 200KB, and download your clean PDF.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can I scan multi-page documents with phone photo mode?',
+        answer: 'Yes! Snap photos of all pages, upload them together in [Image to PDF](/image-to-pdf), arrange page order, and export as a single multi-page PDF.',
+      },
+    ],
+  },
 ];
 
 export const BLOG_CATEGORIES = [
