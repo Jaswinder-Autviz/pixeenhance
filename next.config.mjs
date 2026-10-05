@@ -45,16 +45,33 @@ const nextConfig = {
       { source: '/panorama-splitter', destination: '/image-splitter', permanent: true },
       { source: '/photo-splitter', destination: '/image-splitter', permanent: true },
 
-      // Core Image & Compression Aliases
-      { source: '/compress-jpg-to-20kb', destination: '/compress-image-to-20kb', permanent: true },
-      { source: '/compress-jpeg-to-20kb', destination: '/compress-image-to-20kb', permanent: true },
-      { source: '/compress-photo-to-20kb', destination: '/compress-image-to-20kb', permanent: true },
+      // Core Image & Compression Aliases (Consolidated 301 Redirects)
+      { source: '/compress-jpg-to-20kb', destination: '/compress-jpg-to-50kb', permanent: true },
+      { source: '/compress-image-to-20kb', destination: '/compress-jpg-to-50kb', permanent: true },
+      { source: '/compress-jpeg-to-20kb', destination: '/compress-jpg-to-50kb', permanent: true },
+      { source: '/compress-photo-to-20kb', destination: '/compress-jpg-to-50kb', permanent: true },
       { source: '/compress-image-to-50kb', destination: '/compress-jpg-to-50kb', permanent: true },
       { source: '/compress-photo-to-50kb', destination: '/compress-jpg-to-50kb', permanent: true },
       { source: '/compress-image-to-100kb', destination: '/compress-jpg-to-100kb', permanent: true },
       { source: '/compress-photo-to-100kb', destination: '/compress-jpg-to-100kb', permanent: true },
       { source: '/compress-image-to-200kb', destination: '/compress-jpg-to-200kb', permanent: true },
       { source: '/compress-photo-to-200kb', destination: '/compress-jpg-to-200kb', permanent: true },
+
+      // PDF under-KB variants redirecting to main PDF tools
+      { source: '/jpg-to-pdf-under-50kb', destination: '/jpg-to-pdf', permanent: true },
+      { source: '/jpg-to-pdf-under-100kb', destination: '/jpg-to-pdf', permanent: true },
+      { source: '/jpg-to-pdf-under-200kb', destination: '/jpg-to-pdf', permanent: true },
+      { source: '/image-to-pdf-under-100kb', destination: '/image-to-pdf', permanent: true },
+      { source: '/image-to-pdf-under-200kb', destination: '/image-to-pdf', permanent: true },
+
+      // Paper series variants redirecting to A4 Resizer
+      { source: '/a0-image-resizer', destination: '/a4-image-resizer', permanent: true },
+      { source: '/a1-image-resizer', destination: '/a4-image-resizer', permanent: true },
+      { source: '/a2-image-resizer', destination: '/a4-image-resizer', permanent: true },
+      { source: '/a3-image-resizer', destination: '/a4-image-resizer', permanent: true },
+      { source: '/a5-image-resizer', destination: '/a4-image-resizer', permanent: true },
+      { source: '/a6-image-resizer', destination: '/a4-image-resizer', permanent: true },
+      { source: '/a7-image-resizer', destination: '/a4-image-resizer', permanent: true },
 
       // Converter Aliases
       { source: '/webp-to-jpg-converter', destination: '/webp-to-jpg', permanent: true },

@@ -18,22 +18,45 @@ interface SEOContentSectionProps {
 }
 
 export function SEOContentSection({ tool }: SEOContentSectionProps) {
-  const defaultFaqs = [
+  const universalFaqs = [
     {
       question: `Are my images or documents saved or stored anywhere when using ${tool.name}?`,
-      answer: `Never. All image processing with ${tool.name} happens completely locally inside your web browser. Your private pictures and sensitive documents are never uploaded to any remote server or stored in any database.`,
+      answer: `Never. All image and document processing with ${tool.name} happens completely locally inside your web browser using WebAssembly and HTML5 Canvas API. Your private pictures and sensitive documents are never uploaded to any remote server or stored in any database.`,
     },
     {
       question: `Is ${tool.name} completely free to use?`,
       answer: `Yes, 100% free with no hidden fees, paid subscriptions, account registrations, or watermarks placed on exported files.`,
     },
     {
-      question: `What formats are compatible with ${tool.name}?`,
-      answer: `${tool.name} supports ${tool.supportedFormats.join(', ')} files with high-speed in-browser processing and instant downloads.`,
+      question: `What file formats are compatible with ${tool.name}?`,
+      answer: `${tool.name} supports ${tool.supportedFormats.join(', ')} files with high-speed in-browser hardware acceleration and instant local downloads.`,
+    },
+    {
+      question: `Why should I use ${tool.name} instead of uploading files to cloud converters?`,
+      answer: `Traditional cloud converter websites upload your files to remote servers across the internet, exposing confidential photos, Aadhaar/PAN identity proofs, or financial marksheets to potential privacy breaches. ${tool.name} processes everything locally in browser memory.`,
+    },
+    {
+      question: `Will using ${tool.name} add watermarks to my exported files?`,
+      answer: `No. PixEnhance exports clean, high-resolution original files without adding promotional logos, brand watermarks, or quality restrictions.`,
+    },
+    {
+      question: `Does ${tool.name} work on mobile phones and tablets?`,
+      answer: `Yes. ${tool.name} is fully responsive and optimized for Android, iPhone, iPad, Windows, Mac, and Linux browsers without installing third-party mobile apps.`,
+    },
+    {
+      question: `How can I ensure my output file meets exact online form requirements?`,
+      answer: `Always check official recruitment notification PDFs for exact minimum and maximum KB limits and pixel dimensions before uploading. Use ${tool.name} to adjust target size sliders or lock aspect ratios accordingly.`,
     },
   ];
 
-  const faqsToRender = tool.faqs && tool.faqs.length > 0 ? tool.faqs : defaultFaqs;
+  // Combine tool-specific FAQs with universal FAQs to guarantee 7-8 detailed FAQs per page
+  const customFaqs = tool.faqs || [];
+  const mergedFaqs = [...customFaqs];
+  universalFaqs.forEach((uFaq) => {
+    if (!mergedFaqs.some((f) => f.question.toLowerCase().includes(uFaq.question.substring(0, 25).toLowerCase()))) {
+      mergedFaqs.push(uFaq);
+    }
+  });
 
   return (
     <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10 relative z-10">
@@ -51,28 +74,28 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
             Overview
           </a>
           <a
+            href="#use-cases"
+            className="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            Use Cases
+          </a>
+          <a
             href="#how-to-use"
             className="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             How-To
           </a>
           <a
-            href="#formats-privacy"
+            href="#common-mistakes"
             className="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
-            Formats &amp; Privacy
+            Mistakes to Avoid
           </a>
           <a
             href="#faqs"
             className="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             FAQs
-          </a>
-          <a
-            href="#related-tools"
-            className="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-          >
-            Related Tools
           </a>
         </div>
       </div>
@@ -88,7 +111,7 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
           </div>
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
-              In-Depth Overview
+              In-Depth Overview &amp; Specifications
             </span>
             <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight mt-0.5">
               What is {tool.name}?
@@ -96,8 +119,12 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
           </div>
         </div>
 
-        <p className="text-sm sm:text-base md:text-lg text-black dark:text-slate-200 leading-relaxed mb-6 font-normal">
-          {tool.subtitle} PixEnhance provides an editorial-grade, privacy-first interface designed to give creators, developers, photographers, and everyday users instant control over their digital media without registration, subscriptions, or watermarks.
+        <p className="text-sm sm:text-base md:text-lg text-black dark:text-slate-200 leading-relaxed mb-4 font-normal">
+          {tool.subtitle} PixEnhance provides an editorial-grade, privacy-first interface designed to give creators, developers, students, and job applicants instant control over their digital media without registration, subscriptions, or watermarks.
+        </p>
+
+        <p className="text-sm text-black dark:text-slate-300 leading-relaxed mb-6 font-normal">
+          Whether you are preparing identity documents for recruitment portals, optimizing website graphics for faster Core Web Vitals page speed, or formatting media for social channels, {tool.name} processes all data directly inside browser memory via HTML5 Canvas and WebAssembly.
         </p>
 
         {/* Feature Highlights Grid */}
@@ -114,7 +141,55 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
         </div>
       </div>
 
-      {/* 2. Step-by-Step: How to use */}
+      {/* 2. Key Use Cases & Applications */}
+      <div
+        id="use-cases"
+        className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs backdrop-blur-sm scroll-mt-24 space-y-4"
+      >
+        <div className="flex items-center gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+          <div className="p-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-200/60 dark:border-purple-900/50">
+            <FileCode className="h-5 w-5" />
+          </div>
+          <div>
+            <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight">
+              Primary Use Cases for {tool.name}
+            </h2>
+            <p className="text-xs sm:text-sm text-black dark:text-slate-300">Practical real-world applications across exams, web development, and media.</p>
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-4 pt-2">
+          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
+            <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">1. Online Exam &amp; Recruitment Applications</h3>
+            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
+              Format passport photos, signatures, and certificates to meet strict portal limits (e.g. 20KB–50KB or 100KB–200KB caps). Always verify exact requirements from official recruitment notification PDFs before uploading.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
+            <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">2. Website Speed &amp; SEO Optimization</h3>
+            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
+              Reduce image payload on WordPress or Blogger sites by up to 85%. Lower image sizes improve Largest Contentful Paint (LCP) scores and boost Google rankings.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
+            <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">3. Document Archival &amp; Verification</h3>
+            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
+              Prepare high-contrast scans of Aadhaar, PAN card, marksheets, and identity proofs for college admissions, bank KYC, or visa applications in complete privacy.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
+            <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">4. Social Media &amp; Graphic Delivery</h3>
+            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
+              Scale graphics to exact platform dimensions (Instagram 1080×1350, YouTube 1280×720, WhatsApp DP 320×320) to prevent aggressive social media compression blur.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Step-by-Step: How to use */}
       <div
         id="how-to-use"
         className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs backdrop-blur-sm scroll-mt-24"
@@ -157,10 +232,43 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
         </div>
       </div>
 
+      {/* 4. Common Mistakes to Avoid */}
+      <div
+        id="common-mistakes"
+        className="rounded-3xl border border-amber-200/80 dark:border-amber-900/50 bg-amber-50/40 dark:bg-amber-950/20 p-6 sm:p-8 shadow-xs backdrop-blur-sm scroll-mt-24 space-y-4"
+      >
+        <div className="flex items-center gap-3 pb-3 border-b border-amber-200/60 dark:border-amber-900/40">
+          <div className="p-2.5 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+            <HelpCircle className="h-5 w-5" />
+          </div>
+          <div>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+              Common Mistakes to Avoid
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Prevent upload errors and visual degradation.</p>
+          </div>
+        </div>
+
+        <ul className="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+          <li className="flex items-start gap-2.5 p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-amber-200/60 dark:border-amber-900/40">
+            <span className="text-amber-600 font-bold shrink-0">&bull;</span>
+            <span><strong>Stretching Aspect Ratios:</strong> Unchecking aspect ratio lock stretches faces and signature strokes. Keep aspect ratio locked when resizing photos.</span>
+          </li>
+          <li className="flex items-start gap-2.5 p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-amber-200/60 dark:border-amber-900/40">
+            <span className="text-amber-600 font-bold shrink-0">&bull;</span>
+            <span><strong>Compressing Without Cropping:</strong> Trying to compress a full 4000×3000 photo to 20KB without cropping background margins makes the image blurry. Crop tightly around the subject first.</span>
+          </li>
+          <li className="flex items-start gap-2.5 p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-amber-200/60 dark:border-amber-900/40">
+            <span className="text-amber-600 font-bold shrink-0">&bull;</span>
+            <span><strong>Uploading Wrong Formats:</strong> Portals expecting JPG files will reject `.png` or `.webp` files. Use our format converters to output standard `.jpg` files when required.</span>
+          </li>
+        </ul>
+      </div>
+
       {/* Mid-Article Sponsored Banner */}
       <AdPlaceholder slot="mid-content" label="Sponsored Guide • In-Article Display" />
 
-      {/* 3. Supported Formats & Technical Specifications */}
+      {/* 5. Supported Formats & Privacy Highlight */}
       <div id="formats-privacy" className="grid md:grid-cols-2 gap-6 scroll-mt-24">
         <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-7 shadow-xs backdrop-blur-sm flex flex-col justify-between">
           <div>
@@ -199,16 +307,16 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
               <span>Complete Privacy Guarantee</span>
             </div>
             <p className="text-sm text-emerald-950 dark:text-emerald-200 leading-relaxed font-normal">
-              Your photos and documents are processed with complete confidentiality. Your files stay strictly on your device, and are never stored, tracked, or shared.
+              Your photos and documents are processed with complete confidentiality. Your files stay strictly on your device with zero server uploads.
             </p>
           </div>
           <div className="mt-4 pt-3 border-t border-emerald-200/60 dark:border-emerald-900/40 text-xs text-emerald-700 dark:text-emerald-400 font-mono font-bold">
-            100% Private &bull; Fast &bull; Free Forever
+            100% Private Client-Side Processing &bull; Fast &bull; Free Forever
           </div>
         </div>
       </div>
 
-      {/* 4. Frequently Asked Questions */}
+      {/* 6. Frequently Asked Questions */}
       <div
         id="faqs"
         className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs backdrop-blur-sm scroll-mt-24"
@@ -219,16 +327,16 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
           </div>
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight">
-              Frequently Asked Questions
+              Frequently Asked Questions ({mergedFaqs.length} Answers)
             </h2>
             <p className="text-sm text-black dark:text-slate-300">
-              Clear answers regarding capabilities and security.
+              Clear technical answers regarding functionality, privacy, and form compliance.
             </p>
           </div>
         </div>
 
         <div className="divide-y divide-slate-100 dark:divide-slate-800">
-          {faqsToRender.map((faq, idx) => (
+          {mergedFaqs.map((faq, idx) => (
             <details key={idx} className="group py-4" open={idx === 0}>
               <summary className="flex w-full cursor-pointer list-none items-center justify-between text-left text-base sm:text-lg font-bold text-black dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
                 <span>{faq.question}</span>
@@ -245,7 +353,7 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
       {/* Pre-Related Tools Native Ad */}
       <AdPlaceholder slot="in-content" label="Sponsored Recommendations • Native Banner" />
 
-      {/* 5. Contextual Related Tools & Next Workflow Steps */}
+      {/* 7. Contextual Related Tools & Next Workflow Steps */}
       <div id="related-tools" className="scroll-mt-24">
         <RelatedTools currentSlug={tool.slug} />
       </div>

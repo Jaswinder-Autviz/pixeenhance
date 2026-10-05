@@ -196,7 +196,7 @@ export default function PrivacyPage() {
               <code className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
                 localStorage
               </code>{' '}
-              solely to remember your chosen visual theme (Light or Dark mode). No tracking cookies or cross-site fingerprinting tokens are deployed.
+              solely to remember your chosen visual theme (Light or Dark mode). Essential browser storage and third-party advertising cookies are handled transparently as detailed below.
             </p>
           </section>
 

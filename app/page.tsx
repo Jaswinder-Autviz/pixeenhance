@@ -728,7 +728,7 @@ export default function HomePage() {
             },
             {
               title: 'No Account Required',
-              desc: 'Start editing immediately. No signup forms, passwords, email verification, or tracking cookies.',
+              desc: 'Start editing immediately. No signup forms, passwords, or email verification required.',
               icon: CheckCircle2,
               color: 'text-rose-600 bg-rose-50 dark:bg-rose-950/60 border-rose-200 dark:border-rose-800',
             },
@@ -831,7 +831,7 @@ export default function HomePage() {
               Your Files Never Leave Your Computer
             </h2>
             <p className="text-base sm:text-lg text-black dark:text-slate-200 leading-relaxed mb-6 font-normal">
-              PixEnhance processes all your photos, documents, and code directly on your device. Everything remains entirely confidential with zero tracking and zero data leaks.
+              PixEnhance processes all your photos, documents, and media files directly on your device with zero server file uploads. Your data stays 100% confidential.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <Link

@@ -7,7 +7,7 @@ import { BlogListClient } from '@/components/blog/BlogListClient';
 export const metadata: Metadata = {
   title: 'Practical Image & PDF Guides (SEO, Dimensions & Optimization) | PixEnhance',
   description:
-    'Human-written, step-by-step guides for image compression, pixel dimensions, passport visa sizing, format conversion, and PDF optimization without quality loss.',
+    'Practical, step-by-step guides for image compression, pixel dimensions, passport visa sizing, format conversion, and PDF optimization without quality loss.',
   alternates: {
     canonical: 'https://pixenhance.in/blog',
   },
@@ -44,7 +44,7 @@ export default function BlogIndexPage() {
     '@type': 'Blog',
     name: 'PixEnhance Guides & Technical Articles',
     description:
-      'Human-written tutorials and exact specifications for image compression, dimensions, and document conversions.',
+      'Comprehensive tutorials and exact specifications for image compression, dimensions, and document conversions.',
     url: 'https://pixenhance.in/blog',
     publisher: {
       '@type': 'Organization',
