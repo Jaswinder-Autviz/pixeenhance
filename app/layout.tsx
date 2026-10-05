@@ -175,6 +175,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={nunito.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7732882072230308"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#070b14] text-black dark:text-slate-100 font-sans selection:bg-brand-500 selection:text-white antialiased transition-colors relative"
         suppressHydrationWarning
