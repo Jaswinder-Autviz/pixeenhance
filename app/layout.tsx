@@ -4,7 +4,6 @@ import { Nunito } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
-import { GoogleAdSense } from '@/components/common/GoogleAdSense';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -210,9 +209,6 @@ export default function RootLayout({
             });
           `}
         </Script>
-
-        {/* Google AdSense - Injected cleanly without data-nscript attribute */}
-        <GoogleAdSense publisherId="ca-pub-7732882072230308" />
 
         {/* Microsoft Clarity Tracking */}
         <Script
