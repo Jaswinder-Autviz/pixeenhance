@@ -373,18 +373,6 @@ export function Header() {
                 );
               })}
 
-              {/* Direct "All Tools" Directory Link */}
-              <Link
-                href="/tools"
-                onClick={closeDropdowns}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[14px] font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors"
-              >
-                <span>All Tools</span>
-                <span className="px-1.5 py-0.2 rounded-md bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 text-[10px] font-mono font-extrabold">
-                  60+
-                </span>
-              </Link>
-
               {/* Direct "Blog" Link */}
               <Link
                 href="/blog"
@@ -445,14 +433,6 @@ export function Header() {
                   className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
                 >
                   <span>Blog</span>
-                </Link>
-                <Link
-                  href="/tools"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1"
-                >
-                  <span>All 60+ Tools</span>
-                  <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
             </div>
