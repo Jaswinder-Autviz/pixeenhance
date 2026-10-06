@@ -42,7 +42,7 @@ import {
   Compass,
 } from 'lucide-react';
 import { AdBanner } from '@/components/common/AdBanner';
-import { TOOLS_LIST, ToolCategory } from '@/src/data/toolsList';
+import { TOOLS_LIST, ToolCategory, ToolItem } from '@/src/data/toolsList';
 
 const CATEGORIES: Array<ToolCategory | 'All'> = [
   'All',
@@ -54,253 +54,199 @@ const CATEGORIES: Array<ToolCategory | 'All'> = [
   'Utilities',
 ];
 
-export interface CategoryThemeConfig {
-  bg: string;
-  cardBg: string;
-  text: string;
-  border: string;
-  badge: string;
-  gradient: string;
-  iconBg: string;
-  iconText: string;
-  iconBorder: string;
-  iconHoverBg: string;
-  cardBorderHover: string;
-  cardTopAccent: string;
-  launchBadge: string;
-  tabActive: string;
-}
-
 interface CategoryMeta {
   title: string;
   subtitle: string;
   icon: React.ComponentType<{ className?: string }>;
   gradient: string;
   badge: string;
+  accentColor: string;
+  badgeStyle: string;
 }
 
 const CATEGORY_META: Record<ToolCategory, CategoryMeta> = {
   Compress: {
-    title: 'Image Compression Tools',
-    subtitle: 'Reduce file sizes up to 85% without sacrificing visual sharpness. Fast, free & private.',
+    title: 'Image Compression',
+    subtitle: 'Reduce file sizes up to 85% without losing visual clarity.',
     icon: Minimize2,
-    gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
+    gradient: 'from-emerald-500 to-teal-600',
+    accentColor: 'emerald',
     badge: 'High Savings',
+    badgeStyle: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
   },
   Convert: {
-    title: 'Image Compression & Vector Converters',
-    subtitle: 'Compress image files up to 85%, and convert seamlessly between JPG, PNG, WebP, SVG, and HEIC in seconds',
+    title: 'Compression & Image Converters',
+    subtitle: 'Convert seamlessly between JPG, PNG, WebP, SVG, and HEIC in seconds.',
     icon: Repeat,
-    gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
+    gradient: 'from-emerald-500 to-teal-600',
+    accentColor: 'emerald',
     badge: 'Compress & Convert',
+    badgeStyle: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
   },
   'PDF Tools': {
     title: 'PDF Tools & Document Converters',
-    subtitle: 'Merge photos to multi-page PDF, extract PDF pages to JPG/PNG, animate to GIF, and compress PDFs',
+    subtitle: 'Merge images into multi-page PDF, extract PDF pages, and compress PDFs.',
     icon: FileText,
-    gradient: 'from-rose-500 via-red-600 to-amber-500',
-    badge: 'Multi-Select',
+    gradient: 'from-rose-500 to-red-600',
+    accentColor: 'rose',
+    badge: 'Document Tools',
+    badgeStyle: 'bg-rose-50 text-rose-700 dark:bg-rose-950/80 dark:text-rose-300 border-rose-200 dark:border-rose-800',
   },
   Resize: {
     title: 'Resize & Scale Tools',
-    subtitle: 'Scale photos by dimensions, bulk batches, ISO A0–A7 series, passport photos, and 8× enlargers',
+    subtitle: 'Scale photos by custom dimensions, ISO A0–A7 series, and resolution presets.',
     icon: Maximize2,
-    gradient: 'from-sky-500 via-blue-600 to-indigo-600',
+    gradient: 'from-sky-500 to-blue-600',
+    accentColor: 'sky',
     badge: 'Precision Scale',
+    badgeStyle: 'bg-sky-50 text-sky-700 dark:bg-sky-950/80 dark:text-sky-300 border-sky-200 dark:border-sky-800',
   },
   'Crop & Edit': {
-    title: 'Crop & Photo Editing Tools',
-    subtitle: 'Split images, crop photos, make photo collages, rotate, and mirror flip',
+    title: 'Crop & Photo Editing',
+    subtitle: 'Crop photos, build photo collages, rotate, flip, and split images.',
     icon: Crop,
-    gradient: 'from-purple-500 via-violet-600 to-pink-500',
-    badge: 'Creative Studio',
+    gradient: 'from-purple-500 to-pink-600',
+    accentColor: 'purple',
+    badge: 'Photo Studio',
+    badgeStyle: 'bg-purple-50 text-purple-700 dark:bg-purple-950/80 dark:text-purple-300 border-purple-200 dark:border-purple-800',
   },
   'Social Media': {
-    title: 'Social Media Image Resizers',
-    subtitle: 'Pre-formatted dimension presets for Instagram, YouTube thumbnails, and WhatsApp DP',
+    title: 'Social Media Resizers',
+    subtitle: 'Dimension presets for Instagram, YouTube thumbnails, and WhatsApp DP.',
     icon: Camera,
-    gradient: 'from-pink-500 via-rose-500 to-amber-500',
+    gradient: 'from-pink-500 to-rose-600',
+    accentColor: 'pink',
     badge: 'Social Presets',
+    badgeStyle: 'bg-pink-50 text-pink-700 dark:bg-pink-950/80 dark:text-pink-300 border-pink-200 dark:border-pink-800',
   },
   Utilities: {
-    title: 'Image Utilities & Developer Tools',
-    subtitle: 'Eyedropper pixel color picker, palette extractor, Base64 converters, and dimension inspectors',
+    title: 'Developer & Image Utilities',
+    subtitle: 'Eyedropper pixel color picker, palette extractor, and Base64 converters.',
     icon: Sliders,
-    gradient: 'from-amber-500 via-orange-500 to-yellow-500',
+    gradient: 'from-amber-500 to-orange-600',
+    accentColor: 'amber',
     badge: 'Developer Tools',
+    badgeStyle: 'bg-amber-50 text-amber-700 dark:bg-amber-950/80 dark:text-amber-300 border-amber-200 dark:border-amber-800',
   },
 };
 
-// Refined, high-contrast category theme styling with clean backgrounds
-function getCategoryTheme(category: ToolCategory): CategoryThemeConfig {
-  switch (category) {
-    case 'Compress':
-    case 'Convert':
-      return {
-        bg: 'bg-emerald-500/10 dark:bg-emerald-950/40',
-        cardBg: 'bg-gradient-to-b from-emerald-50/70 via-white to-slate-50/90 dark:from-emerald-950/30 dark:via-slate-900/95 dark:to-slate-900',
-        text: 'text-emerald-700 dark:text-emerald-400',
-        border: 'border-emerald-200/90 dark:border-emerald-900/50',
-        badge: 'bg-emerald-100/90 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/70',
-        gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
-        iconBg: 'bg-emerald-100/80 dark:bg-emerald-950/70',
-        iconText: 'text-emerald-700 dark:text-emerald-400',
-        iconBorder: 'border-emerald-300/80 dark:border-emerald-800/70',
-        iconHoverBg: 'group-hover:bg-gradient-to-br group-hover:from-emerald-500 group-hover:to-teal-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-emerald-500/30 group-hover:border-transparent',
-        cardBorderHover: 'hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-emerald-500/15',
-        cardTopAccent: 'bg-gradient-to-r from-emerald-500 to-teal-500',
-        launchBadge: 'group-hover:bg-gradient-to-r group-hover:from-emerald-600 group-hover:to-teal-600 group-hover:text-white',
-        tabActive: 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25',
-      };
-    case 'PDF Tools':
-      return {
-        bg: 'bg-rose-500/10 dark:bg-rose-950/40',
-        cardBg: 'bg-gradient-to-b from-rose-50/70 via-white to-slate-50/90 dark:from-rose-950/30 dark:via-slate-900/95 dark:to-slate-900',
-        text: 'text-rose-700 dark:text-rose-400',
-        border: 'border-rose-200/90 dark:border-rose-900/50',
-        badge: 'bg-rose-100/90 text-rose-800 dark:bg-rose-950/80 dark:text-rose-300 border border-rose-300 dark:border-rose-800/70',
-        gradient: 'from-rose-500 via-red-600 to-amber-500',
-        iconBg: 'bg-rose-100/80 dark:bg-rose-950/70',
-        iconText: 'text-rose-700 dark:text-rose-400',
-        iconBorder: 'border-rose-300/80 dark:border-rose-800/70',
-        iconHoverBg: 'group-hover:bg-gradient-to-br group-hover:from-rose-500 group-hover:to-red-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-rose-500/30 group-hover:border-transparent',
-        cardBorderHover: 'hover:border-rose-500 dark:hover:border-rose-500 hover:shadow-rose-500/15',
-        cardTopAccent: 'bg-gradient-to-r from-rose-500 to-red-500',
-        launchBadge: 'group-hover:bg-gradient-to-r group-hover:from-rose-600 group-hover:to-red-600 group-hover:text-white',
-        tabActive: 'bg-gradient-to-r from-rose-600 to-red-600 text-white shadow-lg shadow-rose-500/25',
-      };
-    case 'Resize':
-      return {
-        bg: 'bg-sky-500/10 dark:bg-sky-950/40',
-        cardBg: 'bg-gradient-to-b from-sky-50/70 via-white to-slate-50/90 dark:from-sky-950/30 dark:via-slate-900/95 dark:to-slate-900',
-        text: 'text-sky-700 dark:text-sky-400',
-        border: 'border-sky-200/90 dark:border-sky-900/50',
-        badge: 'bg-sky-100/90 text-sky-800 dark:bg-sky-950/80 dark:text-sky-300 border border-sky-300 dark:border-sky-800/70',
-        gradient: 'from-sky-500 via-blue-600 to-indigo-600',
-        iconBg: 'bg-sky-100/80 dark:bg-sky-950/70',
-        iconText: 'text-sky-700 dark:text-sky-400',
-        iconBorder: 'border-sky-300/80 dark:border-sky-800/70',
-        iconHoverBg: 'group-hover:bg-gradient-to-br group-hover:from-sky-500 group-hover:to-blue-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-sky-500/30 group-hover:border-transparent',
-        cardBorderHover: 'hover:border-sky-500 dark:hover:border-sky-500 hover:shadow-sky-500/15',
-        cardTopAccent: 'bg-gradient-to-r from-sky-500 to-blue-500',
-        launchBadge: 'group-hover:bg-gradient-to-r group-hover:from-sky-600 group-hover:to-blue-600 group-hover:text-white',
-        tabActive: 'bg-gradient-to-r from-sky-600 to-blue-600 text-white shadow-lg shadow-sky-500/25',
-      };
-    case 'Crop & Edit':
-      return {
-        bg: 'bg-purple-500/10 dark:bg-purple-950/40',
-        cardBg: 'bg-gradient-to-b from-purple-50/70 via-white to-slate-50/90 dark:from-purple-950/30 dark:via-slate-900/95 dark:to-slate-900',
-        text: 'text-purple-700 dark:text-purple-400',
-        border: 'border-purple-200/90 dark:border-purple-900/50',
-        badge: 'bg-purple-100/90 text-purple-800 dark:bg-purple-950/80 dark:text-purple-300 border border-purple-300 dark:border-purple-800/70',
-        gradient: 'from-purple-500 via-violet-600 to-pink-500',
-        iconBg: 'bg-purple-100/80 dark:bg-purple-950/70',
-        iconText: 'text-purple-700 dark:text-purple-400',
-        iconBorder: 'border-purple-300/80 dark:border-purple-800/70',
-        iconHoverBg: 'group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-pink-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-purple-500/30 group-hover:border-transparent',
-        cardBorderHover: 'hover:border-purple-500 dark:hover:border-purple-500 hover:shadow-purple-500/15',
-        cardTopAccent: 'bg-gradient-to-r from-purple-500 to-pink-500',
-        launchBadge: 'group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:text-white',
-        tabActive: 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25',
-      };
-    case 'Social Media':
-      return {
-        bg: 'bg-pink-500/10 dark:bg-pink-950/40',
-        cardBg: 'bg-gradient-to-b from-pink-50/70 via-white to-slate-50/90 dark:from-pink-950/30 dark:via-slate-900/95 dark:to-slate-900',
-        text: 'text-pink-700 dark:text-pink-400',
-        border: 'border-pink-200/90 dark:border-pink-900/50',
-        badge: 'bg-pink-100/90 text-pink-800 dark:bg-pink-950/80 dark:text-pink-300 border border-pink-300 dark:border-pink-800/70',
-        gradient: 'from-pink-500 via-rose-500 to-amber-500',
-        iconBg: 'bg-pink-100/80 dark:bg-pink-950/70',
-        iconText: 'text-pink-700 dark:text-pink-400',
-        iconBorder: 'border-pink-300/80 dark:border-pink-800/70',
-        iconHoverBg: 'group-hover:bg-gradient-to-br group-hover:from-pink-500 group-hover:to-rose-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-pink-500/30 group-hover:border-transparent',
-        cardBorderHover: 'hover:border-pink-500 dark:hover:border-pink-500 hover:shadow-pink-500/15',
-        cardTopAccent: 'bg-gradient-to-r from-pink-500 to-rose-500',
-        launchBadge: 'group-hover:bg-gradient-to-r group-hover:from-pink-600 group-hover:to-rose-600 group-hover:text-white',
-        tabActive: 'bg-gradient-to-r from-pink-600 to-rose-500 text-white shadow-lg shadow-pink-500/25',
-      };
-    case 'Utilities':
-    default:
-      return {
-        bg: 'bg-amber-500/10 dark:bg-amber-950/40',
-        cardBg: 'bg-gradient-to-b from-amber-50/70 via-white to-slate-50/90 dark:from-amber-950/30 dark:via-slate-900/95 dark:to-slate-900',
-        text: 'text-amber-700 dark:text-amber-400',
-        border: 'border-amber-200/90 dark:border-amber-900/50',
-        badge: 'bg-amber-100/90 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-800/70',
-        gradient: 'from-amber-500 via-orange-500 to-yellow-500',
-        iconBg: 'bg-amber-100/80 dark:bg-amber-950/70',
-        iconText: 'text-amber-700 dark:text-amber-400',
-        iconBorder: 'border-amber-300/80 dark:border-amber-800/70',
-        iconHoverBg: 'group-hover:bg-gradient-to-br group-hover:from-amber-500 group-hover:to-orange-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-amber-500/30 group-hover:border-transparent',
-        cardBorderHover: 'hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-amber-500/15',
-        cardTopAccent: 'bg-gradient-to-r from-amber-500 to-orange-500',
-        launchBadge: 'group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-orange-600 group-hover:text-white',
-        tabActive: 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25',
-      };
-  }
-}
-
-// Icon mapper
+// Tool Icon Resolver
 function getToolIcon(iconName: string) {
   switch (iconName) {
     case 'Minimize2':
-      return <Minimize2 className="h-5 w-5" />;
+      return <Minimize2 className="h-6 w-6" />;
     case 'Maximize2':
-      return <Maximize2 className="h-5 w-5" />;
+      return <Maximize2 className="h-6 w-6" />;
     case 'Crop':
-      return <Crop className="h-5 w-5" />;
+      return <Crop className="h-6 w-6" />;
     case 'Repeat':
-      return <Repeat className="h-5 w-5" />;
+      return <Repeat className="h-6 w-6" />;
     case 'FileImage':
-      return <FileImage className="h-5 w-5" />;
+      return <FileImage className="h-6 w-6" />;
     case 'Sparkles':
-      return <Sparkles className="h-5 w-5" />;
+      return <Sparkles className="h-6 w-6" />;
     case 'Layers':
-      return <Layers className="h-5 w-5" />;
+      return <Layers className="h-6 w-6" />;
     case 'RefreshCw':
-      return <RefreshCw className="h-5 w-5" />;
+      return <RefreshCw className="h-6 w-6" />;
     case 'RotateCw':
-      return <RotateCw className="h-5 w-5" />;
+      return <RotateCw className="h-6 w-6" />;
     case 'FlipHorizontal':
-      return <FlipHorizontal className="h-5 w-5" />;
+      return <FlipHorizontal className="h-6 w-6" />;
     case 'LayoutGrid':
-      return <LayoutGrid className="h-5 w-5" />;
+      return <LayoutGrid className="h-6 w-6" />;
     case 'ZoomIn':
-      return <ZoomIn className="h-5 w-5" />;
+      return <ZoomIn className="h-6 w-6" />;
     case 'Pipette':
-      return <Pipette className="h-5 w-5" />;
+      return <Pipette className="h-6 w-6" />;
     case 'Smile':
-      return <Smile className="h-5 w-5" />;
+      return <Smile className="h-6 w-6" />;
     case 'Code':
-      return <Code className="h-5 w-5" />;
+      return <Code className="h-6 w-6" />;
     case 'Play':
-      return <Play className="h-5 w-5" />;
+      return <Play className="h-6 w-6" />;
     case 'Info':
-      return <Info className="h-5 w-5" />;
+      return <Info className="h-6 w-6" />;
     case 'Calculator':
-      return <Calculator className="h-5 w-5" />;
+      return <Calculator className="h-6 w-6" />;
     case 'Printer':
-      return <Printer className="h-5 w-5" />;
+      return <Printer className="h-6 w-6" />;
     case 'UserCheck':
-      return <UserCheck className="h-5 w-5" />;
+      return <UserCheck className="h-6 w-6" />;
     case 'Camera':
-      return <Camera className="h-5 w-5" />;
+      return <Camera className="h-6 w-6" />;
     case 'Video':
-      return <Video className="h-5 w-5" />;
+      return <Video className="h-6 w-6" />;
     case 'MessageCircle':
-      return <MessageCircle className="h-5 w-5" />;
+      return <MessageCircle className="h-6 w-6" />;
     case 'Sliders':
-      return <Sliders className="h-5 w-5" />;
+      return <Sliders className="h-6 w-6" />;
     case 'Code2':
-      return <Code2 className="h-5 w-5" />;
+      return <Code2 className="h-6 w-6" />;
     case 'FileCode':
-      return <FileCode className="h-5 w-5" />;
+      return <FileCode className="h-6 w-6" />;
     case 'FileText':
-      return <FileText className="h-5 w-5" />;
+      return <FileText className="h-6 w-6" />;
     default:
-      return <Sparkles className="h-5 w-5" />;
+      return <Sparkles className="h-6 w-6" />;
   }
+}
+
+// Classic Tool Card Component - Clean, Elegant, iLoveIMG/Linear Aesthetic
+function ClassicToolCard({ tool }: { tool: ToolItem }) {
+  const meta = CATEGORY_META[tool.category] || CATEGORY_META['Utilities'];
+
+  return (
+    <Link
+      href={tool.slug}
+      className="group relative flex flex-col justify-between p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+    >
+      {/* Subtle Top Accent Line */}
+      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${meta.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+      <div>
+        {/* Header Row: Big Icon Badge & Badge Pill */}
+        <div className="flex items-center justify-between mb-5">
+          <div className={`flex h-13 w-13 items-center justify-center rounded-2xl bg-gradient-to-br ${meta.gradient} text-white shadow-md shadow-indigo-500/15 group-hover:scale-110 transition-transform duration-300`}>
+            {getToolIcon(tool.icon)}
+          </div>
+          {tool.badge && (
+            <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full font-mono border ${meta.badgeStyle} shadow-2xs`}>
+              {tool.badge}
+            </span>
+          )}
+        </div>
+
+        {/* Tool Name */}
+        <h3 className="text-lg font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug mb-2">
+          {tool.name}
+        </h3>
+
+        {/* Short Description */}
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal line-clamp-2 mb-4">
+          {tool.shortDescription}
+        </p>
+      </div>
+
+      {/* Footer Row: Format Pills & Classic Arrow Button */}
+      <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <div className="flex flex-wrap items-center gap-1.5">
+          {(tool.supportedFormats || []).slice(0, 3).map((fmt, idx) => (
+            <span
+              key={idx}
+              className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold border border-slate-200/70 dark:border-slate-700/70"
+            >
+              {fmt}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-2xs shrink-0 ml-2">
+          <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+        </div>
+      </div>
+    </Link>
+  );
 }
 
 export default function HomePage() {
@@ -316,7 +262,7 @@ export default function HomePage() {
       tool.name.toLowerCase().includes(q) ||
       tool.shortDescription.toLowerCase().includes(q) ||
       tool.category.toLowerCase().includes(q) ||
-      tool.supportedFormats.some((fmt) => fmt.toLowerCase().includes(q));
+      tool.supportedFormats?.some((fmt) => fmt.toLowerCase().includes(q));
 
     return matchesCategory && matchesSearch;
   });
@@ -349,7 +295,7 @@ export default function HomePage() {
     },
   ];
 
-  // Google Rich Snippets SEO Schema (ItemList directory & FAQPage)
+  // Google Rich Snippets SEO Schema
   const homeJsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -379,7 +325,6 @@ export default function HomePage() {
     ],
   };
 
-  // Helper to count tools per category
   const getCategoryCount = (cat: ToolCategory | 'All') => {
     if (cat === 'All') return TOOLS_LIST.length;
     return TOOLS_LIST.filter((t) => t.category === cat).length;
@@ -393,40 +338,40 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
       />
 
-      {/* Atmospheric Ambient Glow Spheres */}
+      {/* Soft Ambient Background Glows */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-transparent rounded-full blur-3xl" />
-        <div className="absolute top-1/3 -right-24 w-[550px] h-[550px] bg-gradient-to-bl from-emerald-500/12 via-teal-500/8 to-transparent rounded-full blur-3xl" />
-        <div className="absolute top-2/3 -left-24 w-[550px] h-[550px] bg-gradient-to-tr from-rose-500/12 via-pink-500/8 to-transparent rounded-full blur-3xl" />
-        <div className="absolute -bottom-24 right-1/4 w-[600px] h-[600px] bg-gradient-to-t from-sky-500/12 via-blue-500/8 to-transparent rounded-full blur-3xl" />
+        <div className="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/3 -right-24 w-[550px] h-[550px] bg-gradient-to-bl from-emerald-500/10 via-teal-500/10 to-transparent rounded-full blur-3xl" />
       </div>
 
-      {/* 1. Dynamic Hero Section */}
+      {/* 1. Classic Hero Section */}
       <section className="relative z-10 overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-18 border-b border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-b from-white/90 via-[#E5EBF2]/50 to-[#E5EBF2] dark:from-[#0b0f1d] dark:via-indigo-950/30 dark:to-[#070b14] backdrop-blur-md">
-        {/* Soft Ambient Radial Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-aesthetic-radial dark:bg-aesthetic-dark-radial pointer-events-none" />
-
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-bold font-mono mb-4">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>100% Free &bull; Zero Upload Wait &bull; Privacy First</span>
+          </div>
+
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
-            Free Online{' '}
+            Every Image &amp; PDF Tool You Need,{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-300 dark:to-pink-400">
-              Image &amp; PDF Studio
+              In One Place
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8 font-normal">
-            Compress, resize, convert, edit, and organize your images instantly with zero latency and complete privacy.
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8 font-normal">
+            Compress, resize, edit, and convert your photos and documents instantly with full privacy directly on your device.
           </p>
 
           {/* Live Search Bar */}
-          <div className="max-w-xl mx-auto relative mb-4">
+          <div className="max-w-xl mx-auto relative mb-6">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-indigo-500 dark:text-indigo-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={`Search all ${TOOLS_LIST.length} tools... (e.g. compress, a4 resize, pdf, converter)`}
-              className="w-full pl-12 pr-16 py-3.5 rounded-2xl border-2 border-indigo-200/90 dark:border-indigo-900/70 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 shadow-md shadow-indigo-500/5 focus:outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-500/15 text-sm sm:text-base transition-all"
+              placeholder={`Search ${TOOLS_LIST.length} tools... (e.g. compress, a4 resize, pdf, converter)`}
+              className="w-full pl-12 pr-16 py-3.5 rounded-2xl border-2 border-indigo-200/90 dark:border-indigo-900/70 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 shadow-md focus:outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-500/15 text-sm sm:text-base transition-all"
             />
             {searchQuery ? (
               <button
@@ -442,41 +387,17 @@ export default function HomePage() {
             )}
           </div>
 
-          {/* Quick-Access Popular Tool Chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-8 text-xs">
-            <span className="text-slate-400 dark:text-slate-500 font-semibold font-mono text-[11px]">Popular:</span>
-            {[
-              { label: '⚡ Image Compressor', slug: '/image-compressor', hover: 'hover:border-emerald-500 hover:text-emerald-700' },
-              { label: '🔄 JPG to PNG', slug: '/jpg-to-png', hover: 'hover:border-emerald-500 hover:text-emerald-700' },
-              { label: '📐 A4 Resizer', slug: '/a4-image-resizer', hover: 'hover:border-sky-500 hover:text-sky-700' },
-              { label: '📄 Image to PDF', slug: '/image-to-pdf', hover: 'hover:border-rose-500 hover:text-rose-700' },
-              { label: '🎨 Collage Maker', slug: '/collage-maker', hover: 'hover:border-purple-500 hover:text-purple-700' },
-              { label: '🔲 PNG to SVG', slug: '/png-to-svg', hover: 'hover:border-teal-500 hover:text-teal-700' },
-            ].map((item) => (
-              <Link
-                key={item.slug}
-                href={item.slug}
-                className={`px-3 py-1 rounded-xl bg-white/90 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium ${item.hover} transition-all duration-200 shadow-2xs hover:scale-105 hover:bg-white`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Dynamic Colorful Category Filter Pills with Item Counts */}
+          {/* Dynamic Category Navigation Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2">
             {CATEGORIES.map((cat) => {
               const isSelected = selectedCategory === cat;
-              const theme = cat !== 'All' ? getCategoryTheme(cat as ToolCategory) : null;
               const count = getCategoryCount(cat);
               return (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-1.5 ${isSelected
-                    ? cat === 'All'
-                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md scale-105'
-                      : `${theme?.tabActive} scale-105`
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-1.5 ${isSelected
+                    ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md scale-105'
                     : 'bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-indigo-300 shadow-2xs font-semibold'
                     }`}
                 >
@@ -494,34 +415,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Top Homepage Banner */}
+      {/* Top Banner */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <AdBanner slot="home-top-banner" />
       </div>
 
-      {/* 2. CATEGORIZED TOOLS SECTIONS WITH MAIN HEADINGS */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-14">
-        {/* Search / Global Summary Header */}
-        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
-              {selectedCategory === 'All'
-                ? 'All Image & PDF Utilities'
-                : selectedCategory === 'Convert'
-                  ? 'Compression & Converter Tools'
-                  : `${selectedCategory} Tools`}
-            </span>
-            <span className="text-xs text-slate-400 font-medium font-mono">
-              ({filteredTools.length} tools available)
-            </span>
-          </div>
-
-          <div className="hidden sm:flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            <span>Fast, Free &amp; Secure</span>
-          </div>
-        </div>
-
+      {/* 2. Categorized Tools Classic Directory */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-14">
         {/* Empty State */}
         {filteredTools.length === 0 ? (
           <div className="py-16 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-xs">
@@ -560,11 +460,10 @@ export default function HomePage() {
               const meta = CATEGORY_META[cat];
               const CategoryIcon = meta.icon;
               const toolsInCat = filteredTools.filter((t) => t.category === cat);
-              const theme = getCategoryTheme(cat);
 
               return (
                 <div key={cat} className="space-y-6">
-                  {/* Category Main Heading Block */}
+                  {/* Category Header */}
                   <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200/90 dark:border-slate-800 pb-4">
                     <div className="flex items-center gap-3.5">
                       <div
@@ -577,7 +476,7 @@ export default function HomePage() {
                           <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
                             {meta.title}
                           </h2>
-                          <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${theme.badge} font-mono`}>
+                          <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono">
                             {toolsInCat.length} {toolsInCat.length === 1 ? 'Tool' : 'Tools'}
                           </span>
                         </div>
@@ -605,69 +504,18 @@ export default function HomePage() {
                                       ? '/tools/utilities'
                                       : `/tools?category=${cat}`
                       }
-                      className={`inline-flex items-center gap-1.5 text-xs font-bold ${theme.text} hover:opacity-80 transition-opacity`}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity"
                     >
-                      <span>Explore all {toolsInCat.length} tools</span>
+                      <span>View all {toolsInCat.length} tools</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
 
-                  {/* Tools Grid for this category */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {toolsInCat.map((tool) => {
-                      const cardTheme = getCategoryTheme(tool.category);
-                      return (
-                        <div
-                          key={tool.id}
-                          className={`group relative flex flex-col justify-between p-5 rounded-2xl border ${cardTheme.border} ${cardTheme.cardBg} ${cardTheme.cardBorderHover} shadow-[0_4px_20px_-2px_rgba(15,23,42,0.08)] dark:shadow-[0_4px_25px_-2px_rgba(0,0,0,0.5)] hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden`}
-                        >
-                          {/* Top Accent Line that illuminates on hover */}
-                          <div className={`absolute top-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${cardTheme.cardTopAccent}`} />
-
-                          <div>
-                            {/* Card Header: Icon & Category Badge */}
-                            <div className="flex items-center justify-between mb-4">
-                              <div
-                                className={`flex h-11 w-11 items-center justify-center rounded-xl border ${cardTheme.iconBg} ${cardTheme.iconBorder} ${cardTheme.iconText} ${cardTheme.iconHoverBg} transition-all duration-300 shadow-2xs`}
-                              >
-                                {getToolIcon(tool.icon)}
-                              </div>
-                              {tool.badge && (
-                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md font-mono ${cardTheme.badge} shadow-2xs`}>
-                                  {tool.badge}
-                                </span>
-                              )}
-                            </div>
-
-                            {/* Category Micro Label */}
-                            <span className={`text-[10px] font-bold uppercase tracking-wider font-mono ${cardTheme.text}`}>
-                              {tool.category === 'Convert' ? 'Compression & Converter' : tool.category}
-                            </span>
-
-                            {/* Tool Title as primary anchor with stretched-link */}
-                            <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-slate-950 dark:group-hover:text-white transition-colors mt-0.5 mb-1.5">
-                              <Link href={tool.slug} className="after:absolute after:inset-0">
-                                {tool.name}
-                              </Link>
-                            </h3>
-
-                            {/* Description */}
-                            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">
-                              {tool.shortDescription}
-                            </p>
-                          </div>
-
-                          {/* Bottom Action Footer */}
-                          <div className="mt-5 pt-3.5 border-t border-slate-200/90 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold">
-                            <span className="text-[11px] text-slate-400 font-medium">Instant &bull; Free</span>
-                            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-200/80 dark:bg-slate-800 text-slate-800 dark:text-slate-200 ${cardTheme.launchBadge} text-xs font-bold transition-all duration-300 shadow-2xs`}>
-                              <span>Launch</span>
-                              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-                            </span>
-                          </div>
-                        </div>
-                      );
-                    })}
+                  {/* Classic 4-Column Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {toolsInCat.map((tool) => (
+                      <ClassicToolCard key={tool.id} tool={tool} />
+                    ))}
                   </div>
                 </div>
               );
@@ -675,16 +523,16 @@ export default function HomePage() {
         )}
       </section>
 
-      {/* Mid Homepage Banner */}
+      {/* Mid Banner */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <AdBanner slot="home-mid-banner" />
       </div>
 
-      {/* 3. Why PixEnhance (Aesthetic Bento Feature Grid) */}
+      {/* 3. Why PixEnhance (Classic Bento Grid) */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
-            Uncompromising Privacy &amp; Performance
+            Uncompromising Privacy &amp; Speed
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-black dark:text-white mt-1">
             Why Choose PixEnhance?
@@ -694,7 +542,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
             {
               title: 'Lightning Fast',
@@ -737,7 +585,7 @@ export default function HomePage() {
             return (
               <div
                 key={idx}
-                className="group rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                className="group rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div
                   className={`flex h-11 w-11 items-center justify-center rounded-2xl mb-3.5 border transition-transform duration-300 group-hover:scale-110 shadow-2xs ${item.color}`}
@@ -800,7 +648,7 @@ export default function HomePage() {
             ].map((step, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                className="group relative rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div
                   className={`flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br ${step.gradient} text-white font-mono font-black text-sm shadow-md mb-4 group-hover:scale-105 transition-transform`}
@@ -859,7 +707,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs divide-y divide-slate-100 dark:divide-slate-800">
+        <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xs divide-y divide-slate-100 dark:divide-slate-800">
           {homeFaqs.map((faq, idx) => (
             <details key={idx} className="group py-4" open={idx === 0}>
               <summary className="flex w-full cursor-pointer list-none items-center justify-between text-left text-base sm:text-lg font-bold text-black dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors [&::-webkit-details-marker]:hidden">
