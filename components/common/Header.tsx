@@ -236,7 +236,7 @@ export function Header() {
               onClick={closeDropdowns}
               className="flex items-center gap-2.5 group shrink-0"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white shadow-md shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+              <div className="p-[8px] inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white shadow-md shadow-indigo-500/25 group-hover:scale-105 transition-transform">
                 <Sparkles className="h-5 w-5" />
               </div>
               <div className="flex flex-col">

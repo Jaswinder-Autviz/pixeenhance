@@ -144,16 +144,16 @@ export function DropZone({
               }`}
             />
             <div
-              className={`relative flex h-20 w-20 items-center justify-center rounded-2xl shadow-lg transition-all duration-300 ${
+              className={`relative p-[8px] inline-flex items-center justify-center rounded-2xl shadow-lg transition-all duration-300 ${
                 isDragging
                   ? 'bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white scale-110 shadow-indigo-500/40'
                   : 'bg-gradient-to-br from-indigo-500 via-purple-600 to-teal-600 text-white shadow-indigo-500/25 group-hover:scale-105 group-hover:rotate-1'
               }`}
             >
               {isDragging ? (
-                <Zap className="h-10 w-10 animate-bounce text-white" />
+                <Zap className="h-7 w-7 animate-bounce text-white" />
               ) : (
-                <UploadCloud className="h-10 w-10 transition-transform duration-300 group-hover:-translate-y-1" />
+                <UploadCloud className="h-7 w-7 transition-transform duration-300 group-hover:-translate-y-1" />
               )}
             </div>
           </div>

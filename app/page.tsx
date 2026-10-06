@@ -134,61 +134,61 @@ const CATEGORY_META: Record<ToolCategory, CategoryMeta> = {
 function getToolIcon(iconName: string) {
   switch (iconName) {
     case 'Minimize2':
-      return <Minimize2 className="h-6 w-6" />;
+      return <Minimize2 className="h-5 w-5" />;
     case 'Maximize2':
-      return <Maximize2 className="h-6 w-6" />;
+      return <Maximize2 className="h-5 w-5" />;
     case 'Crop':
-      return <Crop className="h-6 w-6" />;
+      return <Crop className="h-5 w-5" />;
     case 'Repeat':
-      return <Repeat className="h-6 w-6" />;
+      return <Repeat className="h-5 w-5" />;
     case 'FileImage':
-      return <FileImage className="h-6 w-6" />;
+      return <FileImage className="h-5 w-5" />;
     case 'Sparkles':
-      return <Sparkles className="h-6 w-6" />;
+      return <Sparkles className="h-5 w-5" />;
     case 'Layers':
-      return <Layers className="h-6 w-6" />;
+      return <Layers className="h-5 w-5" />;
     case 'RefreshCw':
-      return <RefreshCw className="h-6 w-6" />;
+      return <RefreshCw className="h-5 w-5" />;
     case 'RotateCw':
-      return <RotateCw className="h-6 w-6" />;
+      return <RotateCw className="h-5 w-5" />;
     case 'FlipHorizontal':
-      return <FlipHorizontal className="h-6 w-6" />;
+      return <FlipHorizontal className="h-5 w-5" />;
     case 'LayoutGrid':
-      return <LayoutGrid className="h-6 w-6" />;
+      return <LayoutGrid className="h-5 w-5" />;
     case 'ZoomIn':
-      return <ZoomIn className="h-6 w-6" />;
+      return <ZoomIn className="h-5 w-5" />;
     case 'Pipette':
-      return <Pipette className="h-6 w-6" />;
+      return <Pipette className="h-5 w-5" />;
     case 'Smile':
-      return <Smile className="h-6 w-6" />;
+      return <Smile className="h-5 w-5" />;
     case 'Code':
-      return <Code className="h-6 w-6" />;
+      return <Code className="h-5 w-5" />;
     case 'Play':
-      return <Play className="h-6 w-6" />;
+      return <Play className="h-5 w-5" />;
     case 'Info':
-      return <Info className="h-6 w-6" />;
+      return <Info className="h-5 w-5" />;
     case 'Calculator':
-      return <Calculator className="h-6 w-6" />;
+      return <Calculator className="h-5 w-5" />;
     case 'Printer':
-      return <Printer className="h-6 w-6" />;
+      return <Printer className="h-5 w-5" />;
     case 'UserCheck':
-      return <UserCheck className="h-6 w-6" />;
+      return <UserCheck className="h-5 w-5" />;
     case 'Camera':
-      return <Camera className="h-6 w-6" />;
+      return <Camera className="h-5 w-5" />;
     case 'Video':
-      return <Video className="h-6 w-6" />;
+      return <Video className="h-5 w-5" />;
     case 'MessageCircle':
-      return <MessageCircle className="h-6 w-6" />;
+      return <MessageCircle className="h-5 w-5" />;
     case 'Sliders':
-      return <Sliders className="h-6 w-6" />;
+      return <Sliders className="h-5 w-5" />;
     case 'Code2':
-      return <Code2 className="h-6 w-6" />;
+      return <Code2 className="h-5 w-5" />;
     case 'FileCode':
-      return <FileCode className="h-6 w-6" />;
+      return <FileCode className="h-5 w-5" />;
     case 'FileText':
-      return <FileText className="h-6 w-6" />;
+      return <FileText className="h-5 w-5" />;
     default:
-      return <Sparkles className="h-6 w-6" />;
+      return <Sparkles className="h-5 w-5" />;
   }
 }
 
@@ -207,7 +207,7 @@ function ClassicToolCard({ tool }: { tool: ToolItem }) {
       <div>
         {/* Header Row: Big Icon Badge & Badge Pill */}
         <div className="flex items-center justify-between mb-5">
-          <div className={`flex h-13 w-13 items-center justify-center rounded-2xl bg-gradient-to-br ${meta.gradient} text-white shadow-md shadow-indigo-500/15 group-hover:scale-110 transition-transform duration-300`}>
+          <div className={`p-[8px] inline-flex items-center justify-center rounded-xl bg-gradient-to-br ${meta.gradient} text-white shadow-md shadow-indigo-500/15 group-hover:scale-110 transition-transform duration-300`}>
             {getToolIcon(tool.icon)}
           </div>
           {tool.badge && (
