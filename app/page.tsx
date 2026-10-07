@@ -353,9 +353,9 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
-            Every Image &amp; PDF Tool You Need,{' '}
+            Free Online{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-300 dark:to-pink-400">
-              In One Place
+              Image &amp; PDF Studio
             </span>
           </h1>
 
