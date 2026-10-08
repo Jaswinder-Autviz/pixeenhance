@@ -235,19 +235,19 @@ export class EnhancementEngine {
           dst[idx + 2] = Math.round(centerB * (1 - strengthFactor * 0.65) + smoothB * (strengthFactor * 0.65));
           dst[idx + 3] = src[idx + 3];
         } else {
-          // Subtle high-frequency detail boost for eyes, lips, lashes
+          // Subtle high-frequency detail boost for eyes, lips, lashes, and scene micro-textures
           if (x > 1 && x < w - 2 && y > 1 && y < h - 2) {
-            const laplacian =
-              -src[((y - 1) * w + x) * 4] -
-              src[((y + 1) * w + x) * 4] -
-              src[(yOffset + (x - 1)) * 4] -
-              src[(yOffset + (x + 1)) * 4] +
-              4 * src[idx];
+            for (let c = 0; c < 3; c++) {
+              const laplacian =
+                -src[((y - 1) * w + x) * 4 + c] -
+                src[((y + 1) * w + x) * 4 + c] -
+                src[(yOffset + (x - 1)) * 4 + c] -
+                src[(yOffset + (x + 1)) * 4 + c] +
+                4 * src[idx + c];
 
-            const boost = laplacian * (0.25 * strengthFactor);
-            dst[idx] = Math.min(255, Math.max(0, src[idx] + boost));
-            dst[idx + 1] = Math.min(255, Math.max(0, src[idx + 1] + boost));
-            dst[idx + 2] = Math.min(255, Math.max(0, src[idx + 2] + boost));
+              const boost = laplacian * (0.4 * strengthFactor);
+              dst[idx + c] = Math.min(255, Math.max(0, src[idx + c] + boost));
+            }
             dst[idx + 3] = src[idx + 3];
           } else {
             dst[idx] = src[idx];

@@ -39,12 +39,6 @@ export const Header: React.FC<HeaderProps> = ({ onUploadClick, onOpenBatch }) =>
         {/* Center Navigation */}
         <nav className="nav-links" aria-label="Main Navigation">
           <Link
-            to="/image-upscaler"
-            className={`nav-link ${location.pathname.includes('upscaler') ? 'active' : ''}`}
-          >
-            AI Enhance
-          </Link>
-          <Link
             to="/resize-image"
             className={`nav-link ${location.pathname.includes('resize') ? 'active' : ''}`}
           >

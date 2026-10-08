@@ -31,11 +31,11 @@ export const Footer: React.FC = () => {
             <h3 className="text-xs uppercase tracking-wider font-bold text-charcoal font-serif">
               Neural & Enhancement
             </h3>
-            <Link href="/image-upscaler" className="text-xs text-charcoal-muted hover:text-charcoal transition-colors">
-              AI Image Upscaler 2× & 4×
+            <Link href="/image-resizer" className="text-xs text-charcoal-muted hover:text-charcoal transition-colors">
+              Precision Image Resizer
             </Link>
-            <Link href="/image-enhancer" className="text-xs text-charcoal-muted hover:text-charcoal transition-colors">
-              Intelligent Photo Enhancer
+            <Link href="/image-compressor" className="text-xs text-charcoal-muted hover:text-charcoal transition-colors">
+              Image Compressor
             </Link>
             <Link href="/image-editor" className="text-xs text-charcoal-muted hover:text-charcoal transition-colors">
               Precision Contrast & Clarity

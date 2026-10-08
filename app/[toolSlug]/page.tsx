@@ -209,10 +209,6 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
       case 'panorama-splitter':
       case 'photo-splitter':
         return <ImageSplitterView />;
-      case 'image-enlarger':
-      case 'image-upscaler':
-      case 'photo-enhancer':
-        return <ImageEnlargerView />;
       case 'color-picker':
         return <ColorPickerView />;
       case 'image-converter':

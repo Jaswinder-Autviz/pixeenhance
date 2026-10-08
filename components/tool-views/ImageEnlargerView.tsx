@@ -19,7 +19,7 @@ export function ImageEnlargerView() {
   const [origDim, setOrigDim] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
 
   const [scaleFactor, setScaleFactor] = useState<2 | 4 | 8>(2);
-  const [sharpenAmount, setSharpenAmount] = useState<number>(30); // 0 to 100
+  const [sharpenAmount, setSharpenAmount] = useState<number>(50); // 0 to 100
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [enlargedCanvas, setEnlargedCanvas] = useState<HTMLCanvasElement | null>(null);
   const [sliderPos, setSliderPos] = useState<number>(50); // comparison slider %
@@ -56,29 +56,30 @@ export function ImageEnlargerView() {
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(img, 0, 0, targetW, targetH);
 
-      // Apply unsharp mask edge enhancement if sharpen > 0
-      if (sharpen > 0 && targetW * targetH <= 40000000) {
+      // Apply high-precision 3x3 unsharp mask edge enhancement across ALL pixels
+      if (targetW * targetH <= 40000000) {
         try {
           const imgData = ctx.getImageData(0, 0, targetW, targetH);
           const data = imgData.data;
-          const strength = (sharpen / 100) * 0.35;
+          const strength = (sharpen / 100) * 0.75 + (factor >= 4 ? 0.35 : 0.2);
           const w = targetW;
           const h = targetH;
 
-          // Simple 3x3 high-pass filter
           const copy = new Uint8ClampedArray(data);
-          for (let y = 1; y < h - 1; y += 2) {
-            for (let x = 1; x < w - 1; x += 2) {
-              const idx = (y * w + x) * 4;
+          for (let y = 1; y < h - 1; y++) {
+            const yOffset = y * w;
+            for (let x = 1; x < w - 1; x++) {
+              const idx = (yOffset + x) * 4;
               for (let c = 0; c < 3; c++) {
                 const center = copy[idx + c];
                 const up = copy[((y - 1) * w + x) * 4 + c];
                 const down = copy[((y + 1) * w + x) * 4 + c];
-                const left = copy[(y * w + (x - 1)) * 4 + c];
-                const right = copy[(y * w + (x + 1)) * 4 + c];
+                const left = copy[(yOffset + (x - 1)) * 4 + c];
+                const right = copy[(yOffset + (x + 1)) * 4 + c];
 
                 const laplacian = 4 * center - (up + down + left + right);
-                data[idx + c] = Math.min(255, Math.max(0, center + laplacian * strength));
+                const val = center + laplacian * strength;
+                data[idx + c] = val < 0 ? 0 : val > 255 ? 255 : val;
               }
             }
           }
@@ -136,29 +137,26 @@ export function ImageEnlargerView() {
           {/* Comparison View */}
           <div className="lg:col-span-8 flex flex-col items-center justify-center p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
             <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 select-none">
-              {/* Enlarged Result */}
+              {/* Enlarged Result (Full View) */}
               {enlargedCanvas && (
                 <img
-                  src={enlargedCanvas.toDataURL('image/jpeg', 0.85)}
+                  src={enlargedCanvas.toDataURL('image/jpeg', 0.90)}
                   alt="Enlarged"
                   className="absolute inset-0 w-full h-full object-contain pointer-events-none"
                 />
               )}
 
-              {/* Original (Clipped on Left side of slider) */}
+              {/* Original (Clipped on Left side of slider - clipPath prevents squishing) */}
               <div
-                className="absolute inset-0 overflow-hidden pointer-events-none"
-                style={{ width: `${sliderPos}%` }}
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)`
+                }}
               >
                 <img
                   src={previewUrl}
                   alt="Original"
                   className="w-full h-full object-contain"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                  }}
                 />
               </div>
 
@@ -184,10 +182,10 @@ export function ImageEnlargerView() {
 
               {/* Badges */}
               <div className="absolute bottom-3 left-3 px-2 py-1 rounded-md bg-black/60 backdrop-blur-sm text-white text-[10px] font-bold z-10">
-                Original: {origDim.w}×{origDim.h}
+                BEFORE (Original: {origDim.w}×{origDim.h})
               </div>
               <div className="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-brand-600/90 backdrop-blur-sm text-white text-[10px] font-bold z-10">
-                Enlarged: {origDim.w * scaleFactor}×{origDim.h * scaleFactor} ({scaleFactor}×)
+                AFTER (Enlarged: {origDim.w * scaleFactor}×{origDim.h * scaleFactor} — {scaleFactor}×)
               </div>
             </div>
 

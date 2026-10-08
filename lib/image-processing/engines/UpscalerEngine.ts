@@ -274,24 +274,29 @@ export class UpscalerEngine {
     const w = targetW;
     const h = targetH;
 
-    onProgress?.('Refining edge definitions...', 80);
+    onProgress?.('Refining edge definitions and pixel clarity...', 80);
 
-    // Unsharp mask pass on upscaled image to recover crisp edge details
-    const k = factor === 4 ? 0.35 : 0.25;
-    for (let y = 1; y < h - 1; y += 2) {
+    // High-precision 3x3 unsharp mask pass on upscaled image to recover crisp edge details
+    const k = factor === 4 ? 0.65 : 0.45;
+    const centerWeight = 1 + 4 * k;
+
+    // Create a copy of the pixel buffer for clean convolution
+    const srcBuffer = new Uint8ClampedArray(data);
+
+    for (let y = 1; y < h - 1; y++) {
       const yOffset = y * w;
-      for (let x = 1; x < w - 1; x += 2) {
+      for (let x = 1; x < w - 1; x++) {
         const idx = (yOffset + x) * 4;
         for (let c = 0; c < 3; c++) {
-          const center = data[idx + c];
-          const neighbor = (
-            data[((y - 1) * w + x) * 4 + c] +
-            data[((y + 1) * w + x) * 4 + c] +
-            data[(yOffset + (x - 1)) * 4 + c] +
-            data[(yOffset + (x + 1)) * 4 + c]
+          const center = srcBuffer[idx + c];
+          const neighborAvg = (
+            srcBuffer[((y - 1) * w + x) * 4 + c] +
+            srcBuffer[((y + 1) * w + x) * 4 + c] +
+            srcBuffer[(yOffset + (x - 1)) * 4 + c] +
+            srcBuffer[(yOffset + (x + 1)) * 4 + c]
           ) * 0.25;
 
-          const sharp = center + (center - neighbor) * k;
+          const sharp = center * centerWeight - neighborAvg * (4 * k);
           data[idx + c] = sharp < 0 ? 0 : sharp > 255 ? 255 : sharp;
         }
       }

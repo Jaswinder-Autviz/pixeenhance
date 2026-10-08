@@ -523,33 +523,6 @@ export const TOOLS: Tool[] = [
     related: ['/image-splitter', '/crop-image', '/resize-image', '/image-to-pdf'],
     nextSteps: ['/resize-image', '/image-compressor'],
   },
-  {
-    slug: '/image-enlarger',
-    title: 'Image Enlarger Online Free',
-    h1: 'Enlarge Images Online Without Quality Loss',
-    description: 'Enlarge small images up to 4× with smooth anti-aliased interpolation algorithms directly on your hardware.',
-    category: 'crop-edit',
-    related: ['/resize-image', '/image-quality', '/image-compressor', '/image-upscaler', '/photo-enhancer'],
-    nextSteps: ['/image-compressor', '/image-to-pdf'],
-  },
-  {
-    slug: '/image-upscaler',
-    title: 'Free AI Image Upscaler Online',
-    h1: 'Free AI Image Upscaler Online',
-    description: 'Upscale low-resolution images 2×, 4×, or 8× with edge-preserving detail sharpening.',
-    category: 'resize',
-    related: ['/photo-enhancer', '/image-enlarger', '/image-resizer', '/image-compressor'],
-    nextSteps: ['/image-compressor', '/image-to-pdf'],
-  },
-  {
-    slug: '/photo-enhancer',
-    title: 'Free Photo Enhancer Online',
-    h1: 'Free Online Photo Enhancer',
-    description: 'Enhance photo quality, clarity, and sharpness online for free.',
-    category: 'resize',
-    related: ['/image-upscaler', '/image-quality', '/image-compressor'],
-    nextSteps: ['/image-compressor', '/image-to-pdf'],
-  },
 
   // ==========================================
   // SOCIAL MEDIA PRESETS

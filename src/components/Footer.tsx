@@ -28,10 +28,6 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="footer-header">Tools</h4>
             <ul className="footer-nav-list">
-              <li><Link to="/image-upscaler">AI Image Upscaler</Link></li>
-              <li><Link to="/image-upscaler-2x">Upscale 2×</Link></li>
-              <li><Link to="/image-upscaler-4x">Upscale 4×</Link></li>
-              <li><Link to="/face-enhancer">Face Enhancer</Link></li>
               <li><Link to="/resize-image">Image Resizer</Link></li>
               <li><Link to="/image-converter">Format Converter</Link></li>
               <li><Link to="/image-editor">Studio Editor</Link></li>

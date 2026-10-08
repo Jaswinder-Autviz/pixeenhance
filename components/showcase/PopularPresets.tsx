@@ -50,7 +50,7 @@ export const PopularPresets: React.FC = () => {
       ratio: '16:9 Cinema UHD',
       category: 'Display',
       icon: Monitor,
-      link: '/image-upscaler'
+      link: '/image-resizer'
     }
   ];
 

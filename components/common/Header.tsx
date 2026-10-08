@@ -101,7 +101,6 @@ const NAV_CATEGORIES: NavCategory[] = [
     tools: [
       { name: 'Image Resizer', slug: '/image-resizer', desc: 'Resize by exact pixels or percentage', badge: 'Popular', badgeColor: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300' },
       { name: 'Bulk Image Resizer', slug: '/bulk-image-resizer', desc: 'Batch scale multiple files with ZIP export', badge: 'ZIP', badgeColor: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' },
-      { name: 'Image Enlarger (8×)', slug: '/image-enlarger', desc: 'Upscale 2× to 8× with sharpness recovery', badge: '8× AI', badgeColor: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300' },
       { name: 'A4 Paper Resizer', slug: '/a4-image-resizer', desc: '210 × 297 mm at 300 DPI print quality', badge: 'Print', badgeColor: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300' },
       { name: 'A0–A7 Print Series', slug: '/a3-image-resizer', desc: 'All ISO standard paper sizes (A0 to A7)' },
       { name: 'Passport Photo Resizer', slug: '/passport-photo-resizer', desc: '2×2 inch & 35×45 mm official photos', badge: 'Official', badgeColor: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300' },
