@@ -1289,7 +1289,83 @@ export const TOOLS_LIST: ToolItem[] = [
         answer: 'PixEnhance combines high-precision bicubic resampling with a local unsharp masking pass to prevent blurry edges.'
       }
     ],
-    relatedSlugs: ['image-resizer', 'bulk-image-resizer', 'image-quality']
+    relatedSlugs: ['image-resizer', 'bulk-image-resizer', 'image-quality', 'image-upscaler', 'photo-enhancer']
+  },
+
+  // 27b. AI Image Upscaler
+  {
+    id: 'image-upscaler',
+    slug: '/image-upscaler',
+    name: 'AI Image Upscaler',
+    category: 'Resize',
+    popular: true,
+    badge: '2× 4× 8× AI',
+    shortDescription: 'Upscale low-resolution images 2×, 4×, or 8× with edge-preserving detail sharpening.',
+    icon: 'Sparkles',
+    metaTitle: 'Free AI Image Upscaler Online — Upscale Photos 2×, 4×, 8× | PixEnhance',
+    metaDescription: 'Upscale low-resolution images online for free without quality loss. Increase image resolution 2×, 4×, or 8× instantly in your browser with 100% privacy.',
+    h1: 'Free AI Image Upscaler Online',
+    subtitle: 'Upscale small photos by 2×, 4×, or 8× with edge-preserving detail enhancement and zero server upload.',
+    features: [
+      '2×, 4×, and 8× upscale multipliers',
+      'Edge-preserving detail recovery & adaptive unsharp filter',
+      'Interactive before/after visual comparison slider',
+      '100% private in-browser processing — no file uploads'
+    ],
+    howToUse: [
+      'Upload any low-resolution JPG, PNG, or WebP photo.',
+      'Select 2×, 4×, or 8× upscale factor.',
+      'Adjust the sharpening intensity to refine edge details.',
+      'Click Download Upscaled Image to save the high-res file.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'Is this AI image upscaler free to use?',
+        answer: 'Yes, 100% free with unlimited upscaling and zero watermark.'
+      },
+      {
+        question: 'Are my images uploaded to external servers?',
+        answer: 'No. All processing happens locally on your device using browser WebAssembly and Canvas APIs.'
+      }
+    ],
+    relatedSlugs: ['photo-enhancer', 'image-enlarger', 'image-resizer', 'image-compressor']
+  },
+
+  // 27c. Photo Enhancer
+  {
+    id: 'photo-enhancer',
+    slug: '/photo-enhancer',
+    name: 'Photo Enhancer',
+    category: 'Resize',
+    popular: true,
+    badge: 'HD Quality',
+    shortDescription: 'Enhance photo quality, clarity, and sharpness online for free.',
+    icon: 'Sparkles',
+    metaTitle: 'Free Photo Enhancer Online — Enhance Image Quality | PixEnhance',
+    metaDescription: 'Enhance photo quality and clarity online for free. Fix blurry photos, increase resolution, and sharpen details instantly with 100% privacy.',
+    h1: 'Free Online Photo Enhancer',
+    subtitle: 'Transform blurry or low-res photos into crisp, high-definition graphics directly inside your browser.',
+    features: [
+      'Instant clarity & unsharp mask edge enhancement',
+      'Smart noise reduction & color contrast boost',
+      'Side-by-side interactive split preview slider',
+      'Export to high-res PNG, JPG, or WebP'
+    ],
+    howToUse: [
+      'Upload your photo into the enhancer.',
+      'Tune the quality enhancement & sharpening sliders.',
+      'Inspect before and after results in real-time.',
+      'Download your enhanced high-definition photo.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'How does PixEnhance enhance photo quality?',
+        answer: 'It applies multi-pass local quantization and adaptive unsharp masking to recover edge crispness and contrast.'
+      }
+    ],
+    relatedSlugs: ['image-upscaler', 'image-quality', 'image-compressor']
   },
 
   // 28. Color Picker

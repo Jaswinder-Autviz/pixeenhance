@@ -213,9 +213,9 @@ export function DropZone({
 
       {/* Privacy Guarantee Pill */}
       {showPrivacyBadge && (
-        <div className="mt-3.5 inline-flex items-center gap-2 text-xs font-medium text-slate-600 dark:text-slate-400 bg-white/70 dark:bg-slate-900/60 px-4 py-1.5 rounded-full border border-slate-200/80 dark:border-slate-800 shadow-2xs backdrop-blur-sm">
+        <div className="mt-3.5 inline-flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white/90 dark:bg-slate-900/80 px-4 py-1.5 rounded-full border border-emerald-500/30 dark:border-emerald-500/20 shadow-xs backdrop-blur-sm">
           <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
-          <span>Your files stay strictly on your device &bull; 100% Private</span>
+          <span>🔒 100% Private: In-browser processing &bull; Zero server upload</span>
         </div>
       )}
     </div>

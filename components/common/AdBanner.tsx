@@ -28,7 +28,7 @@ export function AdBanner({
 
   return (
     <div
-      className={`w-full max-w-5xl mx-auto my-3 text-center overflow-hidden ${className}`}
+      className={`w-full max-w-5xl mx-auto my-4 text-center overflow-hidden min-h-[250px] bg-slate-100/50 dark:bg-slate-900/40 rounded-xl border border-slate-200/50 dark:border-slate-800/50 flex flex-col justify-center items-center ${className}`}
       aria-label="Advertisement"
       data-ad-slot={slot}
     >
