@@ -52,7 +52,6 @@ export const INDEXING_TARGETS = [
   // ==========================================
   { url: `${BASE_URL}/image-compressor`, category: 'Universal Compressor' },
   { url: `${BASE_URL}/compress-jpg`, category: 'JPG Compressor' },
-  { url: `${BASE_URL}/compress-jpg-to-20kb`, category: 'Compress to 20KB' },
   { url: `${BASE_URL}/compress-jpg-to-50kb`, category: 'Compress to 50KB' },
   { url: `${BASE_URL}/compress-jpg-to-100kb`, category: 'Compress to 100KB' },
   { url: `${BASE_URL}/compress-jpg-to-200kb`, category: 'Compress to 200KB' },
@@ -100,11 +99,8 @@ export const INDEXING_TARGETS = [
   { url: `${BASE_URL}/resize-image-to-1080x1080`, category: '1080x1080 Square Resizer' },
   { url: `${BASE_URL}/resize-image-to-1920x1080`, category: '1920x1080 Full HD Resizer' },
   { url: `${BASE_URL}/image-cropper`, category: 'Aspect Ratio Cropper' },
-  { url: `${BASE_URL}/crop-image`, category: 'Freehand Cropper' },
   { url: `${BASE_URL}/image-rotator`, category: 'Rotate 90/180/270' },
-  { url: `${BASE_URL}/rotate-image`, category: 'Orientation Adjuster' },
   { url: `${BASE_URL}/image-flipper`, category: 'Horizontal/Vertical Flip' },
-  { url: `${BASE_URL}/flip-image`, category: 'Mirror Image' },
   { url: `${BASE_URL}/image-splitter`, category: 'Grid & Tile Splitter' },
   { url: `${BASE_URL}/collage-maker`, category: 'Photo Collage Maker' },
   { url: `${BASE_URL}/image-dimensions`, category: 'Exif & Dimension Checker' },
@@ -131,13 +127,6 @@ export const INDEXING_TARGETS = [
   // 7. INTERNATIONAL PRINT SIZES (A-SERIES 300 DPI)
   // ==========================================
   { url: `${BASE_URL}/a4-image-resizer`, category: 'A4 Document Size' },
-  { url: `${BASE_URL}/a0-image-resizer`, category: 'A0 Poster Size' },
-  { url: `${BASE_URL}/a1-image-resizer`, category: 'A1 Print Size' },
-  { url: `${BASE_URL}/a2-image-resizer`, category: 'A2 Print Size' },
-  { url: `${BASE_URL}/a3-image-resizer`, category: 'A3 Print Size' },
-  { url: `${BASE_URL}/a5-image-resizer`, category: 'A5 Flyer Size' },
-  { url: `${BASE_URL}/a6-image-resizer`, category: 'A6 Postcard Size' },
-  { url: `${BASE_URL}/a7-image-resizer`, category: 'A7 Label Size' },
   { url: `${BASE_URL}/passport-photo-resizer`, category: 'Passport Size Photo 35x45mm' },
 
   // ==========================================
