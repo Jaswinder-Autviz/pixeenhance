@@ -17,6 +17,7 @@
     "@google/generative-ai": "^0.24.1",
     "@types/canvas-confetti": "^1.9.0",
     "@types/three": "^0.174.0",
+    "@vercel/analytics": "^2.0.1",
     "autoprefixer": "^10.4.20",
     "canvas-confetti": "^1.9.4",
     "framer-motion": "^12.4.7",

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Nunito } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
@@ -227,6 +228,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-grow" id="main-content">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
