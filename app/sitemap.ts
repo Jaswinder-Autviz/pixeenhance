@@ -16,12 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/tools`,
-      lastModified: currentDate,
-      changeFrequency: 'daily' as const,
-      priority: 0.9,
-    },
-    {
       url: `${baseUrl}/blog`,
       lastModified: currentDate,
       changeFrequency: 'daily' as const,
@@ -53,17 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // New clean category hub pages
-  const categoryRoutes: MetadataRoute.Sitemap = CATEGORIES.map((cat) => ({
-    url: `${baseUrl}/tools/${cat.slug}`,
-    lastModified: currentDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.85,
-  }));
-
-  // All active tools from the unified registry (ensuring no live URL is omitted)
   const seenUrls = new Set<string>(staticRoutes.map((r) => r.url));
-  categoryRoutes.forEach((r) => seenUrls.add(r.url));
 
   const toolRoutes: MetadataRoute.Sitemap = [];
 
@@ -127,6 +111,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...blogRoutes];
+  return [...staticRoutes, ...toolRoutes, ...blogRoutes];
 }
 
