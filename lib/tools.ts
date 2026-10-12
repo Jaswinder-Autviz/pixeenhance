@@ -109,6 +109,16 @@ export const TOOLS: Tool[] = [
     nextSteps: ['/webp-to-png', '/resize-image'],
   },
   {
+    slug: '/compress-jpg-to-20kb',
+    title: 'Compress JPG to 20KB Online Free',
+    h1: 'Compress JPG Images to 20KB Online',
+    description: 'Compress JPG photos to under 20KB online for free. Reduce photo and signature file sizes below 20 KB for online job applications, UPSC, and SSC forms.',
+    category: 'compress',
+    related: ['/compress-image-to-20kb', '/compress-jpg-to-50kb', '/image-compressor', '/signature-resizer-10kb'],
+    nextSteps: ['/signature-resizer-10kb', '/image-to-pdf'],
+    duplicateOf: '/compress-image-to-20kb',
+  },
+  {
     slug: '/compress-jpg-to-50kb',
     title: 'Compress JPG to 50KB Online Free',
     h1: 'Compress JPG Images to 50KB Online',

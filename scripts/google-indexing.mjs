@@ -52,6 +52,8 @@ export const INDEXING_TARGETS = [
   // ==========================================
   { url: `${BASE_URL}/image-compressor`, category: 'Universal Compressor' },
   { url: `${BASE_URL}/compress-jpg`, category: 'JPG Compressor' },
+  { url: `${BASE_URL}/compress-jpg-to-20kb`, category: 'Compress to 20KB' },
+  { url: `${BASE_URL}/compress-image-to-20kb`, category: 'Universal 20KB Compressor' },
   { url: `${BASE_URL}/compress-jpg-to-50kb`, category: 'Compress to 50KB' },
   { url: `${BASE_URL}/compress-jpg-to-100kb`, category: 'Compress to 100KB' },
   { url: `${BASE_URL}/compress-jpg-to-200kb`, category: 'Compress to 200KB' },
@@ -126,7 +128,12 @@ export const INDEXING_TARGETS = [
   // ==========================================
   // 7. INTERNATIONAL PRINT SIZES (A-SERIES 300 DPI)
   // ==========================================
+  { url: `${BASE_URL}/a0-image-resizer`, category: 'A0 Blueprint & Poster Size' },
+  { url: `${BASE_URL}/a1-image-resizer`, category: 'A1 Plan & Technical Drawing Size' },
+  { url: `${BASE_URL}/a2-image-resizer`, category: 'A2 Poster Size' },
+  { url: `${BASE_URL}/a3-image-resizer`, category: 'A3 Presentation Size' },
   { url: `${BASE_URL}/a4-image-resizer`, category: 'A4 Document Size' },
+  { url: `${BASE_URL}/a5-image-resizer`, category: 'A5 Booklet Size' },
   { url: `${BASE_URL}/passport-photo-resizer`, category: 'Passport Size Photo 35x45mm' },
 
   // ==========================================
