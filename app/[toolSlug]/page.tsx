@@ -171,12 +171,16 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
       case 'image-compressor':
         return <CompressorView initialTargetSize={querySize} />;
       case 'compress-image-to-20kb':
+      case 'compress-jpg-to-20kb':
         return <CompressorView initialTargetSize="20kb" />;
       case 'compress-image-to-50kb':
+      case 'compress-jpg-to-50kb':
         return <CompressorView initialTargetSize="50kb" />;
       case 'compress-image-to-100kb':
+      case 'compress-jpg-to-100kb':
         return <CompressorView initialTargetSize="100kb" />;
       case 'compress-image-to-200kb':
+      case 'compress-jpg-to-200kb':
         return <CompressorView initialTargetSize="200kb" />;
       case 'image-resizer':
         return <ResizerView />;

@@ -49,10 +49,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const seenUrls = new Set<string>(staticRoutes.map((r) => r.url));
 
+  // Exclude slugs that have 301 redirects in next.config.mjs to prevent GSC redirect errors
+  const redirectedSlugs = new Set([
+    '/compress-image-to-50kb',
+    '/compress-image-to-100kb',
+    '/compress-image-to-200kb',
+    '/compress-jpeg-to-20kb',
+    '/compress-photo-to-20kb',
+    '/compress-photo-to-50kb',
+    '/compress-photo-to-100kb',
+    '/compress-photo-to-200kb',
+  ]);
+
   const toolRoutes: MetadataRoute.Sitemap = [];
 
   for (const tool of getAllTools()) {
     const slug = tool.slug.startsWith('/') ? tool.slug : `/${tool.slug}`;
+    if (redirectedSlugs.has(slug)) continue;
     const fullUrl = `${baseUrl}${slug}`;
 
     if (!seenUrls.has(fullUrl)) {

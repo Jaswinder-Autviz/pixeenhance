@@ -4447,9 +4447,8 @@ export const SLUG_ALIASES: Record<string, string> = {
   'zillow-photo-resizer': 'zillow-listing-photo-resizer',
 
   // Core Image & Compressor Aliases
-  'compress-jpg-to-20kb': 'compress-image-to-20kb',
-  'compress-jpeg-to-20kb': 'compress-image-to-20kb',
-  'compress-photo-to-20kb': 'compress-image-to-20kb',
+  'compress-jpeg-to-20kb': 'compress-jpg-to-20kb',
+  'compress-photo-to-20kb': 'compress-jpg-to-20kb',
   'compress-image-to-50kb': 'compress-jpg-to-50kb',
   'compress-photo-to-50kb': 'compress-jpg-to-50kb',
   'compress-image-to-100kb': 'compress-jpg-to-100kb',

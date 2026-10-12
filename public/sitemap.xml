@@ -241,8 +241,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://pixenhance.in/a0-image-resizer</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pixenhance.in/a1-image-resizer</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://pixenhance.in/a4-image-resizer</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

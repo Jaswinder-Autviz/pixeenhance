@@ -1855,6 +1855,46 @@ export const TOOLS_LIST: ToolItem[] = [
     relatedSlugs: ['code-converter', 'image-to-base64', 'base64-to-image', 'collage-maker']
   },
 
+  // Compress JPG to 20KB
+  {
+    id: 'compress-jpg-to-20kb',
+    slug: '/compress-jpg-to-20kb',
+    name: 'Compress JPG to 20KB',
+    category: 'Convert',
+    popular: true,
+    badge: 'Under 20 KB',
+    shortDescription: 'Compress JPG images to under 20KB for signatures, job applications, and government portals.',
+    icon: 'Minimize2',
+    metaTitle: 'Compress JPG to 20KB Online Free | PixEnhance',
+    metaDescription: 'Compress JPG to 20KB online for free. Reduce photo and signature file sizes below 20 KB with high clarity. Perfect for government forms and signatures.',
+    h1: 'Compress JPG to 20KB Online',
+    subtitle: 'Reduce JPG photo and signature file sizes to under 20 KB with automatic precision quality tuning.',
+    features: [
+      'Target 20 KB exact file size constraint',
+      'Preserves original aspect ratio and dimensions',
+      'Perfect for passport signatures and exam registration portals',
+      '100% private in-browser compression with zero data upload'
+    ],
+    howToUse: [
+      'Upload your JPG photo or signature.',
+      'The 20 KB target size is automatically applied.',
+      'Review the real-time file size and visual preview.',
+      'Click Download Compressed Image.'
+    ],
+    supportedFormats: ['JPG', 'JPEG'],
+    faqs: [
+      {
+        question: 'How do I compress JPG to 20KB without blur?',
+        answer: 'PixEnhance uses smart iterative quantization to compress JPEG files while keeping text and facial features sharp.'
+      },
+      {
+        question: 'Is this 20KB JPG compressor suitable for SSC, UPSC, and government portals?',
+        answer: 'Yes! Most Indian and international portals require photos or signatures between 10KB and 20KB. This tool targets exact limits under 20KB.'
+      }
+    ],
+    relatedSlugs: ['compress-image-to-20kb', 'compress-jpg-to-50kb', 'image-compressor', 'signature-resizer-10kb']
+  },
+
   // 48. Compress Image to 20KB (SEO Landing Page)
   {
     id: 'compress-image-to-20kb',
