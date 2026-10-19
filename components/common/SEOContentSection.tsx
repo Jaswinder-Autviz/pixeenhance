@@ -18,45 +18,373 @@ interface SEOContentSectionProps {
 }
 
 export function SEOContentSection({ tool }: SEOContentSectionProps) {
-  const universalFaqs = [
-    {
-      question: `Are my images or documents saved or stored anywhere when using ${tool.name}?`,
-      answer: `Never. All image and document processing with ${tool.name} happens completely locally inside your web browser using WebAssembly and HTML5 Canvas API. Your private pictures and sensitive documents are never uploaded to any remote server or stored in any database.`,
-    },
-    {
-      question: `Is ${tool.name} completely free to use?`,
-      answer: `Yes, 100% free with no hidden fees, paid subscriptions, account registrations, or watermarks placed on exported files.`,
-    },
-    {
-      question: `What file formats are compatible with ${tool.name}?`,
-      answer: `${tool.name} supports ${tool.supportedFormats.join(', ')} files with high-speed in-browser hardware acceleration and instant local downloads.`,
-    },
-    {
-      question: `Why should I use ${tool.name} instead of uploading files to cloud converters?`,
-      answer: `Traditional cloud converter websites upload your files to remote servers across the internet, exposing confidential photos, Aadhaar/PAN identity proofs, or financial marksheets to potential privacy breaches. ${tool.name} processes everything locally in browser memory.`,
-    },
-    {
-      question: `Will using ${tool.name} add watermarks to my exported files?`,
-      answer: `No. PixEnhance exports clean, high-resolution original files without adding promotional logos, brand watermarks, or quality restrictions.`,
-    },
-    {
-      question: `Does ${tool.name} work on mobile phones and tablets?`,
-      answer: `Yes. ${tool.name} is fully responsive and optimized for Android, iPhone, iPad, Windows, Mac, and Linux browsers without installing third-party mobile apps.`,
-    },
-    {
-      question: `How can I ensure my output file meets exact online form requirements?`,
-      answer: `Always check official recruitment notification PDFs for exact minimum and maximum KB limits and pixel dimensions before uploading. Use ${tool.name} to adjust target size sliders or lock aspect ratios accordingly.`,
-    },
-  ];
+  // Category-specific educational blueprints (100% original, copyright-free technical documentation)
+  const getCategoryBlueprint = () => {
+    switch (tool.category) {
+      case 'Compress':
+        return {
+          tag: 'Lossy & Lossless Compression Science',
+          heading: `How ${tool.name} Optimizes File Size Without Sacrificing Visual Fidelity`,
+          overviewParagraph: `Digital cameras and smartphones capture images with massive redundant color metadata and high-frequency noise that the human eye cannot resolve. ${tool.name} uses advanced local quantization matrices and discrete cosine transforms (DCT) to selectively discard imperceptible high-frequency color variations while protecting facial contours, high-contrast edges, and typography.`,
+          useCases: [
+            {
+              title: '1. Web Vitals & Page Load Acceleration',
+              desc: 'Trimming image payloads from 3MB down to under 150KB drastically improves Largest Contentful Paint (LCP) scores, accelerating mobile browsing speeds and boosting search rankings.',
+            },
+            {
+              title: '2. Recruitment & Competitive Exam Portals',
+              desc: 'Easily meet strict government application file size caps (e.g., strictly between 20KB and 50KB for SSC, UPSC, and State PSCs) without text or signatures becoming unreadable.',
+            },
+            {
+              title: '3. Email Attachments & Messaging Limits',
+              desc: 'Bypass restrictive email provider attachment caps (like Gmail 25MB and Outlook limits) to send high-resolution client decks and photo attachments smoothly.',
+            },
+            {
+              title: '4. E-Commerce Product Catalog Optimization',
+              desc: 'Standardize thousands of product catalog images to lightweight, uniform file sizes for Shopify, WooCommerce, and Amazon storefronts without losing texture sharpness.',
+            },
+          ],
+          mistakes: [
+            {
+              title: 'Aggressive Multi-Pass Compression:',
+              desc: 'Compressing an already compressed lossy JPEG multiple times compounds compression artifacts, creating unsightly "mosquito noise" around sharp edges.',
+            },
+            {
+              title: 'Compressing Without Cropping Margins:',
+              desc: 'Leaving huge empty white margins around a signature or portrait wastes valuable byte budget. Crop tightly around the focal subject first.',
+            },
+            {
+              title: 'Using Lossy Compression for Sharp Vector Logos:',
+              desc: 'Lossy JPEG compression introduces blur around flat graphic illustrations. Use WebP or PNG for graphic logos, and reserve JPEG for natural photography.',
+            },
+          ],
+          faqs: [
+            {
+              question: `How does ${tool.name} reduce image size without making it blurry?`,
+              answer: `${tool.name} operates via browser-based quantization and entropy encoding. Instead of discarding actual pixel dimensions, it removes redundant color channels (chroma subsampling) and imperceptible high-frequency gradients. The output retains exact pixel dimensions while dropping file size by up to 85%.`,
+            },
+            {
+              question: `What is the difference between lossy and lossless compression in ${tool.name}?`,
+              answer: `Lossless compression rearranges image data into a more compact binary stream without altering a single pixel value (common in PNG). Lossy compression (common in JPEG and WebP) intelligently discards subtle color nuances that the human eye cannot detect, achieving 5x to 10x greater size reductions.`,
+            },
+          ],
+        };
 
-  // Combine tool-specific FAQs with universal FAQs to guarantee 7-8 detailed FAQs per page
+      case 'Resize':
+        return {
+          tag: 'Resampling Mathematics & Pixel Grids',
+          heading: `Precision Resampling: How ${tool.name} Scales Pixel Dimensions`,
+          overviewParagraph: `Resizing digital imagery is more than simply changing numbers; it requires mathematical interpolation kernels to re-compute pixel values. ${tool.name} employs adaptive bicubic and bilinear convolution resampling inside browser memory to recalculate sub-pixel gradients, preventing harsh pixelation during downscaling or jagged staircasing during dimension changes.`,
+          useCases: [
+            {
+              title: '1. Print Preparation & DPI Standardization',
+              desc: 'Translate physical millimeter and inch specifications into exact 300 DPI high-resolution pixel matrices required by commercial photo labs and passport issuing authorities.',
+            },
+            {
+              title: '2. Responsive Display Density (1x, 2x, 3x)',
+              desc: 'Generate multiple resolution variants for modern high-DPI Retina screens, ensuring crisp visuals on 4K monitors without overloading mobile data connections.',
+            },
+            {
+              title: '3. Identity Documents & Visa Photographs',
+              desc: 'Format passport and visa photos to mandated dimensions (e.g., 2×2 inches, 35×45 mm, or 138×177 px) with strict aspect-ratio locking.',
+            },
+            {
+              title: '4. CMS & Layout Standardization',
+              desc: 'Standardize blog featured images, portfolio grids, and thumbnail galleries to identical pixel dimensions to eliminate cumulative layout shifts (CLS).',
+            },
+          ],
+          mistakes: [
+            {
+              title: 'Disabling Aspect Ratio Lock:',
+              desc: 'Unchecking the aspect ratio lock stretches facial features, logos, and typography, distorting proportions and causing immediate portal rejection.',
+            },
+            {
+              title: 'Confusing DPI with Pixel Resolution:',
+              desc: 'DPI (dots per inch) is simply a physical print density tag. On digital monitors, total pixel width and height dictate display size, not DPI metadata.',
+            },
+            {
+              title: 'Extreme Nearest-Neighbor Upscaling:',
+              desc: 'Enlarging a low-resolution thumbnail by 400% with basic scaling produces chunky pixel blocks. Use specialized super-resolution upscalers for enlargement.',
+            },
+          ],
+          faqs: [
+            {
+              question: `Does resizing an image with ${tool.name} lower its sharpness?`,
+              answer: `When downscaling, ${tool.name} averages neighboring pixels using bicubic filtering to preserve edge contrast. When upscaling beyond original dimensions, new pixel data must be mathematically estimated, which can soften sharp details. For best results, always start with the highest-resolution source available.`,
+            },
+            {
+              question: `What is the ideal resolution for web images vs print?`,
+              answer: `For web displays, images typically range from 800px to 1920px wide at standard screen density (72–96 PPI). For physical printing, target 300 DPI (e.g., a 4×6 inch print requires 1200×1800 pixels) to avoid visible graininess.`,
+            },
+          ],
+        };
+
+      case 'Convert':
+        return {
+          tag: 'Container Decoding & Format Efficiency',
+          heading: `Cross-Format Architecture: Why Format Conversion Matters`,
+          overviewParagraph: `Different image formats serve distinct architectural purposes across the web. PNG excels in lossless alpha transparency, JPEG remains the universal standard for photographic capture, and WebP offers next-generation web compression. ${tool.name} decodes source containers in hardware-accelerated browser memory and re-encodes target streams with zero generational data loss.`,
+          useCases: [
+            {
+              title: '1. Transparent Background Preservation',
+              desc: 'Extract and preserve transparent alpha channels when converting PNG and WebP assets for logos, UI icons, and design overlays without black background artifacts.',
+            },
+            {
+              title: '2. Next-Gen Web Optimization (WebP Adoption)',
+              desc: 'Convert heavy legacy JPEG and PNG images to modern WebP format to achieve 25% to 35% smaller file sizes with visually identical quality.',
+            },
+            {
+              title: '3. Legacy System & Enterprise Compatibility',
+              desc: 'Convert modern HEIC photos from iPhones or WebP files from the web into universally supported standard JPEG and PNG files for enterprise portals.',
+            },
+            {
+              title: '4. Vector vs. Raster Optimization',
+              desc: 'Prepare clean high-contrast bitmap graphics for SVG vector tracing, producing infinite-scalability graphics for logos and typography.',
+            },
+          ],
+          mistakes: [
+            {
+              title: 'Converting Transparent PNG to JPG Expecting Transparency:',
+              desc: 'JPEG does not support alpha channels. Converting transparent PNG to JPG will automatically fill transparent areas with solid black or white.',
+            },
+            {
+              title: 'Expecting Quality Gains by Converting JPG to PNG:',
+              desc: 'PNG is a lossless format, but converting a low-quality, compressed JPEG into PNG cannot magically restore lost frequencies; it only bloats the file size.',
+            },
+            {
+              title: 'Ignoring ICC Color Space Mappings:',
+              desc: 'Converting between formats without standardizing to the sRGB color profile can cause washed-out colors when viewed on mobile OLED screens.',
+            },
+          ],
+          faqs: [
+            {
+              question: `Why should I convert my images to WebP?`,
+              answer: `WebP was developed by Google specifically for the web. It supports both lossy and lossless compression as well as transparency, offering 26% smaller file sizes than PNG and 25–34% smaller sizes than comparable JPEG images, leading to faster web performance.`,
+            },
+            {
+              question: `Will converting an image reduce its visual quality?`,
+              answer: `Converting to a lossless format like PNG preserves 100% of the input pixel values. When converting to a lossy format like JPEG or WebP, ${tool.name} uses high-quality quantization (90%+ quality default) to ensure the conversion is visually indistinguishable from the source.`,
+            },
+          ],
+        };
+
+      case 'Crop & Edit':
+        return {
+          tag: 'Framing Geometry & Compositional Ratios',
+          heading: `Composition Precision: How ${tool.name} Frames Your Visuals`,
+          overviewParagraph: `Cropping is the most effective way to eliminate visual clutter, correct horizon tilt, and guide the viewer's eye to the key subject. ${tool.name} provides interactive, sub-pixel grid overlays based on the Rule of Thirds and Golden Ratio, executing crops directly via HTML5 Canvas coordinate transforms without lossy re-encoding loops.`,
+          useCases: [
+            {
+              title: '1. Rule of Thirds Portrait & Subject Framing',
+              desc: 'Re-center off-center focal subjects and adjust headroom to transform ordinary candid snapshots into balanced, professional-looking portraits.',
+            },
+            {
+              title: '2. Document & ID Card Boundary Trimming',
+              desc: 'Crop out desk textures, shadows, scanner borders, and binder clips from photographed identity cards, marksheets, and receipts.',
+            },
+            {
+              title: '3. Social Media Multi-Panel Grid Slicing',
+              desc: 'Divide panoramic travel landscape shots into seamless multi-panel square segments for swipeable Instagram carousel posts.',
+            },
+            {
+              title: '4. Horizon Alignment & Orientation Correction',
+              desc: 'Correct tilted horizon lines in landscape photography and rotate sideways phone photos to clean 90-degree orthogonal orientations.',
+            },
+          ],
+          mistakes: [
+            {
+              title: 'Cropping Too Tight Around Forehead/Hair:',
+              desc: 'Official passport and visa specifications mandate a minimum 20%–30% headroom margin above the crown. Cropping too tightly causes immediate rejection.',
+            },
+            {
+              title: 'Repeatedly Rotating Lossy Files:',
+              desc: 'Rotating lossy images in legacy desktop editors often triggers re-compression every save. ${tool.name} executes lossless memory rotation.',
+            },
+            {
+              title: 'Discarding Source Files Before Reviewing:',
+              desc: 'Cropping permanently removes outer pixels. Always review the cropped preview before saving, keeping your original high-resolution camera file intact.',
+            },
+          ],
+          faqs: [
+            {
+              question: `Does cropping an image reduce its file size?`,
+              answer: `Yes, significantly! Cropping removes entire blocks of peripheral pixels. If you crop out 40% of the background area, your resulting file size naturally decreases by roughly 30% to 50% because there are fewer pixels to encode.`,
+            },
+            {
+              question: `Can I lock specific aspect ratios like 16:9 or 1:1 while cropping?`,
+              answer: `Yes. ${tool.name} includes predefined aspect ratio locks for 1:1 (Square), 4:5 (Instagram Portrait), 16:9 (YouTube Widescreen), and 3:2 (Standard DSLR), as well as free-form cropping.`,
+            },
+          ],
+        };
+
+      case 'Social Media':
+        return {
+          tag: 'Platform Compression Standards (2026)',
+          heading: `Platform Optimization: How to Prevent Aggressive Social Media Blur`,
+          overviewParagraph: `Social media platforms like Instagram, Facebook, YouTube, LinkedIn, and WhatsApp enforce strict upload pipelines. When you upload an oversized 15MB phone photo, their backend algorithms aggressively re-encode it, introducing blur, banding, and color shifts. ${tool.name} pre-resizes and optimizes your media to match exact platform display matrices, preventing server-side compression degradation.`,
+          useCases: [
+            {
+              title: '1. Instagram Feed, Stories & Reels (1080px Standards)',
+              desc: 'Pre-scale portraits to 1080×1350 px (4:5) and vertical stories to 1080×1920 px (9:16) to ensure your photos occupy maximum screen real estate without cropping.',
+            },
+            {
+              title: '2. YouTube High-CTR Video Thumbnails',
+              desc: 'Format thumbnails to exactly 1280×720 px (16:9) under 2MB, ensuring bold typography and facial reactions remain razor-sharp across mobile and TV apps.',
+            },
+            {
+              title: '3. Professional LinkedIn Banners & Avatars',
+              desc: 'Format executive header banners to 1584×396 px and company logos to 400×400 px, keeping vital headline copy inside the mobile safe zone.',
+            },
+            {
+              title: '4. WhatsApp DP & Profile Circles',
+              desc: 'Format square profile pictures to 500×500 px with circular preview bounds so your face is perfectly centered without awkward edge clipping.',
+            },
+          ],
+          mistakes: [
+            {
+              title: 'Uploading Raw 48MP Smartphone Files:',
+              desc: 'Instagram server scripts aggressively compress massive files down to 1080px, causing severe compression blur. Pre-scaling to 1080px preserves edge sharpness.',
+            },
+            {
+              title: 'Placing Important Text Outside Safe Zones:',
+              desc: 'Stories and Reels display UI overlays (username, captions, audio tags) at the top and bottom. Keep vital text within the central 80% safe zone.',
+            },
+            {
+              title: 'Using Horizontal 16:9 Images on Instagram Feeds:',
+              desc: 'Horizontal images occupy less than 40% of the mobile screen height. Always crop to 4:5 vertical (1080×1350) for maximum engagement.',
+            },
+          ],
+          faqs: [
+            {
+              question: `Why do my photos look blurry after uploading to Instagram or WhatsApp?`,
+              answer: `When you upload a file with dimensions exceeding the platform's standard (e.g., 4000px wide), the platform compresses it aggressively using automated scripts. Pre-sizing your image to exactly 1080px wide on ${tool.name} with bicubic sharpening prevents the platform from applying harsh compression.`,
+            },
+            {
+              question: `What are the official image dimensions for social media in 2026?`,
+              answer: `Standard dimensions include: Instagram Feed (1080×1350 px), Instagram Story/Reel (1080×1920 px), YouTube Thumbnail (1280×720 px), LinkedIn Banner (1584×396 px), Facebook Cover (820×312 px), and WhatsApp DP (500×500 px).`,
+            },
+          ],
+        };
+
+      case 'PDF Tools':
+        return {
+          tag: 'Document Serialization & PDF Stream Compression',
+          heading: `Document Archival: How ${tool.name} Optimizes PDF Workflows`,
+          overviewParagraph: `PDF documents handle government certificates, academic marksheets, financial statements, and contracts. Storing uncompressed camera captures inside PDF containers often results in 20MB+ bloated files that crash upload portals. ${tool.name} re-encodes embedded image streams, adjusts DPI resolution matrices, and cleans obsolete trailer cross-references directly in browser memory.`,
+          useCases: [
+            {
+              title: '1. Multi-Page Image Consolidation into Single PDF',
+              desc: 'Combine multiple photographed marksheets, Aadhaar card sides, and certificates into a single, beautifully formatted, paginated PDF file.',
+            },
+            {
+              title: '2. Strict Government Portal Size Compliance',
+              desc: 'Compress multi-page PDFs to strictly under 200KB or 500KB caps required by immigration, university admissions, and recruitment systems.',
+            },
+            {
+              title: '3. A4 & Letter Physical Geometry Standardization',
+              desc: 'Normalize mixed-orientation smartphone photos into standardized A4 portrait pages with uniform print margins and crisp line contrast.',
+            },
+            {
+              title: '4. Confidential Contract & Legal Processing',
+              desc: 'Process confidential financial statements, bank passbooks, and identity proofs locally with 100% confidentiality and zero server storage.',
+            },
+          ],
+          mistakes: [
+            {
+              title: 'Embedding Uncompressed 15MB Photos in PDFs:',
+              desc: 'Embedding full-resolution smartphone photos directly into PDFs bloats the file beyond portal limits. Optimize image dimensions before creating the PDF.',
+            },
+            {
+              title: 'Over-compressing Text Documents to Illegibility:',
+              desc: 'Aggressive PDF compression can blur tiny text or seal numbers on official certificates. Always verify that numbers and signatures remain readable.',
+            },
+            {
+              title: 'Mixing Random Landscape and Portrait Orientations:',
+              desc: 'Scanning documents upside down or mixing orientations forces reviewers to rotate pages manually. Normalize page orientation before export.',
+            },
+          ],
+          faqs: [
+            {
+              question: `Is it safe to convert sensitive bank statements and identity proofs with ${tool.name}?`,
+              answer: `Yes, completely safe! Unlike traditional cloud PDF websites that upload your files to remote servers, ${tool.name} executes all document rasterization, pagination, and compression locally inside your web browser. Your private files never leave your device.`,
+            },
+            {
+              question: `How do I compress a PDF to under 100KB or 200KB?`,
+              answer: `Use ${tool.name} to adjust the target resolution and quality preset. The tool recalculates embedded raster image streams using optimized DCT compression to reduce file size while maintaining sharp, legible text.`,
+            },
+          ],
+        };
+
+      case 'Utilities':
+      default:
+        return {
+          tag: 'Web Standards & Media Utility Engineering',
+          heading: `Precision Utility: How ${tool.name} Streamlines Media Workflows`,
+          overviewParagraph: `Modern web development and content workflows require rapid, accurate media utilities: from inline Base64 data URI encoding to exact hexadecimal palette sampling and geometric aspect ratio calculations. ${tool.name} provides clean, client-side developer and creator utilities engineered for speed, accuracy, and zero bloat.`,
+          useCases: [
+            {
+              title: '1. Base64 Inline Data URI Encoding',
+              desc: 'Encode UI icons and vector graphics directly into inline CSS and HTML strings to eliminate extra HTTP requests and improve initial page render speed.',
+            },
+            {
+              title: '2. Accurate Hex & RGB Palette Extraction',
+              desc: 'Extract exact brand colors, secondary accents, and contrast ratios directly from photographic assets for design system consistency.',
+            },
+            {
+              title: '3. Mathematical Aspect Ratio Solving',
+              desc: 'Calculate exact integer scaling fractions (16:9, 4:3, 21:9) and greatest common divisors (GCD) for responsive canvas and video containers.',
+            },
+            {
+              title: '4. Code Snippet to Social Graphic Rendering',
+              desc: 'Transform raw code blocks into beautifully formatted, syntax-highlighted visual cards with modern macOS window styling for tutorials and social media.',
+            },
+          ],
+          mistakes: [
+            {
+              title: 'Base64-Encoding Large Photographic Files:',
+              desc: 'Base64 increases file payload by roughly 33%. Only use Base64 for small icons (<15KB); keep photographic assets as separate WebP/JPEG files.',
+            },
+            {
+              title: 'Sampling Colors from Compressed JPEG Artifacts:',
+              desc: 'Compression blocks introduce slight color noise. Sample colors from smooth, uncompressed flat areas to get true hex values.',
+            },
+            {
+              title: 'Ignoring Display Color Gamuts:',
+              desc: 'Colors sampled from modern Display P3 iPhone displays may shift when viewed on standard sRGB budget monitors. Always verify standard sRGB hex values.',
+            },
+          ],
+          faqs: [
+            {
+              question: `What are the advantages of in-browser utilities compared to online cloud converters?`,
+              answer: `In-browser utilities execute instantly using your local device CPU/GPU with zero network latency. There are no file size queues, no privacy risks, and no third-party server logging.`,
+            },
+            {
+              question: `Can I use ${tool.name} offline without an internet connection?`,
+              answer: `Once the page has loaded in your browser cache, the WebAssembly and Canvas processing scripts run completely client-side, allowing tools to process local files even without active internet connectivity.`,
+            },
+          ],
+        };
+    }
+  };
+
+  const blueprint = getCategoryBlueprint();
+
+  // Combine tool-specific FAQs with blueprint FAQs and privacy guarantee
   const customFaqs = tool.faqs || [];
   const mergedFaqs = [...customFaqs];
-  universalFaqs.forEach((uFaq) => {
-    if (!mergedFaqs.some((f) => f.question.toLowerCase().includes(uFaq.question.substring(0, 25).toLowerCase()))) {
-      mergedFaqs.push(uFaq);
+  blueprint.faqs.forEach((bFaq) => {
+    if (!mergedFaqs.some((f) => f.question.toLowerCase().includes(bFaq.question.substring(0, 25).toLowerCase()))) {
+      mergedFaqs.push(bFaq);
     }
   });
+
+  // Always append universal privacy FAQ
+  if (!mergedFaqs.some((f) => f.question.toLowerCase().includes('saved or stored'))) {
+    mergedFaqs.push({
+      question: `Are my images or documents saved or stored anywhere when using ${tool.name}?`,
+      answer: `Never. All image and document processing with ${tool.name} happens completely locally inside your web browser using HTML5 Canvas API and WebAssembly. Your private pictures and sensitive documents are never uploaded to any remote server or stored in any database.`,
+    });
+  }
 
   return (
     <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10 relative z-10">
@@ -111,10 +439,10 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
           </div>
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
-              In-Depth Overview &amp; Specifications
+              {blueprint.tag}
             </span>
             <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight mt-0.5">
-              What is {tool.name}?
+              {blueprint.heading}
             </h2>
           </div>
         </div>
@@ -124,7 +452,7 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
         </p>
 
         <p className="text-sm text-black dark:text-slate-300 leading-relaxed mb-6 font-normal">
-          Whether you are preparing identity documents for recruitment portals, optimizing website graphics for faster Core Web Vitals page speed, or formatting media for social channels, {tool.name} processes all data directly inside browser memory via HTML5 Canvas and WebAssembly.
+          {blueprint.overviewParagraph}
         </p>
 
         {/* Feature Highlights Grid */}
@@ -159,33 +487,14 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4 pt-2">
-          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
-            <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">1. Online Exam &amp; Recruitment Applications</h3>
-            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
-              Format passport photos, signatures, and certificates to meet strict portal limits (e.g. 20KB–50KB or 100KB–200KB caps). Always verify exact requirements from official recruitment notification PDFs before uploading.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
-            <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">2. Website Speed &amp; SEO Optimization</h3>
-            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
-              Reduce image payload on WordPress or Blogger sites by up to 85%. Lower image sizes improve Largest Contentful Paint (LCP) scores and boost Google rankings.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
-            <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">3. Document Archival &amp; Verification</h3>
-            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
-              Prepare high-contrast scans of Aadhaar, PAN card, marksheets, and identity proofs for college admissions, bank KYC, or visa applications in complete privacy.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
-            <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">4. Social Media &amp; Graphic Delivery</h3>
-            <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
-              Scale graphics to exact platform dimensions (Instagram 1080×1350, YouTube 1280×720, WhatsApp DP 320×320) to prevent aggressive social media compression blur.
-            </p>
-          </div>
+          {blueprint.useCases.map((uc, idx) => (
+            <div key={idx} className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/60 space-y-2">
+              <h3 className="text-sm font-bold text-indigo-600 dark:text-indigo-400">{uc.title}</h3>
+              <p className="text-xs sm:text-sm text-black dark:text-slate-300 leading-relaxed">
+                {uc.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -243,25 +552,19 @@ export function SEOContentSection({ tool }: SEOContentSectionProps) {
           </div>
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              Common Mistakes to Avoid
+              Common Mistakes to Avoid with {tool.name}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Prevent upload errors and visual degradation.</p>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Prevent export errors, formatting issues, and visual degradation.</p>
           </div>
         </div>
 
         <ul className="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-          <li className="flex items-start gap-2.5 p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-amber-200/60 dark:border-amber-900/40">
-            <span className="text-amber-600 font-bold shrink-0">&bull;</span>
-            <span><strong>Stretching Aspect Ratios:</strong> Unchecking aspect ratio lock stretches faces and signature strokes. Keep aspect ratio locked when resizing photos.</span>
-          </li>
-          <li className="flex items-start gap-2.5 p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-amber-200/60 dark:border-amber-900/40">
-            <span className="text-amber-600 font-bold shrink-0">&bull;</span>
-            <span><strong>Compressing Without Cropping:</strong> Trying to compress a full 4000×3000 photo to 20KB without cropping background margins makes the image blurry. Crop tightly around the subject first.</span>
-          </li>
-          <li className="flex items-start gap-2.5 p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-amber-200/60 dark:border-amber-900/40">
-            <span className="text-amber-600 font-bold shrink-0">&bull;</span>
-            <span><strong>Uploading Wrong Formats:</strong> Portals expecting JPG files will reject `.png` or `.webp` files. Use our format converters to output standard `.jpg` files when required.</span>
-          </li>
+          {blueprint.mistakes.map((m, idx) => (
+            <li key={idx} className="flex items-start gap-2.5 p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-amber-200/60 dark:border-amber-900/40">
+              <span className="text-amber-600 font-bold shrink-0">&bull;</span>
+              <span><strong>{m.title}</strong> {m.desc}</span>
+            </li>
+          ))}
         </ul>
       </div>
 
