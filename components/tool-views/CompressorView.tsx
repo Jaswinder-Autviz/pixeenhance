@@ -8,6 +8,7 @@ import {
   Target,
   Check,
   Loader2,
+  AlertTriangle,
 } from 'lucide-react';
 import { DropZone } from '../common/DropZone';
 import {
@@ -183,8 +184,10 @@ export function CompressorView({ initialTargetSize }: CompressorViewProps = {}) 
   // Settings
   const [outputFormat, setOutputFormat] = useState<string>('image/jpeg');
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleFileSelect = (selectedFile: File) => {
+    setErrorMessage(null);
     setFile(selectedFile);
     const url = URL.createObjectURL(selectedFile);
     setOriginalPreview(url);
@@ -216,6 +219,7 @@ export function CompressorView({ initialTargetSize }: CompressorViewProps = {}) 
   const processCompression = useCallback(async () => {
     if (!file) return;
     setIsProcessing(true);
+    setErrorMessage(null);
     try {
       const { bytes } = getTargetInfo();
 
@@ -241,6 +245,9 @@ export function CompressorView({ initialTargetSize }: CompressorViewProps = {}) 
       }
     } catch (err) {
       console.error('Compression error:', err);
+      setErrorMessage(
+        'Image compression could not complete. The image might be corrupted or exceed your browser memory limits.'
+      );
     } finally {
       setIsProcessing(false);
     }
@@ -329,6 +336,22 @@ export function CompressorView({ initialTargetSize }: CompressorViewProps = {}) 
         </div>
       ) : (
         <div className="space-y-6">
+          {errorMessage && (
+            <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/80 border border-rose-300 dark:border-rose-800 text-rose-800 dark:text-rose-200 text-xs sm:text-sm flex items-center justify-between gap-3 shadow-xs">
+              <div className="flex items-center gap-2.5">
+                <AlertTriangle className="h-5 w-5 text-rose-600 dark:text-rose-400 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+              <button
+                type="button"
+                onClick={handleReset}
+                className="px-3 py-1 rounded-xl bg-rose-200/70 dark:bg-rose-900/70 text-rose-900 dark:text-rose-100 font-bold text-xs hover:bg-rose-200 transition-colors shrink-0"
+              >
+                Choose Another Image
+              </button>
+            </div>
+          )}
+
           {/* Metrics & Statistics Bar showing Original, Target, and Compressed Size */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {/* 1. Original Size */}

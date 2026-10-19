@@ -114,7 +114,7 @@ ${urlList
   console.log(`📊 [Total URLs in Sitemap]: ${urlList.length} pages\n`);
 
   console.log('✨ [JSON-LD Schema Verification]:');
-  console.log('   - WebApplication Schema: ✅ Active (Includes AggregateRating ⭐ 4.9/5)');
+  console.log('   - WebApplication Schema: ✅ Active (Compliant without fabricated ratings)');
   console.log('   - BreadcrumbList Schema: ✅ Active');
   console.log('   - HowTo Schema: ✅ Active');
   console.log('   - FAQPage Schema: ✅ Active');

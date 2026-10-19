@@ -298,6 +298,10 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
         return <CodeConverterView initialMode="code-transformer" />;
       case 'code-to-image':
         return <CodeConverterView initialMode="code-to-image" />;
+      case 'image-enlarger':
+      case 'image-upscaler':
+      case 'ai-image-upscaler':
+        return <ImageEnlargerView />;
       default:
         return notFound();
     }
@@ -322,13 +326,6 @@ export default async function ToolPage({ params, searchParams }: ToolPageProps) 
           '@type': 'Offer',
           price: '0',
           priceCurrency: 'USD',
-        },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          ratingCount: '1850',
-          bestRating: '5',
-          worstRating: '1',
         },
         featureList: tool.features.join(', '),
       },

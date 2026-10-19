@@ -112,6 +112,46 @@ export const TOOLS_LIST: ToolItem[] = [
     relatedSlugs: ['image-compressor', 'aspect-ratio-calculator', 'a4-image-resizer', 'instagram-image-resizer']
   },
 
+  // 2b. Image Enlarger & Sharpener
+  {
+    id: 'image-enlarger',
+    slug: '/image-enlarger',
+    name: 'Image Enlarger & Sharpener',
+    category: 'Resize',
+    popular: true,
+    badge: 'Resolution Boost',
+    shortDescription: 'Enlarge images 2×, 4×, and 8× with edge-preserving sharpness and unsharp mask enhancement.',
+    icon: 'ZoomIn',
+    metaTitle: 'Free Image Enlarger Online — Scale & Sharpen Photos | PixEnhance',
+    metaDescription: 'Enlarge images online up to 8x for free. Boost resolution, apply unsharp masking, and preserve sharp edges without quality loss.',
+    h1: 'Online Image Enlarger & Sharpener',
+    subtitle: 'Scale photos 2×, 4×, and 8× with high-fidelity interpolation and adjustable unsharp mask edge enhancement.',
+    features: [
+      '2×, 4×, and 8× precision scale factors',
+      '3×3 unsharp masking convolution filter',
+      'Interactive side-by-side comparison slider',
+      '100% private in-browser processing with zero server uploads'
+    ],
+    howToUse: [
+      'Upload your JPG, PNG, or WebP photo.',
+      'Choose your enlargement multiplier (2×, 4×, or 8×).',
+      'Adjust the sharpening strength slider to optimize acutance.',
+      'Preview the high-resolution output and download your enlarged image.'
+    ],
+    supportedFormats: ['JPG', 'PNG', 'WebP'],
+    faqs: [
+      {
+        question: 'How does the image enlarger maintain sharpness?',
+        answer: 'The enlarger pairs high-quality image smoothing with a convolution-based unsharp masking filter that amplifies high-frequency edge gradients to prevent blurriness.'
+      },
+      {
+        question: 'Will my enlarged image lose quality?',
+        answer: 'Traditional scaling tends to soften edges, but our built-in unsharp masking restores local acutance and edge definition.'
+      }
+    ],
+    relatedSlugs: ['image-resizer', 'bulk-image-resizer', 'image-compressor']
+  },
+
   // 3. JPG to PNG
   {
     id: 'jpg-to-png',
