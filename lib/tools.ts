@@ -199,6 +199,15 @@ export const TOOLS: Tool[] = [
     duplicateOf: '/resize-image',
   },
   {
+    slug: '/image-enlarger',
+    title: 'Free Image Enlarger Online — Scale & Sharpen',
+    h1: 'Online Image Enlarger & Sharpener',
+    description: 'Enlarge images online up to 8x for free. Boost resolution, apply unsharp masking, and preserve sharp edges without quality loss.',
+    category: 'resize',
+    related: ['/image-resizer', '/resize-image', '/bulk-image-resizer', '/image-compressor'],
+    nextSteps: ['/image-compressor', '/image-to-pdf'],
+  },
+  {
     slug: '/resize-image',
     title: 'Resize Image Online Free',
     h1: 'Resize Image Online Free',

@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Mail, Send, CheckCircle2, MessageSquare, Clock, MapPin, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
-import { AdPlaceholder } from '@/components/common/AdPlaceholder';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -12,125 +11,176 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.message) {
+      const subject = encodeURIComponent(`PixEnhance Inquiry from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Sender Name: ${formData.name}\nSender Email: ${formData.email}\n\nMessage Content:\n${formData.message}\n\n---\nSent via PixEnhance Contact Portal`
+      );
+      // Trigger default mail client with prefilled details
+      window.location.href = `mailto:pa.jaswindersingh@gmail.com?subject=${subject}&body=${body}`;
       setSubmitted(true);
     }
   };
 
   return (
-    <div className="w-full min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white py-12 sm:py-16">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-50 dark:bg-brand-950/60 border border-brand-200 dark:border-brand-800 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-3">
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-white py-12 sm:py-16">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-semibold mb-3">
             <MessageSquare className="h-3.5 w-3.5" />
-            <span>Support &amp; Feedback</span>
+            <span>Developer Support &amp; Publisher Inquiries</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">
             Contact PixEnhance
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Have a feature request, bug report, or partnership inquiry? Reach out to our team.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto leading-relaxed">
+            Have a question about image processing, bug report, feature request, or publisher compliance inquiry? Reach out to our technical team directly.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm">
-          {submitted ? (
-            <div className="py-12 text-center space-y-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 mx-auto">
-                <CheckCircle2 className="h-6 w-6" />
+        {/* Direct Contact Cards */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-8">
+          <div className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs space-y-2">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                <Mail className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                Message Sent Successfully
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto">
-                Thank you for contacting PixEnhance. Our team will review your message and reply to {formData.email} shortly.
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Primary Support Email</p>
+                <a
+                  href="mailto:pa.jaswindersingh@gmail.com"
+                  className="text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
+                >
+                  pa.jaswindersingh@gmail.com
+                </a>
+              </div>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Monitored for technical bug reports, API inquiries, and AdSense publisher verification.
+            </p>
+          </div>
+
+          <div className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs space-y-2">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
+                <Clock className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Response Window</p>
+                <p className="text-sm font-bold text-slate-900 dark:text-white">24 to 48 Hours</p>
+              </div>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              We respond to all technical queries and feature suggestions on standard business days.
+            </p>
+          </div>
+        </div>
+
+        {/* Contact Form Card */}
+        <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xs">
+          {submitted ? (
+            <div className="py-10 text-center space-y-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 mx-auto">
+                <CheckCircle2 className="h-7 w-7" />
+              </div>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+                Email Client Launched
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
+                Your default email application was triggered with your message details addressed to <span className="font-mono font-semibold text-indigo-600 dark:text-indigo-400">pa.jaswindersingh@gmail.com</span>. If your client did not launch, please click the direct link below.
               </p>
-              <button
-                onClick={() => {
-                  setSubmitted(false);
-                  setFormData({ name: '', email: '', message: '' });
-                }}
-                className="mt-4 px-4 py-2 rounded-xl bg-brand-600 text-white text-xs font-semibold"
-              >
-                Send Another Message
-              </button>
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <a
+                  href={`mailto:pa.jaswindersingh@gmail.com?subject=${encodeURIComponent(
+                    `PixEnhance Inquiry from ${formData.name}`
+                  )}&body=${encodeURIComponent(
+                    `Sender Name: ${formData.name}\nSender Email: ${formData.email}\n\nMessage:\n${formData.message}`
+                  )}`}
+                  className="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors"
+                >
+                  Open in Email Client Again
+                </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitted(false);
+                    setFormData({ name: '', email: '', message: '' });
+                  }}
+                  className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200"
+                >
+                  Write Another Message
+                </button>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                  Send a Message
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Fill in the fields below to prepare your message for our developer inbox.
+                </p>
+              </div>
+
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Your Name
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  Your Name *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Jane Doe"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:border-brand-500"
+                  placeholder="e.g. Jaswinder Singh"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/80 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Email Address
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  Your Email Address *
                 </label>
                 <input
                   type="email"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="jane@example.com"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:border-brand-500"
+                  placeholder="name@example.com"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/80 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Message
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  Message Details *
                 </label>
                 <textarea
                   required
                   rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="How can we help or improve PixEnhance?"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:border-brand-500"
+                  placeholder="Please describe your question, bug report, or feature suggestion in detail..."
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/80 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md shadow-brand-500/20 transition-all flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md shadow-indigo-500/20 transition-all flex items-center justify-center gap-2"
               >
                 <Send className="h-4 w-4" />
-                <span>Submit Message</span>
+                <span>Send Message to Support</span>
               </button>
             </form>
           )}
         </div>
 
-        {/* Direct Email Card for AdSense & Reviewers */}
-        <div className="mt-6 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between gap-4 text-xs sm:text-sm">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400">
-              <Mail className="h-5 w-5" />
-            </div>
-            <div>
-              <p className="font-bold text-slate-900 dark:text-white">Direct Email Support</p>
-              <p className="text-slate-500 dark:text-slate-400">General queries, publisher &amp; legal inquiries</p>
-            </div>
-          </div>
-          <a
-            href="mailto:pa.jaswindersingh@gmail.com"
-            className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-50 dark:hover:bg-brand-950/60 hover:text-brand-600 transition-colors font-semibold font-mono text-xs"
-          >
-            pa.jaswindersingh@gmail.com
-          </a>
-        </div>
-
-        {/* Ad Placement */}
-        <div className="pt-8">
-          <AdPlaceholder slot="in-content" />
+        {/* Security & Data Privacy Notice */}
+        <div className="mt-8 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 flex items-center gap-3.5 text-xs text-slate-500 dark:text-slate-400">
+          <ShieldCheck className="h-5 w-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+          <p>
+            Your contact details are strictly used to reply to your inquiry. We never share, sell, or rent user contact information with third parties or marketing networks.
+          </p>
         </div>
       </div>
     </div>

@@ -13,17 +13,13 @@ export const AdSlot: React.FC<AdSlotProps> = ({
   type = 'responsive',
   slotId,
   adClient = 'ca-pub-7732882072230308',
-  className = ''
+  className = '',
 }) => {
   const adRef = useRef<HTMLDivElement>(null);
 
-  // If no valid ad unit slot ID is specified, return null to avoid dummy placeholders
-  if (!slotId || slotId === '1234567890') {
-    return null;
-  }
-
   // Attempt to push ad via window.adsbygoogle if AdSense script is injected
   useEffect(() => {
+    if (!slotId || slotId === '1234567890') return;
     try {
       const w = window as unknown as { adsbygoogle?: unknown[] };
       if (w.adsbygoogle && adRef.current) {
@@ -32,7 +28,12 @@ export const AdSlot: React.FC<AdSlotProps> = ({
     } catch {
       // Gracefully handle ad blocker
     }
-  }, []);
+  }, [slotId]);
+
+  // If no valid ad unit slot ID is specified, return null to avoid dummy placeholders
+  if (!slotId || slotId === '1234567890') {
+    return null;
+  }
 
   const getDimensions = (): { width: string; height: string; minHeight: string } => {
     switch (type) {

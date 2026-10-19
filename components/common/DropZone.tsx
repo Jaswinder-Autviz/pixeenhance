@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { UploadCloud, Image as ImageIcon, ShieldCheck, Sparkles, FolderOpen, Zap } from 'lucide-react';
+import { UploadCloud, Image as ImageIcon, ShieldCheck, Sparkles, FolderOpen, Zap, AlertTriangle } from 'lucide-react';
 
 interface DropZoneProps {
   onFileSelect?: (file: File) => void;
@@ -27,6 +27,7 @@ export function DropZone({
   showPrivacyBadge = true,
 }: DropZoneProps) {
   const [isDragging, setIsDragging] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -46,13 +47,41 @@ export function DropZone({
       const files = Array.from(fileList);
       if (files.length === 0) return;
 
+      const MAX_SIZE = 50 * 1024 * 1024; // 50MB limit
+      const validFiles: File[] = [];
+
+      for (const f of files) {
+        if (f.size > MAX_SIZE) {
+          setErrorMessage(
+            `File "${f.name}" exceeds the maximum 50MB in-browser limit (${(f.size / (1024 * 1024)).toFixed(1)}MB). Please choose a smaller file.`
+          );
+          return;
+        }
+
+        const isAllowed =
+          f.type.startsWith('image/') ||
+          f.type === 'application/pdf' ||
+          Boolean(f.name.match(/\.(jpg|jpeg|png|webp|svg|heic|heif|pdf)$/i));
+
+        if (!isAllowed) {
+          setErrorMessage(
+            `File "${f.name}" is not a recognized image or PDF format. Supported types: JPG, PNG, WebP, SVG, HEIC, and PDF.`
+          );
+          return;
+        }
+
+        validFiles.push(f);
+      }
+
+      setErrorMessage(null);
+
       if (onFilesSelect) {
-        onFilesSelect(files);
-      } else if (onFileSelect) {
+        onFilesSelect(validFiles);
+      } else if (onFileSelect && validFiles.length > 0) {
         if (multiple) {
-          files.forEach((f) => onFileSelect(f));
+          validFiles.forEach((f) => onFileSelect(f));
         } else {
-          onFileSelect(files[0]);
+          onFileSelect(validFiles[0]);
         }
       }
     },
@@ -210,6 +239,23 @@ export function DropZone({
           </div>
         </div>
       </div>
+
+      {/* Upload Error Banner */}
+      {errorMessage && (
+        <div className="w-full mt-3.5 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/80 border border-rose-300 dark:border-rose-800 text-rose-800 dark:text-rose-200 text-xs sm:text-sm flex items-center justify-between gap-3 shadow-xs">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 text-rose-600 dark:text-rose-400 shrink-0" />
+            <span>{errorMessage}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setErrorMessage(null)}
+            className="text-xs font-bold px-2 py-1 rounded bg-rose-200/60 dark:bg-rose-900/60 hover:bg-rose-200 text-rose-900 dark:text-rose-100 transition-colors"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
 
       {/* Privacy Guarantee Pill */}
       {showPrivacyBadge && (

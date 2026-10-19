@@ -65,6 +65,11 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link href="/tools" className="text-slate-500 dark:text-slate-400 hover:text-[#4f46e5] dark:hover:text-indigo-400 transition-colors font-semibold">
+                  All Tools Directory
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-slate-500 dark:text-slate-400 hover:text-[#4f46e5] dark:hover:text-indigo-400 transition-colors">
                   About PixEnhance
                 </Link>

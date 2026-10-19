@@ -297,7 +297,7 @@ export default function AboutPage() {
               Ready to experience simple, private media tools?
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Explore our full directory of over 40 free tools and start enhancing, converting, and compressing your files in seconds.
+              Explore our full directory of over 60 free tools and start enhancing, converting, and compressing your files in seconds.
             </p>
           </div>
 
@@ -306,7 +306,7 @@ export default function AboutPage() {
               href="/tools"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold shadow-md shadow-brand-500/25 transition-all"
             >
-              <span>Explore All 40+ Tools</span>
+              <span>Explore All 60+ Tools</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
 

@@ -51,7 +51,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     gradient: 'from-emerald-500 to-teal-600',
     badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
     icon: Repeat,
-    exploreLink: '/tools?category=Convert',
+    exploreLink: '/tools/convert',
     tools: [
       { name: 'Image Compressor', slug: '/image-compressor', desc: 'Compress file sizes up to 85%', badge: 'Popular', badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' },
       { name: 'Universal Converter', slug: '/image-converter', desc: 'Convert between all image formats', badge: 'Multi', badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' },
@@ -74,7 +74,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     gradient: 'from-rose-500 to-red-600',
     badgeColor: 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300 border-rose-200 dark:border-rose-800',
     icon: FileText,
-    exploreLink: '/tools?category=PDF+Tools',
+    exploreLink: '/tools/pdf-tools',
     tools: [
       { name: 'PDF to Word (.docx)', slug: '/pdf-to-word', desc: 'Convert PDF to editable Word document', badge: 'Hot', badgeColor: 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300' },
       { name: 'Word to PDF', slug: '/word-to-pdf', desc: 'Convert DOCX Word documents to PDF', badge: 'New', badgeColor: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300' },
@@ -97,7 +97,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     gradient: 'from-sky-500 to-blue-600',
     badgeColor: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300 border-sky-200 dark:border-sky-800',
     icon: Maximize2,
-    exploreLink: '/tools?category=Resize',
+    exploreLink: '/tools/resize',
     tools: [
       { name: 'Image Resizer', slug: '/image-resizer', desc: 'Resize by exact pixels or percentage', badge: 'Popular', badgeColor: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300' },
       { name: 'Bulk Image Resizer', slug: '/bulk-image-resizer', desc: 'Batch scale multiple files with ZIP export', badge: 'ZIP', badgeColor: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' },
@@ -116,13 +116,13 @@ const NAV_CATEGORIES: NavCategory[] = [
     gradient: 'from-purple-500 to-pink-600',
     badgeColor: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300 border-purple-200 dark:border-purple-800',
     icon: Crop,
-    exploreLink: '/tools?category=Crop+%26+Edit',
+    exploreLink: '/tools/crop-edit',
     tools: [
       { name: 'Image Splitter', slug: '/image-splitter', desc: 'Split landscape photos into 2–10 parts & grid', badge: 'Hot', badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' },
-      { name: 'Crop Image', slug: '/crop-image', desc: 'Custom crop box & ratio presets (16:9, 1:1)', badge: 'Popular', badgeColor: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300' },
+      { name: 'Crop Image', slug: '/image-cropper', desc: 'Custom crop box & ratio presets (16:9, 1:1)', badge: 'Popular', badgeColor: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300' },
       { name: 'Collage Maker', slug: '/collage-maker', desc: 'Combine 2–9 photos in modern grid layouts', badge: 'New', badgeColor: 'bg-pink-100 text-pink-700 dark:bg-pink-950 dark:text-pink-300' },
-      { name: 'Flip Image', slug: '/flip-image', desc: 'Horizontal & vertical mirror reflection' },
-      { name: 'Rotate Image', slug: '/rotate-image', desc: 'Rotate by 90°, 180° or any custom angle' },
+      { name: 'Flip Image', slug: '/image-flipper', desc: 'Horizontal & vertical mirror reflection' },
+      { name: 'Rotate Image', slug: '/image-rotator', desc: 'Rotate by 90°, 180° or any custom angle' },
       { name: 'Social Media Resizers', slug: '/instagram-image-resizer', desc: 'Presets for Instagram, YouTube, and WhatsApp' },
     ],
   },
@@ -135,7 +135,7 @@ const NAV_CATEGORIES: NavCategory[] = [
     gradient: 'from-amber-500 to-orange-600',
     badgeColor: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 border-amber-200 dark:border-amber-800',
     icon: Sliders,
-    exploreLink: '/tools?category=Utilities',
+    exploreLink: '/tools/utilities',
     tools: [
       { name: 'Code Converter', slug: '/code-converter', desc: 'Code to Image + JSON, TS, YAML, JSX converter', badge: 'New', badgeColor: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' },
       { name: 'Code to Image', slug: '/code-to-image', desc: 'Carbon & Ray style code screenshot generator', badge: 'Studio', badgeColor: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300' },
